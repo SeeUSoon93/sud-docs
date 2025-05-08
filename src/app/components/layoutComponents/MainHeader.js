@@ -1,9 +1,15 @@
 "use client";
 
-import { Image, Menu, Typography } from "sud-ui";
+import { Image, Menu, Typography, Button, Divider } from "sud-ui";
 import { useRouter } from "next/navigation";
+import { MenuHamburger } from "sud-icons";
 
-export default function MainHeader({ setSelectHeadMenu, setSelectSiderMenu }) {
+export default function MainHeader({
+  setSelectHeadMenu,
+  setSelectSiderMenu,
+  isMobile,
+  onMenuClick
+}) {
   const router = useRouter();
 
   const handleMenuClick = (key) => {
@@ -58,31 +64,75 @@ export default function MainHeader({ setSelectHeadMenu, setSelectSiderMenu }) {
   };
 
   return (
-    <div className="flex jus-bet w-100 h-100 item-cen">
-      {/* 로고 */}
-      <div
-        className="flex jus-cen item-cen gap-15"
-        onClick={() => router.push("/")}
-        style={{ cursor: "pointer" }}
-      >
-        <Image
-          src="/sud-logo.svg"
-          alt="logo"
-          width={120}
-          preview={false}
-          mask={null}
-        />
-        <Typography as="h1" className="fs-16" pretendard="T">
-          Soon UI Design
-        </Typography>
-      </div>
-      {/* 메뉴 */}
-      <Menu
-        items={mapMenuItems(items)}
-        horizontal={true}
-        expandType="popover"
-        className="flex"
-      />
-    </div>
+    <>
+      {!isMobile ? (
+        <div className="flex jus-bet w-100 h-100 item-cen">
+          {/* 로고 */}
+          <div
+            className="flex jus-cen item-cen gap-15"
+            onClick={() => router.push("/")}
+            style={{ cursor: "pointer" }}
+          >
+            <Image
+              src="/sud-logo.svg"
+              alt="logo"
+              width={120}
+              preview={false}
+              mask={null}
+            />
+            <Typography as="h1" className="fs-16" pretendard="T">
+              Soon UI Design
+            </Typography>
+          </div>
+          {/* 메뉴 */}
+          <Menu
+            items={mapMenuItems(items)}
+            horizontal={true}
+            expandType="popover"
+          />
+        </div>
+      ) : (
+        <div className="flex flex-col w-100 h-100 item-cen">
+          <div className="flex jus-bet w-100 item-cen">
+            <Button
+              icon={<MenuHamburger size={20} />}
+              onClick={onMenuClick}
+              colorType="text"
+              size="large"
+            />
+            {/* 로고 */}
+            <div
+              className="flex jus-cen item-cen gap-15"
+              onClick={() => router.push("/")}
+              style={{ cursor: "pointer" }}
+            >
+              <Image
+                src="/sud-logo.svg"
+                alt="logo"
+                width={80}
+                preview={false}
+                mask={null}
+              />
+            </div>
+            <Button
+              icon={<MenuHamburger size={20} />}
+              disabled
+              color="transparent"
+              background="transparent"
+              border={false}
+              shadow="none"
+            />
+          </div>
+          <Divider />
+          <div className="w-100 h-100 item-cen jus-cen">
+            <Menu
+              items={mapMenuItems(items)}
+              horizontal={true}
+              expandType="popover"
+            />
+          </div>
+        </div>
+      )}
+    </>
   );
 }

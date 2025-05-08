@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { useParams, useRouter } from "next/navigation";
+import { MobileProvider, useMobile } from "../context/mobileContext";
 
 import {
   Layout,
@@ -19,9 +20,11 @@ import MainSider from "./layoutComponents/MainSider";
 
 import { itemsList } from "./layoutData/menuMap";
 
-export default function ClientLayout({ children }) {
+function LayoutContent({ children }) {
   const params = useParams();
   const router = useRouter();
+  const { isMobile } = useMobile();
+  const [isSiderOpen, setIsSiderOpen] = useState(false);
 
   const [selectHeadMenu, setSelectHeadMenu] = useState("");
   const [selectSiderMenu, setSelectSiderMenu] = useState("");
@@ -57,7 +60,7 @@ export default function ClientLayout({ children }) {
       <Layout siderPosition="below-header">
         {/* 헤더 */}
         <Header
-          height="60"
+          height={isMobile ? "110" : "60"}
           className="pd-l-15 pd-r-15"
           border={false}
           shadow="sm"
@@ -65,10 +68,16 @@ export default function ClientLayout({ children }) {
           <MainHeader
             setSelectHeadMenu={setSelectHeadMenu}
             setSelectSiderMenu={setSelectSiderMenu}
+            isMobile={isMobile}
+            onMenuClick={() => setIsSiderOpen(!isSiderOpen)}
           />
         </Header>
+
         {/* 사이더*/}
-        <Sider width={isHome ? 0 : 270} className={isHome ? "pd-0" : "pd-10"}>
+        <Sider
+          width={isHome ? 0 : isMobile ? (isSiderOpen ? "100%" : 0) : 270}
+          className={isHome ? "pd-0" : "pd-10"}
+        >
           {!isHome && (
             <MainSider
               selectHeadMenu={selectHeadMenu}
@@ -79,7 +88,7 @@ export default function ClientLayout({ children }) {
         </Sider>
 
         {/* 컨텐츠 */}
-        <Content>{children}</Content>
+        <Content className={isMobile ? "pd-0" : "pd-20"}>{children}</Content>
 
         {/* 푸터 */}
         <Footer
@@ -96,6 +105,15 @@ export default function ClientLayout({ children }) {
     </SoonUIDesign>
   );
 }
+
+export default function ClientLayout({ children }) {
+  return (
+    <MobileProvider>
+      <LayoutContent>{children}</LayoutContent>
+    </MobileProvider>
+  );
+}
+
 function getFirstSubKey(items) {
   if (!items) return null;
   for (const item of items) {

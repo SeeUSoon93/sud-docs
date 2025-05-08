@@ -1,6 +1,6 @@
 "use client";
 import { useParams } from "next/navigation";
-import Icon from "../../components/pageComponents/IconPage/Icon";
+import Icon from "../../components/pageComponents/iconPage/Icon";
 export default function Sub() {
   const { page, sub } = useParams();
 
