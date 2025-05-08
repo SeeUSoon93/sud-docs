@@ -12,6 +12,7 @@ export default function Icon() {
     { label: "Logo", value: "Logo" }
   ];
 
+  console.log(Icons);
   const [selected, setSelected] = useState("All");
   const [search, setSearch] = useState("");
 
