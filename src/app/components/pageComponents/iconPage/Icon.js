@@ -85,7 +85,7 @@ export default function Icon() {
         </Typography>
 
         <Card
-          colorType="secondary"
+          colorType="sub"
           border={false}
           shadow="none"
           width={"100%"}

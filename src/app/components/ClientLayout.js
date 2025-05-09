@@ -34,10 +34,6 @@ function LayoutContent({ children }) {
   const [isDarkMode, setIsDarkMode] = useState(false);
 
   useEffect(() => {
-    console.log("params:", params);
-    console.log("itemsList:", itemsList);
-    console.log("current page items:", itemsList[params.page]);
-
     if (params.page) {
       setSelectHeadMenu(params.page);
     }
@@ -49,7 +45,6 @@ function LayoutContent({ children }) {
     // /[page]만 있을 경우 → 자동 redirect
     if (params.page && !params.sub) {
       const firstSub = getFirstSubKey(itemsList[params.page]);
-      console.log("firstSub:", firstSub);
       if (firstSub) {
         router.replace(`/${params.page}/${firstSub}`);
         setSelectSiderMenu(firstSub);

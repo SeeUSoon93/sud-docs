@@ -1,8 +1,76 @@
 import { useMobile } from "@/app/context/mobileContext";
-import { Table, Tag, Typography } from "sud-ui";
+import { Button, Card, Segmented, Table, Tag, Typography } from "sud-ui";
+import { colors, colorPalettes } from "@/app/constants/colors";
+import { useState } from "react";
+import { jsCode, tsCode } from "./examples/exampleCode";
 
 export default function Color() {
   const { isMobile } = useMobile();
+
+  const renderColorPalette = (colorName) => {
+    const colorInfo = colorPalettes[colorName];
+    const levels = 10;
+
+    return (
+      <div key={colorName} className="flex flex-col gap-5">
+        <div className="flex flex-col gap-5">
+          <Typography as="h3" gmarket="Medium" size="base">
+            {colorInfo.name}
+          </Typography>
+          <Typography as="span" pretendard="R" size="sm" color="neutral-7">
+            {colorInfo.description}
+          </Typography>
+        </div>
+        <div className="flex flex-col gap-2">
+          {Array.from({ length: levels }, (_, i) => i + 1).map((num) => (
+            <Card
+              key={`${colorName}-${num}`}
+              background={colors[colorName][num]}
+              style={{ width: "100%", textAlign: "center" }}
+              shadow="none"
+              shape="square"
+              border={false}
+            >
+              <div className="flex jus-bet item-cen">
+                <Typography
+                  as="span"
+                  size="xs"
+                  gmarket="Medium"
+                  color={num <= 5 ? "neutral-10" : "neutral-1"}
+                >
+                  {colorName}-{num}
+                </Typography>
+                <Typography
+                  as="span"
+                  size="xs"
+                  pretendard="R"
+                  color={num <= 5 ? "neutral-10" : "neutral-1"}
+                >
+                  {colors[colorName][num]}
+                </Typography>
+              </div>
+            </Card>
+          ))}
+        </div>
+      </div>
+    );
+  };
+
+  const colorGroups = Object.keys(colorPalettes).reduce((acc, color, index) => {
+    const groupIndex = Math.floor(index / 3);
+    if (!acc[groupIndex]) acc[groupIndex] = [];
+    acc[groupIndex].push(color);
+    return acc;
+  }, []);
+
+  const [selected, setSelected] = useState("javascript");
+  const handleSegmentChange = (value) => {
+    setSelected(value);
+  };
+  const options = [
+    { label: "javascript", value: "javascript" },
+    { label: "typescript", value: "typescript" }
+  ];
 
   return (
     <div className="flex flex-col gap-40 pd-20 w-100">
@@ -94,6 +162,60 @@ export default function Color() {
             }
           ]}
         />
+      </div>
+
+      <div className="flex flex-col gap-10">
+        <Typography as="h2" gmarket="Medium" size="xl">
+          기본 팔레트(Base Palette)
+        </Typography>
+        {colorGroups.map((group, groupIndex) => (
+          <div
+            key={groupIndex}
+            className={`grid ${isMobile ? "col-1" : "col-3"} gap-20`}
+          >
+            {group.map((colorName) => renderColorPalette(colorName))}
+          </div>
+        ))}
+      </div>
+
+      <div className="flex flex-col gap-10">
+        <Typography as="h2" gmarket="Medium" size="xl">
+          테마 커스텀(Theme Customization)
+        </Typography>
+        <Typography as="span" pretendard="R" size="base">
+          SoonUIDesign 컴포넌트에서 제공하는 테마 기능을 사용하여 커스텀 테마를
+          적용할 수 있습니다.
+          <br />
+          Base Palette와 Component Palette를 커스텀 테마에 적용할 수 있습니다.
+        </Typography>
+
+        <Segmented
+          value={selected}
+          onChange={handleSegmentChange}
+          options={options}
+        />
+        <Card
+          colorType="sub"
+          border={false}
+          shadow="none"
+          width="100%"
+          height="500px"
+          style={{ overflow: "auto" }}
+        >
+          <Typography
+            as="code"
+            code
+            style={{
+              display: "block",
+              whiteSpace: "pre",
+              overflowX: "auto",
+              padding: "16px",
+              lineHeight: "1.6"
+            }}
+          >
+            {selected === "javascript" ? jsCode : tsCode}
+          </Typography>
+        </Card>
       </div>
     </div>
   );
