@@ -9,18 +9,7 @@ export function MobileProvider({ children }) {
 
   useEffect(() => {
     const checkMobile = () => {
-      const userAgent = navigator.userAgent.toLowerCase();
-      const mobileKeywords = [
-        "android",
-        "iphone",
-        "ipad",
-        "ipod",
-        "windows phone"
-      ];
-      const isMobileDevice = mobileKeywords.some((keyword) =>
-        userAgent.includes(keyword)
-      );
-      setIsMobile(isMobileDevice);
+      setIsMobile(window.innerWidth <= 800);
     };
 
     checkMobile();

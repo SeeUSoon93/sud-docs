@@ -2,8 +2,10 @@ import { useState } from "react";
 import { Search } from "sud-icons";
 import * as Icons from "sud-icons";
 import { Button, Card, Input, Segmented, toast, Typography } from "sud-ui";
+import { useMobile } from "@/app/context/mobileContext";
 
 export default function Icon() {
+  const { isMobile } = useMobile();
   const INSTALL_COMMAND = "npm install sud-icons";
   const segments = [
     { label: "All", value: "All" },
@@ -55,7 +57,7 @@ export default function Icon() {
   };
 
   return (
-    <div className="pd-20 flex flex-col gap-40">
+    <div className="flex flex-col gap-40 pd-20 w-100">
       <div className="flex flex-col gap-10">
         <Typography as="h1" gmarket="Medium" size="3xl">
           아이콘(Icon)
@@ -69,8 +71,17 @@ export default function Icon() {
         <Typography as="h2" gmarket="Medium" size="xl">
           사용하기전에
         </Typography>
-        <Typography as="p" pretendard="R" size="base">
-          아이콘을 사용하려면 'sud-icons' 패키지를 설치해야 합니다.
+        <Typography
+          as="p"
+          pretendard="R"
+          size="base"
+          style={{
+            whiteSpace: "pre-wrap",
+            wordBreak: "keep-all"
+          }}
+        >
+          Soon UI Design 아이콘 팩을 사용하려면 'sud-icons' 패키지를 설치해야
+          합니다.
         </Typography>
 
         <Card
@@ -93,11 +104,11 @@ export default function Icon() {
         </Card>
       </div>
 
-      <div className="flex flex-col gap-20">
+      <div className="flex flex-col gap-20 ">
         <Typography as="h2" gmarket="Medium" size="xl">
           아이콘 목록
         </Typography>
-        <div className="flex flex-row gap-10">
+        <div className="flex gap-10 flex-col">
           <Segmented
             value={selected}
             onChange={handleSegmentChange}
@@ -112,7 +123,12 @@ export default function Icon() {
             onChange={handleSearchChange}
           />
         </div>
-        <div className="grid col-5 gap-30 item-cen jus-cen">
+        <div
+          className="grid gap-30 item-cen jus-cen"
+          style={{
+            gridTemplateColumns: isMobile ? "repeat(3, 1fr)" : "repeat(5, 1fr)"
+          }}
+        >
           {filteredIcons.map(({ name, Component }) => (
             <div key={name} className="flex flex-col item-cen gap-10">
               <Button
@@ -121,7 +137,7 @@ export default function Icon() {
                 onClick={() => handleIconCopy(name)}
                 style={{ padding: 25 }}
               />
-              <Typography as="span" size="base">
+              <Typography as="span" size={`${isMobile ? "sm" : "base"}`}>
                 {name}
               </Typography>
             </div>

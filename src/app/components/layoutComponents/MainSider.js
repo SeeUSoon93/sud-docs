@@ -7,7 +7,9 @@ import { itemsList } from "../layoutData/menuMap";
 export default function MainSider({
   selectHeadMenu,
   selectSiderMenu,
-  setSelectSiderMenu
+  setSelectSiderMenu,
+  setIsSiderOpen,
+  isMobile
 }) {
   const router = useRouter();
 
@@ -21,6 +23,9 @@ export default function MainSider({
         onSelect={(key) => {
           setSelectSiderMenu(key);
           router.push(`/${selectHeadMenu}/${key}`);
+          if (isMobile) {
+            setIsSiderOpen(false);
+          }
         }}
       />
     </div>

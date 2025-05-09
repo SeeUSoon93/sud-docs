@@ -92,7 +92,7 @@ export default function MainHeader({
           />
         </div>
       ) : (
-        <div className="flex flex-col w-100 h-100 item-cen">
+        <div className="flex flex-col w-100 h-100 item-cen jus-cen">
           <div className="flex jus-bet w-100 item-cen">
             <Button
               icon={<MenuHamburger size={20} />}
@@ -102,7 +102,7 @@ export default function MainHeader({
             />
             {/* 로고 */}
             <div
-              className="flex jus-cen item-cen gap-15"
+              className="flex jus-cen item-cen gap-15 "
               onClick={() => router.push("/")}
               style={{ cursor: "pointer" }}
             >
@@ -124,13 +124,11 @@ export default function MainHeader({
             />
           </div>
           <Divider />
-          <div className="w-100 h-100 item-cen jus-cen">
-            <Menu
-              items={mapMenuItems(items)}
-              horizontal={true}
-              expandType="popover"
-            />
-          </div>
+          <Menu
+            items={mapMenuItems(items)}
+            horizontal={true}
+            expandType="popover"
+          />
         </div>
       )}
     </>
