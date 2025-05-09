@@ -1,6 +1,6 @@
-import { useMobile } from "@/app/context/mobileContext";
+import { useMobile } from "../../../context/mobileContext";
 import { Button, Card, Segmented, Table, Tag, Typography } from "sud-ui";
-import { colors, colorPalettes } from "@/app/constants/colors";
+import { colors, colorPalettes } from "../../../constants/colors";
 import { useState } from "react";
 import { jsCode, tsCode } from "./examples/colorExampleCode";
 import { LogoGithub } from "sud-icons";

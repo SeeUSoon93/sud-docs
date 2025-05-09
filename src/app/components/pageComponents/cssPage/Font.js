@@ -1,4 +1,4 @@
-import { useMobile } from "@/app/context/mobileContext";
+import { useMobile } from "../../../context/mobileContext";
 import { Link } from "sud-icons";
 import { Card, Table, Typography } from "sud-ui";
 
