@@ -11,6 +11,8 @@ import Icon from "../../components/pageComponents/iconPage/Icon";
 export default function Sub() {
   const { page, sub } = useParams();
 
+  console.log("dd");
+
   switch (page) {
     case "css":
       switch (sub) {
