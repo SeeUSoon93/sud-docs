@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Search } from "sud-icons";
 import * as Icons from "sud-icons";
 import { Button, Card, Input, Segmented, toast, Typography } from "sud-ui";
-import { useMobile } from "@/app/context/mobileContext";
+import { useMobile } from "../../../context/mobileContext";
 
 export default function Icon() {
   const { isMobile } = useMobile();
