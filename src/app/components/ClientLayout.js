@@ -11,7 +11,8 @@ import {
   Footer,
   Header,
   SoonUIDesign,
-  Typography
+  Typography,
+  FloatButton
 } from "sud-ui";
 import "sud-ui/dist/index.css";
 
@@ -19,6 +20,7 @@ import MainHeader from "./layoutComponents/MainHeader";
 import MainSider from "./layoutComponents/MainSider";
 
 import { itemsList } from "./layoutData/menuMap";
+import { MoonFill, SunFill } from "sud-icons";
 
 function LayoutContent({ children }) {
   const params = useParams();
@@ -28,6 +30,8 @@ function LayoutContent({ children }) {
 
   const [selectHeadMenu, setSelectHeadMenu] = useState("");
   const [selectSiderMenu, setSelectSiderMenu] = useState("");
+
+  const [isDarkMode, setIsDarkMode] = useState(false);
 
   useEffect(() => {
     console.log("params:", params);
@@ -56,7 +60,7 @@ function LayoutContent({ children }) {
   const isHome = !params.page;
 
   return (
-    <SoonUIDesign isDarkMode={false}>
+    <SoonUIDesign isDarkMode={isDarkMode}>
       {isMobile ? (
         <Layout siderPosition="below-header">
           {/* 헤더 */}
@@ -148,6 +152,11 @@ function LayoutContent({ children }) {
           </Footer>
         </Layout>
       )}
+      <FloatButton
+        colorType="default"
+        icon={isDarkMode ? <SunFill /> : <MoonFill />}
+        onClick={() => setIsDarkMode(!isDarkMode)}
+      />
     </SoonUIDesign>
   );
 }
