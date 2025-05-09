@@ -3,6 +3,7 @@ import { Button, Card, Segmented, Table, Tag, Typography } from "sud-ui";
 import { colors, colorPalettes } from "@/app/constants/colors";
 import { useState } from "react";
 import { jsCode, tsCode } from "./examples/exampleCode";
+import { LogoGithub } from "sud-icons";
 
 export default function Color() {
   const { isMobile } = useMobile();
@@ -188,7 +189,17 @@ export default function Color() {
           <br />
           Base Palette와 Component Palette를 커스텀 테마에 적용할 수 있습니다.
         </Typography>
-
+        <Tag className="mg-20" colorType="sky" style={{ cursor: "pointer" }}>
+          <a
+            className="flex gap-10 item-cen"
+            href="https://github.com/SeeUSoon93/sud-docs/tree/master/src/app/sourceCode/theme"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <LogoGithub />
+            View Theme Source Code
+          </a>
+        </Tag>
         <Segmented
           value={selected}
           onChange={handleSegmentChange}
