@@ -12,7 +12,7 @@ import Icon from "../../components/pageComponents/iconPage/Icon";
 
 // 컴포넌트 페이지
 import ComponentOverview from "../../components/pageComponents/componentPage/ComponentOverview";
-
+import ComponentPage from "../../components/pageComponents/componentPage/componentPage";
 export default function Sub() {
   const { page, sub } = useParams();
 
@@ -35,7 +35,7 @@ export default function Sub() {
         case "component-overview":
           return <ComponentOverview />;
         default:
-          return <div className="pd-20">{`[${page}] > [${sub}] 컨텐츠`}</div>;
+          return <ComponentPage sub={sub} />;
       }
     case "icons":
       switch (sub) {

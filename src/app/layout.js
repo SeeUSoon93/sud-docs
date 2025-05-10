@@ -1,4 +1,5 @@
 import ClientLayout from "./components/ClientLayout";
+import "./globals.css";
 
 export const metadata = {
   title: "SUD 공식문서",

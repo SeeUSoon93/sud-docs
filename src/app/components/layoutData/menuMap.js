@@ -17,13 +17,7 @@ export const itemsList = {
       key: "layout",
       title: "Layout",
       mode: "group",
-      children: [
-        { key: "layout", label: "Layout" },
-        { key: "header", label: "Header" },
-        { key: "sider", label: "Sider" },
-        { key: "content", label: "Content" },
-        { key: "footer", label: "Footer" }
-      ]
+      children: [{ key: "layout", label: "Layout" }]
     },
     {
       key: "navigation",

@@ -61,7 +61,7 @@ function LayoutContent({ children }) {
         <Layout siderPosition="below-header">
           {/* 헤더 */}
           <Header
-            height={isMobile ? "110" : "60"}
+            height={isMobile ? 110 : 60}
             className="pd-l-15 pd-r-15"
             border={false}
             shadow="sm"
@@ -106,7 +106,7 @@ function LayoutContent({ children }) {
         <Layout siderPosition="below-header">
           {/* 헤더 */}
           <Header
-            height={isMobile ? "110" : "60"}
+            height={isMobile ? 110 : 60}
             className="pd-l-15 pd-r-15"
             border={false}
             shadow="sm"

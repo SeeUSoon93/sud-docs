@@ -10,22 +10,22 @@ export const overViewData = [
       {
         name: "Header",
         img: "/componentOverview/header.png",
-        link: "/component/header"
+        link: "/component/layout"
       },
       {
         name: "Sider",
         img: "/componentOverview/sider.png",
-        link: "/component/sider"
+        link: "/component/layout"
       },
       {
         name: "Content",
         img: "/componentOverview/content.png",
-        link: "/component/content"
+        link: "/component/layout"
       },
       {
         name: "Footer",
         img: "/componentOverview/footer.png",
-        link: "/component/footer"
+        link: "/component/layout"
       }
     ]
   },

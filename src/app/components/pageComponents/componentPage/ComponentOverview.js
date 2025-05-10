@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useMobile } from "../../../context/mobileContext";
-import { Card, Typography, toast, Button, Input, Tag, Image } from "sud-ui";
+import { Card, Typography, toast, Input, Tag, Image } from "sud-ui";
 import { Search } from "sud-icons";
 import { overViewData } from "./data/overViewData";
 import { useDarkMode } from "../../../context/darkModeContext";
@@ -88,7 +88,7 @@ export default function ComponentOverview() {
       </div>
       <div className="flex flex-col gap-20">
         <Typography as="h2" gmarket="Medium" size="xl">
-          Component 종류
+          Component 개요
         </Typography>
         <Input
           size="sm"
