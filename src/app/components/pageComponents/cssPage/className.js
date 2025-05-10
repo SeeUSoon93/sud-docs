@@ -1,5 +1,5 @@
 import { useMobile } from "../../../context/mobileContext";
-import { Typography, Card, Input } from "sud-ui";
+import { Typography, Card, Input, toast } from "sud-ui";
 import { classNameExamples } from "./data/classNameData";
 import { useState } from "react";
 
@@ -44,7 +44,12 @@ export default function ClassName() {
               display: "block",
               whiteSpace: "pre",
               overflowX: "auto",
-              padding: "16px"
+              padding: "16px",
+              cursor: "pointer"
+            }}
+            onClick={() => {
+              navigator.clipboard.writeText("import 'sud-ui/dist/style.css';");
+              toast.success("복사되었습니다.");
             }}
           >
             {`import "sud-ui/dist/style.css";`}
@@ -82,7 +87,12 @@ export default function ClassName() {
                       display: "block",
                       whiteSpace: "pre",
                       overflowX: "auto",
-                      padding: "16px"
+                      padding: "16px",
+                      cursor: "pointer"
+                    }}
+                    onClick={() => {
+                      navigator.clipboard.writeText(example.sample);
+                      toast.success("복사되었습니다.");
                     }}
                   >
                     {example.sample}

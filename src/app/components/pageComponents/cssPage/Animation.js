@@ -1,9 +1,17 @@
 import { useMobile } from "../../../context/mobileContext";
-import { Typography, Card, Avatar, Tag } from "sud-ui";
+import { Typography, Card, Avatar, Tag, toast } from "sud-ui";
 import { animationExamples } from "./data/animationData";
 
 export default function Animation() {
   const { isMobile } = useMobile();
+
+  const getExampleCode = (example) => {
+    return `<div className="${example.className}"${
+      example.style ? ` style={${JSON.stringify(example.style)}}` : ""
+    }>
+  <Avatar />
+</div>`;
+  };
 
   return (
     <div className="flex flex-col gap-40 pd-20 w-100">
@@ -35,7 +43,12 @@ export default function Animation() {
               display: "block",
               whiteSpace: "pre",
               overflowX: "auto",
-              padding: "16px"
+              padding: "16px",
+              cursor: "pointer"
+            }}
+            onClick={() => {
+              navigator.clipboard.writeText("import 'sud-ui/dist/style.css';");
+              toast.success("복사되었습니다.");
             }}
           >
             {`import "sud-ui/dist/style.css";`}
@@ -88,16 +101,15 @@ export default function Animation() {
                       display: "block",
                       whiteSpace: "pre",
                       overflowX: "auto",
-                      padding: "16px"
+                      padding: "16px",
+                      cursor: "pointer"
+                    }}
+                    onClick={() => {
+                      navigator.clipboard.writeText(getExampleCode(example));
+                      toast.success("복사되었습니다.");
                     }}
                   >
-                    {`<div className="${example.className}"${
-                      example.style
-                        ? ` style={${JSON.stringify(example.style)}}`
-                        : ""
-                    }>
-  <Avatar />
-</div>`}
+                    {getExampleCode(example)}
                   </Typography>
                 </Card>
               </div>
