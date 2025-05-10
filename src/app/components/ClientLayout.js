@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { useParams, useRouter } from "next/navigation";
 import { MobileProvider, useMobile } from "../context/mobileContext";
+import { DarkModeProvider, useDarkMode } from "../context/darkModeContext";
 
 import {
   Layout,
@@ -31,7 +32,7 @@ function LayoutContent({ children }) {
   const [selectHeadMenu, setSelectHeadMenu] = useState("");
   const [selectSiderMenu, setSelectSiderMenu] = useState("");
 
-  const [isDarkMode, setIsDarkMode] = useState(false);
+  const { isDarkMode, setIsDarkMode } = useDarkMode();
 
   useEffect(() => {
     if (params.page) {
@@ -159,7 +160,9 @@ function LayoutContent({ children }) {
 export default function ClientLayout({ children }) {
   return (
     <MobileProvider>
-      <LayoutContent>{children}</LayoutContent>
+      <DarkModeProvider>
+        <LayoutContent>{children}</LayoutContent>
+      </DarkModeProvider>
     </MobileProvider>
   );
 }

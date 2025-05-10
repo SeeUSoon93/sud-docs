@@ -57,7 +57,7 @@ export default function ClassName() {
         </Card>
       </div>
       <div className="flex flex-col gap-20">
-        <Typography as="h2" gmarket="Medium" size="2xl">
+        <Typography as="h2" gmarket="Medium" size="xl">
           className 규칙
         </Typography>
         <Input

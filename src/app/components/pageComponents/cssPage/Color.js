@@ -1,5 +1,5 @@
 import { useMobile } from "../../../context/mobileContext";
-import { Button, Card, Segmented, Table, Tag, Typography } from "sud-ui";
+import { Card, Segmented, Table, Tag, Typography, toast } from "sud-ui";
 import { colors, colorPalettes } from "../../../constants/colors";
 import { useState } from "react";
 import { jsCode, tsCode } from "./data/colorExampleCode";
@@ -27,12 +27,18 @@ export default function Color() {
             <Card
               key={`${colorName}-${num}`}
               background={colors[colorName][num]}
-              style={{ width: "100%", textAlign: "center" }}
+              style={{ width: "100%", textAlign: "center", cursor: "pointer" }}
               shadow="none"
               shape="square"
               border={false}
             >
-              <div className="flex jus-bet item-cen">
+              <div
+                className="flex jus-bet item-cen"
+                onClick={() => {
+                  navigator.clipboard.writeText(colors[colorName][num]);
+                  toast.success("복사되었습니다.");
+                }}
+              >
                 <Typography
                   as="span"
                   size="xs"

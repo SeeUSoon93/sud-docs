@@ -18,11 +18,11 @@ export const itemsList = {
       title: "Layout",
       mode: "group",
       children: [
-        { key: "content", label: "Content" },
-        { key: "footer", label: "Footer" },
-        { key: "header", label: "Header" },
         { key: "layout", label: "Layout" },
-        { key: "sider", label: "Sider" }
+        { key: "header", label: "Header" },
+        { key: "sider", label: "Sider" },
+        { key: "content", label: "Content" },
+        { key: "footer", label: "Footer" }
       ]
     },
     {
@@ -45,7 +45,6 @@ export const itemsList = {
       title: "Input",
       mode: "group",
       children: [
-        { key: "form", label: "Form" },
         { key: "input", label: "Input" },
         { key: "inputotp", label: "InputOTP" },
         { key: "textarea", label: "TextArea" },
@@ -97,7 +96,7 @@ export const itemsList = {
       children: [
         { key: "modal", label: "Modal" },
         { key: "notification", label: "Notification" },
-        { key: "popconfirm", label: "Pop Confirm" },
+        { key: "popconfirm", label: "PopConfirm" },
         { key: "popover", label: "Popover" },
         { key: "progress", label: "Progress" },
         { key: "spinner", label: "Spin" },

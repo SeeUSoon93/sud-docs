@@ -10,6 +10,9 @@ import ClassName from "../../components/pageComponents/cssPage/className";
 // 아이콘 페이지
 import Icon from "../../components/pageComponents/iconPage/Icon";
 
+// 컴포넌트 페이지
+import ComponentOverview from "../../components/pageComponents/componentPage/ComponentOverview";
+
 export default function Sub() {
   const { page, sub } = useParams();
 
@@ -29,8 +32,8 @@ export default function Sub() {
       }
     case "component":
       switch (sub) {
-        case "icons":
-          return <Icon />;
+        case "component-overview":
+          return <ComponentOverview />;
         default:
           return <div className="pd-20">{`[${page}] > [${sub}] 컨텐츠`}</div>;
       }

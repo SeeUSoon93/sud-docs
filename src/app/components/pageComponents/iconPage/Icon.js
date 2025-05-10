@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Search } from "sud-icons";
 import * as Icons from "sud-icons";
-import { Button, Card, Input, Segmented, toast, Typography } from "sud-ui";
+import { Button, Card, Input, Segmented, toast, Typography, Tag } from "sud-ui";
 import { useMobile } from "../../../context/mobileContext";
 
 export default function Icon() {
@@ -27,8 +27,10 @@ export default function Icon() {
 
     const filters = {
       Filled: name.includes("Fill"),
-      Logo: name.includes("Logo"),
-      Outlined: !name.includes("Fill") && !name.includes("Logo"),
+      Logo: name.includes("Logo") && !name.includes("Logout"),
+      Outlined:
+        (!name.includes("Fill") && !name.includes("Logo")) ||
+        name.includes("Logout"),
       All: true
     };
 
@@ -80,8 +82,9 @@ export default function Icon() {
             wordBreak: "keep-all"
           }}
         >
-          Soon UI Design 아이콘 팩을 사용하려면 'sud-icons' 패키지를 설치해야
-          합니다.
+          Soon UI Design 아이콘 팩을 사용하려면{" "}
+          <Tag style={{ display: "inline-block" }}>sud-icons</Tag> 패키지를
+          설치해야 합니다.
         </Typography>
 
         <Card
@@ -89,17 +92,12 @@ export default function Icon() {
           border={false}
           shadow="none"
           width={"100%"}
-          className="flex flex-row"
+          className="flex flex-row cursor-pointer"
         >
-          <div className="flex jus-bet item-cen">
+          <div className="flex jus-bet item-cen" onClick={handleInstallCopy}>
             <Typography as="code" code size="lg">
               {INSTALL_COMMAND}
             </Typography>
-            <Button colorType="default" size="sm" onClick={handleInstallCopy}>
-              <Typography pretendard="L" size="xs">
-                Copy
-              </Typography>
-            </Button>
           </div>
         </Card>
       </div>
@@ -132,6 +130,7 @@ export default function Icon() {
           {filteredIcons.map(({ name, Component }) => (
             <div key={name} className="flex flex-col item-cen gap-10">
               <Button
+                className="pd-25"
                 icon={<Component size="30" />}
                 colorType="default"
                 onClick={() => handleIconCopy(name)}

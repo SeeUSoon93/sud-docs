@@ -57,7 +57,7 @@ export default function Animation() {
       </div>
 
       <div className="flex flex-col gap-20">
-        <Typography as="h2" gmarket="Medium" size="2xl">
+        <Typography as="h2" gmarket="Medium" size="xl">
           애니메이션 종류
         </Typography>
         <Typography
