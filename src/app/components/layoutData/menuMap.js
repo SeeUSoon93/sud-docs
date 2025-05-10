@@ -5,7 +5,7 @@ export const itemsList = {
     { key: "color", label: "color" },
     { key: "font", label: "font" },
     { key: "animation", label: "animation" },
-    { key: "etc", label: "etc" }
+    { key: "className", label: "className" }
   ],
   component: [
     {
@@ -106,5 +106,5 @@ export const itemsList = {
       ]
     }
   ],
-  icons: [{ key: "icons", label: "아이콘" }]
+  icons: [{ key: "icons", label: "icons" }]
 };

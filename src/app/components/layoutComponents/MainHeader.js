@@ -33,19 +33,19 @@ export default function MainHeader({
       key: "css",
       label: "CSS",
       children: [
-        { key: "color", label: "색상" },
-        { key: "font", label: "폰트" },
-        { key: "animation", label: "애니메이션" },
-        { key: "etc", label: "나머지" }
+        { key: "color", label: "color" },
+        { key: "font", label: "font" },
+        { key: "animation", label: "animation" },
+        { key: "className", label: "className" }
       ]
     },
     {
       key: "component",
-      label: "컴포넌트"
+      label: "Component"
     },
     {
       key: "icons",
-      label: "아이콘"
+      label: "Icons"
     }
   ];
 

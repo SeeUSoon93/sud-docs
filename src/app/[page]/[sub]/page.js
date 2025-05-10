@@ -4,14 +4,14 @@ import { useParams } from "next/navigation";
 // css 페이지
 import Color from "../../components/pageComponents/cssPage/Color";
 import Font from "../../components/pageComponents/cssPage/Font";
+import Animation from "../../components/pageComponents/cssPage/Animation";
+import ClassName from "../../components/pageComponents/cssPage/className";
 
 // 아이콘 페이지
 import Icon from "../../components/pageComponents/iconPage/Icon";
 
 export default function Sub() {
   const { page, sub } = useParams();
-
-  console.log("dd");
 
   switch (page) {
     case "css":
@@ -20,6 +20,10 @@ export default function Sub() {
           return <Color />;
         case "font":
           return <Font />;
+        case "animation":
+          return <Animation />;
+        case "className":
+          return <ClassName />;
         default:
           return <div className="pd-20">{`[${page}] > [${sub}] 컨텐츠`}</div>;
       }

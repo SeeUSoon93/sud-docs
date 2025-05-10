@@ -12,8 +12,8 @@
     "next": "15.3.2",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "sud-icons": "^1.0.0",
-    "sud-ui": "^0.1.2005"
+    "sud-icons": "^1.0.1",
+    "sud-ui": "^0.1.2008"
   },
   "devDependencies": {
     "@types/node": "22.15.17",
