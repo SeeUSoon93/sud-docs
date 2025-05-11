@@ -178,7 +178,7 @@ export default function Color() {
             <Tag colorType="sky" style={{ cursor: "pointer" }}>
               <a
                 className="flex gap-10 item-cen"
-                href="https://github.com/SeeUSoon93/sud-docs/tree/master/src/app/sourceCode/theme"
+                href="https://github.com/SeeUSoon93/sud-docs/tree/master/src/app/_lib/sourceCode/theme"
                 target="_blank"
                 rel="noopener noreferrer"
               >
