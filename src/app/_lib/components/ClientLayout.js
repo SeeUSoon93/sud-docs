@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { useParams, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 import { MobileProvider, useMobile } from "../context/mobileContext";
 import { DarkModeProvider, useDarkMode } from "../context/darkModeContext";
 
@@ -20,12 +20,10 @@ import "sud-ui/dist/index.css";
 import MainHeader from "./layoutComponents/MainHeader";
 import MainSider from "./layoutComponents/MainSider";
 
-import { itemsList } from "./layoutData/menuMap";
 import { MoonFill, SunFill } from "sud-icons";
 
 function LayoutContent({ children }) {
-  const params = useParams();
-  const router = useRouter();
+  const pathname = usePathname();
   const { isMobile } = useMobile();
   const [isSiderOpen, setIsSiderOpen] = useState(false);
 
@@ -33,27 +31,19 @@ function LayoutContent({ children }) {
   const [selectSiderMenu, setSelectSiderMenu] = useState("");
 
   const { isDarkMode, setIsDarkMode } = useDarkMode();
+  const isHome = pathname === "/";
 
   useEffect(() => {
-    if (params.page) {
-      setSelectHeadMenu(params.page);
-    }
-
-    if (params.sub) {
-      setSelectSiderMenu(params.sub);
-    }
-
-    // /[page]만 있을 경우 → 자동 redirect
-    if (params.page && !params.sub) {
-      const firstSub = getFirstSubKey(itemsList[params.page]);
-      if (firstSub) {
-        router.replace(`/${params.page}/${firstSub}`);
-        setSelectSiderMenu(firstSub);
+    if (pathname) {
+      const [_, headMenu, siderMenu] = pathname.split("/");
+      if (headMenu) {
+        setSelectHeadMenu(headMenu);
+        if (siderMenu) {
+          setSelectSiderMenu(siderMenu);
+        }
       }
     }
-  }, [params.page, params.sub]);
-
-  const isHome = !params.page;
+  }, [pathname]);
 
   return (
     <SoonUIDesign isDarkMode={isDarkMode}>
@@ -75,7 +65,7 @@ function LayoutContent({ children }) {
           </Header>
 
           {/* 사이더: 모바일에서만 오픈 시 렌더 */}
-          {isSiderOpen && !isHome && (
+          {isSiderOpen && (
             <Sider width="100%" className="pd-10">
               <MainSider
                 selectHeadMenu={selectHeadMenu}

@@ -6,26 +6,6 @@ export const overViewData = [
         name: "Layout",
         img: "/componentOverview/layout.png",
         link: "/component/layout"
-      },
-      {
-        name: "Header",
-        img: "/componentOverview/header.png",
-        link: "/component/layout"
-      },
-      {
-        name: "Sider",
-        img: "/componentOverview/sider.png",
-        link: "/component/layout"
-      },
-      {
-        name: "Content",
-        img: "/componentOverview/content.png",
-        link: "/component/layout"
-      },
-      {
-        name: "Footer",
-        img: "/componentOverview/footer.png",
-        link: "/component/layout"
       }
     ]
   },
