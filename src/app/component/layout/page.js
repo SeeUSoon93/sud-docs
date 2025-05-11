@@ -5,6 +5,8 @@ import { useMobile } from "../../_lib/context/mobileContext";
 import { Tag } from "sud-ui";
 import * as sud from "sud-ui";
 import { LogoSud } from "sud-icons";
+import { useState } from "react";
+
 export default function Layout() {
   const { isMobile } = useMobile();
 
@@ -42,7 +44,7 @@ export default function Layout() {
       description: "기본적인 레이아웃 구성입니다.",
       render: (
         <div
-          className={`grid col-2 gap-20`}
+          className={`grid ${isMobile ? "col-1" : "col-2"} gap-20`}
           style={{ width: "100%", height: "70vh" }}
         >
           <sud.Layout>
@@ -69,7 +71,7 @@ export default function Layout() {
               background="blue-6"
               color="white-10"
             >
-              Content
+              content
             </sud.Content>
             <sud.Footer
               className="flex jus-cen item-cen"
@@ -105,7 +107,7 @@ export default function Layout() {
               background="blue-6"
               color="white-10"
             >
-              Content
+              content
             </sud.Content>
             <sud.Footer
               className="flex jus-cen item-cen"
@@ -132,7 +134,7 @@ export default function Layout() {
               background="blue-6"
               color="white-10"
             >
-              Content
+              content
             </sud.Content>
           </sud.Layout>
           <sud.Layout>
@@ -150,7 +152,7 @@ export default function Layout() {
               background="blue-6"
               color="white-10"
             >
-              Content
+              content
             </sud.Content>
             <sud.Footer
               className="flex jus-cen item-cen"
@@ -255,7 +257,7 @@ export default BasicLayout;`,
               </sud.Typography>
             </sud.Content>
             <sud.Footer
-              className="flex jus-cen item-cen"
+              className="flex jus-cen item-cen ta-cen"
               colorType="info"
               border={false}
               height="40px"
@@ -265,6 +267,534 @@ export default BasicLayout;`,
           </sud.Layout>
         </div>
       )
+    },
+    {
+      title: "Above-Header-Sider-Content",
+      description: "Above-Header-Sider-Content 레이아웃입니다.",
+      render: (
+        <div style={{ width: "100%", height: "50vh" }}>
+          {(() => {
+            const [selectedMenu, setSelectedMenu] = useState("");
+
+            const menuItems = [
+              {
+                key: "dashboard",
+                label: "대시보드",
+                children: [
+                  { key: "overview", label: "개요" },
+                  { key: "analytics", label: "분석" }
+                ]
+              },
+              {
+                key: "management",
+                label: "관리",
+                children: [
+                  { key: "users", label: "사용자" },
+                  { key: "settings", label: "설정" }
+                ]
+              }
+            ];
+
+            const findLabel = (items, targetKey) => {
+              for (const item of items) {
+                if (item.key === targetKey) return item.label;
+                if (item.children) {
+                  const childLabel = findLabel(item.children, targetKey);
+                  if (childLabel) return childLabel;
+                }
+              }
+              return null;
+            };
+
+            const handleMenuSelect = (key) => {
+              const label = findLabel(menuItems, key);
+              setSelectedMenu(label || "");
+            };
+
+            return (
+              <sud.Layout siderPosition="above-header">
+                <sud.Header
+                  className="flex jus-cen item-cen"
+                  colorType="info"
+                  shadow="sm"
+                  border={false}
+                >
+                  <LogoSud /> Soon UI Design
+                </sud.Header>
+                <sud.Sider
+                  className="flex pd-l-5 pd-r-10"
+                  width="object-fit"
+                  border={false}
+                  colorType="sub"
+                  shadow="sm"
+                >
+                  <sud.Menu
+                    items={menuItems}
+                    expandType="accordion"
+                    colorType="info"
+                    onSelect={handleMenuSelect}
+                  />
+                </sud.Sider>
+                <sud.Content className="flex jus-cen item-cen">
+                  {selectedMenu
+                    ? `${selectedMenu} 선택됨`
+                    : "메뉴를 선택해주세요"}
+                </sud.Content>
+              </sud.Layout>
+            );
+          })()}
+        </div>
+      ),
+      jscode: `import React, { useState } from 'react';
+import { Layout, Header, Sider, Content, Menu } from 'sud-ui';
+import { LogoSud } from 'sud-icons';
+
+const AboveHeaderSiderContent = () => {
+  const [selectedMenu, setSelectedMenu] = useState("");
+
+  const menuItems = [
+    {
+      key: "dashboard",
+      label: "대시보드",
+      children: [
+        { key: "overview", label: "개요" },
+        { key: "analytics", label: "분석" }
+      ]
+    },
+    {
+      key: "management",
+      label: "관리",
+      children: [
+        { key: "users", label: "사용자" },
+        { key: "settings", label: "설정" }
+      ]
+    }
+  ];
+
+  const findLabel = (items, targetKey) => {
+    for (const item of items) {
+      if (item.key === targetKey) return item.label;
+      if (item.children) {
+        const childLabel = findLabel(item.children, targetKey);
+        if (childLabel) return childLabel;
+      }
+    }
+    return null;
+  };
+
+  const handleMenuSelect = (key) => {
+    const label = findLabel(menuItems, key);
+    setSelectedMenu(label || "");
+  };
+
+  return (
+    <Layout siderPosition="above-header">
+      <Header
+        className="flex jus-cen item-cen"
+        colorType="info"
+        shadow="sm"
+        border={false}
+      >
+        <LogoSud /> Soon UI Design
+      </Header>
+      <Sider
+        className="flex pd-l-5 pd-r-10"
+        width="object-fit"
+        border={false}
+      >
+        <Menu
+          items={menuItems}
+          expandType="accordion"
+          colorType="info"
+          onSelect={handleMenuSelect}
+        />
+      </Sider>
+      <Content
+        className="flex jus-cen item-cen"
+        background="blue-6"
+        color="white-10"
+      >
+        {selectedMenu ? \`\${selectedMenu} 선택됨\` : "메뉴를 선택해주세요"}
+      </Content>
+    </Layout>
+  );
+};
+
+export default AboveHeaderSiderContent;`,
+      tscode: `import React, { useState } from 'react';
+import { Layout, Header, Sider, Content, Menu } from 'sud-ui';
+import { LogoSud } from 'sud-icons';
+
+interface MenuItem {
+  key: string;
+  label: string;
+  children?: MenuItem[];
+}
+
+const AboveHeaderSiderContent: React.FC = () => {
+  const [selectedMenu, setSelectedMenu] = useState<string>("");
+
+  const menuItems: MenuItem[] = [
+    {
+      key: "dashboard",
+      label: "대시보드",
+      children: [
+        { key: "overview", label: "개요" },
+        { key: "analytics", label: "분석" }
+      ]
+    },
+    {
+      key: "management",
+      label: "관리",
+      children: [
+        { key: "users", label: "사용자" },
+        { key: "settings", label: "설정" }
+      ]
+    }
+  ];
+
+  const findLabel = (items: MenuItem[], targetKey: string): string | null => {
+    for (const item of items) {
+      if (item.key === targetKey) return item.label;
+      if (item.children) {
+        const childLabel = findLabel(item.children, targetKey);
+        if (childLabel) return childLabel;
+      }
+    }
+    return null;
+  };
+
+  const handleMenuSelect = (key: string): void => {
+    const label = findLabel(menuItems, key);
+    setSelectedMenu(label || "");
+  };
+
+  return (
+    <Layout siderPosition="above-header">
+      <Header
+        className="flex jus-cen item-cen"
+        colorType="info"
+        shadow="sm"
+        border={false}
+      >
+        <LogoSud /> Soon UI Design
+      </Header>
+      <Sider
+        className="flex pd-l-5 pd-r-10"
+        width="object-fit"
+        border={false}
+      >
+        <Menu
+          items={menuItems}
+          expandType="accordion"
+          colorType="info"
+          onSelect={handleMenuSelect}
+        />
+      </Sider>
+      <Content
+        className="flex jus-cen item-cen"
+        background="blue-6"
+        color="white-10"
+      >
+        {selectedMenu ? \`\${selectedMenu} 선택됨\` : "메뉴를 선택해주세요"}
+      </Content>
+    </Layout>
+  );
+};
+
+export default AboveHeaderSiderContent;`
+    },
+    {
+      title: "Nested-Layout",
+      description:
+        "Layout 컴포넌트를 Content 안에 중첩하여 사용하는 예제입니다.",
+      render: (
+        <div style={{ width: "100%", height: "50vh" }}>
+          <sud.Layout>
+            <sud.Header
+              className="flex jus-cen item-cen"
+              colorType="info"
+              shadow="sm"
+              border={false}
+            >
+              <LogoSud /> Soon UI Design
+            </sud.Header>
+            <sud.Sider
+              className="flex pd-l-5 pd-r-10"
+              width="270"
+              colorType="sub"
+              shadow="sm"
+              border={false}
+            >
+              <sud.Menu
+                items={[
+                  { key: "dashboard", label: "대시보드" },
+                  { key: "users", label: "사용자" },
+                  { key: "settings", label: "설정" }
+                ]}
+                colorType="info"
+              />
+            </sud.Sider>
+            <sud.Content>
+              <sud.Layout>
+                <sud.Header
+                  className="flex jus-cen item-cen"
+                  colorType="sub"
+                  shadow="sm"
+                  border={false}
+                  height="60"
+                >
+                  서브 헤더
+                </sud.Header>
+                <sud.Content className="flex jus-cen item-cen">
+                  중첩된 레이아웃의 콘텐츠
+                </sud.Content>
+              </sud.Layout>
+            </sud.Content>
+          </sud.Layout>
+        </div>
+      ),
+      jscode: `import React from 'react';
+import { Layout, Header, Sider, Content, Menu } from 'sud-ui';
+import { LogoSud } from 'sud-icons';
+
+const NestedLayout = () => {
+  return (
+    <Layout>
+      <Header
+        className="flex jus-cen item-cen"
+        colorType="info"
+        shadow="sm"
+        border={false}
+      >
+        <LogoSud /> Soon UI Design
+      </Header>
+      <Sider
+        className="flex pd-l-5 pd-r-10"
+        width="270"
+        colorType="sub"
+        shadow="sm"
+        border={false}
+      >
+        <Menu
+          items={[
+            { key: "dashboard", label: "대시보드" },
+            { key: "users", label: "사용자" },
+            { key: "settings", label: "설정" }
+          ]}
+          colorType="info"
+        />
+      </Sider>
+      <Content>
+        <Layout>
+          <Header
+            className="flex jus-cen item-cen"
+            colorType="sub"
+            shadow="sm"
+            border={false}
+            height="60"
+          >
+            서브 헤더
+          </Header>
+          <Content className="flex jus-cen item-cen">
+            중첩된 레이아웃의 콘텐츠
+          </Content>
+        </Layout>
+      </Content>
+    </Layout>
+  );
+};
+
+export default NestedLayout;`,
+      tscode: `import React from 'react';
+import { Layout, Header, Sider, Content, Menu } from 'sud-ui';
+import { LogoSud } from 'sud-icons';
+
+interface MenuItem {
+  key: string;
+  label: string;
+}
+
+const NestedLayout: React.FC = () => {
+  const menuItems: MenuItem[] = [
+    { key: "dashboard", label: "대시보드" },
+    { key: "users", label: "사용자" },
+    { key: "settings", label: "설정" }
+  ];
+
+  return (
+    <Layout>
+      <Header
+        className="flex jus-cen item-cen"
+        colorType="info"
+        shadow="sm"
+        border={false}
+      >
+        <LogoSud /> Soon UI Design
+      </Header>
+      <Sider
+        className="flex pd-l-5 pd-r-10"
+        width="270"
+        colorType="sub"
+        shadow="sm"
+        border={false}
+      >
+        <Menu
+          items={menuItems}
+          colorType="info"
+        />
+      </Sider>
+      <Content>
+        <Layout>
+          <Header
+            className="flex jus-cen item-cen"
+            colorType="sub"
+            shadow="sm"
+            border={false}
+            height="60"
+          >
+            서브 헤더
+          </Header>
+          <Content className="flex jus-cen item-cen">
+            중첩된 레이아웃의 콘텐츠
+          </Content>
+        </Layout>
+      </Content>
+    </Layout>
+  );
+};
+
+export default NestedLayout;`
+    },
+    {
+      title: "Sider-Content",
+      description: "Sider와 Content만 있는 간단한 레이아웃입니다.",
+      render: (
+        <div style={{ width: "100%", height: "50vh" }}>
+          {(() => {
+            const [selectedMenu, setSelectedMenu] = useState("");
+
+            const menuItems = [
+              { key: "dashboard", label: "대시보드" },
+              { key: "users", label: "사용자" },
+              { key: "settings", label: "설정" }
+            ];
+
+            const handleMenuSelect = (key) => {
+              const selected = menuItems.find((item) => item.key === key);
+              setSelectedMenu(selected?.label || "");
+            };
+
+            return (
+              <sud.Layout>
+                <sud.Sider
+                  className="flex pd-l-5 pd-r-10"
+                  width="270"
+                  colorType="sub"
+                  shadow="sm"
+                  border={false}
+                >
+                  <sud.Menu
+                    items={menuItems}
+                    colorType="info"
+                    onSelect={handleMenuSelect}
+                  />
+                </sud.Sider>
+                <sud.Content className="flex jus-cen item-cen">
+                  {selectedMenu
+                    ? `${selectedMenu} 페이지`
+                    : "메뉴를 선택해주세요"}
+                </sud.Content>
+              </sud.Layout>
+            );
+          })()}
+        </div>
+      ),
+      jscode: `import React, { useState } from 'react';
+import { Layout, Sider, Content, Menu } from 'sud-ui';
+
+const SiderContentLayout = () => {
+  const [selectedMenu, setSelectedMenu] = useState("");
+
+  const menuItems = [
+    { key: "dashboard", label: "대시보드" },
+    { key: "users", label: "사용자" },
+    { key: "settings", label: "설정" }
+  ];
+
+  const handleMenuSelect = (key) => {
+    const selected = menuItems.find(item => item.key === key);
+    setSelectedMenu(selected?.label || "");
+  };
+
+  return (
+    <Layout>
+      <Sider
+        className="flex pd-l-5 pd-r-10"
+        width="270"
+        colorType="sub"
+        shadow="sm"
+        border={false}
+      >
+        <Menu
+          items={menuItems}
+          colorType="info"
+          onSelect={handleMenuSelect}
+        />
+      </Sider>
+      <Content className="flex jus-cen item-cen">
+        {selectedMenu ? \`\${selectedMenu} 페이지\` : "메뉴를 선택해주세요"}
+      </Content>
+    </Layout>
+  );
+};
+
+export default SiderContentLayout;`,
+      tscode: `import React, { useState } from 'react';
+import { Layout, Sider, Content, Menu } from 'sud-ui';
+
+interface MenuItem {
+  key: string;
+  label: string;
+}
+
+const SiderContentLayout: React.FC = () => {
+  const [selectedMenu, setSelectedMenu] = useState<string>("");
+
+  const menuItems: MenuItem[] = [
+    { key: "dashboard", label: "대시보드" },
+    { key: "users", label: "사용자" },
+    { key: "settings", label: "설정" }
+  ];
+
+  const handleMenuSelect = (key: string): void => {
+    const selected = menuItems.find(item => item.key === key);
+    setSelectedMenu(selected?.label || "");
+  };
+
+  return (
+    <Layout>
+      <Sider
+        className="flex pd-l-5 pd-r-10"
+        width="270"
+        colorType="sub"
+        shadow="sm"
+        border={false}
+      >
+        <Menu
+          items={menuItems}
+          colorType="info"
+          onSelect={handleMenuSelect}
+        />
+      </Sider>
+      <Content className="flex jus-cen item-cen">
+        {selectedMenu ? \`\${selectedMenu} 페이지\` : "메뉴를 선택해주세요"}
+      </Content>
+    </Layout>
+  );
+};
+
+export default SiderContentLayout;`
     }
   ];
 
