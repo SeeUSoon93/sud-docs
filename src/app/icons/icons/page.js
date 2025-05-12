@@ -60,10 +60,7 @@ export default function Icon() {
         description={
           <>
             Soon UI Design 아이콘 팩을 사용하려면
-            <Tag style={{ display: "inline-block", margin: "0 4px" }}>
-              sud-icons
-            </Tag>
-            패키지를 설치해야 합니다.
+            <Tag>sud-icons</Tag> 패키지를 설치해야 합니다.
           </>
         }
         etc={

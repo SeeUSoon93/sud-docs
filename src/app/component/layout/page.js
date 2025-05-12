@@ -16,12 +16,8 @@ export default function Layout() {
       웹 애플리케이션의 레이아웃을 구성하는 컴포넌트입니다. Header, Sider,
       Content, Footer 컴포넌트를 조합하여 다양한 레이아웃을 구성할 수 있습니다.
       <br />
-      <Tag style={{ display: "inline-block", margin: "0 4px" }}>Layout</Tag>
-      <Tag style={{ display: "inline-block", margin: "0 4px" }}>Header</Tag>
-      <Tag style={{ display: "inline-block", margin: "0 4px" }}>Sider</Tag>
-      <Tag style={{ display: "inline-block", margin: "0 4px" }}>Content</Tag>
-      <Tag style={{ display: "inline-block", margin: "0 4px" }}>Footer</Tag>
-      컴포넌트와 함께 사용합니다.
+      <Tag>Layout</Tag> <Tag>Header</Tag> <Tag>Sider</Tag> <Tag>Content</Tag>{" "}
+      <Tag>Footer</Tag> 컴포넌트와 함께 사용합니다.
       <br />
       <br />
       Layout 컴포넌트는 자동으로 화면 전체를 차지하며, 내부 컴포넌트들의 크기에

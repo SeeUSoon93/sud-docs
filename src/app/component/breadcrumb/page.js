@@ -2,7 +2,7 @@
 
 import Frame from "../Frame";
 import { useMobile } from "../../_lib/context/mobileContext";
-import { Breadcrumb, Dropdown, Typography } from "sud-ui";
+import { Breadcrumb, Dropdown, Tag, Typography } from "sud-ui";
 import { AngleDown, HomeOutline, TriangleRight } from "sud-icons";
 export default function BreadcrumbPage() {
   const { isMobile } = useMobile();
@@ -430,9 +430,137 @@ const CustomStyleBreadcrumb: React.FC = () => {
 export default CustomStyleBreadcrumb;`
     }
   ];
+  const howToUseTableColumn = [
+    {
+      title: "속성 이름",
+      dataIndex: "name",
+      key: "name",
+      col: 1,
+      align: "center"
+    },
+    {
+      title: "설명",
+      dataIndex: "description",
+      key: "description",
+      col: 5,
+      align: "center"
+    },
+    {
+      title: "필수",
+      dataIndex: "required",
+      key: "required",
+      col: 1,
+      align: "center"
+    },
+    {
+      title: "타입",
+      dataIndex: "type",
+      key: "type",
+      col: 3,
+      align: "center"
+    },
+    {
+      title: "기본값",
+      dataIndex: "default",
+      key: "default",
+      col: 1,
+      align: "center"
+    }
+  ];
+
+  const howToUseTableData = [
+    {
+      key: "items",
+      name: "items",
+      description:
+        "브레드크럼 항목 목록. 각 항목은 { label: ReactNode, href?: string } 형태로 구성됩니다.",
+      required: "선택",
+      type: "BreadcrumbItem[]",
+      default: ""
+    },
+    {
+      key: "separator",
+      name: "separator",
+      description: "항목 사이의 구분자",
+      required: "선택",
+      type: "ReactNode",
+      default: "'>'"
+    },
+    {
+      key: "className",
+      name: "className",
+      description: "추가 클래스명",
+      required: "선택",
+      type: "string",
+      default: ""
+    },
+    {
+      key: "style",
+      name: "style",
+      description: "컨테이너 스타일",
+      required: "선택",
+      type: "React.CSSProperties",
+      default: ""
+    },
+    {
+      key: "separatorStyle",
+      name: "separatorStyle",
+      description: "구분자 스타일",
+      required: "선택",
+      type: "React.CSSProperties",
+      default: ""
+    },
+    {
+      key: "linkStyle",
+      name: "linkStyle",
+      description: "링크 스타일",
+      required: "선택",
+      type: "React.CSSProperties",
+      default: ""
+    },
+    {
+      key: "itemStyle",
+      name: "itemStyle",
+      description: "항목 스타일",
+      required: "선택",
+      type: "React.CSSProperties",
+      default: ""
+    },
+    {
+      key: "listStyle",
+      name: "listStyle",
+      description: "목록 스타일",
+      required: "선택",
+      type: "React.CSSProperties",
+      default: ""
+    },
+    {
+      key: "size",
+      name: "size",
+      description: "텍스트 크기 (Typography size prop과 동일)",
+      required: "선택",
+      type: (
+        <>
+          <Tag>xs</Tag> <Tag>sm</Tag> <Tag>base</Tag> <Tag>lg</Tag>{" "}
+          <Tag>xl</Tag> <Tag>2xl</Tag> <Tag>3xl</Tag> <Tag>4xl</Tag>{" "}
+          <Tag>5xl</Tag>
+        </>
+      ),
+      default: "'base'"
+    }
+  ];
+
   return (
     <Frame
-      component={{ name, description, IMPORT_COMMAND, whenToUse, examples }}
+      component={{
+        name,
+        description,
+        IMPORT_COMMAND,
+        whenToUse,
+        examples,
+        howToUseTableColumn,
+        howToUseTableData
+      }}
       grid={true}
       isMobile={isMobile}
     />

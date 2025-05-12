@@ -34,16 +34,9 @@ export default function Animation() {
         title={"애니메이션 종류"}
         description={
           <>
-            <Tag style={{ display: "inline-block", margin: "0 4px" }}>
-              hover-transition-fast
-            </Tag>
-            <Tag style={{ display: "inline-block", margin: "0 4px" }}>
-              hover-transition-normal
-            </Tag>
-            <Tag style={{ display: "inline-block", margin: "0 4px" }}>
-              hover-transition-slow
-            </Tag>
-            클래스를 함께 사용하여 호버 시 전환 속도를 조절할 수 있습니다.
+            <Tag>hover-transition-fast</Tag> <Tag>hover-transition-normal</Tag>{" "}
+            <Tag>hover-transition-slow</Tag> 클래스를 함께 사용하여 호버 시 전환
+            속도를 조절할 수 있습니다.
           </>
         }
         etc={animationExamples.map((example, index) => (

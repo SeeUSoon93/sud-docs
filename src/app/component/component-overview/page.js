@@ -49,8 +49,7 @@ export default function ComponentOverview() {
         title={"사용하기전에"}
         description={
           <>
-            Soon UI Design 컴포넌트를 사용하려면{" "}
-            <Tag style={{ display: "inline-block" }}>sud-ui</Tag> 패키지를
+            Soon UI Design 컴포넌트를 사용하려면 <Tag>sud-ui</Tag> 패키지를
             설치해야 합니다.
           </>
         }

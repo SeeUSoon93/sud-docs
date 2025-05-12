@@ -90,26 +90,10 @@ export default function Color() {
             <br /> 총 28종의 색상군과 1~10단계의 명도 시스템을 바탕으로,{" "}
             <b>토큰 기반 설계</b>를 적용하여 디자인 시스템을 구성합니다.
             <br />
-            <br />각 색상은
-            <Tag
-              colorType="red"
-              style={{ display: "inline-block", margin: "0 4px" }}
-            >
-              red-6
-            </Tag>
-            <Tag
-              colorType="blue"
-              style={{ display: "inline-block", margin: "0 4px" }}
-            >
-              blue-3
-            </Tag>
-            <Tag
-              colorType="forest"
-              style={{ display: "inline-block", margin: "0 4px" }}
-            >
-              forest-5
-            </Tag>
-            와 같이 색상군과 명도 단계를 통해 표현됩니다.
+            <br />각 색상은 <Tag colorType="red">red-6</Tag>{" "}
+            <Tag colorType="blue">blue-3</Tag>{" "}
+            <Tag colorType="forest">forest-5</Tag> 와 같이 색상군과 명도 단계를
+            통해 표현됩니다.
           </>
         }
       />
@@ -174,7 +158,7 @@ export default function Color() {
           </>
         }
         etc={
-          <>
+          <div className="flex flex-col gap-20">
             <Tag colorType="sky" style={{ cursor: "pointer" }}>
               <a
                 className="flex gap-10 item-cen"
@@ -191,7 +175,7 @@ export default function Color() {
               setSelected={setSelected}
               code={selected === "javascript" ? jsCode : tsCode}
             />
-          </>
+          </div>
         }
       />
     </div>

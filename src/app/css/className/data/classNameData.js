@@ -6,14 +6,8 @@ export const classNameExamples = [
     descriptionText: "hidden block flex grid inline inline-block",
     description: (
       <>
-        <Tag style={{ display: "inline-block", margin: "0 4px" }}>hidden</Tag>
-        <Tag style={{ display: "inline-block", margin: "0 4px" }}>block</Tag>
-        <Tag style={{ display: "inline-block", margin: "0 4px" }}>flex</Tag>
-        <Tag style={{ display: "inline-block", margin: "0 4px" }}>grid</Tag>
-        <Tag style={{ display: "inline-block", margin: "0 4px" }}>inline</Tag>
-        <Tag style={{ display: "inline-block", margin: "0 4px" }}>
-          inline-block
-        </Tag>
+        <Tag>hidden</Tag> <Tag>block</Tag> <Tag>flex</Tag> <Tag>grid</Tag>
+        <Tag>inline</Tag> <Tag>inline-block</Tag>
       </>
     ),
     sample: `/* CSS */
@@ -29,11 +23,9 @@ export const classNameExamples = [
     descriptionText: "relative absolute fixed static sticky",
     description: (
       <>
-        <Tag style={{ display: "inline-block", margin: "0 4px" }}>relative</Tag>
-        <Tag style={{ display: "inline-block", margin: "0 4px" }}>absolute</Tag>
-        <Tag style={{ display: "inline-block", margin: "0 4px" }}>fixed</Tag>
-        <Tag style={{ display: "inline-block", margin: "0 4px" }}>static</Tag>
-        <Tag style={{ display: "inline-block", margin: "0 4px" }}>sticky</Tag>
+        <Tag>relative</Tag> <Tag>absolute</Tag> <Tag>fixed</Tag>{" "}
+        <Tag>static</Tag>
+        <Tag>sticky</Tag>
       </>
     ),
     sample: `/* CSS */
@@ -50,33 +42,11 @@ export const classNameExamples = [
       "overflow-auto overflow-hidden overflow-scroll overflow-x-auto overflow-y-auto overflow-x-hidden overflow-y-hidden overflow-x-scroll overflow-y-scroll",
     description: (
       <>
-        <Tag style={{ display: "inline-block", margin: "0 4px" }}>
-          overflow-auto
-        </Tag>
-        <Tag style={{ display: "inline-block", margin: "0 4px" }}>
-          overflow-hidden
-        </Tag>
-        <Tag style={{ display: "inline-block", margin: "0 4px" }}>
-          overflow-scroll
-        </Tag>
-        <Tag style={{ display: "inline-block", margin: "0 4px" }}>
-          overflow-x-auto
-        </Tag>
-        <Tag style={{ display: "inline-block", margin: "0 4px" }}>
-          overflow-y-auto
-        </Tag>
-        <Tag style={{ display: "inline-block", margin: "0 4px" }}>
-          overflow-x-hidden
-        </Tag>
-        <Tag style={{ display: "inline-block", margin: "0 4px" }}>
-          overflow-y-hidden
-        </Tag>
-        <Tag style={{ display: "inline-block", margin: "0 4px" }}>
-          overflow-x-scroll
-        </Tag>
-        <Tag style={{ display: "inline-block", margin: "0 4px" }}>
-          overflow-y-scroll
-        </Tag>
+        <Tag>overflow-auto</Tag> <Tag>overflow-hidden</Tag>{" "}
+        <Tag>overflow-scroll</Tag> <Tag>overflow-x-auto</Tag>{" "}
+        <Tag>overflow-y-auto</Tag>
+        <Tag>overflow-x-hidden</Tag> <Tag>overflow-y-hidden</Tag>
+        <Tag>overflow-x-scroll</Tag> <Tag>overflow-y-scroll</Tag>
       </>
     ),
     sample: `/* CSS */
@@ -116,12 +86,7 @@ export const classNameExamples = [
     descriptionText: "scroll-smooth scroll-auto",
     description: (
       <>
-        <Tag style={{ display: "inline-block", margin: "0 4px" }}>
-          scroll-smooth
-        </Tag>
-        <Tag style={{ display: "inline-block", margin: "0 4px" }}>
-          scroll-auto
-        </Tag>
+        <Tag>scroll-smooth</Tag> <Tag>scroll-auto</Tag>
       </>
     ),
     sample: `/* CSS */
@@ -141,18 +106,8 @@ export const classNameExamples = [
       "w-px-{0-1000} min-w-px-{0-1000} max-w-px-{0-1000} w-{0-100}",
     description: (
       <>
-        <Tag style={{ display: "inline-block", margin: "0 4px" }}>
-          w-px-{`{0-1000}`}
-        </Tag>
-        <Tag style={{ display: "inline-block", margin: "0 4px" }}>
-          min-w-px-{`{0-1000}`}
-        </Tag>
-        <Tag style={{ display: "inline-block", margin: "0 4px" }}>
-          max-w-px-{`{0-1000}`}
-        </Tag>
-        <Tag style={{ display: "inline-block", margin: "0 4px" }}>
-          w-{`{0-100}`}
-        </Tag>
+        <Tag>w-px-{`{0-1000}`}</Tag> <Tag>min-w-px-{`{0-1000}`}</Tag>{" "}
+        <Tag>max-w-px-{`{0-1000}`}</Tag> <Tag>w-{`{0-100}`}</Tag>
       </>
     ),
     sample: `/* CSS */
@@ -178,18 +133,8 @@ export const classNameExamples = [
       "h-px-{0-1000} min-h-px-{0-1000} max-h-px-{0-1000} h-{0-100}",
     description: (
       <>
-        <Tag style={{ display: "inline-block", margin: "0 4px" }}>
-          h-px-{`{0-1000}`}
-        </Tag>
-        <Tag style={{ display: "inline-block", margin: "0 4px" }}>
-          min-h-px-{`{0-1000}`}
-        </Tag>
-        <Tag style={{ display: "inline-block", margin: "0 4px" }}>
-          max-h-px-{`{0-1000}`}
-        </Tag>
-        <Tag style={{ display: "inline-block", margin: "0 4px" }}>
-          h-{`{0-100}`}
-        </Tag>
+        <Tag>h-px-{`{0-1000}`}</Tag> <Tag>min-h-px-{`{0-1000}`}</Tag>{" "}
+        <Tag>max-h-px-{`{0-1000}`}</Tag> <Tag>h-{`{0-100}`}</Tag>
       </>
     ),
     sample: `/* CSS */
@@ -215,21 +160,8 @@ export const classNameExamples = [
       "mg-{0-100} mg-t-{0-100} mg-r-{0-100} mg-b-{0-100} mg-l-{0-100}",
     description: (
       <>
-        <Tag style={{ display: "inline-block", margin: "0 4px" }}>
-          mg-{`{0-100}`}
-        </Tag>
-        <Tag style={{ display: "inline-block", margin: "0 4px" }}>
-          mg-t-{`{0-100}`}
-        </Tag>
-        <Tag style={{ display: "inline-block", margin: "0 4px" }}>
-          mg-r-{`{0-100}`}
-        </Tag>
-        <Tag style={{ display: "inline-block", margin: "0 4px" }}>
-          mg-b-{`{0-100}`}
-        </Tag>
-        <Tag style={{ display: "inline-block", margin: "0 4px" }}>
-          mg-l-{`{0-100}`}
-        </Tag>
+        <Tag>mg-{`{0-100}`}</Tag> <Tag>mg-t-{`{0-100}`}</Tag>{" "}
+        <Tag>mg-b-{`{0-100}`}</Tag> <Tag>mg-l-{`{0-100}`}</Tag>
       </>
     ),
     sample: `/* CSS */
@@ -258,21 +190,9 @@ export const classNameExamples = [
       "pd-{0-100} pd-t-{0-100} pd-r-{0-100} pd-b-{0-100} pd-l-{0-100}",
     description: (
       <>
-        <Tag style={{ display: "inline-block", margin: "0 4px" }}>
-          pd-{`{0-100}`}
-        </Tag>
-        <Tag style={{ display: "inline-block", margin: "0 4px" }}>
-          pd-t-{`{0-100}`}
-        </Tag>
-        <Tag style={{ display: "inline-block", margin: "0 4px" }}>
-          pd-r-{`{0-100}`}
-        </Tag>
-        <Tag style={{ display: "inline-block", margin: "0 4px" }}>
-          pd-b-{`{0-100}`}
-        </Tag>
-        <Tag style={{ display: "inline-block", margin: "0 4px" }}>
-          pd-l-{`{0-100}`}
-        </Tag>
+        <Tag>pd-{`{0-100}`}</Tag> <Tag>pd-t-{`{0-100}`}</Tag>{" "}
+        <Tag>pd-r-{`{0-100}`}</Tag> <Tag>pd-b-{`{0-100}`}</Tag>{" "}
+        <Tag>pd-l-{`{0-100}`}</Tag>
       </>
     ),
     sample: `/* CSS */
@@ -301,18 +221,10 @@ export const classNameExamples = [
       "flex-row flex-col flex-wra flex-now item-cen item-sta item-end jus-cen jus-bet jus-aro jus-sta jus-end",
     description: (
       <>
-        <Tag style={{ display: "inline-block", margin: "0 4px" }}>flex-row</Tag>
-        <Tag style={{ display: "inline-block", margin: "0 4px" }}>flex-col</Tag>
-        <Tag style={{ display: "inline-block", margin: "0 4px" }}>flex-wra</Tag>
-        <Tag style={{ display: "inline-block", margin: "0 4px" }}>flex-now</Tag>
-        <Tag style={{ display: "inline-block", margin: "0 4px" }}>item-cen</Tag>
-        <Tag style={{ display: "inline-block", margin: "0 4px" }}>item-sta</Tag>
-        <Tag style={{ display: "inline-block", margin: "0 4px" }}>item-end</Tag>
-        <Tag style={{ display: "inline-block", margin: "0 4px" }}>jus-cen</Tag>
-        <Tag style={{ display: "inline-block", margin: "0 4px" }}>jus-bet</Tag>
-        <Tag style={{ display: "inline-block", margin: "0 4px" }}>jus-aro</Tag>
-        <Tag style={{ display: "inline-block", margin: "0 4px" }}>jus-sta</Tag>
-        <Tag style={{ display: "inline-block", margin: "0 4px" }}>jus-end</Tag>
+        <Tag>flex-row</Tag> <Tag>flex-col</Tag> <Tag>flex-wra</Tag>{" "}
+        <Tag>flex-now</Tag> <Tag>item-cen</Tag> <Tag>item-sta</Tag>{" "}
+        <Tag>item-end</Tag> <Tag>jus-cen</Tag> <Tag>jus-bet</Tag>{" "}
+        <Tag>jus-aro</Tag> <Tag>jus-sta</Tag> <Tag>jus-end</Tag>
       </>
     ),
     sample: `/* CSS */
@@ -361,9 +273,7 @@ export const classNameExamples = [
     descriptionText: "col-{1-20}",
     description: (
       <>
-        <Tag style={{ display: "inline-block", margin: "0 4px" }}>
-          col-{`{1-20}`}
-        </Tag>
+        <Tag>col-{`{1-20}`}</Tag>
       </>
     ),
     sample: `/* CSS */
@@ -385,9 +295,7 @@ export const classNameExamples = [
     descriptionText: "gap-{0-100}",
     description: (
       <>
-        <Tag style={{ display: "inline-block", margin: "0 4px" }}>
-          gap-{`{0-100}`}
-        </Tag>
+        <Tag>gap-{`{0-100}`}</Tag>
       </>
     ),
     sample: `/* CSS */
@@ -409,9 +317,7 @@ export const classNameExamples = [
     descriptionText: "borw-{0-100}",
     description: (
       <>
-        <Tag style={{ display: "inline-block", margin: "0 4px" }}>
-          borw-{`{0-100}`}
-        </Tag>
+        <Tag>borw-{`{0-100}`}</Tag>
       </>
     ),
     sample: `/* CSS */
@@ -437,33 +343,9 @@ export const classNameExamples = [
       "bors-solid bors-dashed bors-dotted bors-double bors-groove bors-ridge bors-inset bors-outset bors-none",
     description: (
       <>
-        <Tag style={{ display: "inline-block", margin: "0 4px" }}>
-          bors-solid
-        </Tag>
-        <Tag style={{ display: "inline-block", margin: "0 4px" }}>
-          bors-dashed
-        </Tag>
-        <Tag style={{ display: "inline-block", margin: "0 4px" }}>
-          bors-dotted
-        </Tag>
-        <Tag style={{ display: "inline-block", margin: "0 4px" }}>
-          bors-double
-        </Tag>
-        <Tag style={{ display: "inline-block", margin: "0 4px" }}>
-          bors-groove
-        </Tag>
-        <Tag style={{ display: "inline-block", margin: "0 4px" }}>
-          bors-ridge
-        </Tag>
-        <Tag style={{ display: "inline-block", margin: "0 4px" }}>
-          bors-inset
-        </Tag>
-        <Tag style={{ display: "inline-block", margin: "0 4px" }}>
-          bors-outset
-        </Tag>
-        <Tag style={{ display: "inline-block", margin: "0 4px" }}>
-          bors-none
-        </Tag>
+        <Tag>bors-solid</Tag> <Tag>bors-dashed</Tag> <Tag>bors-dotted</Tag>
+        <Tag>bors-double</Tag> <Tag>bors-groove</Tag> <Tag>bors-ridge</Tag>
+        <Tag>bors-inset</Tag> <Tag>bors-outset</Tag> <Tag>bors-none</Tag>
       </>
     ),
     sample: `/* CSS */
@@ -503,13 +385,8 @@ export const classNameExamples = [
     descriptionText: "rad-{0-100} rad-25p rad-50p rad-75p rad-100p",
     description: (
       <>
-        <Tag style={{ display: "inline-block", margin: "0 4px" }}>
-          rad-{`{0-100}`}
-        </Tag>
-        <Tag style={{ display: "inline-block", margin: "0 4px" }}>rad-25p</Tag>
-        <Tag style={{ display: "inline-block", margin: "0 4px" }}>rad-50p</Tag>
-        <Tag style={{ display: "inline-block", margin: "0 4px" }}>rad-75p</Tag>
-        <Tag style={{ display: "inline-block", margin: "0 4px" }}>rad-100p</Tag>
+        <Tag>rad-{`{0-100}`}</Tag> <Tag>rad-25p</Tag> <Tag>rad-50p</Tag>{" "}
+        <Tag>rad-75p</Tag> <Tag>rad-100p</Tag>
       </>
     ),
     sample: `/* CSS */
@@ -544,15 +421,7 @@ export const classNameExamples = [
     descriptionText: "shadow-sm shadow-md shadow-lg",
     description: (
       <>
-        <Tag style={{ display: "inline-block", margin: "0 4px" }}>
-          shadow-sm
-        </Tag>
-        <Tag style={{ display: "inline-block", margin: "0 4px" }}>
-          shadow-md
-        </Tag>
-        <Tag style={{ display: "inline-block", margin: "0 4px" }}>
-          shadow-lg
-        </Tag>
+        <Tag>shadow-sm</Tag> <Tag>shadow-md</Tag> <Tag>shadow-lg</Tag>
       </>
     ),
     sample: `/* CSS */
@@ -574,9 +443,7 @@ export const classNameExamples = [
     descriptionText: "fs-{0-100}",
     description: (
       <>
-        <Tag style={{ display: "inline-block", margin: "0 4px" }}>
-          fs-{`{0-100}`}
-        </Tag>
+        <Tag>fs-{`{0-100}`}</Tag>
       </>
     ),
     sample: `/* CSS */
@@ -604,9 +471,7 @@ export const classNameExamples = [
     descriptionText: "fw-{0,100,200,300,400,500,600,700,800,900,1000}",
     description: (
       <>
-        <Tag style={{ display: "inline-block", margin: "0 4px" }}>
-          fw-{`{0,100,200,300,400,500,600,700,800,900,1000}`}
-        </Tag>
+        <Tag>fw-{`{0,100,200,300,400,500,600,700,800,900,1000}`}</Tag>
       </>
     ),
     sample: `/* CSS */
@@ -653,17 +518,9 @@ export const classNameExamples = [
       "lh-1 lh-1-1 lh-1-2 lh-1-3 lh-1-4 lh-1-5 lh-1-6 lh-1-7 lh-1-8 lh-1-9 lh-2",
     description: (
       <>
-        <Tag style={{ display: "inline-block", margin: "0 4px" }}>lh-1</Tag>
-        <Tag style={{ display: "inline-block", margin: "0 4px" }}>lh-1-1</Tag>
-        <Tag style={{ display: "inline-block", margin: "0 4px" }}>lh-1-2</Tag>
-        <Tag style={{ display: "inline-block", margin: "0 4px" }}>lh-1-3</Tag>
-        <Tag style={{ display: "inline-block", margin: "0 4px" }}>lh-1-4</Tag>
-        <Tag style={{ display: "inline-block", margin: "0 4px" }}>lh-1-5</Tag>
-        <Tag style={{ display: "inline-block", margin: "0 4px" }}>lh-1-6</Tag>
-        <Tag style={{ display: "inline-block", margin: "0 4px" }}>lh-1-7</Tag>
-        <Tag style={{ display: "inline-block", margin: "0 4px" }}>lh-1-8</Tag>
-        <Tag style={{ display: "inline-block", margin: "0 4px" }}>lh-1-9</Tag>
-        <Tag style={{ display: "inline-block", margin: "0 4px" }}>lh-2</Tag>
+        <Tag>lh-1</Tag> <Tag>lh-1-1</Tag> <Tag>lh-1-2</Tag> <Tag>lh-1-3</Tag>
+        <Tag>lh-1-4</Tag> <Tag>lh-1-5</Tag> <Tag>lh-1-6</Tag> <Tag>lh-1-7</Tag>
+        <Tag>lh-1-8</Tag> <Tag>lh-1-9</Tag> <Tag>lh-2</Tag>
       </>
     ),
     sample: `/* CSS */
@@ -709,9 +566,7 @@ export const classNameExamples = [
     descriptionText: "ta-lef ta-cen ta-rig",
     description: (
       <>
-        <Tag style={{ display: "inline-block", margin: "0 4px" }}>ta-lef</Tag>
-        <Tag style={{ display: "inline-block", margin: "0 4px" }}>ta-cen</Tag>
-        <Tag style={{ display: "inline-block", margin: "0 4px" }}>ta-rig</Tag>
+        <Tag>ta-lef</Tag> <Tag>ta-cen</Tag> <Tag>ta-rig</Tag>
       </>
     ),
     sample: `/* CSS */
@@ -733,9 +588,7 @@ export const classNameExamples = [
     descriptionText: "opa-{0-100}",
     description: (
       <>
-        <Tag style={{ display: "inline-block", margin: "0 4px" }}>
-          opa-{`{0-100}`}
-        </Tag>
+        <Tag>opa-{`{0-100}`}</Tag>
       </>
     ),
     sample: `/* CSS */
@@ -763,9 +616,7 @@ export const classNameExamples = [
     descriptionText: "z-{0-1500}",
     description: (
       <>
-        <Tag style={{ display: "inline-block", margin: "0 4px" }}>
-          z-{`{0-1500}`}
-        </Tag>
+        <Tag>z-{`{0-1500}`}</Tag>
       </>
     ),
     sample: `/* CSS */
@@ -784,9 +635,7 @@ export const classNameExamples = [
     descriptionText: "blur-{0-1000}",
     description: (
       <>
-        <Tag style={{ display: "inline-block", margin: "0 4px" }}>
-          blur-{`{0-1000}`}
-        </Tag>
+        <Tag>blur-{`{0-1000}`}</Tag>
       </>
     ),
     sample: `/* CSS */
@@ -806,57 +655,15 @@ export const classNameExamples = [
       "cursor-pointer cursor-default cursor-text cursor-move cursor-not-allowed cursor-wait cursor-help cursor-auto cursor-crosshair cursor-col-resize cursor-row-resize cursor-ew-resize cursor-ns-resize cursor-nwse-resize cursor-nesw-resize cursor-zoom-in cursor-zoom-out",
     description: (
       <>
-        <Tag style={{ display: "inline-block", margin: "0 4px" }}>
-          cursor-pointer
-        </Tag>
-        <Tag style={{ display: "inline-block", margin: "0 4px" }}>
-          cursor-default
-        </Tag>
-        <Tag style={{ display: "inline-block", margin: "0 4px" }}>
-          cursor-text
-        </Tag>
-        <Tag style={{ display: "inline-block", margin: "0 4px" }}>
-          cursor-move
-        </Tag>
-        <Tag style={{ display: "inline-block", margin: "0 4px" }}>
-          cursor-not-allowed
-        </Tag>
-        <Tag style={{ display: "inline-block", margin: "0 4px" }}>
-          cursor-wait
-        </Tag>
-        <Tag style={{ display: "inline-block", margin: "0 4px" }}>
-          cursor-help
-        </Tag>
-        <Tag style={{ display: "inline-block", margin: "0 4px" }}>
-          cursor-auto
-        </Tag>
-        <Tag style={{ display: "inline-block", margin: "0 4px" }}>
-          cursor-crosshair
-        </Tag>
-        <Tag style={{ display: "inline-block", margin: "0 4px" }}>
-          cursor-col-resize
-        </Tag>
-        <Tag style={{ display: "inline-block", margin: "0 4px" }}>
-          cursor-row-resize
-        </Tag>
-        <Tag style={{ display: "inline-block", margin: "0 4px" }}>
-          cursor-ew-resize
-        </Tag>
-        <Tag style={{ display: "inline-block", margin: "0 4px" }}>
-          cursor-ns-resize
-        </Tag>
-        <Tag style={{ display: "inline-block", margin: "0 4px" }}>
-          cursor-nwse-resize
-        </Tag>
-        <Tag style={{ display: "inline-block", margin: "0 4px" }}>
-          cursor-nesw-resize
-        </Tag>
-        <Tag style={{ display: "inline-block", margin: "0 4px" }}>
-          cursor-zoom-in
-        </Tag>
-        <Tag style={{ display: "inline-block", margin: "0 4px" }}>
-          cursor-zoom-out
-        </Tag>
+        <Tag>cursor-pointer</Tag> <Tag>cursor-default</Tag>{" "}
+        <Tag>cursor-text</Tag> <Tag>cursor-move</Tag>{" "}
+        <Tag>cursor-not-allowed</Tag> <Tag>cursor-wait</Tag>{" "}
+        <Tag>cursor-help</Tag> <Tag>cursor-auto</Tag>{" "}
+        <Tag>cursor-crosshair</Tag> <Tag>cursor-col-resize</Tag>{" "}
+        <Tag>cursor-row-resize</Tag> <Tag>cursor-ew-resize</Tag>{" "}
+        <Tag>cursor-ns-resize</Tag> <Tag>cursor-nwse-resize</Tag>{" "}
+        <Tag>cursor-nesw-resize</Tag> <Tag>cursor-zoom-in</Tag>{" "}
+        <Tag>cursor-zoom-out</Tag>
       </>
     ),
     sample: `/* CSS */
@@ -920,15 +727,8 @@ export const classNameExamples = [
     descriptionText: "visibility-visible visibility-hidden visibility-collapse",
     description: (
       <>
-        <Tag style={{ display: "inline-block", margin: "0 4px" }}>
-          visibility-visible
-        </Tag>
-        <Tag style={{ display: "inline-block", margin: "0 4px" }}>
-          visibility-hidden
-        </Tag>
-        <Tag style={{ display: "inline-block", margin: "0 4px" }}>
-          visibility-collapse
-        </Tag>
+        <Tag>visibility-visible</Tag> <Tag>visibility-hidden</Tag>{" "}
+        <Tag>visibility-collapse</Tag>
       </>
     ),
     sample: `/* CSS */
@@ -951,24 +751,9 @@ export const classNameExamples = [
       "align-baseline align-top align-middle align-bottom align-text-top align-text-bottom",
     description: (
       <>
-        <Tag style={{ display: "inline-block", margin: "0 4px" }}>
-          align-baseline
-        </Tag>
-        <Tag style={{ display: "inline-block", margin: "0 4px" }}>
-          align-top
-        </Tag>
-        <Tag style={{ display: "inline-block", margin: "0 4px" }}>
-          align-middle
-        </Tag>
-        <Tag style={{ display: "inline-block", margin: "0 4px" }}>
-          align-bottom
-        </Tag>
-        <Tag style={{ display: "inline-block", margin: "0 4px" }}>
-          align-text-top
-        </Tag>
-        <Tag style={{ display: "inline-block", margin: "0 4px" }}>
-          align-text-bottom
-        </Tag>
+        <Tag>align-baseline</Tag> <Tag>align-top</Tag> <Tag>align-middle</Tag>{" "}
+        <Tag>align-bottom</Tag> <Tag>align-text-top</Tag>{" "}
+        <Tag>align-text-bottom</Tag>
       </>
     ),
     sample: `/* CSS */
@@ -1000,21 +785,9 @@ export const classNameExamples = [
       "whitespace-normal whitespace-nowrap whitespace-pre whitespace-pre-line whitespace-pre-wrap",
     description: (
       <>
-        <Tag style={{ display: "inline-block", margin: "0 4px" }}>
-          whitespace-normal
-        </Tag>
-        <Tag style={{ display: "inline-block", margin: "0 4px" }}>
-          whitespace-nowrap
-        </Tag>
-        <Tag style={{ display: "inline-block", margin: "0 4px" }}>
-          whitespace-pre
-        </Tag>
-        <Tag style={{ display: "inline-block", margin: "0 4px" }}>
-          whitespace-pre-line
-        </Tag>
-        <Tag style={{ display: "inline-block", margin: "0 4px" }}>
-          whitespace-pre-wrap
-        </Tag>
+        <Tag>whitespace-normal</Tag> <Tag>whitespace-nowrap</Tag>{" "}
+        <Tag>whitespace-pre</Tag> <Tag>whitespace-pre-line</Tag>{" "}
+        <Tag>whitespace-pre-wrap</Tag>
       </>
     ),
     sample: `/* CSS */
@@ -1043,15 +816,8 @@ export const classNameExamples = [
       "word-break-normal word-break-break-word word-break-keep-all",
     description: (
       <>
-        <Tag style={{ display: "inline-block", margin: "0 4px" }}>
-          word-break-normal
-        </Tag>
-        <Tag style={{ display: "inline-block", margin: "0 4px" }}>
-          word-break-break-word
-        </Tag>
-        <Tag style={{ display: "inline-block", margin: "0 4px" }}>
-          word-break-keep-all
-        </Tag>
+        <Tag>word-break-normal</Tag> <Tag>word-break-break-word</Tag>{" "}
+        <Tag>word-break-keep-all</Tag>
       </>
     ),
     sample: `/* CSS */

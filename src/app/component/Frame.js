@@ -6,7 +6,7 @@ import {
   SubTitleAndDescription
 } from "../_lib/components/common/render";
 import { CircleOutline, ErrorCircleOutline } from "sud-icons";
-import { Avatar, Card, Typography } from "sud-ui";
+import { Avatar, Card, Table, Typography } from "sud-ui";
 
 export default function Frame({ component, isMobile, grid }) {
   const [selected, setSelected] = useState("javascript");
@@ -92,6 +92,18 @@ export default function Frame({ component, isMobile, grid }) {
         ))}
         grid={grid}
         isMobile={isMobile}
+      />
+
+      {/* 사용방법 */}
+      <SubTitleAndDescription
+        title={"사용 방법"}
+        description={"컴포넌트의 props를 설정하는 방법입니다."}
+        etc={
+          <Table
+            columns={component.howToUseTableColumn}
+            dataSource={component.howToUseTableData}
+          />
+        }
       />
     </div>
   );
