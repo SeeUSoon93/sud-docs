@@ -12,9 +12,10 @@ import {
   SubTitleAndDescription
 } from "../../_lib/components/common/render";
 import { handleInstallCopy, handleSearch } from "../../_lib/utils/utils";
-
+import { useRouter } from "next/navigation";
 export default function ComponentOverview() {
   const { isMobile } = useMobile();
+  const router = useRouter();
   const INSTALL_COMMAND = "npm install sud-ui";
   const [search, setSearch] = useState("");
   const { isDarkMode } = useDarkMode();
@@ -27,6 +28,10 @@ export default function ComponentOverview() {
       )
     }))
     .filter((category) => category.children.length > 0);
+
+  const handleCardClick = (link) => {
+    router.push(link);
+  };
 
   return (
     <div className="flex flex-col gap-40 pd-20 w-100">
@@ -78,30 +83,30 @@ export default function ComponentOverview() {
                     className={`grid ${isMobile ? "col-1" : "col-3"} gap-20`}
                   >
                     {item.children.map((child) => (
-                      <a href={child.link} key={child.name}>
-                        <Card
-                          className="hover-bounce-big"
-                          style={{ width: "100%" }}
-                          title={
-                            <Typography as="span" pretendard="SB" size="sm">
-                              {child.name}
-                            </Typography>
-                          }
-                          divider
-                        >
-                          <div className="flex flex-col juc-cen item-cen pd-t-10 pd-b-20">
-                            <Image
-                              src={child.img}
-                              style={{
-                                height: "100%",
-                                filter: isDarkMode ? "invert(1)" : "none"
-                              }}
-                              preview={false}
-                              mask={null}
-                            />
-                          </div>
-                        </Card>
-                      </a>
+                      <Card
+                        key={child.name}
+                        className="hover-bounce-big"
+                        style={{ width: "100%" }}
+                        title={
+                          <Typography as="span" pretendard="SB" size="sm">
+                            {child.name}
+                          </Typography>
+                        }
+                        divider
+                        onClick={() => handleCardClick(child.link)}
+                      >
+                        <div className="flex flex-col juc-cen item-cen pd-t-10 pd-b-20">
+                          <Image
+                            src={child.img}
+                            style={{
+                              height: "100%",
+                              filter: isDarkMode ? "invert(1)" : "none"
+                            }}
+                            preview={false}
+                            mask={null}
+                          />
+                        </div>
+                      </Card>
                     ))}
                   </div>
                 </div>

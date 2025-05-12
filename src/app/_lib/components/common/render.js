@@ -1,6 +1,7 @@
 import { Card, Collapse, Divider, Segmented, Typography } from "sud-ui";
 import { handleInstallCopy } from "../../utils/utils";
 import { CodeBoxOutline } from "sud-icons";
+import React from "react";
 
 export const MainTitle = ({ title, description, etc }) => {
   return (
@@ -18,7 +19,26 @@ export const MainTitle = ({ title, description, etc }) => {
   );
 };
 
-export const SubTitleAndDescription = ({ title, description, etc }) => {
+export const SubTitleAndDescription = ({
+  title,
+  description,
+  search,
+  etc,
+  grid = false,
+  isMobile
+}) => {
+  const useColumnLayout = grid && !isMobile;
+
+  const childrenArray = React.Children.toArray(etc);
+
+  // 2열로 나누기
+  const columns = useColumnLayout ? [[], []] : [childrenArray];
+  if (useColumnLayout) {
+    childrenArray.forEach((child, index) => {
+      columns[index % 2].push(child);
+    });
+  }
+
   return (
     <div className="flex flex-col gap-10">
       <Typography as="h2" gmarket="Medium" size="xl">
@@ -37,7 +57,31 @@ export const SubTitleAndDescription = ({ title, description, etc }) => {
           {description}
         </Typography>
       )}
-      {etc && etc}
+      {search && search}
+      {etc && (
+        <div
+          className={`${
+            useColumnLayout ? "flex" : "flex flex-col"
+          } gap-10 w-100`}
+        >
+          {columns.map((column, columnIndex) => (
+            <div
+              key={columnIndex}
+              className="flex flex-col gap-10"
+              style={{
+                flex: "0 0 calc(50% - 5px)",
+                minWidth: 0
+              }}
+            >
+              {column.map((child, index) => (
+                <div key={index} className="w-100">
+                  {child}
+                </div>
+              ))}
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 };
@@ -140,11 +184,7 @@ export const ExampleBlock = ({
         style={{ width: "100%", height: "100%" }}
       >
         {/* 렌더링 */}
-        <div style={{ width: "100%" }}>
-          <Card shadow="none" width="100%" height="100%">
-            {render}
-          </Card>
-        </div>
+        <div style={{ width: "100%" }}>{render}</div>
         {title && <Divider content={title} />}
         {description && (
           <Typography as="div" pretendard="R" size="base">

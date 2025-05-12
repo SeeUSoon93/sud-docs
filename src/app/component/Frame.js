@@ -5,10 +5,10 @@ import {
   MainTitle,
   SubTitleAndDescription
 } from "../_lib/components/common/render";
-import { ErrorCircleOutline } from "sud-icons";
+import { CircleOutline, ErrorCircleOutline } from "sud-icons";
 import { Avatar, Card, Typography } from "sud-ui";
 
-export default function Frame({ component, isMobile }) {
+export default function Frame({ component, isMobile, grid }) {
   const [selected, setSelected] = useState("javascript");
 
   return (
@@ -21,30 +21,60 @@ export default function Frame({ component, isMobile }) {
       />
 
       {/* 사용주의 사항 */}
-      <SubTitleAndDescription
-        title={"사용 시 주의사항"}
-        etc={component.cautions.map((caution, index) => (
-          <div key={index} className="flex flex-row gap-5 item-cen">
-            <Typography
-              as="div"
-              color="red-4"
-              className="flex jus-cen item-cen"
-            >
-              <ErrorCircleOutline size="16" />
-            </Typography>
-            <Typography
-              as="p"
-              pretendard="R"
-              style={{
-                whiteSpace: "pre-wrap",
-                wordBreak: "keep-all"
-              }}
-            >
-              {caution}
-            </Typography>
-          </div>
-        ))}
-      />
+      {component.cautions && (
+        <SubTitleAndDescription
+          title={"사용 시 주의사항"}
+          etc={component.cautions.map((caution, index) => (
+            <div key={index} className="flex flex-row gap-5 item-cen">
+              <Typography
+                as="div"
+                color="red-4"
+                className="flex jus-cen item-cen"
+              >
+                <ErrorCircleOutline size="16" />
+              </Typography>
+              <Typography
+                as="p"
+                pretendard="R"
+                style={{
+                  whiteSpace: "pre-wrap",
+                  wordBreak: "keep-all"
+                }}
+              >
+                {caution}
+              </Typography>
+            </div>
+          ))}
+        />
+      )}
+
+      {/* 언제 사용하는지 */}
+      {component.whenToUse && (
+        <SubTitleAndDescription
+          title={"사용할 때"}
+          etc={component.whenToUse.map((whenToUse, index) => (
+            <div key={index} className="flex flex-row gap-5 item-cen">
+              <Typography
+                as="div"
+                color="blue-4"
+                className="flex jus-cen item-cen"
+              >
+                <CircleOutline size="16" />
+              </Typography>
+              <Typography
+                as="p"
+                pretendard="R"
+                style={{
+                  whiteSpace: "pre-wrap",
+                  wordBreak: "keep-all"
+                }}
+              >
+                {whenToUse}
+              </Typography>
+            </div>
+          ))}
+        />
+      )}
 
       {/* 예제 */}
       <SubTitleAndDescription
@@ -60,6 +90,8 @@ export default function Frame({ component, isMobile }) {
             setSelected={setSelected}
           />
         ))}
+        grid={grid}
+        isMobile={isMobile}
       />
     </div>
   );

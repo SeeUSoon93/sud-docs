@@ -46,9 +46,7 @@ export default function Animation() {
             클래스를 함께 사용하여 호버 시 전환 속도를 조절할 수 있습니다.
           </>
         }
-      />
-      <div className={`grid ${isMobile ? "col-1" : "col-2"} gap-20`}>
-        {animationExamples.map((example, index) => (
+        etc={animationExamples.map((example, index) => (
           <ExampleBlock
             key={index}
             title={example.title}
@@ -67,7 +65,8 @@ export default function Animation() {
             setSelected={setSelected}
           />
         ))}
-      </div>
+        grid={true}
+      />
     </div>
   );
 }

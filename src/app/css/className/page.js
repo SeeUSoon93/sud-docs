@@ -48,29 +48,26 @@ export default function ClassName() {
             <br />
           </>
         }
-        etc={
-          <div className="flex flex-col gap-20">
-            <Input
-              placeholder="검색어를 입력해주세요."
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-            />
-            <div className={`grid ${isMobile ? "col-1" : "col-2"} gap-20`}>
-              {filteredExamples.map((example, index) => (
-                <ExampleBlock
-                  key={index}
-                  description={example.description}
-                  render={
-                    <Typography as="p" pretendard="B" size="lg">
-                      {example.title}
-                    </Typography>
-                  }
-                  code={example.sample}
-                />
-              ))}
-            </div>
-          </div>
+        search={
+          <Input
+            placeholder="검색어를 입력해주세요."
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+          />
         }
+        etc={filteredExamples.map((example, index) => (
+          <ExampleBlock
+            key={index}
+            description={example.description}
+            render={
+              <Typography as="p" pretendard="B" size="lg">
+                {example.title}
+              </Typography>
+            }
+            code={example.sample}
+          />
+        ))}
+        grid={true}
       />
     </div>
   );

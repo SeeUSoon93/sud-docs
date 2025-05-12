@@ -186,7 +186,7 @@ const BasicLayout = () => {
       >
         <LogoSud /> Soon UI Design
       </Header>
-      <Content className="flex flex-col jus-cen item-cen gap-10">
+      <Content className="flex flex-col jus-cen item-cen gap-10" background="sky-1">
         <Avatar />
         <Typography as="span" size="base" pretendard="B">
           Hello World!
@@ -220,7 +220,7 @@ const BasicLayout: React.FC = () => {
       >
         <LogoSud /> Soon UI Design
       </Header>
-      <Content className="flex flex-col jus-cen item-cen gap-10">
+      <Content className="flex flex-col jus-cen item-cen gap-10" background="sky-1">
         <Avatar />
         <Typography as="span" size="base" pretendard="B">
           Hello World!
@@ -250,7 +250,10 @@ export default BasicLayout;`,
             >
               <LogoSud /> Soon UI Design
             </sud.Header>
-            <sud.Content className="flex flex-col jus-cen item-cen gap-10">
+            <sud.Content
+              className="flex flex-col jus-cen item-cen gap-10"
+              background="sky-1"
+            >
               <sud.Avatar />
               <sud.Typography as="span" size="base" pretendard="B">
                 Hello World!
@@ -335,7 +338,10 @@ export default BasicLayout;`,
                     onSelect={handleMenuSelect}
                   />
                 </sud.Sider>
-                <sud.Content className="flex jus-cen item-cen">
+                <sud.Content
+                  className="flex jus-cen item-cen"
+                  background="sky-1"
+                >
                   {selectedMenu
                     ? `${selectedMenu} 선택됨`
                     : "메뉴를 선택해주세요"}
@@ -401,6 +407,8 @@ const AboveHeaderSiderContent = () => {
         className="flex pd-l-5 pd-r-10"
         width="object-fit"
         border={false}
+        colorType="sub"
+        shadow="sm"
       >
         <Menu
           items={menuItems}
@@ -411,8 +419,7 @@ const AboveHeaderSiderContent = () => {
       </Sider>
       <Content
         className="flex jus-cen item-cen"
-        background="blue-6"
-        color="white-10"
+        background="sky-1"
       >
         {selectedMenu ? \`\${selectedMenu} 선택됨\` : "메뉴를 선택해주세요"}
       </Content>
@@ -483,6 +490,8 @@ const AboveHeaderSiderContent: React.FC = () => {
         className="flex pd-l-5 pd-r-10"
         width="object-fit"
         border={false}
+        colorType="sub"
+        shadow="sm"
       >
         <Menu
           items={menuItems}
@@ -493,8 +502,7 @@ const AboveHeaderSiderContent: React.FC = () => {
       </Sider>
       <Content
         className="flex jus-cen item-cen"
-        background="blue-6"
-        color="white-10"
+        background="sky-1"
       >
         {selectedMenu ? \`\${selectedMenu} 선택됨\` : "메뉴를 선택해주세요"}
       </Content>
@@ -539,14 +547,17 @@ export default AboveHeaderSiderContent;`
               <sud.Layout>
                 <sud.Header
                   className="flex jus-cen item-cen"
-                  colorType="sub"
+                  colorType="primary"
                   shadow="sm"
                   border={false}
-                  height="60"
+                  height={60}
                 >
                   서브 헤더
                 </sud.Header>
-                <sud.Content className="flex jus-cen item-cen">
+                <sud.Content
+                  className="flex jus-cen item-cen"
+                  background="sky-1"
+                >
                   중첩된 레이아웃의 콘텐츠
                 </sud.Content>
               </sud.Layout>
@@ -589,7 +600,7 @@ const NestedLayout = () => {
         <Layout>
           <Header
             className="flex jus-cen item-cen"
-            colorType="sub"
+            colorType="primary"
             shadow="sm"
             border={false}
             height="60"
@@ -648,7 +659,7 @@ const NestedLayout: React.FC = () => {
         <Layout>
           <Header
             className="flex jus-cen item-cen"
-            colorType="sub"
+            colorType="primary"
             shadow="sm"
             border={false}
             height="60"
@@ -700,7 +711,10 @@ export default NestedLayout;`
                     onSelect={handleMenuSelect}
                   />
                 </sud.Sider>
-                <sud.Content className="flex jus-cen item-cen">
+                <sud.Content
+                  className="flex jus-cen item-cen"
+                  background="sky-1"
+                >
                   {selectedMenu
                     ? `${selectedMenu} 페이지`
                     : "메뉴를 선택해주세요"}
@@ -742,7 +756,7 @@ const SiderContentLayout = () => {
           onSelect={handleMenuSelect}
         />
       </Sider>
-      <Content className="flex jus-cen item-cen">
+      <Content className="flex jus-cen item-cen" background="sky-1">
         {selectedMenu ? \`\${selectedMenu} 페이지\` : "메뉴를 선택해주세요"}
       </Content>
     </Layout>
@@ -787,7 +801,7 @@ const SiderContentLayout: React.FC = () => {
           onSelect={handleMenuSelect}
         />
       </Sider>
-      <Content className="flex jus-cen item-cen">
+      <Content className="flex jus-cen item-cen" background="sky-1">
         {selectedMenu ? \`\${selectedMenu} 페이지\` : "메뉴를 선택해주세요"}
       </Content>
     </Layout>
