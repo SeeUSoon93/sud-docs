@@ -73,7 +73,7 @@ export default function Icon() {
       <SubTitleAndDescription
         title={"아이콘 목록"}
         etc={
-          <>
+          <div className="flex flex-col gap-20">
             <div className="flex gap-10 flex-col">
               <Segmented
                 value={selected}
@@ -115,7 +115,7 @@ export default function Icon() {
                 </div>
               ))}
             </div>
-          </>
+          </div>
         }
       />
     </div>

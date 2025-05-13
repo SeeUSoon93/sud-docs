@@ -103,11 +103,13 @@ export const classNameExamples = [
   {
     title: "Width",
     descriptionText:
-      "w-px-{0-1000} min-w-px-{0-1000} max-w-px-{0-1000} w-{0-100}",
+      "w-px-{0-1000} min-w-px-{0-1000} max-w-px-{0-1000} w-{0-100} min-w-{0-100} max-w-{0-100} w-auto",
     description: (
       <>
         <Tag>w-px-{`{0-1000}`}</Tag> <Tag>min-w-px-{`{0-1000}`}</Tag>{" "}
-        <Tag>max-w-px-{`{0-1000}`}</Tag> <Tag>w-{`{0-100}`}</Tag>
+        <Tag>max-w-px-{`{0-1000}`}</Tag> <Tag>w-{`{0-100}`}</Tag>{" "}
+        <Tag>min-w-{`{0-100}`}</Tag> <Tag>max-w-{`{0-100}`}</Tag>{" "}
+        <Tag>w-auto</Tag>
       </>
     ),
     sample: `/* CSS */
@@ -123,6 +125,15 @@ export const classNameExamples = [
 .w-0 {
   width: 0%;
 }
+.min-w-0 {
+  min-width: 0%;
+}
+.max-w-0 {
+  max-width: 0%;
+}
+.w-auto {
+  width: auto;
+}
 
 /* Usage */
 <div className="w-px-100 w-50">width example</div>`
@@ -130,11 +141,13 @@ export const classNameExamples = [
   {
     title: "Height",
     descriptionText:
-      "h-px-{0-1000} min-h-px-{0-1000} max-h-px-{0-1000} h-{0-100}",
+      "h-px-{0-1000} min-h-px-{0-1000} max-h-px-{0-1000} h-{0-100} min-h-{0-100} max-h-{0-100} h-auto",
     description: (
       <>
         <Tag>h-px-{`{0-1000}`}</Tag> <Tag>min-h-px-{`{0-1000}`}</Tag>{" "}
-        <Tag>max-h-px-{`{0-1000}`}</Tag> <Tag>h-{`{0-100}`}</Tag>
+        <Tag>max-h-px-{`{0-1000}`}</Tag> <Tag>h-{`{0-100}`}</Tag>{" "}
+        <Tag>min-h-{`{0-100}`}</Tag> <Tag>max-h-{`{0-100}`}</Tag>{" "}
+        <Tag>h-auto</Tag>
       </>
     ),
     sample: `/* CSS */
@@ -150,6 +163,15 @@ export const classNameExamples = [
 .h-0 {
   height: 0%;
 }
+.min-h-0 {
+  min-height: 0%;
+}
+.max-h-0 {
+  max-height: 0%;
+}
+.h-auto {
+  height: auto;
+}
 
 /* Usage */
 <div className="h-px-100 h-50">height example</div>`
@@ -157,11 +179,12 @@ export const classNameExamples = [
   {
     title: "Margin",
     descriptionText:
-      "mg-{0-100} mg-t-{0-100} mg-r-{0-100} mg-b-{0-100} mg-l-{0-100}",
+      "mg-{0-1000} mg-t-{0-1000} mg-r-{0-1000} mg-b-{0-1000} mg-l-{0-1000} mg-x-{0-1000} mg-y-{0-1000}",
     description: (
       <>
-        <Tag>mg-{`{0-100}`}</Tag> <Tag>mg-t-{`{0-100}`}</Tag>{" "}
-        <Tag>mg-b-{`{0-100}`}</Tag> <Tag>mg-l-{`{0-100}`}</Tag>
+        <Tag>mg-{`{0-1000}`}</Tag> <Tag>mg-t-{`{0-1000}`}</Tag>{" "}
+        <Tag>mg-r-{`{0-1000}`}</Tag> <Tag>mg-b-{`{0-1000}`}</Tag>{" "}
+        <Tag>mg-x-{`{0-1000}`}</Tag> <Tag>mg-y-{`{0-1000}`}</Tag>
       </>
     ),
     sample: `/* CSS */
@@ -180,6 +203,14 @@ export const classNameExamples = [
 .mg-l-0 {
   margin-left: 0px;
 }
+.mg-x-0 {
+  margin-left: 0px;
+  margin-right: 0px;
+}
+.mg-y-0 {
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
 
 /* Usage */
 <div className="mg-10 mg-t-20">margin example</div>`
@@ -187,12 +218,13 @@ export const classNameExamples = [
   {
     title: "Padding",
     descriptionText:
-      "pd-{0-100} pd-t-{0-100} pd-r-{0-100} pd-b-{0-100} pd-l-{0-100}",
+      "pd-{0-1000} pd-t-{0-1000} pd-r-{0-1000} pd-b-{0-1000} pd-l-{0-1000} pd-x-{0-1000} pd-y-{0-1000}",
     description: (
       <>
-        <Tag>pd-{`{0-100}`}</Tag> <Tag>pd-t-{`{0-100}`}</Tag>{" "}
-        <Tag>pd-r-{`{0-100}`}</Tag> <Tag>pd-b-{`{0-100}`}</Tag>{" "}
-        <Tag>pd-l-{`{0-100}`}</Tag>
+        <Tag>pd-{`{0-1000}`}</Tag> <Tag>pd-t-{`{0-1000}`}</Tag>{" "}
+        <Tag>pd-r-{`{0-1000}`}</Tag> <Tag>pd-b-{`{0-1000}`}</Tag>{" "}
+        <Tag>pd-l-{`{0-1000}`}</Tag> <Tag>pd-x-{`{0-1000}`}</Tag>{" "}
+        <Tag>pd-y-{`{0-1000}`}</Tag>
       </>
     ),
     sample: `/* CSS */
@@ -211,9 +243,58 @@ export const classNameExamples = [
 .pd-l-0 {
   padding-left: 0px;
 }
+.pd-x-0 {
+  padding-left: 0px;
+  padding-right: 0px;
+}
+.pd-y-0 {
+  padding-top: 0px;
+  padding-bottom: 0px;
+}
 
 /* Usage */
 <div className="pd-10 pd-t-20">padding example</div>`
+  },
+  {
+    title: "Top Bottom Left Right",
+    descriptionText:
+      "t-px-{0-1000} t-{0-100} b-px-{0-1000} b-{0-100} l-px-{0-1000} l-{0-100} r-px-{0-1000} r-{0-100}",
+    description: (
+      <>
+        <Tag>t-px-{`{0-1000}`}</Tag> <Tag>t-{`{0-100}`}</Tag>{" "}
+        <Tag>b-px-{`{0-1000}`}</Tag> <Tag>b-{`{0-100}`}</Tag>{" "}
+        <Tag>l-px-{`{0-1000}`}</Tag> <Tag>l-{`{0-100}`}</Tag>{" "}
+        <Tag>r-px-{`{0-1000}`}</Tag> <Tag>r-{`{0-100}`}</Tag>
+      </>
+    ),
+    sample: `/* CSS */
+.t-px-0 {
+  top: 0px;
+}
+.t-0 {
+  top: 0%;
+}
+.b-px-0 {
+  bottom: 0px;
+}
+.b-0 {
+  bottom: 0%;
+}
+.l-px-0 {
+  left: 0px;
+}
+.l-0 {
+  left: 0%;
+}
+.r-px-0 {
+  right: 0px;
+}
+.r-0 {
+  right: 0%;
+}
+
+/* Usage */
+<div className="t-px-10 b-px-20 l-px-30 r-px-40">top bottom left right example</div>`
   },
   {
     title: "Flexbox",
@@ -270,10 +351,10 @@ export const classNameExamples = [
   },
   {
     title: "Grid Columns",
-    descriptionText: "col-{1-20}",
+    descriptionText: "col-{1-100}",
     description: (
       <>
-        <Tag>col-{`{1-20}`}</Tag>
+        <Tag>col-{`{1-100}`}</Tag>
       </>
     ),
     sample: `/* CSS */
@@ -292,10 +373,10 @@ export const classNameExamples = [
   },
   {
     title: "Gap",
-    descriptionText: "gap-{0-100}",
+    descriptionText: "gap-{0-1000}",
     description: (
       <>
-        <Tag>gap-{`{0-100}`}</Tag>
+        <Tag>gap-{`{0-1000}`}</Tag>
       </>
     ),
     sample: `/* CSS */
@@ -314,28 +395,28 @@ export const classNameExamples = [
   },
   {
     title: "Border Width",
-    descriptionText: "borw-{0-100}",
+    descriptionText: "bor-w-{0-100}",
     description: (
       <>
-        <Tag>borw-{`{0-100}`}</Tag>
+        <Tag>bor-w-{`{0-100}`}</Tag>
       </>
     ),
     sample: `/* CSS */
-.borw-0 {
+.bor-w-0 {
   border-width: 0px;
 }
-.borw-1 {
+.bor-w-1 {
   border-width: 1px;
 }
-.borw-2 {
+.bor-w-2 {
   border-width: 2px;
 }
-.borw-10 {
+.bor-w-10 {
   border-width: 10px;
 }
 
 /* Usage */
-<div className="borw-2">border width example</div>`
+<div className="bor-w-2">border width example</div>`
   },
   {
     title: "Border Style",
@@ -440,10 +521,10 @@ export const classNameExamples = [
   },
   {
     title: "Font Size",
-    descriptionText: "fs-{0-100}",
+    descriptionText: "fs-{0-1000}",
     description: (
       <>
-        <Tag>fs-{`{0-100}`}</Tag>
+        <Tag>fs-{`{0-1000}`}</Tag>
       </>
     ),
     sample: `/* CSS */

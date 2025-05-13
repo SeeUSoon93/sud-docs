@@ -11,6 +11,74 @@ import { Avatar, Card, Table, Typography } from "sud-ui";
 export default function Frame({ component, isMobile, grid }) {
   const [selected, setSelected] = useState("javascript");
 
+  const mobileColumn = (prop) => {
+    return [
+      {
+        title: prop.name,
+        dataIndex: "name",
+        key: "name",
+        col: 2
+      },
+      {
+        title: "내용",
+        dataIndex: "value",
+        key: "value",
+        col: 3
+      }
+    ];
+  };
+
+  const mobileDataSource = (prop) => {
+    return [
+      {
+        key: "description",
+        name: "설명",
+        value: prop.description
+      },
+      {
+        key: "type",
+        name: "타입",
+        value: prop.type
+      },
+      {
+        key: "default",
+        name: "기본값",
+        value: prop.default
+      }
+    ];
+  };
+
+  const tableColumn = [
+    {
+      title: "속성 이름",
+      dataIndex: "name",
+      key: "name",
+      col: 3,
+      align: "center"
+    },
+    {
+      title: "설명",
+      dataIndex: "description",
+      key: "description",
+      col: 5,
+      align: "center"
+    },
+    {
+      title: "타입",
+      dataIndex: "type",
+      key: "type",
+      col: 5,
+      align: "center"
+    },
+    {
+      title: "기본값",
+      dataIndex: "default",
+      key: "default",
+      col: 2,
+      align: "center"
+    }
+  ];
+
   return (
     <div className="flex flex-col gap-40 pd-20 w-100">
       {/*  헤더 */}
@@ -97,12 +165,30 @@ export default function Frame({ component, isMobile, grid }) {
       {/* 사용방법 */}
       <SubTitleAndDescription
         title={"사용 방법"}
-        description={"컴포넌트의 props를 설정하는 방법입니다."}
+        description={
+          <>
+            컴포넌트의 props를 설정하는 방법입니다.
+            <br />
+            *은 필수 속성입니다.
+          </>
+        }
         etc={
-          <Table
-            columns={component.howToUseTableColumn}
-            dataSource={component.howToUseTableData}
-          />
+          isMobile ? (
+            <div className="flex flex-col gap-20">
+              {component.howToUseTableData.map((prop) => (
+                <Table
+                  key={prop.key}
+                  columns={mobileColumn(prop)}
+                  dataSource={mobileDataSource(prop)}
+                />
+              ))}
+            </div>
+          ) : (
+            <Table
+              columns={tableColumn}
+              dataSource={component.howToUseTableData}
+            />
+          )
         }
       />
     </div>

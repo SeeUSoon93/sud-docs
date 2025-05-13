@@ -78,7 +78,7 @@ function LayoutContent({ children }) {
           )}
 
           {/* 컨텐츠 */}
-          <Content className={isMobile ? "pd-0" : "pd-20"}>{children}</Content>
+          <Content className={isHome ? "pd-0" : "pd-20"}>{children}</Content>
 
           {/* 푸터 */}
           <Footer
@@ -123,7 +123,7 @@ function LayoutContent({ children }) {
           </Sider>
 
           {/* 컨텐츠 */}
-          <Content className={isMobile ? "pd-0" : "pd-20"}>{children}</Content>
+          <Content className={isHome ? "pd-0" : "pd-20"}>{children}</Content>
 
           {/* 푸터 */}
           <Footer

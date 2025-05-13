@@ -62,14 +62,14 @@ export const SubTitleAndDescription = ({
         <div
           className={`${
             useColumnLayout ? "flex" : "flex flex-col"
-          } gap-10 w-100`}
+          } gap-20 w-100`}
         >
           {columns.map((column, columnIndex) => (
             <div
               key={columnIndex}
-              className="flex flex-col gap-10"
+              className="flex flex-col gap-20"
               style={{
-                flex: "0 0 calc(50% - 5px)",
+                flex: "0 0 calc(50% - 10px)",
                 minWidth: 0
               }}
             >
@@ -185,7 +185,15 @@ export const ExampleBlock = ({
       >
         {/* 렌더링 */}
         <div style={{ width: "100%" }}>{render}</div>
-        {title && <Divider content={title} />}
+        {title && (
+          <Divider
+            content={
+              <Typography as="div" gmarket="medium" size="lg">
+                {title}
+              </Typography>
+            }
+          />
+        )}
         {description && (
           <Typography as="div" pretendard="R" size="base">
             {description}
@@ -193,6 +201,8 @@ export const ExampleBlock = ({
         )}
         {code && (
           <Collapse
+            headerColorType="info"
+            border={false}
             items={[
               {
                 key: "code",

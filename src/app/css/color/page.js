@@ -94,6 +94,11 @@ export default function Color() {
             <Tag colorType="blue">blue-3</Tag>{" "}
             <Tag colorType="forest">forest-5</Tag> 와 같이 색상군과 명도 단계를
             통해 표현됩니다.
+            <br />
+            <br />
+            컴포넌트의 props 중 <Tag>color</Tag> <Tag>background</Tag>{" "}
+            <Tag>borderColor</Tag> 등에 색상이름을 사용하여 색상지정이
+            가능합니다.
           </>
         }
       />
