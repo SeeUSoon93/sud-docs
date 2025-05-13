@@ -3,7 +3,6 @@ import { Typography, Avatar, Card, Tooltip, Carousel, Image } from "sud-ui";
 import { useMobile } from "./_lib/context/mobileContext";
 import { overViewData } from "./component/component-overview/overViewData";
 import { useDarkMode } from "./_lib/context/darkModeContext";
-import pkg from "sud-ui/package.json";
 
 export default function Home() {
   const { isMobile } = useMobile();
@@ -56,7 +55,7 @@ export default function Home() {
           className="ta-cen"
           style={{ fontSize: isMobile ? "50px" : "70px" }}
         >
-          {pkg.version}
+          0.1.3
         </Typography>
 
         <div className="mg-t-50">
