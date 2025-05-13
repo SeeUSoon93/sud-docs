@@ -94,16 +94,20 @@ export default function ComponentOverview() {
                         divider
                         onClick={() => handleCardClick(child.link)}
                       >
-                        <div className="flex flex-col juc-cen item-cen pd-t-10 pd-b-20">
-                          <Image
-                            src={child.img}
-                            style={{
-                              height: "100%",
-                              filter: isDarkMode ? "invert(1)" : "none"
-                            }}
-                            preview={false}
-                            mask={null}
-                          />
+                        <div
+                          className={`flex flex-col jus-cen pd-20 h-px-250 w-100 ${
+                            !child.item && "item-cen"
+                          }`}
+                        >
+                          {child.item ? (
+                            child.item
+                          ) : (
+                            <Image
+                              src={child.img}
+                              preview={false}
+                              mask={null}
+                            />
+                          )}
                         </div>
                       </Card>
                     ))}

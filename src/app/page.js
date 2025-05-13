@@ -18,22 +18,23 @@ export default function Home() {
       className="hover-bounce-big"
       style={{ width: "100%" }}
       title={
-        <Typography as="div" pretendard="SB" size="lg" className="ta-cen">
+        <Typography as="div" gmarket="Medium" size="lg" className="ta-cen">
           {component.name}
         </Typography>
       }
       divider
       background={isDarkMode ? "mint-9" : "mint-1"}
     >
-      <div className="flex flex-col juc-cen item-cen pd-t-10 pd-b-20">
-        <Image
-          src={component.img}
-          style={{
-            height: "100%"
-          }}
-          preview={false}
-          mask={null}
-        />
+      <div
+        className={`flex flex-col jus-cen pd-20 h-px-250 w-100 ${
+          !component.item && "item-cen"
+        }`}
+      >
+        {component.item ? (
+          component.item
+        ) : (
+          <Image src={component.img} preview={false} mask={null} />
+        )}
       </div>
     </Card>
   ));
@@ -84,9 +85,10 @@ export default function Home() {
         items={renderItems}
         effectType="overlap"
         itemCount={5}
-        itemWidthRatio={0.32}
-        autoPlay={true}
+        itemWidthRatio={isMobile ? 0.8 : 0.32}
+        autoPlay={false}
         autoPlayInterval={2000}
+        height="450px"
       />
     </div>
   );
