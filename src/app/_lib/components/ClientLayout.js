@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
 import { MobileProvider, useMobile } from "../context/mobileContext";
 import { DarkModeProvider, useDarkMode } from "../context/darkModeContext";
+import { DotSpinner } from "sud-ui";
 
 import {
   Layout,
@@ -19,13 +20,14 @@ import "sud-ui/dist/index.css";
 
 import MainHeader from "./layoutComponents/MainHeader";
 import MainSider from "./layoutComponents/MainSider";
-
 import { MoonFill, SunFill } from "sud-icons";
+import { LoadingPage } from "./LoadingPage";
 
 function LayoutContent({ children }) {
   const pathname = usePathname();
   const { isMobile } = useMobile();
   const [isSiderOpen, setIsSiderOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   const [selectHeadMenu, setSelectHeadMenu] = useState("");
   const [selectSiderMenu, setSelectSiderMenu] = useState("");
@@ -45,8 +47,19 @@ function LayoutContent({ children }) {
     }
   }, [pathname]);
 
+  // 페이지 전환 감지
+  useEffect(() => {
+    setIsLoading(true);
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 500);
+
+    return () => clearTimeout(timer);
+  }, [pathname]);
+
   return (
     <SoonUIDesign isDarkMode={isDarkMode}>
+      {isLoading && <LoadingPage />}
       {isMobile ? (
         <Layout siderPosition="below-header">
           {/* 헤더 */}
