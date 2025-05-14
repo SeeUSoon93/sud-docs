@@ -10,11 +10,11 @@ export const overViewData = [
         img: "/componentOverview/layout.png",
         link: "/component/layout",
         item: (
-          <div className="w-100 h-100">
+          <div className="w-100 h-100 rad-15 overflow-hidden">
             <sudUi.Layout>
               <sudUi.Header
                 className="flex jus-cen item-cen"
-                background="blue-4"
+                background="blue-3"
                 color="white-10"
                 border={false}
                 height="20%"
@@ -30,19 +30,15 @@ export const overViewData = [
               >
                 Sider
               </sudUi.Sider>
-              <sudUi.Content
-                className="flex jus-cen item-cen"
-                background="blue-6"
-                color="white-10"
-              >
+              <sudUi.Content className="flex jus-cen item-cen">
                 content
               </sudUi.Content>
               <sudUi.Footer
                 className="flex jus-cen item-cen"
-                background="blue-4"
+                background="blue-3"
                 color="white-10"
                 border={false}
-                height="20%"
+                height="10%"
               >
                 Footer
               </sudUi.Footer>
@@ -108,12 +104,86 @@ export const overViewData = [
       {
         name: "Drawer",
         img: "/componentOverview/drawer.png",
-        link: "/component/drawer"
+        link: "/component/drawer",
+        item: (
+          <div
+            className="flex item-cen jus-cen w-100 rad-15 overflow-hidden relative"
+            style={{ height: "300px" }}
+          >
+            <sudUi.Card
+              background="black-5"
+              shape="square"
+              shadow="none"
+              style={{
+                width: "100%",
+                height: "100%",
+                position: "absolute",
+                top: 0,
+                left: 0
+              }}
+            />
+            <sudUi.Card
+              variant="drawer"
+              isDrawer
+              title="Drawer Title"
+              divider
+              style={{
+                width: "60%",
+                height: "100%",
+                position: "absolute",
+                right: 0,
+                top: 0
+              }}
+            >
+              <div className="flex flex-col gap-10">
+                <sudUi.Typography>Drawer Content</sudUi.Typography>
+                <sudUi.Button colorType="primary">Action Button</sudUi.Button>
+              </div>
+            </sudUi.Card>
+          </div>
+        )
       },
       {
         name: "Dropdown",
         img: "/componentOverview/dropdown.png",
-        link: "/component/dropdown"
+        link: "/component/dropdown",
+        item: (
+          <div className="flex gap-10 item-cen jus-cen w-100">
+            <sudUi.Card
+              title={
+                <div className="flex item-cen jus-cen">
+                  <sudUi.Dropdown
+                    items={[
+                      {
+                        key: "menu1",
+                        label: "메뉴 1"
+                      },
+                      {
+                        key: "menu2",
+                        label: "메뉴 2"
+                      },
+                      {
+                        key: "menu3",
+                        label: "메뉴 3"
+                      }
+                    ]}
+                    trigger="click"
+                  >
+                    <sudUi.Button colorType="warning">Click me!</sudUi.Button>
+                  </sudUi.Dropdown>
+                </div>
+              }
+            >
+              <sudUi.Typography color="transparent">
+                transparent Content hahahaha
+                <br />
+                transparent Content hahahaha
+                <br />
+                transparent Content hahahaha
+              </sudUi.Typography>
+            </sudUi.Card>
+          </div>
+        )
       },
       {
         name: "Menu",
@@ -431,9 +501,44 @@ export const overViewData = [
         )
       },
       {
+        name: "Calendar",
+        img: "/componentOverview/calendar.png",
+        link: "/component/calendar",
+        item: (
+          <div className="flex flex-col gap-10 item-cen jus-cen">
+            <sudUi.Card>
+              <sudUi.Calendar size="miniView" />
+            </sudUi.Card>
+          </div>
+        )
+      },
+      {
         name: "Card",
         img: "/componentOverview/card.png",
-        link: "/component/card"
+        link: "/component/card",
+        item: (
+          <div className="flex flex-col gap-10 item-cen jus-cen">
+            <sudUi.Card title="Card" divider>
+              <div className="flex flex-col gap-10">
+                <sudUi.Typography>Hi, Im SeeUSoon93</sudUi.Typography>
+                <div className="flex flex-row gap-10 item-cen">
+                  <sudUi.Avatar />
+                  <sudUi.Card
+                    border={false}
+                    shadow="none"
+                    colorType="sub"
+                    color={"transparent"}
+                  >
+                    asdasdasdsadasdaa
+                    <br />
+                    <br />
+                    <br />
+                  </sudUi.Card>
+                </div>
+              </div>
+            </sudUi.Card>
+          </div>
+        )
       },
       {
         name: "Carousel",
@@ -450,8 +555,8 @@ export const overViewData = [
         img: "/componentOverview/empty.png",
         link: "/component/empty",
         item: (
-          <div className="flex flex-col gap-10 item-cen jus-cen">
-            <sudUi.Card shadow="none" border={false}>
+          <div className="flex flex-col gap-10 item-cen jus-cen w-100">
+            <sudUi.Card shadow="none" border={false} style={{ width: "100%" }}>
               <sudUi.Empty />
             </sudUi.Card>
           </div>
@@ -497,21 +602,35 @@ export const overViewData = [
         img: "/componentOverview/timeline.png",
         link: "/component/timeline",
         item: (
-          <div className="flex flex-col gap-10 item-cen jus-cen">
-            <sudUi.Timeline
-              items={[
-                { content: "I'm a python developer" },
-                { content: "But I need to learn javascript" },
-                { content: "So I Make a sud-ui" }
-              ]}
-            />
+          <div className="flex flex-col gap-10 item-cen jus-cen w-100">
+            <sudUi.Card shadow="none" border={false} style={{ width: "100%" }}>
+              <sudUi.Timeline
+                items={[
+                  { content: "I'm a python developer" },
+                  { content: "But I need to learn javascript" },
+                  { content: "So I Make a sud-ui" }
+                ]}
+              />
+            </sudUi.Card>
           </div>
         )
       },
       {
         name: "Typography",
         img: "/componentOverview/typography.png",
-        link: "/component/typography"
+        link: "/component/typography",
+        item: (
+          <div className="flex flex-col gap-10 item-cen jus-cen w-100">
+            <sudUi.Card shadow="none" border={false}>
+              <sudUi.Typography as="h1" size="4xl">
+                Abc
+              </sudUi.Typography>
+              <sudUi.Typography as="h1" size="4xl">
+                가나다
+              </sudUi.Typography>
+            </sudUi.Card>
+          </div>
+        )
       }
     ]
   },
@@ -521,22 +640,121 @@ export const overViewData = [
       {
         name: "Modal",
         img: "/componentOverview/modal.png",
-        link: "/component/modal"
+        link: "/component/modal",
+        item: (
+          <div className="flex flex-col gap-10 item-cen jus-cen w-100">
+            <sudUi.Card
+              shadow="none"
+              border={false}
+              background="black-5"
+              style={{ width: "100%", height: "100%" }}
+            >
+              <div className="flex jus-cen item-cen">
+                <sudUi.Card
+                  title="Modal"
+                  variant="modal"
+                  divider
+                  footer={
+                    <div className="grid col-2 gap-20 pd-x-30">
+                      <sudUi.Button
+                        colorType="primary"
+                        onClick={() =>
+                          sudUi.toast.info(
+                            "Thank you! but, Click the link below"
+                          )
+                        }
+                      >
+                        start
+                      </sudUi.Button>
+                      <sudUi.Button colorType="default">Cancel</sudUi.Button>
+                    </div>
+                  }
+                >
+                  <div className="flex flex-col gap-10 item-cen">
+                    <sudIcon.LogoGithub size={40} />
+                    <sudUi.Typography>
+                      <sudUi.Typography code size="base">
+                        <a href="https://github.com/SeeUSoon93" target="_blank">
+                          https://github.com/SeeUSoon93
+                        </a>
+                      </sudUi.Typography>
+                    </sudUi.Typography>
+                  </div>
+                </sudUi.Card>
+              </div>
+            </sudUi.Card>
+          </div>
+        )
       },
       {
         name: "Notification",
         img: "/componentOverview/notification.png",
-        link: "/component/notification"
+        link: "/component/notification",
+        item: (
+          <div
+            className="flex item-cen jus-cen w-100 rad-15 overflow-hidden relative"
+            style={{ height: "300px" }}
+          >
+            <sudUi.Card
+              background="black-5"
+              shape="square"
+              shadow="none"
+              style={{
+                width: "100%",
+                height: "100%",
+                position: "absolute",
+                top: 0,
+                left: 0
+              }}
+            />
+            <sudUi.Card
+              variant="Notification"
+              title="Notification"
+              style={{
+                width: "60%",
+                position: "absolute",
+                right: 10,
+                top: 10
+              }}
+            >
+              <div className="flex flex-col gap-10">
+                <sudUi.Typography>Notification Content</sudUi.Typography>
+              </div>
+            </sudUi.Card>
+          </div>
+        )
       },
       {
         name: "Popconfirm",
         img: "/componentOverview/popconfirm.png",
-        link: "/component/popconfirm"
+        link: "/component/popconfirm",
+        item: (
+          <div className="flex flex-col gap-10 item-cen jus-cen w-100">
+            <sudUi.PopConfirm
+              content={
+                <sudUi.Typography code size="lg">
+                  Are you sure?
+                </sudUi.Typography>
+              }
+            >
+              <sudUi.Button background="volcano-2" color={"volcano-8"}>
+                npm install sud-ui
+              </sudUi.Button>
+            </sudUi.PopConfirm>
+          </div>
+        )
       },
       {
         name: "Popover",
         img: "/componentOverview/popover.png",
-        link: "/component/popover"
+        link: "/component/popover",
+        item: (
+          <div className="flex flex-col gap-10 item-cen jus-cen w-100">
+            <sudUi.Popover content="Hello SeeUSoon93" placement="top">
+              <sudUi.Button colorType="primary">Hover me!</sudUi.Button>
+            </sudUi.Popover>
+          </div>
+        )
       },
       {
         name: "Progress",

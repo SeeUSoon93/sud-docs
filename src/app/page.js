@@ -3,7 +3,11 @@ import { Typography, Avatar, Card, Tooltip, Carousel, Image } from "sud-ui";
 import { useMobile } from "./_lib/context/mobileContext";
 import { overViewData } from "./component/component-overview/overViewData";
 import { useDarkMode } from "./_lib/context/darkModeContext";
+import { LogoSud } from "sud-icons";
+import { InstallCommand } from "./_lib/components/common/render";
+import { handleInstallCopy } from "./_lib/utils/utils";
 
+const INSTALL_COMMAND = `npm install sud-ui sud-icons`;
 export default function Home() {
   const { isMobile } = useMobile();
   const { isDarkMode } = useDarkMode();
@@ -23,10 +27,10 @@ export default function Home() {
         </Typography>
       }
       divider
-      background={isDarkMode ? "mint-9" : "mint-1"}
+      background={"mint-1"}
     >
       <div
-        className={`flex flex-col jus-cen pd-20 h-px-250 w-100 ${
+        className={`flex flex-col jus-cen pd-20 h-px-300 w-100 ${
           !component.item && "item-cen"
         }`}
       >
@@ -63,16 +67,21 @@ export default function Home() {
           <Tooltip
             placement="top"
             content={
-              <div className="flex flex-col item-cen pd-20">
+              <div className="flex flex-col item-cen pd-20 gap-10">
                 <Typography
                   as="p"
                   className="ta-cen"
                   size="lg"
                   style={{ wordBreak: "keep-all" }}
                 >
-                  디자이너와 개발자가 더 쉽고 빠르게 제품을 만들 수 있도록 돕는
+                  디자이너와 개발자가 더 쉽고 빠르게
+                  <br /> 제품을 만들 수 있도록 돕는
+                  <br />
+                </Typography>
+                <Typography as="p" pretendard="B" className="ta-cen" size="2xl">
                   React UI 라이브러리
                 </Typography>
+                <LogoSud size={50} />
               </div>
             }
           >
@@ -88,8 +97,23 @@ export default function Home() {
         itemWidthRatio={isMobile ? 0.8 : 0.32}
         autoPlay={false}
         autoPlayInterval={2000}
-        height="450px"
+        height="500px"
       />
+
+      <div className="mg-t-40 flex flex-col gap-20 min-w-50">
+        <Typography
+          as="h1"
+          suite="H"
+          className="ta-cen"
+          style={{ fontSize: isMobile ? "30px" : "50px" }}
+        >
+          Start Using SUD
+        </Typography>
+        <InstallCommand
+          command={INSTALL_COMMAND}
+          onClick={() => handleInstallCopy(INSTALL_COMMAND)}
+        />
+      </div>
     </div>
   );
 }
