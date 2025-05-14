@@ -68,6 +68,7 @@ export default function ClassName() {
           />
         ))}
         grid={true}
+        isMobile={isMobile}
       />
     </div>
   );

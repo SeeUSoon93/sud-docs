@@ -10,7 +10,7 @@ export const overViewData = [
         img: "/componentOverview/layout.png",
         link: "/component/layout",
         item: (
-          <div className="w-100 h-100 rad-15 overflow-hidden">
+          <div className="w-100 h-100 rad-15 overflow-hidden z-0">
             <sudUi.Layout>
               <sudUi.Header
                 className="flex jus-cen item-cen"
@@ -167,9 +167,8 @@ export const overViewData = [
                         label: "메뉴 3"
                       }
                     ]}
-                    trigger="click"
                   >
-                    <sudUi.Button colorType="warning">Click me!</sudUi.Button>
+                    <sudUi.Button colorType="warning">Hover me!</sudUi.Button>
                   </sudUi.Dropdown>
                 </div>
               }

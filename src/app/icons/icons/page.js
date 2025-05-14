@@ -79,6 +79,7 @@ export default function Icon() {
                 value={selected}
                 onChange={(value) => handleSegmentChange(value, setSelected)}
                 options={segments}
+                block
               />
               <Input
                 size="sm"

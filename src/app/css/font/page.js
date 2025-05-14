@@ -48,19 +48,22 @@ export default function Font() {
         etc={
           isMobile ? (
             <div className="flex flex-col gap-20">
-              {FONT_DATA.map(({ font }) => (
-                <Table
-                  key={font}
-                  columns={[
-                    {
-                      key: "weight",
-                      title: fontColumns.find((col) => col.key === font).title,
-                      dataIndex: "weight"
-                    }
-                  ]}
-                  dataSource={mobileFontTableData[font]}
-                />
-              ))}
+              {FONT_DATA.filter(({ font }) => font !== "intelone").map(
+                ({ font }) => (
+                  <Table
+                    key={font}
+                    columns={[
+                      {
+                        key: "weight",
+                        title: fontColumns.find((col) => col.key === font)
+                          .title,
+                        dataIndex: "weight"
+                      }
+                    ]}
+                    dataSource={mobileFontTableData[font]}
+                  />
+                )
+              )}
             </div>
           ) : (
             <Table columns={fontColumns} dataSource={fontTableData} />

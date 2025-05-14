@@ -91,7 +91,7 @@ export default function Example() {
         <div className="flex flex-col gap-20">
           {size.map((size) => (
             <div className="flex flex-col gap-10" key={size.value}>
-              <Typography as="span" suite="H" size="lg">
+              <Typography as="span" pretendard="SB">
                 {size.name}
               </Typography>
               <Collapse
@@ -123,7 +123,7 @@ export default function Example() {
     <div className="flex flex-col gap-20">
       {size.map((size) => (
         <div className="flex flex-col gap-10" key={size.value}>
-          <Typography as="span" suite="H" size="lg">
+          <Typography as="span" pretendard="SB">
             {size.name}
           </Typography>
           <Collapse
@@ -167,7 +167,7 @@ export default function Example() {
     <div className="flex flex-col gap-20">
       {size.map((size) => (
         <div className="flex flex-col gap-10" key={size.value}>
-          <Typography as="span" suite="H" size="lg">
+          <Typography as="span" pretendard="SB">
             {size.name}
           </Typography>
           <Collapse
@@ -385,7 +385,7 @@ export default function Example() {
       render: (
         <div className="flex flex-col gap-20">
           <div className="flex flex-col gap-10">
-            <Typography as="span" suite="H" size="lg">
+            <Typography as="span" pretendard="SB">
               Rounded
             </Typography>
             <Collapse
@@ -396,7 +396,7 @@ export default function Example() {
             />
           </div>
           <div className="flex flex-col gap-10">
-            <Typography as="span" suite="H" size="lg">
+            <Typography as="span" pretendard="SB">
               Square
             </Typography>
             <Collapse
@@ -421,13 +421,13 @@ export default function Example() {
   return (
     <div className="flex flex-col gap-20">
       <div className="flex flex-col gap-10">
-        <Typography as="span" suite="H" size="lg">
+        <Typography as="span" pretendard="SB">
           Rounded
         </Typography>
         <Collapse items={[items[0]]} shape="rounded" />
       </div>
       <div className="flex flex-col gap-10">
-        <Typography as="span" suite="H" size="lg">
+        <Typography as="span" pretendard="SB">
           Square
         </Typography>
         <Collapse items={[items[1]]} shape="square" />
@@ -454,13 +454,13 @@ export default function Example() {
   return (
     <div className="flex flex-col gap-20">
       <div className="flex flex-col gap-10">
-        <Typography as="span" suite="H" size="lg">
+        <Typography as="span" pretendard="SB">
           Rounded
         </Typography>
         <Collapse items={[items[0]]} shape="rounded" />
       </div>
       <div className="flex flex-col gap-10">
-        <Typography as="span" suite="H" size="lg">
+        <Typography as="span" pretendard="SB">
           Square
         </Typography>
         <Collapse items={[items[1]]} shape="square" />

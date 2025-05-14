@@ -1,5 +1,13 @@
 "use client";
-import { Typography, Avatar, Card, Tooltip, Carousel, Image } from "sud-ui";
+import {
+  Typography,
+  Avatar,
+  Card,
+  Tooltip,
+  Carousel,
+  Image,
+  defaultTheme
+} from "sud-ui";
 import { useMobile } from "./_lib/context/mobileContext";
 import { overViewData } from "./component/component-overview/overViewData";
 import { useDarkMode } from "./_lib/context/darkModeContext";
@@ -8,6 +16,17 @@ import { InstallCommand } from "./_lib/components/common/render";
 import { handleInstallCopy } from "./_lib/utils/utils";
 
 const INSTALL_COMMAND = `npm install sud-ui sud-icons`;
+
+// Fisher-Yates 셔플 알고리즘
+const shuffleArray = (array) => {
+  const newArray = [...array];
+  for (let i = newArray.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [newArray[i], newArray[j]] = [newArray[j], newArray[i]];
+  }
+  return newArray;
+};
+
 export default function Home() {
   const { isMobile } = useMobile();
   const { isDarkMode } = useDarkMode();
@@ -16,10 +35,12 @@ export default function Home() {
     return [...acc, ...category.children];
   }, []);
 
-  const renderItems = allComponents.map((component) => (
+  const shuffledComponents = shuffleArray(allComponents);
+
+  const renderItems = shuffledComponents.map((component) => (
     <Card
       key={component.name}
-      className="hover-bounce-big"
+      className="hover-shadow-6"
       style={{ width: "100%" }}
       title={
         <Typography as="div" gmarket="Medium" size="lg" className="ta-cen">
@@ -60,7 +81,7 @@ export default function Home() {
           className="ta-cen"
           style={{ fontSize: isMobile ? "50px" : "70px" }}
         >
-          0.1.3
+          0.1.4
         </Typography>
 
         <div className="mg-t-50">
@@ -96,8 +117,8 @@ export default function Home() {
         itemCount={5}
         itemWidthRatio={isMobile ? 0.8 : 0.32}
         autoPlay={true}
-        autoPlayInterval={2000}
-        height="500px"
+        autoPlayInterval={4000}
+        height="450px"
       />
 
       <div className="mg-t-40 flex flex-col gap-20 min-w-50">

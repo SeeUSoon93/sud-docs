@@ -1,7 +1,8 @@
-import { Card, Collapse, Divider, Segmented, Typography } from "sud-ui";
+import { Button, Card, Collapse, Divider, Segmented, Typography } from "sud-ui";
 import { handleInstallCopy } from "../../utils/utils";
-import { CodeBoxOutline } from "sud-icons";
-import React from "react";
+import { CodeBoxOutline, DocumentOutline } from "sud-icons";
+import React, { useState } from "react";
+import { useDarkMode } from "../../context/darkModeContext";
 
 export const MainTitle = ({ title, description, etc }) => {
   return (
@@ -94,25 +95,48 @@ export const SubTitle = ({ title }) => {
   );
 };
 
-export const InstallCommand = ({ command, onClick }) => {
+export const InstallCommand = ({ command }) => {
+  const [isHovered, setIsHovered] = useState(false);
+  const { isDarkMode } = useDarkMode();
+
   return (
     <Card
       colorType="sub"
       border={false}
       shadow="none"
       width={"100%"}
-      className="flex flex-row cursor-pointer"
+      className="flex flex-row cursor-pointer relative"
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
     >
-      <div className="flex jus-bet item-cen" onClick={onClick}>
+      <div
+        className="flex item-cen w-100 pd-10"
+        onClick={() => handleInstallCopy(command)}
+      >
         <Typography as="code" code size="lg">
           {command}
         </Typography>
       </div>
+      {isHovered && (
+        <div
+          className="flex flex-row gap-5 item-cen absolute rad-10 pd-10"
+          style={{
+            top: "10px",
+            right: "10px",
+            background: isDarkMode ? "black" : "white"
+          }}
+          onClick={() => handleInstallCopy(command)}
+        >
+          <DocumentOutline size={16} /> Copy
+        </div>
+      )}
     </Card>
   );
 };
 
 export const CodeBlock = ({ code }) => {
+  const [isHovered, setIsHovered] = useState(false);
+
   return (
     <Card
       colorType="sub"
@@ -120,6 +144,9 @@ export const CodeBlock = ({ code }) => {
       shadow="none"
       width="100%"
       style={{ maxHeight: "600px", overflow: "auto" }}
+      className="relative"
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
     >
       <Typography
         as="code"
@@ -136,6 +163,19 @@ export const CodeBlock = ({ code }) => {
       >
         {code}
       </Typography>
+      {isHovered && (
+        <div
+          className="flex flex-row gap-5 item-cen absolute rad-10 pd-10 cursor-pointer"
+          style={{
+            top: "10px",
+            right: "10px",
+            background: "white"
+          }}
+          onClick={() => handleInstallCopy(code)}
+        >
+          <DocumentOutline size={16} /> Copy
+        </div>
+      )}
     </Card>
   );
 };
@@ -162,6 +202,7 @@ export const CodeSegment = ({
           value={select}
           onChange={(key) => setSelected(key)}
           options={options}
+          block
         />
       )}
       <CodeBlock code={code} />

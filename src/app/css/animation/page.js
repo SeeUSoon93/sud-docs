@@ -1,7 +1,7 @@
 "use client";
 
 import { useMobile } from "../../_lib/context/mobileContext";
-import { Typography, Card, Avatar, Tag, toast } from "sud-ui";
+import { Typography, Card, Avatar, Tag, toast, Radio } from "sud-ui";
 import { animationExamples } from "./data/animationData";
 import {
   InstallCommand,
@@ -14,6 +14,7 @@ export default function Animation() {
   const { isMobile } = useMobile();
 
   const [selected, setSelected] = useState("javascript");
+  const [selectedStage, setSelectedStage] = useState(1);
 
   return (
     <div className="flex flex-col gap-40 pd-20 w-100">
@@ -34,9 +35,9 @@ export default function Animation() {
         title={"애니메이션 종류"}
         description={
           <>
-            <Tag>hover-transition-fast</Tag> <Tag>hover-transition-normal</Tag>{" "}
-            <Tag>hover-transition-slow</Tag> 클래스를 함께 사용하여 호버 시 전환
-            속도를 조절할 수 있습니다.
+            각 효과별 class이름 뒤에 숫자를 붙여 강도를 조절할 수 있습니다.
+            <br />
+            예) <Tag>hover-scale-[1-10]</Tag>
           </>
         }
         etc={animationExamples.map((example, index) => (
@@ -45,10 +46,38 @@ export default function Animation() {
             title={example.title}
             render={
               <>
-                <div className="flex flex-col item-cen pd-20">
-                  <div className={example.className} style={example.style}>
+                <Card
+                  style={{ width: "100%" }}
+                  shadow="none"
+                  title={
+                    <div className="flex jus-cen">
+                      <Typography pretendard="B" size="lg">
+                        단계 선택
+                      </Typography>
+                    </div>
+                  }
+                >
+                  <Radio.Group
+                    value={selectedStage}
+                    onChange={setSelectedStage}
+                    cols={5}
+                    direction="horizontal"
+                    options={Array.from({ length: 10 }, (_, index) => ({
+                      value: index + 1,
+                      label: `${index + 1}`
+                    }))}
+                  />
+                </Card>
+                <div className="flex flex-col item-cen jus-cen pd-20 gap-10">
+                  <div
+                    className={`${example.className}${selectedStage}`}
+                    style={{ borderRadius: "50%", ...example.style }}
+                  >
                     <Avatar />
                   </div>
+                  <Typography as="p" pretendard="B" size="lg">
+                    Hover me!
+                  </Typography>
                 </div>
               </>
             }
@@ -59,6 +88,7 @@ export default function Animation() {
           />
         ))}
         grid={true}
+        isMobile={isMobile}
       />
     </div>
   );

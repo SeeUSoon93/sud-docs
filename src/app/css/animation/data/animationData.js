@@ -5,38 +5,96 @@ export const animationExamples = [
     title: "Flash",
     description: (
       <>
-        <Tag>sud-hover</Tag> 클래스를 사용하여 밝기가 잠시 변하는 효과를 적용할
-        수 있습니다.
+        <Tag>sud-hover-[1-10]</Tag> 클래스를 사용하여 밝기가 잠시 변하는 효과를
+        적용할 수 있습니다.
       </>
     ),
-    className: "sud-hover",
-    jscode: `import { Card, Avatar } from "sud-ui";
+    className: "sud-hover-",
+    jscode: `import { Card, Avatar, Radio, Typography } from "sud-ui";
+import { useState } from "react";
 
 function FlashExample() {
+  const [selectedStage, setSelectedStage] = useState(4);
+
   return (
     <div className="flex flex-col gap-10 item-cen jus-cen">
-      <Card style={{ width: "100%" }}>
-        <div className="flex flex-col item-cen pd-20">
-          <div className="sud-hover">
-            <Avatar />
+      <Card
+        style={{ width: "100%" }}
+        shadow="none"
+        title={
+          <div className="flex jus-cen">
+            <Typography pretendard="B" size="lg">
+              단계 선택
+            </Typography>
           </div>
-        </div>
+        }
+      >
+        <Radio.Group
+          value={selectedStage}
+          onChange={setSelectedStage}
+          cols={5}
+          direction="horizontal"
+          options={Array.from({ length: 10 }, (_, index) => ({
+            value: index + 1,
+            label: \`\${index + 1}\`
+          }))}
+        />
       </Card>
+      <div className="flex flex-col item-cen jus-cen pd-20 gap-10">
+        <div
+          className={\`sud-hover-\${selectedStage}\`}
+          style={{ borderRadius: "50%" }}
+        >
+          <Avatar />
+        </div>
+        <Typography as="p" pretendard="B" size="lg">
+          Hover me!
+        </Typography>
+      </div>
     </div>
   );
 }`,
-    tscode: `import { Card, Avatar } from "sud-ui";
+    tscode: `import { Card, Avatar, Radio, Typography } from "sud-ui";
+import { useState } from "react";
 
 const FlashExample: React.FC = () => {
+  const [selectedStage, setSelectedStage] = useState(4);
+
   return (
     <div className="flex flex-col gap-10 item-cen jus-cen">
-      <Card style={{ width: "100%" }}>
-        <div className="flex flex-col item-cen pd-20">
-          <div className="sud-hover">
-            <Avatar />
+      <Card
+        style={{ width: "100%" }}
+        shadow="none"
+        title={
+          <div className="flex jus-cen">
+            <Typography pretendard="B" size="lg">
+              단계 선택
+            </Typography>
           </div>
-        </div>
+        }
+      >
+        <Radio.Group
+          value={selectedStage}
+          onChange={setSelectedStage}
+          cols={5}
+          direction="horizontal"
+          options={Array.from({ length: 10 }, (_, index) => ({
+            value: index + 1,
+            label: \`\${index + 1}\`
+          }))}
+        />
       </Card>
+      <div className="flex flex-col item-cen jus-cen pd-20 gap-10">
+        <div
+          className={\`sud-hover-\${selectedStage}\`}
+          style={{ borderRadius: "50%" }}
+        >
+          <Avatar />
+        </div>
+        <Typography as="p" pretendard="B" size="lg">
+          Hover me!
+        </Typography>
+      </div>
     </div>
   );
 };`
@@ -45,39 +103,194 @@ const FlashExample: React.FC = () => {
     title: "Scale",
     description: (
       <>
-        <Tag>hover-scale-95</Tag> <Tag>hover-scale-100</Tag>{" "}
-        <Tag>hover-scale-105</Tag> <Tag>hover-scale-110</Tag> 클래스를 사용하여
-        호버 시 크기 변화를 적용할 수 있습니다.
+        <Tag>hover-scale-[1-10]</Tag> 클래스를 사용하여 호버 시 크기 변화를
+        적용할 수 있습니다.
       </>
     ),
-    className: "hover-scale-105",
-    jscode: `import { Card, Avatar } from "sud-ui";
+    className: "hover-scale-",
+    jscode: `import { Card, Avatar, Radio, Typography } from "sud-ui";
+import { useState } from "react";
 
 function ScaleExample() {
+  const [selectedStage, setSelectedStage] = useState(4);
+
   return (
     <div className="flex flex-col gap-10 item-cen jus-cen">
-      <Card style={{ width: "100%" }}>
-        <div className="flex flex-col item-cen pd-20">
-          <div className="hover-scale-105">
-            <Avatar />
+      <Card
+        style={{ width: "100%" }}
+        shadow="none"
+        title={
+          <div className="flex jus-cen">
+            <Typography pretendard="B" size="lg">
+              단계 선택
+            </Typography>
           </div>
-        </div>
+        }
+      >
+        <Radio.Group
+          value={selectedStage}
+          onChange={setSelectedStage}
+          cols={5}
+          direction="horizontal"
+          options={Array.from({ length: 10 }, (_, index) => ({
+            value: index + 1,
+            label: \`\${index + 1}\`
+          }))}
+        />
       </Card>
+      <div className="flex flex-col item-cen jus-cen pd-20 gap-10">
+        <div
+          className={\`hover-scale-\${selectedStage}\`}
+          style={{ borderRadius: "50%" }}
+        >
+          <Avatar />
+        </div>
+        <Typography as="p" pretendard="B" size="lg">
+          Hover me!
+        </Typography>
+      </div>
     </div>
   );
 }`,
-    tscode: `import { Card, Avatar } from "sud-ui";
+    tscode: `import { Card, Avatar, Radio, Typography } from "sud-ui";
+import { useState } from "react";
 
 const ScaleExample: React.FC = () => {
+  const [selectedStage, setSelectedStage] = useState(4);
+
   return (
     <div className="flex flex-col gap-10 item-cen jus-cen">
-      <Card style={{ width: "100%" }}>
-        <div className="flex flex-col item-cen pd-20">
-          <div className="hover-scale-105">
-            <Avatar />
+      <Card
+        style={{ width: "100%" }}
+        shadow="none"
+        title={
+          <div className="flex jus-cen">
+            <Typography pretendard="B" size="lg">
+              단계 선택
+            </Typography>
           </div>
-        </div>
+        }
+      >
+        <Radio.Group
+          value={selectedStage}
+          onChange={setSelectedStage}
+          cols={5}
+          direction="horizontal"
+          options={Array.from({ length: 10 }, (_, index) => ({
+            value: index + 1,
+            label: \`\${index + 1}\`
+          }))}
+        />
       </Card>
+      <div className="flex flex-col item-cen jus-cen pd-20 gap-10">
+        <div
+          className={\`hover-scale-\${selectedStage}\`}
+          style={{ borderRadius: "50%" }}
+        >
+          <Avatar />
+        </div>
+        <Typography as="p" pretendard="B" size="lg">
+          Hover me!
+        </Typography>
+      </div>
+    </div>
+  );
+};`
+  },
+  {
+    title: "Pulse",
+    description: (
+      <>
+        <Tag>hover-pulse-[1-10]</Tag> 클래스를 사용하여 호버 시 펄스 효과를
+        적용할 수 있습니다.
+      </>
+    ),
+    className: "hover-pulse-",
+    jscode: `import { Card, Avatar, Radio, Typography } from "sud-ui";
+import { useState } from "react";
+
+function PulseExample() {
+  const [selectedStage, setSelectedStage] = useState(4);
+
+  return (
+    <div className="flex flex-col gap-10 item-cen jus-cen">
+      <Card
+        style={{ width: "100%" }}
+        shadow="none"
+        title={
+          <div className="flex jus-cen">
+            <Typography pretendard="B" size="lg">
+              단계 선택
+            </Typography>
+          </div>
+        }
+      >
+        <Radio.Group
+          value={selectedStage}
+          onChange={setSelectedStage}
+          cols={5}
+          direction="horizontal"
+          options={Array.from({ length: 10 }, (_, index) => ({
+            value: index + 1,
+            label: \`\${index + 1}\`
+          }))}
+        />
+      </Card>
+      <div className="flex flex-col item-cen jus-cen pd-20 gap-10">
+        <div
+          className={\`hover-pulse-\${selectedStage}\`}
+          style={{ borderRadius: "50%" }}
+        >
+          <Avatar />
+        </div>
+        <Typography as="p" pretendard="B" size="lg">
+          Hover me!
+        </Typography>
+      </div>
+    </div>
+  );
+}`,
+    tscode: `import { Card, Avatar, Radio, Typography } from "sud-ui";
+import { useState } from "react";
+
+const PulseExample: React.FC = () => {
+  const [selectedStage, setSelectedStage] = useState(4);
+
+  return (
+    <div className="flex flex-col gap-10 item-cen jus-cen">
+      <Card
+        style={{ width: "100%" }}
+        shadow="none"
+        title={
+          <div className="flex jus-cen">
+            <Typography pretendard="B" size="lg">
+              단계 선택
+            </Typography>
+          </div>
+        }
+      >
+        <Radio.Group
+          value={selectedStage}
+          onChange={setSelectedStage}
+          cols={5}
+          direction="horizontal"
+          options={Array.from({ length: 10 }, (_, index) => ({
+            value: index + 1,
+            label: \`\${index + 1}\`
+          }))}
+        />
+      </Card>
+      <div className="flex flex-col item-cen jus-cen pd-20 gap-10">
+        <div
+          className={\`hover-pulse-\${selectedStage}\`}
+          style={{ borderRadius: "50%" }}
+        >
+          <Avatar />
+        </div>
+        <Typography as="p" pretendard="B" size="lg">
+          Hover me!
+        </Typography>
+      </div>
     </div>
   );
 };`
@@ -86,39 +299,96 @@ const ScaleExample: React.FC = () => {
     title: "Bounce",
     description: (
       <>
-        <Tag>hover-bounce</Tag> <Tag>hover-bounce-small</Tag>{" "}
-        <Tag>hover-bounce-big</Tag> 클래스를 사용하여 호버 시 위아래로 튀는
+        <Tag>hover-bounce-[1-10]</Tag>클래스를 사용하여 호버 시 위아래로 튀는
         효과를 적용할 수 있습니다.
       </>
     ),
-    className: "hover-bounce",
-    jscode: `import { Card, Avatar } from "sud-ui";
+    className: "hover-bounce-",
+    jscode: `import { Card, Avatar, Radio, Typography } from "sud-ui";
+import { useState } from "react";
 
 function BounceExample() {
+  const [selectedStage, setSelectedStage] = useState(4);
+
   return (
     <div className="flex flex-col gap-10 item-cen jus-cen">
-      <Card style={{ width: "100%" }}>
-        <div className="flex flex-col item-cen pd-20">
-          <div className="hover-bounce">
-            <Avatar />
+      <Card
+        style={{ width: "100%" }}
+        shadow="none"
+        title={
+          <div className="flex jus-cen">
+            <Typography pretendard="B" size="lg">
+              단계 선택
+            </Typography>
           </div>
-        </div>
+        }
+      >
+        <Radio.Group
+          value={selectedStage}
+          onChange={setSelectedStage}
+          cols={5}
+          direction="horizontal"
+          options={Array.from({ length: 10 }, (_, index) => ({
+            value: index + 1,
+            label: \`\${index + 1}\`
+          }))}
+        />
       </Card>
+      <div className="flex flex-col item-cen jus-cen pd-20 gap-10">
+        <div
+          className={\`hover-bounce-\${selectedStage}\`}
+          style={{ borderRadius: "50%" }}
+        >
+          <Avatar />
+        </div>
+        <Typography as="p" pretendard="B" size="lg">
+          Hover me!
+        </Typography>
+      </div>
     </div>
   );
 }`,
-    tscode: `import { Card, Avatar } from "sud-ui";
+    tscode: `import { Card, Avatar, Radio, Typography } from "sud-ui";
+import { useState } from "react";
 
 const BounceExample: React.FC = () => {
+  const [selectedStage, setSelectedStage] = useState(4);
+
   return (
     <div className="flex flex-col gap-10 item-cen jus-cen">
-      <Card style={{ width: "100%" }}>
-        <div className="flex flex-col item-cen pd-20">
-          <div className="hover-bounce">
-            <Avatar />
+      <Card
+        style={{ width: "100%" }}
+        shadow="none"
+        title={
+          <div className="flex jus-cen">
+            <Typography pretendard="B" size="lg">
+              단계 선택
+            </Typography>
           </div>
-        </div>
+        }
+      >
+        <Radio.Group
+          value={selectedStage}
+          onChange={setSelectedStage}
+          cols={5}
+          direction="horizontal"
+          options={Array.from({ length: 10 }, (_, index) => ({
+            value: index + 1,
+            label: \`\${index + 1}\`
+          }))}
+        />
       </Card>
+      <div className="flex flex-col item-cen jus-cen pd-20 gap-10">
+        <div
+          className={\`hover-bounce-\${selectedStage}\`}
+          style={{ borderRadius: "50%" }}
+        >
+          <Avatar />
+        </div>
+        <Typography as="p" pretendard="B" size="lg">
+          Hover me!
+        </Typography>
+      </div>
     </div>
   );
 };`
@@ -127,39 +397,96 @@ const BounceExample: React.FC = () => {
     title: "Shake",
     description: (
       <>
-        <Tag>hover-shake</Tag> <Tag>hover-shake-small</Tag>{" "}
-        <Tag>hover-shake-big</Tag> 클래스를 사용하여 호버 시 좌우로 흔들리는
-        클래스를 사용하여 호버 시 좌우로 흔들리는 효과를 적용할 수 있습니다.
+        <Tag>hover-shake-[1-10]</Tag>클래스를 사용하여 호버 시 좌우로 흔들리는
+        효과를 적용할 수 있습니다.
       </>
     ),
-    className: "hover-shake",
-    jscode: `import { Card, Avatar } from "sud-ui";
+    className: "hover-shake-",
+    jscode: `import { Card, Avatar, Radio, Typography } from "sud-ui";
+import { useState } from "react";
 
 function ShakeExample() {
+  const [selectedStage, setSelectedStage] = useState(4);
+
   return (
     <div className="flex flex-col gap-10 item-cen jus-cen">
-      <Card style={{ width: "100%" }}>
-        <div className="flex flex-col item-cen pd-20">
-          <div className="hover-shake">
-            <Avatar />
+      <Card
+        style={{ width: "100%" }}
+        shadow="none"
+        title={
+          <div className="flex jus-cen">
+            <Typography pretendard="B" size="lg">
+              단계 선택
+            </Typography>
           </div>
-        </div>
+        }
+      >
+        <Radio.Group
+          value={selectedStage}
+          onChange={setSelectedStage}
+          cols={5}
+          direction="horizontal"
+          options={Array.from({ length: 10 }, (_, index) => ({
+            value: index + 1,
+            label: \`\${index + 1}\`
+          }))}
+        />
       </Card>
+      <div className="flex flex-col item-cen jus-cen pd-20 gap-10">
+        <div
+          className={\`hover-shake-\${selectedStage}\`}
+          style={{ borderRadius: "50%" }}
+        >
+          <Avatar />
+        </div>
+        <Typography as="p" pretendard="B" size="lg">
+          Hover me!
+        </Typography>
+      </div>
     </div>
   );
 }`,
-    tscode: `import { Card, Avatar } from "sud-ui";
+    tscode: `import { Card, Avatar, Radio, Typography } from "sud-ui";
+import { useState } from "react";
 
 const ShakeExample: React.FC = () => {
+  const [selectedStage, setSelectedStage] = useState(4);
+
   return (
     <div className="flex flex-col gap-10 item-cen jus-cen">
-      <Card style={{ width: "100%" }}>
-        <div className="flex flex-col item-cen pd-20">
-          <div className="hover-shake">
-            <Avatar />
+      <Card
+        style={{ width: "100%" }}
+        shadow="none"
+        title={
+          <div className="flex jus-cen">
+            <Typography pretendard="B" size="lg">
+              단계 선택
+            </Typography>
           </div>
-        </div>
+        }
+      >
+        <Radio.Group
+          value={selectedStage}
+          onChange={setSelectedStage}
+          cols={5}
+          direction="horizontal"
+          options={Array.from({ length: 10 }, (_, index) => ({
+            value: index + 1,
+            label: \`\${index + 1}\`
+          }))}
+        />
       </Card>
+      <div className="flex flex-col item-cen jus-cen pd-20 gap-10">
+        <div
+          className={\`hover-shake-\${selectedStage}\`}
+          style={{ borderRadius: "50%" }}
+        >
+          <Avatar />
+        </div>
+        <Typography as="p" pretendard="B" size="lg">
+          Hover me!
+        </Typography>
+      </div>
     </div>
   );
 };`
@@ -168,40 +495,96 @@ const ShakeExample: React.FC = () => {
     title: "Shadow",
     description: (
       <>
-        <Tag>hover-shadow-sm</Tag> <Tag>hover-shadow-md</Tag> hover-shadow-md
-        <Tag>hover-shadow-lg</Tag> <Tag>hover-shadow-light</Tag>{" "}
-        <Tag>hover-shadow-heavy</Tag> 클래스를 사용하여 호버 시 그림자 효과를
-        클래스를 사용하여 호버 시 그림자 효과를 적용할 수 있습니다.
+        <Tag>hover-shadow-[1-10]</Tag>클래스를 사용하여 호버 시 그림자 효과를
+        적용할 수 있습니다.
       </>
     ),
-    className: "hover-shadow-md",
-    jscode: `import { Card, Avatar } from "sud-ui";
+    className: "hover-shadow-",
+    jscode: `import { Card, Avatar, Radio, Typography } from "sud-ui";
+import { useState } from "react";
 
 function ShadowExample() {
+  const [selectedStage, setSelectedStage] = useState(4);
+
   return (
     <div className="flex flex-col gap-10 item-cen jus-cen">
-      <Card style={{ width: "100%" }}>
-        <div className="flex flex-col item-cen pd-20">
-          <div className="hover-shadow-md">
-            <Avatar />
+      <Card
+        style={{ width: "100%" }}
+        shadow="none"
+        title={
+          <div className="flex jus-cen">
+            <Typography pretendard="B" size="lg">
+              단계 선택
+            </Typography>
           </div>
-        </div>
+        }
+      >
+        <Radio.Group
+          value={selectedStage}
+          onChange={setSelectedStage}
+          cols={5}
+          direction="horizontal"
+          options={Array.from({ length: 10 }, (_, index) => ({
+            value: index + 1,
+            label: \`\${index + 1}\`
+          }))}
+        />
       </Card>
+      <div className="flex flex-col item-cen jus-cen pd-20 gap-10">
+        <div
+          className={\`hover-shadow-\${selectedStage}\`}
+          style={{ borderRadius: "50%" }}
+        >
+          <Avatar />
+        </div>
+        <Typography as="p" pretendard="B" size="lg">
+          Hover me!
+        </Typography>
+      </div>
     </div>
   );
 }`,
-    tscode: `import { Card, Avatar } from "sud-ui";
+    tscode: `import { Card, Avatar, Radio, Typography } from "sud-ui";
+import { useState } from "react";
 
 const ShadowExample: React.FC = () => {
+  const [selectedStage, setSelectedStage] = useState(4);
+
   return (
     <div className="flex flex-col gap-10 item-cen jus-cen">
-      <Card style={{ width: "100%" }}>
-        <div className="flex flex-col item-cen pd-20">
-          <div className="hover-shadow-md">
-            <Avatar />
+      <Card
+        style={{ width: "100%" }}
+        shadow="none"
+        title={
+          <div className="flex jus-cen">
+            <Typography pretendard="B" size="lg">
+              단계 선택
+            </Typography>
           </div>
-        </div>
+        }
+      >
+        <Radio.Group
+          value={selectedStage}
+          onChange={setSelectedStage}
+          cols={5}
+          direction="horizontal"
+          options={Array.from({ length: 10 }, (_, index) => ({
+            value: index + 1,
+            label: \`\${index + 1}\`
+          }))}
+        />
       </Card>
+      <div className="flex flex-col item-cen jus-cen pd-20 gap-10">
+        <div
+          className={\`hover-shadow-\${selectedStage}\`}
+          style={{ borderRadius: "50%" }}
+        >
+          <Avatar />
+        </div>
+        <Typography as="p" pretendard="B" size="lg">
+          Hover me!
+        </Typography>
+      </div>
     </div>
   );
 };`
