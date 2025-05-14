@@ -44,8 +44,8 @@ export default function Home() {
   ));
 
   return (
-    <div className="flex flex-col item-cen w-100">
-      <div className="flex flex-col item-cen mg-t-80 z-1 w-100 pd-x-20">
+    <div className="flex flex-col item-cen w-100 pd-y-150">
+      <div className="flex flex-col item-cen z-1 w-100 pd-x-20">
         <Typography
           as="h1"
           suite="H"
