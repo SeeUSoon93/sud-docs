@@ -93,9 +93,10 @@ export default function ComponentOverview() {
                         }
                         divider
                         onClick={() => handleCardClick(child.link)}
+                        background={"mint-1"}
                       >
                         <div
-                          className={`flex flex-col jus-cen pd-20 h-px-250 w-100 ${
+                          className={`flex flex-col jus-cen pd-20 h-px-350 w-100 ${
                             !child.item && "item-cen"
                           }`}
                         >
