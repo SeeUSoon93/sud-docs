@@ -95,7 +95,7 @@ export default function Home() {
         effectType="overlap"
         itemCount={5}
         itemWidthRatio={isMobile ? 0.8 : 0.32}
-        autoPlay={false}
+        autoPlay={true}
         autoPlayInterval={2000}
         height="500px"
       />
