@@ -29,7 +29,7 @@ export default function DrawerPage() {
 
   const examples = [
     {
-      title: "기본 사용",
+      title: "Basic Usage",
       render: (
         <div>
           <Button colorType="primary" onClick={() => setOpenBasic(true)}>
@@ -44,12 +44,33 @@ export default function DrawerPage() {
           </Drawer>
         </div>
       ),
-      description: "기본적인 사용 방법입니다.",
+      description: "기본적인 드로어 컴포넌트입니다.",
       jscode: `import { useState } from "react";\nimport { Drawer, Button } from "sud-ui";\n\nexport default function Example() {\n  const [open, setOpen] = useState(false);\n  return (\n    <div>\n      <Button colorType="primary" onClick={() => setOpen(true)}>Open Drawer</Button>\n      <Drawer open={open} onClose={() => setOpen(false)} title=\"Drawer\">\n        <div>Drawer Content</div>\n      </Drawer>\n    </div>\n  );\n}`,
       tscode: `import { useState } from "react";\nimport { Drawer, Button } from "sud-ui";\n\nexport default function Example() {\n  const [open, setOpen] = useState(false);\n  return (\n    <div>\n      <Button colorType="primary" onClick={() => setOpen(true)}>Open Drawer</Button>\n      <Drawer open={open} onClose={() => setOpen(false)} title=\"Drawer\">\n        <div>Drawer Content</div>\n      </Drawer>\n    </div>\n  );\n}`
     },
     {
-      title: "위치 변경",
+      title: "Size",
+      render: (
+        <div>
+          <Button colorType="primary" onClick={() => setOpenWidth(true)}>
+            Open 50% Drawer
+          </Button>
+          <Drawer
+            open={openWidth}
+            onClose={() => setOpenWidth(false)}
+            title={"Wide Drawer"}
+            width={"50%"}
+          >
+            <div>width=50%로 지정된 Drawer</div>
+          </Drawer>
+        </div>
+      ),
+      description: "드로어의 크기를 설정할 수 있습니다.",
+      jscode: `import { useState } from "react";\nimport { Drawer, Button } from "sud-ui";\n\nexport default function Example() {\n  const [open, setOpen] = useState(false);\n  return (\n    <div>\n      <Button colorType="primary" onClick={() => setOpen(true)}>Open 50% Drawer</Button>\n      <Drawer open={open} onClose={() => setOpen(false)} title=\"Wide Drawer\" width={"50%"}>\n        <div>width=50%로 지정된 Drawer</div>\n      </Drawer>\n    </div>\n  );\n}`,
+      tscode: `import { useState } from "react";\nimport { Drawer, Button } from "sud-ui";\n\nexport default function Example() {\n  const [open, setOpen] = useState(false);\n  return (\n    <div>\n      <Button colorType="primary" onClick={() => setOpen(true)}>Open 50% Drawer</Button>\n      <Drawer open={open} onClose={() => setOpen(false)} title=\"Wide Drawer\" width={"50%"}>\n        <div>width=50%로 지정된 Drawer</div>\n      </Drawer>\n    </div>\n  );\n}`
+    },
+    {
+      title: "Position",
       render: (
         <div>
           <Segmented
@@ -71,34 +92,12 @@ export default function DrawerPage() {
           </Drawer>
         </div>
       ),
-      description:
-        "placement prop으로 Drawer가 나오는 위치를 변경할 수 있습니다.",
+      description: "드로어의 위치를 설정할 수 있습니다.",
       jscode: `import { useState } from "react";\nimport { Drawer, Button, Segmented } from "sud-ui";\n\nexport default function Example() {\n  const [open, setOpen] = useState(false);\n  const [placement, setPlacement] = useState(\"right\");\n  return (\n    <div>\n      <Segmented options={[\"left\", \"right\", \"top\", \"bottom\"]} value={placement} onChange={setPlacement} style={{ marginBottom: \"20px\" }} />\n      <Button colorType="primary" onClick={() => setOpen(true)}>Open Drawer</Button>\n      <Drawer open={open} onClose={() => setOpen(false)} placement={placement} title=\"Drawer\">\n        <div>Drawer Content</div>\n      </Drawer>\n    </div>\n  );\n}`,
       tscode: `import { useState } from "react";\nimport { Drawer, Button, Segmented } from "sud-ui";\n\nexport default function Example() {\n  const [open, setOpen] = useState(false);\n  const [placement, setPlacement] = useState<\"left\" | \"right\" | \"top\" | \"bottom\">(\"right\");\n  return (\n    <div>\n      <Segmented options={[\"left\", \"right\", \"top\", \"bottom\"]} value={placement} onChange={setPlacement} style={{ marginBottom: \"20px\" }} />\n      <Button colorType="primary" onClick={() => setOpen(true)}>Open Drawer</Button>\n      <Drawer open={open} onClose={() => setOpen(false)} placement={placement} title=\"Drawer\">\n        <div>Drawer Content</div>\n      </Drawer>\n    </div>\n  );\n}`
     },
     {
-      title: "너비 커스텀",
-      render: (
-        <div>
-          <Button colorType="primary" onClick={() => setOpenWidth(true)}>
-            Open 50% Drawer
-          </Button>
-          <Drawer
-            open={openWidth}
-            onClose={() => setOpenWidth(false)}
-            title={"Wide Drawer"}
-            width={"50%"}
-          >
-            <div>width=50%로 지정된 Drawer</div>
-          </Drawer>
-        </div>
-      ),
-      description: "width prop으로 Drawer의 너비를 지정할 수 있습니다.",
-      jscode: `import { useState } from "react";\nimport { Drawer, Button } from "sud-ui";\n\nexport default function Example() {\n  const [open, setOpen] = useState(false);\n  return (\n    <div>\n      <Button colorType="primary" onClick={() => setOpen(true)}>Open 50% Drawer</Button>\n      <Drawer open={open} onClose={() => setOpen(false)} title=\"Wide Drawer\" width={"50%"}>\n        <div>width=50%로 지정된 Drawer</div>\n      </Drawer>\n    </div>\n  );\n}`,
-      tscode: `import { useState } from "react";\nimport { Drawer, Button } from "sud-ui";\n\nexport default function Example() {\n  const [open, setOpen] = useState(false);\n  return (\n    <div>\n      <Button colorType="primary" onClick={() => setOpen(true)}>Open 50% Drawer</Button>\n      <Drawer open={open} onClose={() => setOpen(false)} title=\"Wide Drawer\" width={"50%"}>\n        <div>width=50%로 지정된 Drawer</div>\n      </Drawer>\n    </div>\n  );\n}`
-    },
-    {
-      title: "모양 변경",
+      title: "Color Customization",
       render: (
         <div>
           <Button colorType="primary" onClick={() => setOpenShape(true)}>
@@ -114,7 +113,7 @@ export default function DrawerPage() {
           </Drawer>
         </div>
       ),
-      description: "shape prop으로 Drawer의 모양을 변경할 수 있습니다.",
+      description: "드로어의 색상을 커스텀할 수 있습니다.",
       jscode: `import { useState } from "react";\nimport { Drawer, Button } from "sud-ui";\n\nexport default function Example() {\n  const [open, setOpen] = useState(false);\n  return (\n    <div>\n      <Button colorType="primary" onClick={() => setOpen(true)}>Open Drawer</Button>\n      <Drawer open={open} onClose={() => setOpen(false)} title=\"Drawer\" shape=\"square\">\n        <div>shape=square로 지정된 Drawer</div>\n      </Drawer>\n    </div>\n  );\n}`,
       tscode: `import { useState } from "react";\nimport { Drawer, Button } from "sud-ui";\n\nexport default function Example() {\n  const [open, setOpen] = useState(false);\n  return (\n    <div>\n      <Button colorType="primary" onClick={() => setOpen(true)}>Open Drawer</Button>\n      <Drawer open={open} onClose={() => setOpen(false)} title=\"Drawer\" shape=\"square\">\n        <div>shape=square로 지정된 Drawer</div>\n      </Drawer>\n    </div>\n  );\n}`
     }

@@ -89,6 +89,7 @@ export default function MainHeader({
             items={mapMenuItems(items)}
             horizontal={true}
             expandType="popover"
+            border
           />
         </div>
       ) : (

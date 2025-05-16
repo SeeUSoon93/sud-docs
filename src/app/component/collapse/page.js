@@ -1,7 +1,9 @@
 "use client";
 import Frame from "../Frame";
 import { useMobile } from "../../_lib/context/mobileContext";
-import { Collapse, Divider, Tag, Typography } from "sud-ui";
+import { Card, Collapse, Radio, Tag, Typography } from "sud-ui";
+import { useState } from "react";
+
 export default function CollapsePage() {
   const { isMobile } = useMobile();
   const name = "Collapse";
@@ -12,38 +14,47 @@ export default function CollapsePage() {
     "사용자에게 콘텐츠를 접거나 열 수 있는 버튼을 제공할 때."
   ];
 
-  const colorType = [
-    "default",
-    "sub",
-    "primary",
-    "secondary",
-    "success",
-    "warning",
-    "danger",
-    "info",
-    "text"
+  const [shape, setShape] = useState("rounded");
+  const shapeOptions = [
+    { label: "rounded", value: "rounded" },
+    { label: "square", value: "square" }
   ];
 
-  const color = [
-    "coral",
-    "apricot",
-    "mint",
-    "sky",
-    "navy",
-    "plum",
-    "forest",
-    "warm-gray"
+  const [colorType, setColorType] = useState("default");
+  const colorTypeOptions = [
+    { label: "default", value: "default" },
+    { label: "sub", value: "sub" },
+    { label: "primary", value: "primary" },
+    { label: "secondary", value: "secondary" },
+    { label: "success", value: "success" },
+    { label: "warning", value: "warning" },
+    { label: "danger", value: "danger" },
+    { label: "info", value: "info" },
+    { label: "text", value: "text" }
   ];
 
-  const size = [
-    { name: "Small", value: "sm" },
-    { name: "Medium", value: "md" },
-    { name: "Large", value: "lg" }
+  const [color, setColor] = useState("coral");
+  const colorOptions = [
+    { label: "coral", value: "coral" },
+    { label: "apricot", value: "apricot" },
+    { label: "mint", value: "mint" },
+    { label: "sky", value: "sky" },
+    { label: "navy", value: "navy" },
+    { label: "plum", value: "plum" },
+    { label: "forest", value: "forest" },
+    { label: "warm-gray", value: "warm-gray" }
+  ];
+
+  const [size, setSize] = useState("md");
+  const sizeOptions = [
+    { label: "Small", value: "sm" },
+    { label: "Medium", value: "md" },
+    { label: "Large", value: "lg" }
   ];
 
   const examples = [
     {
-      title: "기본 사용",
+      title: "Basic Usage",
       render: (
         <Collapse
           items={[
@@ -56,7 +67,7 @@ export default function CollapsePage() {
           ]}
         />
       ),
-      description: "가장 기본적인 Collapse 사용 예시입니다.",
+      description: "기본적인 아코디언 컴포넌트입니다.",
       jscode: `import { Collapse } from "sud-ui";
 
 const items = [
@@ -86,64 +97,71 @@ export default function Example() {
 }`
     },
     {
-      title: "사이즈별 Collapse",
+      title: "Size",
       render: (
         <div className="flex flex-col gap-20">
-          {size.map((size) => (
-            <div className="flex flex-col gap-10" key={size.value}>
-              <Typography as="span" pretendard="SB">
-                {size.name}
-              </Typography>
-              <Collapse
-                items={[
-                  {
-                    key: size.value,
-                    label: size.name,
-                    children: `size='${size.value}'`
-                  }
-                ]}
-                size={size.value}
+          <Card style={{ width: "100%" }} shadow="none" colorType="sub">
+            <div className="flex jus-cen">
+              <Radio.Group
+                direction="horizontal"
+                options={sizeOptions}
+                value={size}
+                onChange={setSize}
               />
             </div>
-          ))}
-        </div>
-      ),
-      description: "size prop으로 Collapse의 크기를 조절할 수 있습니다.",
-      jscode: `import { Collapse } from "sud-ui";
-import { Typography } from "sud-ui";
-
-const size = [
-  { name: "Small", value: "sm" },
-  { name: "Medium", value: "md" },
-  { name: "Large", value: "lg" }
-];
-
-export default function Example() {
-  return (
-    <div className="flex flex-col gap-20">
-      {size.map((size) => (
-        <div className="flex flex-col gap-10" key={size.value}>
-          <Typography as="span" pretendard="SB">
-            {size.name}
-          </Typography>
+          </Card>
           <Collapse
             items={[
               {
-                key: size.value,
-                label: size.name,
-                children: \`size='\${size.value}'\`
+                key: size,
+                label: size,
+                children: `size='${size}'`
               }
             ]}
-            size={size.value}
+            size={size}
           />
         </div>
-      ))}
+      ),
+      description: "아코디언의 크기를 설정할 수 있습니다.",
+      jscode: `import { Collapse, Radio, Card } from "sud-ui";
+import { useState } from "react";
+
+const sizeOptions = [
+  { label: "Small", value: "sm" },
+  { label: "Medium", value: "md" },
+  { label: "Large", value: "lg" }
+];
+
+export default function Example() {
+  const [size, setSize] = useState("md");
+
+  return (
+    <div className="flex flex-col gap-20">
+      <Card style={{ width: "100%" }} shadow="none" colorType="sub">
+        <div className="flex jus-cen">
+          <Radio.Group
+            direction="horizontal"
+            options={sizeOptions}
+            value={size}
+            onChange={setSize}
+          />
+        </div>
+      </Card>
+      <Collapse
+        items={[
+          {
+            key: size,
+            label: size,
+            children: \`size='\${size}'\`
+          }
+        ]}
+        size={size}
+      />
     </div>
   );
 }`,
-      tscode: `import { Collapse } from "sud-ui";
-import { ReactNode } from "react";
-import { Typography } from "sud-ui";
+      tscode: `import { Collapse, Radio, Card } from "sud-ui";
+import { useState, ReactNode } from "react";
 
 interface CollapseItem {
   key: string;
@@ -151,187 +169,48 @@ interface CollapseItem {
   children: ReactNode;
 }
 
-interface Size {
-  name: string;
+interface SizeOption {
+  label: string;
   value: string;
 }
 
-const size: Size[] = [
-  { name: "Small", value: "sm" },
-  { name: "Medium", value: "md" },
-  { name: "Large", value: "lg" }
+const sizeOptions: SizeOption[] = [
+  { label: "Small", value: "sm" },
+  { label: "Medium", value: "md" },
+  { label: "Large", value: "lg" }
 ];
 
 export default function Example() {
+  const [size, setSize] = useState<string>("md");
+
   return (
     <div className="flex flex-col gap-20">
-      {size.map((size) => (
-        <div className="flex flex-col gap-10" key={size.value}>
-          <Typography as="span" pretendard="SB">
-            {size.name}
-          </Typography>
-          <Collapse
-            items={[
-              {
-                key: size.value,
-                label: size.name,
-                children: \`size='\${size.value}'\`
-              }
-            ]}
-            size={size.value}
+      <Card style={{ width: "100%" }} shadow="none" colorType="sub">
+        <div className="flex jus-cen">
+          <Radio.Group
+            direction="horizontal"
+            options={sizeOptions}
+            value={size}
+            onChange={setSize}
           />
         </div>
-      ))}
+      </Card>
+      <Collapse
+        items={[
+          {
+            key: size,
+            label: size,
+            children: \`size='\${size}'\`
+          }
+        ]}
+        size={size}
+      />
     </div>
   );
-}
-`
+}`
     },
     {
-      title: "그림자, 테두리 없는 Collapse",
-      render: (
-        <Collapse
-          items={[
-            {
-              key: "1",
-              label: "No Shadow & No Border",
-              children: "shadow='none', border={false}"
-            }
-          ]}
-          shadow="none"
-          border={false}
-        />
-      ),
-      description:
-        "shadow와 border prop으로 그림자와 테두리 표시를 제어할 수 있습니다.",
-      jscode: `import { Collapse } from "sud-ui";
-
-const items = [
-  { key: "1", label: "No Shadow & No Border", children: "shadow='none', border={false}" }
-];
-
-export default function Example() {
-  return <Collapse items={items} shadow="none" border={false} />;
-}`,
-      tscode: `import { Collapse } from "sud-ui";
-import { ReactNode } from "react";
-
-interface CollapseItem {
-  key: string;
-  label: ReactNode;
-  children: ReactNode;
-}
-
-const items: CollapseItem[] = [
-  { key: "1", label: "No Shadow & No Border", children: "shadow='none', border={false}" }
-];
-
-export default function Example() {
-  return <Collapse items={items} shadow="none" border={false} />;
-}
-`
-    },
-    {
-      title: "headerColorType 커스텀",
-      render: (
-        <div className="flex flex-col gap-20">
-          {colorType.map((color) => (
-            <div key={color} className="flex flex-col gap-10">
-              <Collapse
-                items={[
-                  {
-                    key: color,
-                    label: color,
-                    children: "headerColorType='" + color + "'"
-                  }
-                ]}
-                headerColorType={color}
-              />
-            </div>
-          ))}
-        </div>
-      ),
-      description:
-        "headerColorType prop으로 헤더 색상 테마를 지정할 수 있습니다.",
-      jscode: `import { Collapse } from "sud-ui";
-
-const colorType = [
-  "default",
-  "sub",
-  "primary",
-  "secondary",
-  "success",
-  "warning",
-  "danger",
-  "info",
-  "text"
-];
-
-export default function Example() {
-  return (
-    <div className="flex flex-col gap-20">
-      {colorType.map((color) => (
-        <div key={color} className="flex flex-col gap-10">
-          <Collapse
-            items={[
-              {
-                key: color,
-                label: color,
-                children: "headerColorType='" + color + "'"
-              }
-            ]}
-            headerColorType={color}
-          />
-        </div>
-      ))}
-    </div>
-  );
-}`,
-      tscode: `import { Collapse } from "sud-ui";
-import { ReactNode } from "react";
-
-interface CollapseItem {
-  key: string;
-  label: ReactNode;
-  children: ReactNode;
-}
-
-const colorType = [
-  "default",
-  "sub",
-  "primary",
-  "secondary",
-  "success",
-  "warning",
-  "danger",
-  "info",
-  "text"
-];
-
-export default function Example() {
-  return (
-    <div className="flex flex-col gap-20">
-      {colorType.map((color) => (
-        <div key={color} className="flex flex-col gap-10">
-          <Collapse
-            items={[
-              {
-                key: color,
-                label: color,
-                children: "headerColorType='" + color + "'"
-              }
-            ]}
-            headerColorType={color}
-          />
-        </div>
-      ))}
-    </div>
-  );
-}
-`
-    },
-    {
-      title: "비활성화 아이템 포함",
+      title: "Disabled",
       render: (
         <Collapse
           items={[
@@ -349,7 +228,7 @@ export default function Example() {
           disabledKeys={["2"]}
         />
       ),
-      description: "disabledKeys prop으로 특정 패널을 비활성화할 수 있습니다.",
+      description: "아코디언을 비활성화할 수 있습니다.",
       jscode: `import { Collapse } from "sud-ui";
 
 const items = [
@@ -359,85 +238,9 @@ const items = [
 
 export default function Example() {
   return <Collapse items={items} disabledKeys={["2"]} />;
-}
-`,
-      tscode: `import { Collapse } from "sud-ui";
-import { ReactNode } from "react";
-
-interface CollapseItem {
-  key: string;
-  label: ReactNode;
-  children: ReactNode;
-}
-
-const items: CollapseItem[] = [
-  { key: "1", label: "활성화", children: "이 패널은 활성화되어 있습니다." },
-  { key: "2", label: "비활성화", children: "이 패널은 비활성화되어 있습니다." }
-];
-
-export default function Example() {
-  return <Collapse items={items} disabledKeys={["2"]} />;
-}
-`
-    },
-    {
-      title: "아코디언 모양",
-      render: (
-        <div className="flex flex-col gap-20">
-          <div className="flex flex-col gap-10">
-            <Typography as="span" pretendard="SB">
-              Rounded
-            </Typography>
-            <Collapse
-              items={[
-                { key: "1", label: "Rounded", children: "shape='rounded'" }
-              ]}
-              shape="rounded"
-            />
-          </div>
-          <div className="flex flex-col gap-10">
-            <Typography as="span" pretendard="SB">
-              Square
-            </Typography>
-            <Collapse
-              items={[
-                { key: "2", label: "Square", children: "shape='square'" }
-              ]}
-              shape="square"
-            />
-          </div>
-        </div>
-      ),
-      description: "shape prop으로 Collapse의 모양을 변경할 수 있습니다.",
-      jscode: `import { Collapse } from "sud-ui";
-import { Typography } from "sud-ui";
-
-const items = [
-  { key: "1", label: "Rounded", children: "shape='rounded'" },
-  { key: "2", label: "Square", children: "shape='square'" }
-];
-
-export default function Example() {
-  return (
-    <div className="flex flex-col gap-20">
-      <div className="flex flex-col gap-10">
-        <Typography as="span" pretendard="SB">
-          Rounded
-        </Typography>
-        <Collapse items={[items[0]]} shape="rounded" />
-      </div>
-      <div className="flex flex-col gap-10">
-        <Typography as="span" pretendard="SB">
-          Square
-        </Typography>
-        <Collapse items={[items[1]]} shape="square" />
-      </div>
-    </div>
-  );
 }`,
       tscode: `import { Collapse } from "sud-ui";
 import { ReactNode } from "react";
-import { Typography } from "sud-ui";
 
 interface CollapseItem {
   key: string;
@@ -446,80 +249,95 @@ interface CollapseItem {
 }
 
 const items: CollapseItem[] = [
-  { key: "1", label: "Rounded", children: "shape='rounded'" },
-  { key: "2", label: "Square", children: "shape='square'" }
+  { key: "1", label: "활성화", children: "이 패널은 활성화되어 있습니다." },
+  { key: "2", label: "비활성화", children: "이 패널은 비활성화되어 있습니다." }
 ];
 
 export default function Example() {
-  return (
-    <div className="flex flex-col gap-20">
-      <div className="flex flex-col gap-10">
-        <Typography as="span" pretendard="SB">
-          Rounded
-        </Typography>
-        <Collapse items={[items[0]]} shape="rounded" />
-      </div>
-      <div className="flex flex-col gap-10">
-        <Typography as="span" pretendard="SB">
-          Square
-        </Typography>
-        <Collapse items={[items[1]]} shape="square" />
-      </div>
-    </div>
-  );
+  return <Collapse items={items} disabledKeys={["2"]} />;
 }
 `
     },
     {
-      title: "openKeys vs defaultOpenKeys",
+      title: "Color Customization",
       render: (
         <div className="flex flex-col gap-20">
-          {/* 제어형 */}
+          <Card style={{ width: "100%" }} shadow="none" colorType="sub">
+            <div className="flex jus-cen">
+              <Radio.Group
+                direction="horizontal"
+                options={colorOptions}
+                value={color}
+                onChange={setColor}
+                cols={2}
+              />
+            </div>
+          </Card>
           <Collapse
             items={[
               {
-                key: "1",
-                label: "제어형(Controlled)",
-                children: "openKeys로 제어"
+                key: color,
+                label: "커스텀 색상 [" + color + "]",
+                children: "headerBackground='" + color + "-3'"
               }
             ]}
-            openKeys={["1"]}
-            onChange={() => {}}
-          />
-          {/* 비제어형 */}
-          <Collapse
-            items={[
-              {
-                key: "2",
-                label: "비제어형(Uncontrolled)",
-                children: "defaultOpenKeys로 제어"
-              }
-            ]}
-            defaultOpenKeys={["2"]}
+            headerBackground={color + "-3"}
+            headerColor={color + "-10"}
+            contentBackground={color + "-1"}
+            contentColor={color + "-10"}
+            borderColor={color + "-7"}
           />
         </div>
       ),
-      description:
-        "openKeys와 defaultOpenKeys로 Collapse의 열림 상태를 제어할 수 있습니다.",
-      jscode: `import { Collapse } from "sud-ui";
+      description: "아코디언의 색상을 커스텀할 수 있습니다.",
+      jscode: `import { Collapse, Radio, Card } from "sud-ui";
 import { useState } from "react";
 
-const items = [
-  { key: "1", label: "제어형(Controlled)", children: "openKeys로 제어" },
-  { key: "2", label: "비제어형(Uncontrolled)", children: "defaultOpenKeys로 제어" }
+const colorOptions = [
+  { label: "coral", value: "coral" },
+  { label: "apricot", value: "apricot" },
+  { label: "mint", value: "mint" },
+  { label: "sky", value: "sky" },
+  { label: "navy", value: "navy" },
+  { label: "plum", value: "plum" },
+  { label: "forest", value: "forest" },
+  { label: "warm-gray", value: "warm-gray" }
 ];
 
 export default function Example() {
-  const [openKeys, setOpenKeys] = useState(["1"]);
+  const [color, setColor] = useState("coral");
+
   return (
-    <>
-      <Collapse items={[items[0]]} openKeys={openKeys} onChange={setOpenKeys} />
-      <Collapse items={[items[1]]} defaultOpenKeys={["2"]} />
-    </>
+    <div className="flex flex-col gap-20">
+      <Card style={{ width: "100%" }} shadow="none" colorType="sub">
+        <div className="flex jus-cen">
+          <Radio.Group
+            direction="horizontal"
+            options={colorOptions}
+            value={color}
+            onChange={setColor}
+            cols={2}
+          />
+        </div>
+      </Card>
+      <Collapse
+        items={[
+          {
+            key: color,
+            label: "커스텀 색상 [" + color + "]",
+            children: "headerBackground='" + color + "-3'"
+          }
+        ]}
+        headerBackground={color + "-3"}
+        headerColor={color + "-10"}
+        contentBackground={color + "-1"}
+        contentColor={color + "-10"}
+        borderColor={color + "-7"}
+      />
+    </div>
   );
-}
-`,
-      tscode: `import { Collapse } from "sud-ui";
+}`,
+      tscode: `import { Collapse, Radio, Card } from "sud-ui";
 import { useState, ReactNode } from "react";
 
 interface CollapseItem {
@@ -528,187 +346,55 @@ interface CollapseItem {
   children: ReactNode;
 }
 
-const items: CollapseItem[] = [
-  { key: "1", label: "제어형(Controlled)", children: "openKeys로 제어" },
-  { key: "2", label: "비제어형(Uncontrolled)", children: "defaultOpenKeys로 제어" }
+interface ColorOption {
+  label: string;
+  value: string;
+}
+
+const colorOptions: ColorOption[] = [
+  { label: "coral", value: "coral" },
+  { label: "apricot", value: "apricot" },
+  { label: "mint", value: "mint" },
+  { label: "sky", value: "sky" },
+  { label: "navy", value: "navy" },
+  { label: "plum", value: "plum" },
+  { label: "forest", value: "forest" },
+  { label: "warm-gray", value: "warm-gray" }
 ];
 
 export default function Example() {
-  const [openKeys, setOpenKeys] = useState<string[]>(["1"]);
+  const [color, setColor] = useState<string>("coral");
+
   return (
-    <>
-      <Collapse items={[items[0]]} openKeys={openKeys} onChange={setOpenKeys} />
-      <Collapse items={[items[1]]} defaultOpenKeys={["2"]} />
-    </>
-  );
-}
-`
-    },
-    {
-      title: "onChange 콜백 활용",
-      render: (
-        <Collapse
-          items={[
-            {
-              key: "1",
-              label: "onChange 예시",
-              children: "패널을 열거나 닫으면 콘솔에 openKeys가 출력됩니다."
-            }
-          ]}
-          onChange={(openKeys) => {
-            // eslint-disable-next-line no-console
-            console.log("열린 패널:", openKeys);
-          }}
-        />
-      ),
-      description: "onChange 콜백으로 열린 패널의 key 배열을 알 수 있습니다.",
-      jscode: `import { Collapse } from "sud-ui";
-
-const items = [
-  { key: "1", label: "onChange 예시", children: "패널을 열거나 닫으면 콘솔에 openKeys가 출력됩니다." }
-];
-
-export default function Example() {
-  return (
-    <Collapse
-      items={items}
-      onChange={(openKeys) => {
-        console.log("열린 패널:", openKeys);
-      }}
-    />
-  );
-}
-`,
-      tscode: `import { Collapse } from "sud-ui";
-import { ReactNode } from "react";
-
-interface CollapseItem {
-  key: string;
-  label: ReactNode;
-  children: ReactNode;
-}
-
-const items: CollapseItem[] = [
-  { key: "1", label: "onChange 예시", children: "패널을 열거나 닫으면 콘솔에 openKeys가 출력됩니다." }
-];
-
-export default function Example() {
-  return (
-    <Collapse
-      items={items}
-      onChange={(openKeys: string[]) => {
-        console.log("열린 패널:", openKeys);
-      }}
-    />
-  );
-}
-`
-    },
-    {
-      title: "개별 색상 커스텀",
-      render: (
-        <div className="flex flex-col gap-20">
-          {color.map((color) => (
-            <Collapse
-              key={color}
-              items={[
-                {
-                  key: color,
-                  label: `커스텀 색상 [${color}]`,
-                  children: `headerBackground='${color}-3'`
-                }
-              ]}
-              headerBackground={`${color}-3`}
-              headerColor={`${color}-10`}
-              contentBackground={`${color}-1`}
-              contentColor={`${color}-10`}
-              borderColor={`${color}-7`}
-            />
-          ))}
+    <div className="flex flex-col gap-20">
+      <Card style={{ width: "100%" }} shadow="none" colorType="sub">
+        <div className="flex jus-cen">
+          <Radio.Group
+            direction="horizontal"
+            options={colorOptions}
+            value={color}
+            onChange={setColor}
+            cols={2}
+          />
         </div>
-      ),
-      description:
-        "headerBackground, headerColor, contentBackground, contentColor prop으로 색상을 커스텀할 수 있습니다.",
-      jscode: `import { Collapse } from "sud-ui";
-
-const color = [
-  "coral",
-  "apricot",
-  "mint",
-  "sky",
-  "navy",
-  "plum",
-  "forest",
-  "warm-gray"
-];
-
-export default function Example() {
-  return (
-    <div className="flex flex-col gap-20">
-      {color.map((color) => (
-        <Collapse
-          key={color}
-          items={[
-            {
-              key: color,
-              label: \`커스텀 색상 [\${color}]\`,
-              children: \`headerBackground='\${color}-3'\`
-            }
-          ]}
-          headerBackground={\`\${color}-3\`}
-          headerColor={\`\${color}-10\`}
-          contentBackground={\`\${color}-1\`}
-          contentColor={\`\${color}-10\`}
-          borderColor={\`\${color}-7\`}
-        />
-      ))}
+      </Card>
+      <Collapse
+        items={[
+          {
+            key: color,
+            label: "커스텀 색상 [" + color + "]",
+            children: "headerBackground='" + color + "-3'"
+          }
+        ]}
+        headerBackground={color + "-3"}
+        headerColor={color + "-10"}
+        contentBackground={color + "-1"}
+        contentColor={color + "-10"}
+        borderColor={color + "-7"}
+      />
     </div>
   );
-}`,
-      tscode: `import { Collapse } from "sud-ui";
-import { ReactNode } from "react";
-
-interface CollapseItem {
-  key: string;
-  label: ReactNode;
-  children: ReactNode;
-}
-
-const color = [
-  "coral",
-  "apricot",
-  "mint",
-  "sky",
-  "navy",
-  "plum",
-  "forest",
-  "warm-gray"
-];
-
-export default function Example() {
-  return (
-    <div className="flex flex-col gap-20">
-      {color.map((color) => (
-        <Collapse
-          key={color}
-          items={[
-            {
-              key: color,
-              label: \`커스텀 색상 [\${color}]\`,
-              children: \`headerBackground='\${color}-3'\`
-            }
-          ]}
-          headerBackground={\`\${color}-3\`}
-          headerColor={\`\${color}-10\`}
-          contentBackground={\`\${color}-1\`}
-          contentColor={\`\${color}-10\`}
-          borderColor={\`\${color}-7\`}
-        />
-      ))}
-    </div>
-  );
-}
-`
+}`
     }
   ];
 

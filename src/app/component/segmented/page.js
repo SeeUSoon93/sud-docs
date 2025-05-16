@@ -2,22 +2,9 @@
 
 import Frame from "../Frame";
 import { useMobile } from "../../_lib/context/mobileContext";
-import {
-  Pagination,
-  Dropdown,
-  Tag,
-  Typography,
-  Segmented,
-  Avatar
-} from "sud-ui";
-import {
-  AngleDown,
-  HomeOutline,
-  MoonOutline,
-  SunOutline,
-  TriangleRight
-} from "sud-icons";
-import React from "react";
+import { Tag, Typography, Segmented, Avatar, Card, Radio } from "sud-ui";
+import { MoonOutline, SunOutline } from "sud-icons";
+import React, { useState } from "react";
 
 export default function SegmentedPage() {
   const { isMobile } = useMobile();
@@ -62,10 +49,26 @@ export default function SegmentedPage() {
     setBasicSelected(value);
   };
 
+  const [shape, setShape] = useState("rounded");
+
+  const shapeOptions = [
+    { value: "rounded", label: "rounded" },
+    { value: "square", label: "square" },
+    { value: "capsule", label: "capsule" }
+  ];
+
+  const [size, setSize] = useState("md");
+
+  const sizeOptions = [
+    { value: "sm", label: "sm" },
+    { value: "md", label: "md" },
+    { value: "lg", label: "lg" }
+  ];
+
   const examples = [
     {
-      title: "기본 사용",
-      description: "기본적인 사용 방법입니다.",
+      title: "Basic Usage",
+      description: "기본적인 세그먼트 컴포넌트입니다.",
       render: (
         <>
           <Segmented
@@ -75,11 +78,11 @@ export default function SegmentedPage() {
           />
         </>
       ),
-      jscode: `import React from 'react';
+      jscode: `import React, { useState } from 'react';
 import { Segmented } from 'sud-ui';
 
 const BasicSegmented = () => {
-  const [selected, setSelected] = React.useState('home');
+  const [selected, setSelected] = useState('home');
   
   const options = [
     { value: 'home', label: 'Home' },
@@ -88,42 +91,39 @@ const BasicSegmented = () => {
     { value: 'icons', label: 'Icons' }
   ];
 
-  const handleChange = (value) => {
-    setSelected(value);
-  };
-
   return (
     <Segmented 
       options={options}
       value={selected}
-      onChange={handleChange}
+      onChange={setSelected}
     />
   );
 };
 
 export default BasicSegmented;`,
-      tscode: `import React from 'react';
+      tscode: `import React, { useState } from 'react';
 import { Segmented } from 'sud-ui';
 
+interface Option {
+  value: string;
+  label: string;
+}
+
 const BasicSegmented: React.FC = () => {
-  const [selected, setSelected] = React.useState<string>('home');
+  const [selected, setSelected] = useState<string>('home');
   
-  const options = [
+  const options: Option[] = [
     { value: 'home', label: 'Home' },
     { value: 'components', label: 'Components' },
     { value: 'css', label: 'CSS' },
     { value: 'icons', label: 'Icons' }
   ];
 
-  const handleChange = (value: string) => {
-    setSelected(value);
-  };
-
   return (
     <Segmented 
       options={options}
       value={selected}
-      onChange={handleChange}
+      onChange={setSelected}
     />
   );
 };
@@ -131,71 +131,123 @@ const BasicSegmented: React.FC = () => {
 export default BasicSegmented;`
     },
     {
-      title: "모양 변경",
-      description:
-        "shape 속성을 사용하여 Segmented의 모양을 변경할 수 있습니다.",
+      title: "Size",
+      description: "세그먼트의 크기를 설정할 수 있습니다.",
       render: (
         <div className="flex flex-col gap-20">
-          <div className="flex flex-col gap-10">
-            <Typography pretendard="SB">rounded</Typography>
-            <Segmented
-              options={basicItems}
-              value={basicSelected}
-              onChange={handleBasicSelected}
-              shape="rounded"
-            />
-          </div>
-          <div className="flex flex-col gap-10">
-            <Typography pretendard="SB">square</Typography>
-            <Segmented
-              options={basicItems}
-              value={basicSelected}
-              onChange={handleBasicSelected}
-              shape="square"
-            />
-          </div>
-          <div className="flex flex-col gap-10">
-            <Typography pretendard="SB">capsule</Typography>
-            <Segmented
-              options={basicItems}
-              value={basicSelected}
-              onChange={handleBasicSelected}
-              shape="capsule"
-            />
-          </div>
+          <Card style={{ width: "100%" }} shadow="none" colorType="sub">
+            <div className="flex jus-cen">
+              <Radio.Group
+                direction="horizontal"
+                options={sizeOptions}
+                value={size}
+                onChange={setSize}
+              />
+            </div>
+          </Card>
+          <Segmented
+            options={basicItems}
+            value={basicSelected}
+            onChange={handleBasicSelected}
+            size={size}
+          />
         </div>
-      )
-    },
-    {
-      title: "Block",
-      description:
-        "block 속성을 사용하여 Segmented가 컨테이너의 전체 너비를 차지하도록 할 수 있습니다.",
-      render: (
-        <div className="flex flex-col gap-20">
-          <div className="flex flex-col gap-10">
-            <Typography pretendard="SB">{"block={false} (기본값)"}</Typography>
-            <Segmented
-              options={basicItems}
-              value={basicSelected}
-              onChange={handleBasicSelected}
-            />
-          </div>
-          <div className="flex flex-col gap-10">
-            <Typography pretendard="SB">{"block={true}"}</Typography>
-            <Segmented
-              options={basicItems}
-              value={basicSelected}
-              onChange={handleBasicSelected}
-              block
-            />
-          </div>
+      ),
+      jscode: `import React, { useState } from 'react';
+import { Segmented, Radio, Card } from 'sud-ui';
+
+const SizeSegmented = () => {
+  const [size, setSize] = useState('md');
+  const [selected, setSelected] = useState('home');
+  
+  const sizeOptions = [
+    { value: 'sm', label: 'sm' },
+    { value: 'md', label: 'md' },
+    { value: 'lg', label: 'lg' }
+  ];
+
+  const options = [
+    { value: 'home', label: 'Home' },
+    { value: 'components', label: 'Components' },
+    { value: 'css', label: 'CSS' },
+    { value: 'icons', label: 'Icons' }
+  ];
+
+  return (
+    <div className="flex flex-col gap-20">
+      <Card style={{ width: "100%" }} shadow="none" colorType="sub">
+        <div className="flex jus-cen">
+          <Radio.Group
+            direction="horizontal"
+            options={sizeOptions}
+            value={size}
+            onChange={setSize}
+          />
         </div>
-      )
+      </Card>
+      <Segmented
+        options={options}
+        value={selected}
+        onChange={setSelected}
+        size={size}
+      />
+    </div>
+  );
+};
+
+export default SizeSegmented;`,
+      tscode: `import React, { useState } from 'react';
+import { Segmented, Radio, Card } from 'sud-ui';
+
+interface Option {
+  value: string;
+  label: string;
+}
+
+const SizeSegmented: React.FC = () => {
+  const [size, setSize] = useState<string>('md');
+  const [selected, setSelected] = useState<string>('home');
+  
+  const sizeOptions: Option[] = [
+    { value: 'sm', label: 'sm' },
+    { value: 'md', label: 'md' },
+    { value: 'lg', label: 'lg' }
+  ];
+
+  const options: Option[] = [
+    { value: 'home', label: 'Home' },
+    { value: 'components', label: 'Components' },
+    { value: 'css', label: 'CSS' },
+    { value: 'icons', label: 'Icons' }
+  ];
+
+  return (
+    <div className="flex flex-col gap-20">
+      <Card style={{ width: "100%" }} shadow="none" colorType="sub">
+        <div className="flex jus-cen">
+          <Radio.Group
+            direction="horizontal"
+            options={sizeOptions}
+            value={size}
+            onChange={setSize}
+          />
+        </div>
+      </Card>
+      <Segmented
+        options={options}
+        value={selected}
+        onChange={setSelected}
+        size={size}
+      />
+    </div>
+  );
+};
+
+export default SizeSegmented;`
     },
     {
       title: "Disabled",
-      description:
-        "disabled 속성을 사용하여 Segmented를 비활성화할 수 있습니다.",
+      description: "세그먼트를 비활성화할 수 있습니다.",
       render: (
         <div className="flex flex-col gap-20">
           <div className="flex flex-col gap-10">
@@ -221,81 +273,105 @@ export default BasicSegmented;`
             />
           </div>
         </div>
-      )
-    },
-    {
-      title: "아이콘만 사용",
-      description: "label에 아이콘만 사용할 수 있습니다.",
-      render: (
+      ),
+      jscode: `import React, { useState } from 'react';
+import { Segmented, Typography } from 'sud-ui';
+
+const DisabledSegmented = () => {
+  const [selected, setSelected] = useState('home');
+  
+  const options = [
+    { value: 'home', label: 'Home' },
+    { value: 'components', label: 'Components' },
+    { value: 'css', label: 'CSS' },
+    { value: 'icons', label: 'Icons' }
+  ];
+
+  const disabledOptions = [
+    { value: 'home', label: 'Home' },
+    { value: 'components', label: 'Components', disabled: true },
+    { value: 'css', label: 'CSS' },
+    { value: 'icons', label: 'Icons' }
+  ];
+
+  return (
+    <div className="flex flex-col gap-20">
+      <div className="flex flex-col gap-10">
+        <Typography pretendard="SB">전체 disabled</Typography>
         <Segmented
-          options={[
-            { value: "light", label: <SunOutline /> },
-            { value: "dark", label: <MoonOutline /> }
-          ]}
-          value={iconSelected}
-          onChange={setIconSelected}
+          options={options}
+          value={selected}
+          onChange={setSelected}
+          disabled
         />
-      )
-    },
-    {
-      title: "label 커스텀",
-      description: "label에 아이콘만 사용할 수 있습니다.",
-      render: (
+      </div>
+      <div className="flex flex-col gap-10">
+        <Typography pretendard="SB">일부 disabled</Typography>
         <Segmented
-          options={Array.from({ length: 5 }, (_, index) => ({
-            value: index + 1,
-            label: (
-              <div className="flex flex-col item-cen gap-10">
-                <Avatar size="sm" sample={index + 1} />
-                <Typography>Sample {index + 1}</Typography>
-              </div>
-            )
-          }))}
-          value={avatarSelected}
-          onChange={setAvatarSelected}
+          options={disabledOptions}
+          value={selected}
+          onChange={setSelected}
         />
-      )
+      </div>
+    </div>
+  );
+};
+
+export default DisabledSegmented;`,
+      tscode: `import React, { useState } from 'react';
+import { Segmented, Typography } from 'sud-ui';
+
+interface Option {
+  value: string;
+  label: string;
+  disabled?: boolean;
+}
+
+const DisabledSegmented: React.FC = () => {
+  const [selected, setSelected] = useState<string>('home');
+  
+  const options: Option[] = [
+    { value: 'home', label: 'Home' },
+    { value: 'components', label: 'Components' },
+    { value: 'css', label: 'CSS' },
+    { value: 'icons', label: 'Icons' }
+  ];
+
+  const disabledOptions: Option[] = [
+    { value: 'home', label: 'Home' },
+    { value: 'components', label: 'Components', disabled: true },
+    { value: 'css', label: 'CSS' },
+    { value: 'icons', label: 'Icons' }
+  ];
+
+  return (
+    <div className="flex flex-col gap-20">
+      <div className="flex flex-col gap-10">
+        <Typography pretendard="SB">전체 disabled</Typography>
+        <Segmented
+          options={options}
+          value={selected}
+          onChange={setSelected}
+          disabled
+        />
+      </div>
+      <div className="flex flex-col gap-10">
+        <Typography pretendard="SB">일부 disabled</Typography>
+        <Segmented
+          options={disabledOptions}
+          value={selected}
+          onChange={setSelected}
+        />
+      </div>
+    </div>
+  );
+};
+
+export default DisabledSegmented;`
     },
     {
-      title: "사이즈별",
-      description:
-        "size 속성을 사용하여 Segmented의 크기를 변경할 수 있습니다.",
-      render: (
-        <div className="flex flex-col gap-20">
-          <div className="flex flex-col gap-10">
-            <Typography pretendard="SB">sm</Typography>
-            <Segmented
-              options={basicItems}
-              value={basicSelected}
-              onChange={handleBasicSelected}
-              size="sm"
-            />
-          </div>
-          <div className="flex flex-col gap-10">
-            <Typography pretendard="SB">md</Typography>
-            <Segmented
-              options={basicItems}
-              value={basicSelected}
-              onChange={handleBasicSelected}
-              size="md"
-            />
-          </div>
-          <div className="flex flex-col gap-10">
-            <Typography pretendard="SB">lg</Typography>
-            <Segmented
-              options={basicItems}
-              value={basicSelected}
-              onChange={handleBasicSelected}
-              size="lg"
-            />
-          </div>
-        </div>
-      )
-    },
-    {
-      title: "색상 변경",
-      description:
-        "colorType 속성을 사용하여 Segmented의 색상을 변경할 수 있습니다.",
+      title: "Color Customization",
+      description: "세그먼트의 색상을 커스텀할 수 있습니다.",
       render: (
         <Segmented
           options={basicItems}
@@ -303,7 +379,60 @@ export default BasicSegmented;`
           onChange={handleBasicSelected}
           colorType="primary"
         />
-      )
+      ),
+      jscode: `import React, { useState } from 'react';
+import { Segmented } from 'sud-ui';
+
+const ColorSegmented = () => {
+  const [selected, setSelected] = useState('home');
+  
+  const options = [
+    { value: 'home', label: 'Home' },
+    { value: 'components', label: 'Components' },
+    { value: 'css', label: 'CSS' },
+    { value: 'icons', label: 'Icons' }
+  ];
+
+  return (
+    <Segmented
+      options={options}
+      value={selected}
+      onChange={setSelected}
+      colorType="primary"
+    />
+  );
+};
+
+export default ColorSegmented;`,
+      tscode: `import React, { useState } from 'react';
+import { Segmented } from 'sud-ui';
+
+interface Option {
+  value: string;
+  label: string;
+}
+
+const ColorSegmented: React.FC = () => {
+  const [selected, setSelected] = useState<string>('home');
+  
+  const options: Option[] = [
+    { value: 'home', label: 'Home' },
+    { value: 'components', label: 'Components' },
+    { value: 'css', label: 'CSS' },
+    { value: 'icons', label: 'Icons' }
+  ];
+
+  return (
+    <Segmented
+      options={options}
+      value={selected}
+      onChange={setSelected}
+      colorType="primary"
+    />
+  );
+};
+
+export default ColorSegmented;`
     }
   ];
 
@@ -372,10 +501,90 @@ export default BasicSegmented;`
       description: "모양",
       type: (
         <>
-          <Tag>rounded</Tag> ｜ <Tag>square</Tag> ｜ <Tag>circle</Tag>
+          <Tag>rounded</Tag> ｜ <Tag>square</Tag> ｜ <Tag>circle</Tag> ｜{" "}
+          <Tag>capsule</Tag>
         </>
       ),
       default: <Tag>rounded</Tag>
+    },
+    {
+      key: "background",
+      name: "background",
+      description: "배경색",
+      type: "string",
+      default: ""
+    },
+    {
+      key: "color",
+      name: "color",
+      description: "텍스트 색상",
+      type: "string",
+      default: ""
+    },
+    {
+      key: "border",
+      name: "border",
+      description: "테두리 표시 여부",
+      type: "boolean",
+      default: "false"
+    },
+    {
+      key: "borderColor",
+      name: "borderColor",
+      description: "테두리 색상",
+      type: "string",
+      default: ""
+    },
+    {
+      key: "borderType",
+      name: "borderType",
+      description: "테두리 스타일",
+      type: (
+        <>
+          <Tag>solid</Tag> ｜ <Tag>dashed</Tag> ｜ <Tag>dotted</Tag>
+        </>
+      ),
+      default: <Tag>solid</Tag>
+    },
+    {
+      key: "borderWeight",
+      name: "borderWeight",
+      description: "테두리 두께",
+      type: "number",
+      default: "1"
+    },
+    {
+      key: "shadow",
+      name: "shadow",
+      description: "그림자 효과",
+      type: (
+        <>
+          <Tag>none</Tag> ｜ <Tag>sm</Tag> ｜ <Tag>md</Tag> ｜ <Tag>lg</Tag> ｜{" "}
+          <Tag>xl</Tag>
+        </>
+      ),
+      default: <Tag>none</Tag>
+    },
+    {
+      key: "style",
+      name: "style",
+      description: "추가 스타일",
+      type: "React.CSSProperties",
+      default: ""
+    },
+    {
+      key: "className",
+      name: "className",
+      description: "추가 클래스명",
+      type: "string",
+      default: ""
+    },
+    {
+      key: "name",
+      name: "name",
+      description: "접근성 이름",
+      type: "string",
+      default: "segmented-control"
     }
   ];
 

@@ -71,13 +71,13 @@ export default function MenuPage() {
 
   const examples = [
     {
-      title: "기본 사용",
+      title: "Basic Usage",
       render: (
         <>
           <Menu items={items} />
         </>
       ),
-      description: "기본적인 메뉴 사용 방법입니다.",
+      description: "기본적인 메뉴 컴포넌트입니다.",
       jscode: `import React from 'react';
 import { Menu } from 'sud-ui';
 
@@ -161,7 +161,8 @@ const BasicMenu: React.FC = () => {
 export default BasicMenu;`
     },
     {
-      title: "팝오버 메뉴",
+      title: "Size",
+      description: "메뉴의 크기를 설정할 수 있습니다.",
       render: (
         <>
           <Menu items={items} expandType="popover" />
@@ -251,7 +252,8 @@ const PopoverMenu: React.FC = () => {
 export default PopoverMenu;`
     },
     {
-      title: "수평 팝오버 메뉴",
+      title: "Disabled",
+      description: "메뉴를 비활성화할 수 있습니다.",
       render: (
         <>
           <Menu items={items} expandType="popover" horizontal />
@@ -342,7 +344,8 @@ const HorizontalPopoverMenu: React.FC = () => {
 export default HorizontalPopoverMenu;`
     },
     {
-      title: "그룹 메뉴",
+      title: "Icon",
+      description: "메뉴에 아이콘을 추가할 수 있습니다.",
       render: (
         <>
           <Menu items={groupItems} expandType="accordion" />
@@ -417,8 +420,8 @@ const GroupMenu: React.FC = () => {
 export default GroupMenu;`
     },
     {
-      title: "색상 커스텀",
-      description: "메뉴 항목의 색상을 커스텀할 수 있습니다.",
+      title: "Color Customization",
+      description: "메뉴의 색상을 커스텀할 수 있습니다.",
       render: (
         <>
           <Menu

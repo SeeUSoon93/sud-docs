@@ -2,13 +2,11 @@
 
 import Frame from "../Frame";
 import { useMobile } from "../../_lib/context/mobileContext";
-import { Pagination, Dropdown, Tag, Typography } from "sud-ui";
-import { AngleDown, HomeOutline, TriangleRight } from "sud-icons";
-import React from "react";
+import { Card, Input, List, Pagination, Radio, Tag, Typography } from "sud-ui";
+import React, { useState } from "react";
 
 export default function PaginationPage() {
   const { isMobile } = useMobile();
-  const [current, setCurrent] = React.useState(1);
 
   const name = "Pagination";
   const description = (
@@ -22,10 +20,21 @@ export default function PaginationPage() {
     "페이지를 나누어 데이터를 탐색할 때."
   ];
 
+  const [align, setAlign] = useState("left");
+  const [pageSize, setPageSize] = useState(10);
+  const [maxVisibleButtons, setMaxVisibleButtons] = useState(5);
+  const [currentPage, setCurrentPage] = useState(1);
+
+  const alignOptions = [
+    { label: "left", value: "left" },
+    { label: "center", value: "center" },
+    { label: "right", value: "right" }
+  ];
+
   const examples = [
     {
-      title: "기본 사용",
-      description: "기본적인 사용 방법입니다.",
+      title: "Basic Usage",
+      description: "기본적인 페이지네이션 컴포넌트입니다.",
       render: (
         <>
           <Pagination total={50} />
@@ -42,73 +51,87 @@ export default BasicPagination;`,
       tscode: `import React from 'react';
 import { Pagination } from 'sud-ui';
 
-const BasicPagination = () => {
+const BasicPagination: React.FC = () => {
   return <Pagination total={50} />;
 };
 
 export default BasicPagination;`
     },
     {
-      title: "위치 정렬",
-      description:
-        "페이지네이션의 위치를 왼쪽, 가운데, 오른쪽으로 정렬할 수 있습니다.",
+      title: "Size",
+      description: "페이지네이션의 크기를 설정할 수 있습니다.",
       render: (
-        <div className="flex flex-col gap-40 w-100">
-          <div className="flex flex-col gap-20 w-100">
-            <Typography pretendard="SB">왼쪽 정렬 (기본값)</Typography>
-            <Pagination total={50} align="left" />
-          </div>
-          <div className="flex flex-col gap-20 w-100">
-            <Typography pretendard="SB">가운데 정렬</Typography>
-            <Pagination total={50} align="center" />
-          </div>
-          <div className="flex flex-col gap-20 w-100">
-            <Typography pretendard="SB">오른쪽 정렬</Typography>
-            <Pagination total={50} align="right" />
-          </div>
+        <div className="flex flex-col gap-20">
+          <Card style={{ width: "100%" }} shadow="none" colorType="sub">
+            <div className="flex jus-cen">
+              <Radio.Group
+                direction="horizontal"
+                options={alignOptions}
+                value={align}
+                onChange={setAlign}
+              />
+            </div>
+          </Card>
+          <Pagination align={align} total={50} />
         </div>
       ),
-      jscode: `import React from 'react';
-import { Pagination, Typography } from 'sud-ui';
+      jscode: `import React, { useState } from 'react';
+import { Pagination, Radio, Card } from 'sud-ui';
 
 const AlignPagination = () => {
+  const [align, setAlign] = useState('left');
+  
+  const alignOptions = [
+    { label: 'left', value: 'left' },
+    { label: 'center', value: 'center' },
+    { label: 'right', value: 'right' }
+  ];
+
   return (
-    <div className="flex flex-col gap-40 w-100">
-      <div className="flex flex-col gap-20 w-100">
-        <Typography pretendard="SB">왼쪽 정렬 (기본값)</Typography>
-        <Pagination total={50} align="left" />
-      </div>
-      <div className="flex flex-col gap-20 w-100">
-        <Typography pretendard="SB">가운데 정렬</Typography>
-        <Pagination total={50} align="center" />
-      </div>
-      <div className="flex flex-col gap-20 w-100">
-        <Typography pretendard="SB">오른쪽 정렬</Typography>
-        <Pagination total={50} align="right" />
-      </div>
+    <div className="flex flex-col gap-20">
+      <Card style={{ width: "100%" }} shadow="none" colorType="sub">
+        <div className="flex jus-cen">
+          <Radio.Group
+            direction="horizontal"
+            options={alignOptions}
+            value={align}
+            onChange={setAlign}
+          />
+        </div>
+      </Card>
+      <Pagination align={align} total={50} />
     </div>
   );
 };
 
 export default AlignPagination;`,
-      tscode: `import React from 'react';
-import { Pagination, Typography } from 'sud-ui';
+      tscode: `import React, { useState } from 'react';
+import { Pagination, Radio, Card } from 'sud-ui';
 
-const AlignPagination = () => {
+type AlignType = 'left' | 'center' | 'right';
+
+const AlignPagination: React.FC = () => {
+  const [align, setAlign] = useState<AlignType>('left');
+  
+  const alignOptions = [
+    { label: 'left', value: 'left' },
+    { label: 'center', value: 'center' },
+    { label: 'right', value: 'right' }
+  ];
+
   return (
-    <div className="flex flex-col gap-40 w-100">
-      <div className="flex flex-col gap-20 w-100">
-        <Typography pretendard="SB">왼쪽 정렬 (기본값)</Typography>
-        <Pagination total={50} align="left" />
-      </div>
-      <div className="flex flex-col gap-20 w-100">
-        <Typography pretendard="SB">가운데 정렬</Typography>
-        <Pagination total={50} align="center" />
-      </div>
-      <div className="flex flex-col gap-20 w-100">
-        <Typography pretendard="SB">오른쪽 정렬</Typography>
-        <Pagination total={50} align="right" />
-      </div>
+    <div className="flex flex-col gap-20">
+      <Card style={{ width: "100%" }} shadow="none" colorType="sub">
+        <div className="flex jus-cen">
+          <Radio.Group
+            direction="horizontal"
+            options={alignOptions}
+            value={align}
+            onChange={setAlign}
+          />
+        </div>
+      </Card>
+      <Pagination align={align} total={50} />
     </div>
   );
 };
@@ -116,54 +139,133 @@ const AlignPagination = () => {
 export default AlignPagination;`
     },
     {
-      title: "한 페이지에 표시할 아이템 수",
-      description:
-        "pageSize prop을 사용하여 한 페이지에 표시할 아이템 수를 설정할 수 있습니다.",
+      title: "Shape",
+      description: "페이지네이션의 모양을 설정할 수 있습니다.",
       render: (
-        <div className="flex flex-col gap-40 w-100">
-          <div className="flex flex-col gap-20 w-100">
-            <Typography pretendard="SB">기본값 (10개)</Typography>
-            <Pagination total={50} />
-          </div>
-          <div className="flex flex-col gap-20 w-100">
-            <Typography pretendard="SB">5개씩 표시</Typography>
-            <Pagination total={50} pageSize={5} />
+        <div className="flex flex-col gap-20">
+          <Card style={{ width: "100%" }} shadow="none" colorType="sub">
+            <div className="flex jus-cen">
+              <Input
+                value={pageSize}
+                onChange={(e) => setPageSize(Number(e.target.value))}
+                type="number"
+                min={1}
+                max={100}
+                placeholder="페이지당 아이템 수"
+              />
+            </div>
+          </Card>
+          <Card style={{ width: "100%" }} shadow="none">
+            <List
+              dataSource={Array.from(
+                { length: 1000 },
+                (_, i) => `아이템 ${i + 1}`
+              ).slice((currentPage - 1) * pageSize, currentPage * pageSize)}
+              split={true}
+              gap={8}
+            />
+          </Card>
+          <div className="flex flex-col gap-20">
+            <Pagination
+              total={1000}
+              pageSize={pageSize}
+              defaultCurrent={currentPage}
+              onChange={setCurrentPage}
+              showPrevNext={true}
+              showFirstLast={true}
+              maxVisibleButtons={5}
+              align="center"
+            />
           </div>
         </div>
       ),
-      jscode: `import React from 'react';
-import { Pagination, Typography } from 'sud-ui';
+      jscode: `import React, { useState } from 'react';
+import { Pagination, Input, Card, List } from 'sud-ui';
 
 const PageSizePagination = () => {
+  const [pageSize, setPageSize] = useState(10);
+  const [currentPage, setCurrentPage] = useState(1);
+
   return (
-    <div className="flex flex-col gap-40 w-100">
-      <div className="flex flex-col gap-20 w-100">
-        <Typography pretendard="SB">기본값 (10개)</Typography>
-        <Pagination total={50} />
-      </div>
-      <div className="flex flex-col gap-20 w-100">
-        <Typography pretendard="SB">5개씩 표시</Typography>
-        <Pagination total={50} pageSize={5} />
-      </div>
+    <div className="flex flex-col gap-20">
+      <Card style={{ width: "100%" }} shadow="none" colorType="sub">
+        <div className="flex jus-cen">
+          <Input
+            value={pageSize}
+            onChange={(e) => setPageSize(Number(e.target.value))}
+            type="number"
+            min={1}
+            max={100}
+            placeholder="페이지당 아이템 수"
+          />
+        </div>
+      </Card>
+      <Card style={{ width: "100%" }} shadow="none">
+        <List
+          dataSource={Array.from(
+            { length: 1000 },
+            (_, i) => \`아이템 \${i + 1}\`
+          ).slice((currentPage - 1) * pageSize, currentPage * pageSize)}
+          split={true}
+          gap={8}
+        />
+      </Card>
+      <Pagination
+        total={1000}
+        pageSize={pageSize}
+        defaultCurrent={currentPage}
+        onChange={setCurrentPage}
+        showPrevNext={true}
+        showFirstLast={true}
+        maxVisibleButtons={5}
+        align="center"
+      />
     </div>
   );
 };
 
 export default PageSizePagination;`,
-      tscode: `import React from 'react';
-import { Pagination, Typography } from 'sud-ui';
+      tscode: `import React, { useState } from 'react';
+import { Pagination, Input, Card, List } from 'sud-ui';
 
-const PageSizePagination = () => {
+const PageSizePagination: React.FC = () => {
+  const [pageSize, setPageSize] = useState<number>(10);
+  const [currentPage, setCurrentPage] = useState<number>(1);
+
   return (
-    <div className="flex flex-col gap-40 w-100">
-      <div className="flex flex-col gap-20 w-100">
-        <Typography pretendard="SB">기본값 (10개)</Typography>
-        <Pagination total={50} />
-      </div>
-      <div className="flex flex-col gap-20 w-100">
-        <Typography pretendard="SB">5개씩 표시</Typography>
-        <Pagination total={50} pageSize={5} />
-      </div>
+    <div className="flex flex-col gap-20">
+      <Card style={{ width: "100%" }} shadow="none" colorType="sub">
+        <div className="flex jus-cen">
+          <Input
+            value={pageSize}
+            onChange={(e) => setPageSize(Number(e.target.value))}
+            type="number"
+            min={1}
+            max={100}
+            placeholder="페이지당 아이템 수"
+          />
+        </div>
+      </Card>
+      <Card style={{ width: "100%" }} shadow="none">
+        <List
+          dataSource={Array.from(
+            { length: 1000 },
+            (_, i) => \`아이템 \${i + 1}\`
+          ).slice((currentPage - 1) * pageSize, currentPage * pageSize)}
+          split={true}
+          gap={8}
+        />
+      </Card>
+      <Pagination
+        total={1000}
+        pageSize={pageSize}
+        defaultCurrent={currentPage}
+        onChange={setCurrentPage}
+        showPrevNext={true}
+        showFirstLast={true}
+        maxVisibleButtons={5}
+        align="center"
+      />
     </div>
   );
 };
@@ -171,190 +273,8 @@ const PageSizePagination = () => {
 export default PageSizePagination;`
     },
     {
-      title: "이전/다음 버튼 표시",
-      description:
-        "showPrevNext prop을 사용하여 이전/다음 페이지 버튼의 표시 여부를 설정할 수 있습니다.",
-      render: (
-        <div className="flex flex-col gap-40 w-100">
-          <div className="flex flex-col gap-20 w-100">
-            <Typography pretendard="SB">
-              이전/다음 버튼 표시 (기본값)
-            </Typography>
-            <Pagination total={50} showPrevNext={true} />
-          </div>
-          <div className="flex flex-col gap-20 w-100">
-            <Typography pretendard="SB">이전/다음 버튼 숨김</Typography>
-            <Pagination total={50} showPrevNext={false} />
-          </div>
-        </div>
-      ),
-      jscode: `import React from 'react';
-import { Pagination, Typography } from 'sud-ui';
-
-const PrevNextPagination = () => {
-  return (
-    <div className="flex flex-col gap-40 w-100">
-      <div className="flex flex-col gap-20 w-100">
-        <Typography pretendard="SB">이전/다음 버튼 표시 (기본값)</Typography>
-        <Pagination total={50} showPrevNext={true} />
-      </div>
-      <div className="flex flex-col gap-20 w-100">
-        <Typography pretendard="SB">이전/다음 버튼 숨김</Typography>
-        <Pagination total={50} showPrevNext={false} />
-      </div>
-    </div>
-  );
-};
-
-export default PrevNextPagination;`,
-      tscode: `import React from 'react';
-import { Pagination, Typography } from 'sud-ui';
-
-const PrevNextPagination = () => {
-  return (
-    <div className="flex flex-col gap-40 w-100">
-      <div className="flex flex-col gap-20 w-100">
-        <Typography pretendard="SB">이전/다음 버튼 표시 (기본값)</Typography>
-        <Pagination total={50} showPrevNext={true} />
-      </div>
-      <div className="flex flex-col gap-20 w-100">
-        <Typography pretendard="SB">이전/다음 버튼 숨김</Typography>
-        <Pagination total={50} showPrevNext={false} />
-      </div>
-    </div>
-  );
-};
-
-export default PrevNextPagination;`
-    },
-    {
-      title: "첫 페이지/마지막 페이지 버튼 표시",
-      description:
-        "showFirstLast prop을 사용하여 첫 페이지/마지막 페이지 버튼의 표시 여부를 설정할 수 있습니다.",
-      render: (
-        <div className="flex flex-col gap-40 w-100">
-          <div className="flex flex-col gap-20 w-100">
-            <Typography pretendard="SB">
-              첫/마지막 버튼 표시 (기본값)
-            </Typography>
-            <Pagination total={50} showFirstLast={true} />
-          </div>
-          <div className="flex flex-col gap-20 w-100">
-            <Typography pretendard="SB">첫/마지막 버튼 숨김</Typography>
-            <Pagination total={50} showFirstLast={false} />
-          </div>
-        </div>
-      ),
-      jscode: `import React from 'react';
-import { Pagination, Typography } from 'sud-ui';
-
-const FirstLastPagination = () => {
-  return (
-    <div className="flex flex-col gap-40 w-100">
-      <div className="flex flex-col gap-20 w-100">
-        <Typography pretendard="SB">첫/마지막 버튼 표시 (기본값)</Typography>
-        <Pagination total={50} showFirstLast={true} />
-      </div>
-      <div className="flex flex-col gap-20 w-100">
-        <Typography pretendard="SB">첫/마지막 버튼 숨김</Typography>
-        <Pagination total={50} showFirstLast={false} />
-      </div>
-    </div>
-  );
-};
-
-export default FirstLastPagination;`,
-      tscode: `import React from 'react';
-import { Pagination, Typography } from 'sud-ui';
-
-const FirstLastPagination = () => {
-  return (
-    <div className="flex flex-col gap-40 w-100">
-      <div className="flex flex-col gap-20 w-100">
-        <Typography pretendard="SB">첫/마지막 버튼 표시 (기본값)</Typography>
-        <Pagination total={50} showFirstLast={true} />
-      </div>
-      <div className="flex flex-col gap-20 w-100">
-        <Typography pretendard="SB">첫/마지막 버튼 숨김</Typography>
-        <Pagination total={50} showFirstLast={false} />
-      </div>
-    </div>
-  );
-};
-
-export default FirstLastPagination;`
-    },
-    {
-      title: "표시할 버튼 수",
-      description:
-        "maxVisibleButtons prop을 사용하여 한 번에 표시할 페이지 버튼의 수를 설정할 수 있습니다.",
-      render: (
-        <div className="flex flex-col gap-40 w-100">
-          <div className="flex flex-col gap-20 w-100">
-            <Typography pretendard="SB">기본값 (5개)</Typography>
-            <Pagination total={100} maxVisibleButtons={5} />
-          </div>
-          <div className="flex flex-col gap-20 w-100">
-            <Typography pretendard="SB">3개 표시</Typography>
-            <Pagination total={100} maxVisibleButtons={3} />
-          </div>
-          <div className="flex flex-col gap-20 w-100">
-            <Typography pretendard="SB">7개 표시</Typography>
-            <Pagination total={100} maxVisibleButtons={7} />
-          </div>
-        </div>
-      ),
-      jscode: `import React from 'react';
-import { Pagination, Typography } from 'sud-ui';
-
-const MaxVisiblePagination = () => {
-  return (
-    <div className="flex flex-col gap-40 w-100">
-      <div className="flex flex-col gap-20 w-100">
-        <Typography pretendard="SB">기본값 (5개)</Typography>
-        <Pagination total={100} maxVisibleButtons={5} />
-      </div>
-      <div className="flex flex-col gap-20 w-100">
-        <Typography pretendard="SB">3개 표시</Typography>
-        <Pagination total={100} maxVisibleButtons={3} />
-      </div>
-      <div className="flex flex-col gap-20 w-100">
-        <Typography pretendard="SB">7개 표시</Typography>
-        <Pagination total={100} maxVisibleButtons={7} />
-      </div>
-    </div>
-  );
-};
-
-export default MaxVisiblePagination;`,
-      tscode: `import React from 'react';
-import { Pagination, Typography } from 'sud-ui';
-
-const MaxVisiblePagination = () => {
-  return (
-    <div className="flex flex-col gap-40 w-100">
-      <div className="flex flex-col gap-20 w-100">
-        <Typography pretendard="SB">기본값 (5개)</Typography>
-        <Pagination total={100} maxVisibleButtons={5} />
-      </div>
-      <div className="flex flex-col gap-20 w-100">
-        <Typography pretendard="SB">3개 표시</Typography>
-        <Pagination total={100} maxVisibleButtons={3} />
-      </div>
-      <div className="flex flex-col gap-20 w-100">
-        <Typography pretendard="SB">7개 표시</Typography>
-        <Pagination total={100} maxVisibleButtons={7} />
-      </div>
-    </div>
-  );
-};
-
-export default MaxVisiblePagination;`
-    },
-    {
-      title: "버튼 커스텀",
-      description:
-        "activeStyle, defaultStyle prop을 사용하여 버튼의 스타일을 커스터마이징할 수 있습니다.",
+      title: "Color Customization",
+      description: "페이지네이션의 색상을 커스텀할 수 있습니다.",
       render: (
         <div className="flex flex-col gap-40 w-100">
           <div className="flex flex-col gap-20 w-100">
@@ -423,7 +343,7 @@ export default CustomStylePagination;`,
       tscode: `import React from 'react';
 import { Pagination, Typography } from 'sud-ui';
 
-const CustomStylePagination = () => {
+const CustomStylePagination: React.FC = () => {
   return (
     <div className="flex flex-col gap-40 w-100">
       <div className="flex flex-col gap-20 w-100">
@@ -456,10 +376,88 @@ const CustomStylePagination = () => {
 };
 
 export default CustomStylePagination;`
+    },
+    {
+      title: "표시할 버튼 수",
+      description:
+        "maxVisibleButtons prop을 사용하여 한 번에 표시할 페이지 버튼의 수를 설정할 수 있습니다.",
+      render: (
+        <div className="flex flex-col gap-40 w-100">
+          <Card style={{ width: "100%" }} shadow="none" colorType="sub">
+            <div className="flex jus-cen">
+              <Input
+                value={maxVisibleButtons}
+                onChange={(e) => setMaxVisibleButtons(Number(e.target.value))}
+                type="number"
+                min={1}
+                max={100}
+              />
+            </div>
+            <Pagination total={100} maxVisibleButtons={maxVisibleButtons} />
+          </Card>
+        </div>
+      ),
+      jscode: `import React, { useState } from 'react';
+import { Pagination, Input, Card } from 'sud-ui';
+
+const MaxVisiblePagination = () => {
+  const [maxVisibleButtons, setMaxVisibleButtons] = useState(5);
+
+  return (
+    <div className="flex flex-col gap-40 w-100">
+      <Card style={{ width: "100%" }} shadow="none" colorType="sub">
+        <div className="flex jus-cen">
+          <Input
+            value={maxVisibleButtons}
+            onChange={(e) => setMaxVisibleButtons(Number(e.target.value))}
+            type="number"
+            min={1}
+            max={100}
+          />
+        </div>
+        <Pagination total={100} maxVisibleButtons={maxVisibleButtons} />
+      </Card>
+    </div>
+  );
+};
+
+export default MaxVisiblePagination;`,
+      tscode: `import React, { useState } from 'react';
+import { Pagination, Input, Card } from 'sud-ui';
+
+const MaxVisiblePagination: React.FC = () => {
+  const [maxVisibleButtons, setMaxVisibleButtons] = useState<number>(5);
+
+  return (
+    <div className="flex flex-col gap-40 w-100">
+      <Card style={{ width: "100%" }} shadow="none" colorType="sub">
+        <div className="flex jus-cen">
+          <Input
+            value={maxVisibleButtons}
+            onChange={(e) => setMaxVisibleButtons(Number(e.target.value))}
+            type="number"
+            min={1}
+            max={100}
+          />
+        </div>
+        <Pagination total={100} maxVisibleButtons={maxVisibleButtons} />
+      </Card>
+    </div>
+  );
+};
+
+export default MaxVisiblePagination;`
     }
   ];
 
   const howToUseTableData = [
+    {
+      key: "current",
+      name: "current",
+      description: "현재 페이지 번호",
+      type: "number",
+      default: "1"
+    },
     {
       key: "defaultCurrent",
       name: "defaultCurrent",

@@ -2,13 +2,11 @@
 
 import Frame from "../Frame";
 import { useMobile } from "../../_lib/context/mobileContext";
-import { Button, Drawer, Dropdown, Tag } from "sud-ui";
-import { useState } from "react";
+import { Button, Dropdown, Tag } from "sud-ui";
 import { AngleDown, AngleLeft, AngleRight, AngleUp } from "sud-icons";
 
 export default function DrawerPage() {
   const { isMobile } = useMobile();
-  const [open, setOpen] = useState(false);
 
   const name = "Dropdown";
   const description = <>드롭다운 컴포넌트입니다.</>;
@@ -61,7 +59,7 @@ export default function DrawerPage() {
 
   const examples = [
     {
-      title: "기본 사용",
+      title: "Basic Usage",
       render: (
         <div>
           <Dropdown items={basicItems}>
@@ -131,7 +129,7 @@ export default function Example() {
 }`
     },
     {
-      title: "Click 트리거",
+      title: "Size",
       render: (
         <div>
           <Dropdown items={basicItems} trigger="click">
@@ -141,8 +139,7 @@ export default function Example() {
           </Dropdown>
         </div>
       ),
-      description:
-        "trigger prop으로 드롭다운을 여는 방식을 변경할 수 있습니다.",
+      description: "드롭다운의 크기를 설정할 수 있습니다.",
       jscode: `import { Dropdown, Button } from "sud-ui";
 import { AngleDown } from "sud-icons";
 
@@ -201,7 +198,7 @@ export default function Example() {
 }`
     },
     {
-      title: "ContextMenu 트리거",
+      title: "Disabled",
       render: (
         <div>
           <Dropdown items={basicItems} trigger="contextMenu">
@@ -211,7 +208,7 @@ export default function Example() {
           </Dropdown>
         </div>
       ),
-      description: "우클릭으로 드롭다운을 열 수 있습니다.",
+      description: "드롭다운을 비활성화할 수 있습니다.",
       jscode: `import { Dropdown, Button } from "sud-ui";
 import { AngleDown } from "sud-icons";
 
@@ -269,9 +266,8 @@ export default function Example() {
   );
 }`
     },
-
     {
-      title: "색상 타입",
+      title: "Icon",
       render: (
         <div style={{ display: "flex", gap: "8px" }}>
           <Dropdown items={basicItems} colorType="default">
@@ -290,8 +286,99 @@ export default function Example() {
           </Dropdown>
         </div>
       ),
-      description:
-        "colorType prop으로 드롭다운의 색상 스타일을 변경할 수 있습니다.",
+      description: "드롭다운에 아이콘을 추가할 수 있습니다.",
+      jscode: `import { Dropdown, Button } from "sud-ui";
+import { AngleDown } from "sud-icons";
+
+const items = [
+  {
+    key: "menu1",
+    label: "메뉴 1",
+    onClick: () => console.log("메뉴 1 클릭")
+  },
+  {
+    key: "menu2",
+    label: "메뉴 2",
+    onClick: () => console.log("메뉴 2 클릭")
+  }
+];
+
+export default function Example() {
+  return (
+    <div style={{ display: 'flex', gap: '8px' }}>
+      <Dropdown items={items} colorType="default">
+        <Button icon={<AngleDown size={16} />} iconPosition="right" >
+          Default
+        </Button>
+      </Dropdown>
+      <Dropdown items={items} colorType="primary">
+        <Button icon={<AngleDown size={16} />} iconPosition="right" colorType="primary">
+          Primary
+        </Button>
+      </Dropdown>
+    </div>
+  );
+}`,
+      tscode: `import { Dropdown, Button } from "sud-ui";
+import { AngleDown } from "sud-icons";
+
+interface MenuItem {
+  key: string;
+  label: string;
+  onClick: () => void;
+}
+
+const items: MenuItem[] = [
+  {
+    key: "menu1",
+    label: "메뉴 1",
+    onClick: () => console.log("메뉴 1 클릭")
+  },
+  {
+    key: "menu2",
+    label: "메뉴 2",
+    onClick: () => console.log("메뉴 2 클릭")
+  }
+];
+
+export default function Example() {
+  return (
+    <div style={{ display: 'flex', gap: '8px' }}>
+      <Dropdown items={items} colorType="default">
+        <Button icon={<AngleDown size={16} />} iconPosition="right">
+          Default
+        </Button>
+      </Dropdown>
+      <Dropdown items={items} colorType="primary">
+        <Button icon={<AngleDown size={16} />} iconPosition="right" colorType="primary">
+          Primary
+        </Button>
+      </Dropdown>
+    </div>
+  );
+}`
+    },
+    {
+      title: "Color Customization",
+      render: (
+        <div style={{ display: "flex", gap: "8px" }}>
+          <Dropdown items={basicItems} colorType="default">
+            <Button icon={<AngleDown size={16} />} iconPosition="right">
+              Default
+            </Button>
+          </Dropdown>
+          <Dropdown items={basicItems} colorType="primary">
+            <Button
+              colorType="primary"
+              icon={<AngleDown size={16} />}
+              iconPosition="right"
+            >
+              Primary
+            </Button>
+          </Dropdown>
+        </div>
+      ),
+      description: "드롭다운의 색상을 커스텀할 수 있습니다.",
       jscode: `import { Dropdown, Button } from "sud-ui";
 import { AngleDown } from "sud-icons";
 

@@ -326,6 +326,7 @@ export const overViewData = [
           <div className="flex flex-col gap-10 jus-cen item-cen">
             <sudUi.Checkbox.Group
               direction="horizontal"
+              layout="grid"
               cols={2}
               value={["b", "c"]}
               options={[
@@ -405,6 +406,7 @@ export const overViewData = [
           <div className="flex jus-cen item-cen">
             <sudUi.Radio.Group
               value={2}
+              direction="horizontal"
               options={[
                 { value: 1, label: <sudIcon.LogoGithubCopilot size="50" /> },
                 { value: 2, label: <sudIcon.LogoOpenAI size="50" /> },
