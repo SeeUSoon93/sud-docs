@@ -40,8 +40,8 @@ export const itemsList = {
       mode: "group",
       children: [
         { key: "input", label: "Input" },
-        { key: "inputotp", label: "InputOTP" },
-        { key: "textarea", label: "TextArea" },
+        { key: "otp", label: "OTP" },
+        { key: "textarea", label: "Textarea" },
         { key: "upload", label: "Upload" }
       ]
     },

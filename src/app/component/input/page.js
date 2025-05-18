@@ -2,9 +2,9 @@
 
 import Frame from "../Frame";
 import { useMobile } from "../../_lib/context/mobileContext";
-import { Input, Tag, Radio, Card, Select } from "sud-ui";
+import { Input, Tag, Radio, Card, Select, Button } from "sud-ui";
 
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Search } from "sud-icons";
 
 export default function InputPage() {
@@ -28,6 +28,10 @@ export default function InputPage() {
   const [iconPosition, setIconPosition] = useState("after");
   const [prefixSuffix, setPrefixSuffix] = useState("prefix");
   const [colorValue, setColorValue] = useState("");
+  const [shapeValue, setShapeValue] = useState("");
+  const [iconValue, setIconValue] = useState("");
+  const [prefixSuffixValue, setPrefixSuffixValue] = useState("");
+  const [thousandValue, setThousandValue] = useState("");
 
   const name = "Input";
   const description = <>텍스트를 입력할 수 있는 입력 컴포넌트입니다.</>;
@@ -812,7 +816,12 @@ export default ErrorInput;`
               />
             </div>
           </Card>
-          <Input shape={shape} placeholder={`${shape} 모양의 Input 입니다.`} />
+          <Input
+            shape={shape}
+            value={shapeValue}
+            onChange={(e) => setShapeValue(e.target.value)}
+            placeholder={`${shape} 모양의 Input 입니다.`}
+          />
         </div>
       ),
       jscode: `import React, { useState } from 'react';
@@ -820,6 +829,7 @@ import { Input, Radio, Card } from 'sud-ui';
 
 const ShapeInput = () => {
   const [shape, setShape] = useState('rounded');
+  const [shapeValue, setShapeValue] = useState('');
   
   const shapeOptions = [
     { label: 'rounded', value: 'rounded' },
@@ -839,7 +849,12 @@ const ShapeInput = () => {
           />
         </div>
       </Card>
-      <Input shape={shape} placeholder={\`\${shape} 모양의 Input 입니다.\`} />
+      <Input
+        shape={shape}
+        value={shapeValue}
+        onChange={(e) => setShapeValue(e.target.value)}
+        placeholder={\`\${shape} 모양의 Input 입니다.\`}
+      />
     </div>
   );
 };
@@ -855,6 +870,7 @@ interface ShapeOption {
 
 const ShapeInput: React.FC = () => {
   const [shape, setShape] = useState<string>('rounded');
+  const [shapeValue, setShapeValue] = useState<string>('');
   
   const shapeOptions: ShapeOption[] = [
     { label: 'rounded', value: 'rounded' },
@@ -874,7 +890,12 @@ const ShapeInput: React.FC = () => {
           />
         </div>
       </Card>
-      <Input shape={shape} placeholder={\`\${shape} 모양의 Input 입니다.\`} />
+      <Input
+        shape={shape}
+        value={shapeValue}
+        onChange={(e) => setShapeValue(e.target.value)}
+        placeholder={\`\${shape} 모양의 Input 입니다.\`}
+      />
     </div>
   );
 };
@@ -898,8 +919,10 @@ export default ShapeInput;`
           </Card>
           <Input
             {...(iconPosition === "before"
-              ? { beforeIcon: "🔍" }
-              : { afterIcon: "🔍" })}
+              ? { beforeIcon: <Search /> }
+              : { afterIcon: <Search /> })}
+            value={iconValue}
+            onChange={(e) => setIconValue(e.target.value)}
             placeholder="아이콘이 있는 Input 입니다."
           />
         </div>
@@ -909,6 +932,7 @@ import { Input, Radio, Card } from 'sud-ui';
 
 const IconInput = () => {
   const [iconPosition, setIconPosition] = useState('after');
+  const [iconValue, setIconValue] = useState('');
   
   const iconPositionOptions = [
     { label: '앞', value: 'before' },
@@ -929,8 +953,10 @@ const IconInput = () => {
       </Card>
       <Input
         {...(iconPosition === "before"
-          ? { beforeIcon: "🔍" }
-          : { afterIcon: "🔍" })}
+          ? { beforeIcon: <Search /> }
+          : { afterIcon: <Search /> })}
+        value={iconValue}
+        onChange={(e) => setIconValue(e.target.value)}
         placeholder="아이콘이 있는 Input 입니다."
       />
     </div>
@@ -948,6 +974,7 @@ interface IconPositionOption {
 
 const IconInput: React.FC = () => {
   const [iconPosition, setIconPosition] = useState<string>('after');
+  const [iconValue, setIconValue] = useState<string>('');
   
   const iconPositionOptions: IconPositionOption[] = [
     { label: '앞', value: 'before' },
@@ -968,8 +995,10 @@ const IconInput: React.FC = () => {
       </Card>
       <Input
         {...(iconPosition === "before"
-          ? { beforeIcon: "🔍" }
-          : { afterIcon: "🔍" })}
+          ? { beforeIcon: <Search /> }
+          : { afterIcon: <Search /> })}
+        value={iconValue}
+        onChange={(e) => setIconValue(e.target.value)}
         placeholder="아이콘이 있는 Input 입니다."
       />
     </div>
@@ -993,16 +1022,41 @@ export default IconInput;`
               />
             </div>
           </Card>
-          <Input
-            {...(prefixSuffix === "prefix"
-              ? { prefix: "₩" }
-              : { suffix: "원" })}
-            placeholder="접두사/접미사가 있는 Input 입니다."
-          />
+          <div className="flex flex-col gap-20">
+            <Input
+              {...(prefixSuffix === "prefix"
+                ? { prefix: "₩" }
+                : { suffix: "원" })}
+              value={prefixSuffixValue}
+              onChange={(e) => setPrefixSuffixValue(e.target.value)}
+              placeholder="접두사/접미사가 있는 Input 입니다."
+            />
+
+            <Input
+              {...(prefixSuffix === "prefix"
+                ? {
+                    prefix: (
+                      <Button size="sm" colorType="primary" shadow="none">
+                        검색
+                      </Button>
+                    )
+                  }
+                : {
+                    suffix: (
+                      <Button size="sm" colorType="primary">
+                        확인
+                      </Button>
+                    )
+                  })}
+              value={prefixSuffixValue}
+              onChange={(e) => setPrefixSuffixValue(e.target.value)}
+              placeholder="접두사/접미사가 있는 Input 입니다."
+            />
+          </div>
         </div>
       ),
       jscode: `import React, { useState } from 'react';
-import { Input, Radio, Card } from 'sud-ui';
+import { Input, Radio, Card, Button } from 'sud-ui';
 
 const PrefixSuffixInput = () => {
   const [prefixSuffix, setPrefixSuffix] = useState('prefix');
@@ -1024,19 +1078,32 @@ const PrefixSuffixInput = () => {
           />
         </div>
       </Card>
-      <Input
-        {...(prefixSuffix === "prefix"
-          ? { prefix: "₩" }
-          : { suffix: "원" })}
-        placeholder="접두사/접미사가 있는 Input 입니다."
-      />
+      <div className="flex flex-col gap-20">
+        <Input
+          {...(prefixSuffix === "prefix"
+            ? { prefix: "₩" }
+            : { suffix: "원" })}
+        value={prefixSuffixValue}
+        onChange={(e) => setPrefixSuffixValue(e.target.value)}
+          placeholder="접두사/접미사가 있는 Input 입니다."
+        />
+
+        <Input
+          {...(prefixSuffix === "prefix"
+            ? { prefix: <Button size="sm" colorType="primary" shadow="none">검색</Button> }
+            : { suffix: <Button size="sm" colorType="primary">확인</Button> })}
+          value={prefixSuffixValue}
+          onChange={(e) => setPrefixSuffixValue(e.target.value)}
+          placeholder="접두사/접미사가 있는 Input 입니다."
+        />
+      </div>
     </div>
   );
 };
 
 export default PrefixSuffixInput;`,
       tscode: `import React, { useState } from 'react';
-import { Input, Radio, Card } from 'sud-ui';
+import { Input, Radio, Card, Button } from 'sud-ui';
 
 interface PrefixSuffixOption {
   label: string;
@@ -1063,13 +1130,25 @@ const PrefixSuffixInput: React.FC = () => {
           />
         </div>
       </Card>
-      <Input
+      <div className="flex flex-col gap-20">
+        <Input
         {...(prefixSuffix === "prefix"
           ? { prefix: "₩" }
           : { suffix: "원" })}
-        placeholder="접두사/접미사가 있는 Input 입니다."
-      />
-    </div>
+        value={prefixSuffixValue}
+        onChange={(e) => setPrefixSuffixValue(e.target.value)}
+          placeholder="접두사/접미사가 있는 Input 입니다."
+        />
+
+        <Input
+          {...(prefixSuffix === "prefix"
+            ? { prefix: <Button size="sm" colorType="primary" shadow="none">검색</Button> }
+            : { suffix: <Button size="sm" colorType="primary">확인</Button> })}
+          value={prefixSuffixValue}
+          onChange={(e) => setPrefixSuffixValue(e.target.value)}
+          placeholder="접두사/접미사가 있는 Input 입니다."
+        />
+      </div>
   );
 };
 
@@ -1126,6 +1205,54 @@ const CustomColorInput: React.FC = () => {
 };
 
 export default CustomColorInput;`
+    },
+    {
+      title: "Thousand Separator",
+      description: "숫자 입력 시 3자리마다 콤마를 추가합니다.",
+      render: (
+        <Input
+          thousandSeparator
+          value={thousandValue}
+          onChange={(e) => setThousandValue(e.target.value)}
+          placeholder="숫자를 입력하세요"
+        />
+      ),
+      jscode: `import React, { useState } from 'react';
+import { Input } from 'sud-ui';
+
+const ThousandSeparatorInput = () => {
+  const [value, setValue] = useState("");
+
+  return (
+    <Input
+      type="number"
+      thousandSeparator
+      value={value}
+      onChange={(e) => setValue(e.target.value)}
+      placeholder="숫자를 입력하세요"
+    />
+  );
+};
+
+export default ThousandSeparatorInput;`,
+      tscode: `import React, { useState } from 'react';
+import { Input } from 'sud-ui';
+
+const ThousandSeparatorInput: React.FC = () => {
+  const [value, setValue] = useState("");
+
+  return (
+    <Input
+      type="number"
+      thousandSeparator
+      value={value}
+      onChange={(e) => setValue(e.target.value)}
+      placeholder="숫자를 입력하세요"
+    />
+  );
+};
+
+export default ThousandSeparatorInput;`
     }
   ];
   const howToUseTableData = [
@@ -1134,7 +1261,7 @@ export default CustomColorInput;`
       name: "value",
       description: "입력 필드의 값",
       type: "string",
-      default: "''"
+      default: '""'
     },
     {
       key: "onChange",
@@ -1151,6 +1278,35 @@ export default CustomColorInput;`
       default: "-"
     },
     {
+      key: "type",
+      name: "type",
+      description: "입력 필드의 타입 (HTML input의 모든 type 지원)",
+      type: "string",
+      default: "text"
+    },
+    {
+      key: "size",
+      name: "size",
+      description: "입력 필드의 크기",
+      type: (
+        <>
+          <Tag>sm</Tag> ｜ <Tag>md</Tag> ｜ <Tag>lg</Tag>
+        </>
+      ),
+      default: <Tag>md</Tag>
+    },
+    {
+      key: "shape",
+      name: "shape",
+      description: "입력 필드의 모서리 모양",
+      type: (
+        <>
+          <Tag>rounded</Tag> ｜ <Tag>square</Tag> ｜ <Tag>capsule</Tag>
+        </>
+      ),
+      default: <Tag>rounded</Tag>
+    },
+    {
       key: "disabled",
       name: "disabled",
       description: "입력 필드 비활성화 여부",
@@ -1165,22 +1321,11 @@ export default CustomColorInput;`
       default: "false"
     },
     {
-      key: "size",
-      name: "size",
-      description: "입력 필드의 크기",
-      type: (
-        <>
-          <Tag>sm</Tag> ｜ <Tag>md</Tag> ｜ <Tag>lg</Tag>
-        </>
-      ),
-      default: <Tag>md</Tag>
-    },
-    {
-      key: "type",
-      name: "type",
-      description: "입력 필드의 타입",
-      type: "string",
-      default: "text"
+      key: "password",
+      name: "password",
+      description: "비밀번호 입력 필드 여부",
+      type: "boolean",
+      default: "false"
     },
     {
       key: "maxLength",
@@ -1192,14 +1337,7 @@ export default CustomColorInput;`
     {
       key: "clearable",
       name: "clearable",
-      description: "지우기 버튼 표시 여부",
-      type: "boolean",
-      default: "false"
-    },
-    {
-      key: "password",
-      name: "password",
-      description: "비밀번호 입력 필드 여부",
+      description: "값을 지울 수 있는 버튼 표시 여부",
       type: "boolean",
       default: "false"
     },
@@ -1211,9 +1349,23 @@ export default CustomColorInput;`
       default: "-"
     },
     {
+      key: "underline",
+      name: "underline",
+      description: "밑줄 스타일 여부",
+      type: "boolean",
+      default: "false"
+    },
+    {
+      key: "autoComplete",
+      name: "autoComplete",
+      description: "자동 완성 속성",
+      type: "string",
+      default: "-"
+    },
+    {
       key: "error",
       name: "error",
-      description: "에러 상태",
+      description: "에러 상태 여부",
       type: "boolean",
       default: "false"
     },
@@ -1225,166 +1377,97 @@ export default CustomColorInput;`
       default: "-"
     },
     {
-      key: "shape",
-      name: "shape",
-      description: "입력 필드의 모서리 모양",
-      type: (
-        <>
-          <Tag>rounded</Tag> ｜ <Tag>square</Tag> ｜ <Tag>capsule</Tag>
-        </>
-      ),
-      default: "rounded"
-    },
-    {
-      key: "shadow",
-      name: "shadow",
-      description: "입력 필드의 그림자 스타일",
-      type: (
-        <>
-          <Tag>none</Tag> ｜ <Tag>sm</Tag> ｜ <Tag>md</Tag> ｜ <Tag>lg</Tag>
-        </>
-      ),
-      default: "sm"
-    },
-    {
-      key: "background",
-      name: "background",
-      description: "입력 필드의 배경색",
-      type: "string",
-      default: "-"
-    },
-    {
-      key: "border",
-      name: "border",
-      description: "입력 필드의 테두리 표시 여부",
-      type: "boolean",
-      default: "true"
-    },
-    {
-      key: "borderColor",
-      name: "borderColor",
-      description: "입력 필드의 테두리 색상",
-      type: "string",
-      default: "-"
-    },
-    {
-      key: "borderType",
-      name: "borderType",
-      description: "입력 필드의 테두리 스타일",
-      type: "string",
-      default: "solid"
-    },
-    {
-      key: "borderWeight",
-      name: "borderWeight",
-      description: "입력 필드의 테두리 두께",
-      type: "number",
-      default: "1"
-    },
-    {
-      key: "underline",
-      name: "underline",
-      description: "밑줄 스타일 적용 여부",
-      type: "boolean",
-      default: "false"
-    },
-    {
-      key: "afterIcon",
-      name: "afterIcon",
-      description: "입력 필드 뒤에 표시할 아이콘",
+      key: "beforeIcon",
+      name: "beforeIcon",
+      description: "입력 필드 앞에 표시될 아이콘",
       type: "ReactNode",
       default: "-"
     },
     {
-      key: "beforeIcon",
-      name: "beforeIcon",
-      description: "입력 필드 앞에 표시할 아이콘",
+      key: "afterIcon",
+      name: "afterIcon",
+      description: "입력 필드 뒤에 표시될 아이콘",
       type: "ReactNode",
       default: "-"
     },
     {
       key: "prefix",
       name: "prefix",
-      description: "입력 필드 앞에 표시할 접두사",
+      description: "입력 필드 앞에 표시될 텍스트",
       type: "ReactNode",
       default: "-"
     },
     {
       key: "suffix",
       name: "suffix",
-      description: "입력 필드 뒤에 표시할 접미사",
+      description: "입력 필드 뒤에 표시될 텍스트",
       type: "ReactNode",
       default: "-"
     },
     {
-      key: "autoFocus",
-      name: "autoFocus",
-      description: "자동 포커스 여부",
-      type: "boolean",
-      default: "false"
-    },
-    {
-      key: "id",
-      name: "id",
-      description: "입력 필드의 고유 식별자",
-      type: "string",
-      default: "-"
-    },
-    {
-      key: "name",
-      name: "name",
-      description: "입력 필드의 이름",
-      type: "string",
-      default: "-"
-    },
-    {
-      key: "autoComplete",
-      name: "autoComplete",
-      description: "자동 완성 기능",
-      type: "string",
-      default: "-"
-    },
-    {
-      key: "ariaLabel",
-      name: "ariaLabel",
-      description: "접근성을 위한 레이블",
-      type: "string",
-      default: "-"
-    },
-    {
-      key: "ariaRequired",
-      name: "ariaRequired",
-      description: "접근성을 위한 필수 입력 여부",
-      type: "boolean",
-      default: "-"
-    },
-    {
-      key: "ariaInvalid",
-      name: "ariaInvalid",
-      description: "접근성을 위한 유효성 상태",
-      type: "boolean",
-      default: "-"
-    },
-    {
-      key: "ariaDescribedby",
-      name: "ariaDescribedby",
-      description: "접근성을 위한 설명 ID",
+      key: "background",
+      name: "background",
+      description: "배경색",
       type: "string",
       default: "-"
     },
     {
       key: "color",
       name: "color",
-      description: "입력 필드의 텍스트 색상",
+      description: "텍스트 색상",
       type: "string",
       default: "-"
+    },
+    {
+      key: "border",
+      name: "border",
+      description: "테두리 표시 여부",
+      type: "boolean",
+      default: "true"
+    },
+    {
+      key: "borderColor",
+      name: "borderColor",
+      description: "테두리 색상",
+      type: "string",
+      default: "-"
+    },
+    {
+      key: "borderType",
+      name: "borderType",
+      description: "테두리 스타일",
+      type: (
+        <>
+          <Tag>solid</Tag> ｜ <Tag>dashed</Tag> ｜ <Tag>dotted</Tag>
+        </>
+      ),
+      default: <Tag>solid</Tag>
+    },
+    {
+      key: "borderWeight",
+      name: "borderWeight",
+      description: "테두리 두께",
+      type: "number",
+      default: "1"
+    },
+    {
+      key: "shadow",
+      name: "shadow",
+      description: "그림자 크기",
+      type: (
+        <>
+          <Tag>none</Tag> ｜ <Tag>sm</Tag> ｜ <Tag>md</Tag> ｜ <Tag>lg</Tag> ｜{" "}
+          <Tag>xl</Tag>
+        </>
+      ),
+      default: <Tag>sm</Tag>
     },
     {
       key: "className",
       name: "className",
       description: "추가 클래스명",
       type: "string",
-      default: "''"
+      default: '""'
     },
     {
       key: "style",
@@ -1394,35 +1477,11 @@ export default CustomColorInput;`
       default: "{}"
     },
     {
-      key: "required",
-      name: "required",
-      description: "필수 입력 여부",
+      key: "thousandSeparator",
+      name: "thousandSeparator",
+      description: "숫자 입력 시 3자리마다 콤마 추가 여부",
       type: "boolean",
       default: "false"
-    },
-    {
-      key: "onClick",
-      name: "onClick",
-      description: "클릭 시 호출되는 콜백",
-      type: "(e: MouseEvent) => void",
-      default: "-"
-    }
-  ];
-
-  const tabPaneProps = [
-    {
-      key: "label",
-      name: "label",
-      description: "탭의 레이블",
-      type: "string | ReactNode",
-      default: "undefined"
-    },
-    {
-      key: "children",
-      name: "children",
-      description: "탭의 내용",
-      type: "ReactNode",
-      default: "undefined"
     }
   ];
 
@@ -1434,8 +1493,7 @@ export default CustomColorInput;`
         IMPORT_COMMAND,
         whenToUse,
         examples,
-        howToUseTableData,
-        tabPaneProps
+        howToUseTableData
       }}
       grid={true}
       isMobile={isMobile}
