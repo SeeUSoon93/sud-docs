@@ -297,7 +297,11 @@ export const overViewData = [
         link: "/component/upload",
         item: (
           <div className="flex jus-cen item-cen">
-            <sudUi.Upload />
+            <sudUi.Upload>
+              <sudUi.Button icon={<sudIcon.Upload />} colorType="primary">
+                Upload
+              </sudUi.Button>
+            </sudUi.Upload>
           </div>
         )
       }
