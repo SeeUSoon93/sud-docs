@@ -1,7 +1,7 @@
 "use client";
 
 import { useMobile } from "../../_lib/context/mobileContext";
-import { Typography, Card, Avatar, Tag, toast, Radio } from "sud-ui";
+import { Typography, Card, Avatar, Tag, Radio } from "sud-ui";
 import { animationExamples } from "./data/animationData";
 import {
   InstallCommand,
@@ -10,8 +10,11 @@ import {
   ExampleBlock
 } from "../../_lib/components/common/render";
 import { useState } from "react";
+import { useLang } from "../../_lib/context/langContext";
+
 export default function Animation() {
   const { isMobile } = useMobile();
+  const { lang } = useLang();
 
   const [selected, setSelected] = useState("javascript");
   const [selectedStage, setSelectedStage] = useState(1);
@@ -19,25 +22,48 @@ export default function Animation() {
   return (
     <div className="flex flex-col gap-40 pd-20 w-100">
       <MainTitle
-        title={"애니메이션 (Animation)"}
+        title={lang === "ko" ? "애니메이션" : "Animation"}
         description={
           <>
-            Soon UI Design에서는 <b>className</b>을 이용하여 적용할 수 있는
-            간단한 Hover-Animation 몇가지를 제공합니다.
-            <br />
-            className으로 Hover-Animation을 사용하기 위해서는 아래처럼 css
-            파일을 불러와야 합니다.
+            {lang === "ko" ? (
+              <>
+                Soon UI Design에서는 <b>className</b>을 이용하여 적용할 수 있는
+                간단한 Hover-Animation 몇가지를 제공합니다.
+                <br />
+                className으로 Hover-Animation을 사용하기 위해서는 아래처럼 css
+                파일을 불러와야 합니다.
+              </>
+            ) : (
+              <>
+                Soon UI Design provides several simple Hover-Animation effects
+                that can be applied using <b>className</b>.
+                <br />
+                To use Hover-Animation with className, you need to import the
+                CSS file as shown below.
+              </>
+            )}
           </>
         }
         etc={<InstallCommand command="import 'sud-ui/dist/style.css';" />}
       />
       <SubTitleAndDescription
-        title={"애니메이션 종류"}
+        title={lang === "ko" ? "애니메이션 종류" : "Animation Types"}
         description={
           <>
-            각 효과별 class이름 뒤에 숫자를 붙여 강도를 조절할 수 있습니다.
-            <br />
-            예) <Tag>hover-scale-[1-10]</Tag>
+            {lang === "ko" ? (
+              <>
+                각 효과별 class이름 뒤에 숫자를 붙여 강도를 조절할 수 있습니다.
+                <br />
+                예) <Tag>hover-scale-[1-10]</Tag>
+              </>
+            ) : (
+              <>
+                You can adjust the intensity by adding a number after each
+                effect's class name.
+                <br />
+                Example) <Tag>hover-scale-[1-10]</Tag>
+              </>
+            )}
           </>
         }
         etc={animationExamples.map((example, index) => (
@@ -52,7 +78,7 @@ export default function Animation() {
                   title={
                     <div className="flex jus-cen">
                       <Typography pretendard="B" size="lg">
-                        단계 선택
+                        {lang === "ko" ? "단계 선택" : "Select Level"}
                       </Typography>
                     </div>
                   }
@@ -81,7 +107,9 @@ export default function Animation() {
                 </div>
               </>
             }
-            description={example.description}
+            description={
+              lang === "ko" ? example.description.ko : example.description.en
+            }
             code={selected === "javascript" ? example.jscode : example.tscode}
             select={selected}
             setSelected={setSelected}

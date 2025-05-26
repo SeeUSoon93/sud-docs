@@ -5,21 +5,32 @@ import { useMobile } from "../../_lib/context/mobileContext";
 import { Tag, Card, Avatar, Badge, Radio, Input, Typography } from "sud-ui";
 
 import React, { useState } from "react";
+import { useLang } from "../../_lib/context/langContext";
 
 export default function BadgePage() {
   const { isMobile } = useMobile();
+  const { lang } = useLang();
   const [size, setSize] = useState("sm");
   const [sizeNumber, setSizeNumber] = useState(20);
   const [shape, setShape] = useState("circle");
 
   const name = "Badge";
   const description = (
-    <>표시되는 데이터의 개수를 표시하는 배지 컴포넌트입니다.</>
+    <>
+      {lang === "ko" ? (
+        <>표시되는 데이터의 개수를 표시하는 배지 컴포넌트입니다.</>
+      ) : (
+        <>A component that displays the count of data being shown.</>
+      )}
+    </>
   );
 
   const IMPORT_COMMAND = "import { Badge } from 'sud-ui';";
 
-  const whenToUse = ["알림, 카운트, 표시 등 데이터의 개수를 표시할 때"];
+  const whenToUse =
+    lang === "ko"
+      ? ["알림, 카운트, 표시 등 데이터의 개수를 표시할 때"]
+      : ["When displaying counts for notifications, counters, or indicators"];
 
   const sizeOptions = [
     {
@@ -62,7 +73,8 @@ export default function BadgePage() {
   const examples = [
     {
       title: "Basic Usage",
-      description: "기본적인 사용방법입니다.",
+      description:
+        lang === "ko" ? "기본적인 사용방법입니다." : "Basic usage example.",
       render: (
         <div className="flex gap-20">
           <Badge count={10}>
@@ -110,7 +122,10 @@ export default BasicBadge;`
     },
     {
       title: "Size",
-      description: "배지의 크기를 설정할 수 있습니다.",
+      description:
+        lang === "ko"
+          ? "배지의 크기를 설정할 수 있습니다."
+          : "You can set the size of the badge.",
       render: (
         <div className="flex flex-col gap-20">
           <Card style={{ width: "100%" }} shadow="none" colorType="sub">
@@ -267,7 +282,10 @@ export default SizeBadge;`
     },
     {
       title: "Shape",
-      description: "뱃지의 모양을 설정할 수 있습니다.",
+      description:
+        lang === "ko"
+          ? "뱃지의 모양을 설정할 수 있습니다."
+          : "You can set the shape of the badge.",
       render: (
         <div className="flex flex-col gap-20">
           <Card style={{ width: "100%" }} shadow="none" colorType="sub">
@@ -358,7 +376,10 @@ export default ShapeBadge;`
     },
     {
       title: "Label Mode",
-      description: "라벨 모드를 활성화할 수 있습니다.",
+      description:
+        lang === "ko"
+          ? "라벨 모드를 활성화할 수 있습니다."
+          : "You can enable label mode.",
       render: (
         <Badge label count={"Label Mode"}>
           <Avatar shape="rounded" />
@@ -391,7 +412,8 @@ export default LabelModeBadge;`
     },
     {
       title: "Show Zero",
-      description: "count가 0일 때도 표시",
+      description:
+        lang === "ko" ? "count가 0일 때도 표시" : "Show when count is zero",
       render: (
         <div className="flex gap-20">
           <Badge showZero count={0}>
@@ -442,7 +464,10 @@ export default ShowZeroBadge;`
     },
     {
       title: "Color Type",
-      description: "배지의 색상 타입을 설정할 수 있습니다.",
+      description:
+        lang === "ko"
+          ? "배지의 색상 타입을 설정할 수 있습니다."
+          : "You can set the color type of the badge.",
       render: (
         <Badge colorType="purple" count={15}>
           <Avatar shape="rounded" />
@@ -475,7 +500,10 @@ export default ColorTypeBadge;`
     },
     {
       title: "Max",
-      description: "최대 표시 숫자를 설정할 수 있습니다.",
+      description:
+        lang === "ko"
+          ? "최대 표시 숫자를 설정할 수 있습니다."
+          : "You can set the maximum display number.",
       render: (
         <Badge max={10} count={15}>
           <Avatar shape="rounded" />
@@ -512,35 +540,42 @@ export default MaxBadge;`
     {
       key: "count",
       name: "count",
-      description: "표시할 숫자",
+      description: lang === "ko" ? "표시할 숫자" : "Number to display",
       type: "number",
       default: "-"
     },
     {
       key: "max",
       name: "max",
-      description: "최대 표시 숫자 (초과시 max+ 표시)",
+      description:
+        lang === "ko"
+          ? "최대 표시 숫자 (초과시 max+ 표시)"
+          : "Maximum display number (shows max+ when exceeded)",
       type: "number",
       default: "-"
     },
     {
       key: "dot",
       name: "dot",
-      description: "숫자 대신 점으로 표시",
+      description:
+        lang === "ko"
+          ? "숫자 대신 점으로 표시"
+          : "Display as a dot instead of a number",
       type: "boolean",
       default: "false"
     },
     {
       key: "showZero",
       name: "showZero",
-      description: "count가 0일 때도 표시",
+      description:
+        lang === "ko" ? "count가 0일 때도 표시" : "Show when count is zero",
       type: "boolean",
       default: "false"
     },
     {
       key: "position",
       name: "position",
-      description: "배지의 위치",
+      description: lang === "ko" ? "배지의 위치" : "Position of the badge",
       type: (
         <>
           <Tag>top-right</Tag> ｜ <Tag>top-left</Tag> ｜ <Tag>bottom-right</Tag>{" "}
@@ -552,7 +587,7 @@ export default MaxBadge;`
     {
       key: "size",
       name: "size",
-      description: "배지의 크기",
+      description: lang === "ko" ? "배지의 크기" : "Size of the badge",
       type: (
         <>
           <Tag>xs</Tag> ｜ <Tag>sm</Tag> ｜ <Tag>md</Tag> ｜ <Tag>lg</Tag> ｜{" "}
@@ -564,21 +599,24 @@ export default MaxBadge;`
     {
       key: "offsetRatio",
       name: "offsetRatio",
-      description: "배지의 위치 오프셋 비율 (0~1 사이의 값)",
+      description:
+        lang === "ko"
+          ? "배지의 위치 오프셋 비율 (0~1 사이의 값)"
+          : "Offset ratio of badge position (value between 0 and 1)",
       type: "number",
       default: "0.25"
     },
     {
       key: "label",
       name: "label",
-      description: "라벨 모드 활성화",
+      description: lang === "ko" ? "라벨 모드 활성화" : "Enable label mode",
       type: "boolean",
       default: "false"
     },
     {
       key: "shape",
       name: "shape",
-      description: "배지의 모양",
+      description: lang === "ko" ? "배지의 모양" : "Shape of the badge",
       type: (
         <>
           <Tag>circle</Tag> ｜ <Tag>square</Tag> ｜ <Tag>rounded</Tag>
@@ -589,42 +627,46 @@ export default MaxBadge;`
     {
       key: "colorType",
       name: "colorType",
-      description: "배지의 색상 타입",
+      description:
+        lang === "ko" ? "배지의 색상 타입" : "Color type of the badge",
       type: "string",
       default: <Tag>red</Tag>
     },
     {
       key: "background",
       name: "background",
-      description: "배지의 배경색",
+      description:
+        lang === "ko" ? "배지의 배경색" : "Background color of the badge",
       type: "string",
       default: "-"
     },
     {
       key: "color",
       name: "color",
-      description: "배지의 텍스트 색상",
+      description:
+        lang === "ko" ? "배지의 텍스트 색상" : "Text color of the badge",
       type: "string",
       default: "-"
     },
     {
       key: "border",
       name: "border",
-      description: "테두리 표시 여부",
+      description:
+        lang === "ko" ? "테두리 표시 여부" : "Whether to show border",
       type: "boolean",
       default: "false"
     },
     {
       key: "borderColor",
       name: "borderColor",
-      description: "테두리 색상",
+      description: lang === "ko" ? "테두리 색상" : "Border color",
       type: "string",
       default: "-"
     },
     {
       key: "borderType",
       name: "borderType",
-      description: "테두리 스타일",
+      description: lang === "ko" ? "테두리 스타일" : "Border style",
       type: (
         <>
           <Tag>solid</Tag> ｜ <Tag>dashed</Tag> ｜ <Tag>dotted</Tag>
@@ -635,14 +677,14 @@ export default MaxBadge;`
     {
       key: "borderWeight",
       name: "borderWeight",
-      description: "테두리 두께",
+      description: lang === "ko" ? "테두리 두께" : "Border weight",
       type: "number",
       default: "1"
     },
     {
       key: "shadow",
       name: "shadow",
-      description: "그림자 크기",
+      description: lang === "ko" ? "그림자 크기" : "Shadow size",
       type: (
         <>
           <Tag>none</Tag> ｜ <Tag>sm</Tag> ｜ <Tag>md</Tag> ｜ <Tag>lg</Tag>
@@ -653,21 +695,21 @@ export default MaxBadge;`
     {
       key: "className",
       name: "className",
-      description: "추가 클래스명",
+      description: lang === "ko" ? "추가 클래스명" : "Additional class name",
       type: "string",
       default: '""'
     },
     {
       key: "style",
       name: "style",
-      description: "추가 스타일",
+      description: lang === "ko" ? "추가 스타일" : "Additional style",
       type: "React.CSSProperties",
       default: "{}"
     },
     {
       key: "aria-label",
       name: "aria-label",
-      description: "접근성 레이블",
+      description: lang === "ko" ? "접근성 레이블" : "Accessibility label",
       type: "string",
       default: "-"
     }
@@ -825,6 +867,7 @@ export default MaxBadge;`
       }}
       grid={true}
       isMobile={isMobile}
+      lang={lang}
     />
   );
 }

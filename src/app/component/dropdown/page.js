@@ -1,40 +1,56 @@
 "use client";
-
 import Frame from "../Frame";
 import { useMobile } from "../../_lib/context/mobileContext";
+import { useLang } from "../../_lib/context/langContext";
 import { Button, Dropdown, Tag } from "sud-ui";
 import { AngleDown, AngleLeft, AngleRight, AngleUp } from "sud-icons";
 
 export default function DrawerPage() {
   const { isMobile } = useMobile();
+  const { lang } = useLang();
 
-  const name = "Dropdown";
-  const description = <>드롭다운 컴포넌트입니다.</>;
+  const name = lang === "ko" ? "드롭다운" : "Dropdown";
+  const description =
+    lang === "ko" ? (
+      <>드롭다운 목록을 표시할 수 있습니다.</>
+    ) : (
+      <>You can display a dropdown list.</>
+    );
 
   const IMPORT_COMMAND = "import { Dropdown } from 'sud-ui';";
 
-  const whenToUse = [
-    "사용자가 선택할 수 있는 옵션 목록을 표시할 때",
-    "공간을 효율적으로 사용하면서 여러 옵션을 제공해야 할 때",
-    "메뉴, 필터, 정렬 등의 기능을 구현할 때",
-    "폼에서 선택형 입력이 필요할 때"
-  ];
+  const whenToUse =
+    lang === "ko"
+      ? [
+          "사용자가 선택할 수 있는 옵션 목록을 표시할 때",
+          "공간을 효율적으로 사용하면서 여러 옵션을 제공해야 할 때",
+          "메뉴, 필터, 정렬 등의 기능을 구현할 때",
+          "사용자 인터페이스에서 추가 작업이나 옵션을 제공할 때",
+          "폼이나 설정에서 여러 선택지를 제공할 때"
+        ]
+      : [
+          "When you need to display a list of options that users can select.",
+          "When you need to provide multiple options efficiently while conserving space.",
+          "When implementing features like menus, filters, or sorting.",
+          "When providing additional actions or options in the user interface.",
+          "When offering multiple choices in forms or settings."
+        ];
 
   const basicItems = [
     {
       key: "menu1",
-      label: "메뉴 1",
-      onClick: () => console.log("메뉴 1 클릭")
+      label: "Menu 1",
+      onClick: () => console.log("Menu 1 clicked")
     },
     {
       key: "menu2",
-      label: "메뉴 2",
-      onClick: () => console.log("메뉴 2 클릭")
+      label: "Menu 2",
+      onClick: () => console.log("Menu 2 clicked")
     },
     {
       key: "menu3",
-      label: "메뉴 3",
-      onClick: () => console.log("메뉴 3 클릭")
+      label: "Menu 3",
+      onClick: () => console.log("Menu 3 clicked")
     }
   ];
 
@@ -69,21 +85,20 @@ export default function DrawerPage() {
           </Dropdown>
         </div>
       ),
-      description:
-        "기본적인 드롭다운 사용 방법입니다. hover 시 메뉴가 표시됩니다.",
+      description: lang === "ko" ? "기본적인 사용 방법입니다." : "Basic usage.",
       jscode: `import { Dropdown, Button } from "sud-ui";
 import { AngleDown } from "sud-icons";
 
 const items = [
   {
     key: "menu1",
-    label: "메뉴 1",
-    onClick: () => console.log("메뉴 1 클릭")
+    label: "Menu 1",
+    onClick: () => console.log("Menu 1 clicked")
   },
   {
     key: "menu2",
-    label: "메뉴 2",
-    onClick: () => console.log("메뉴 2 클릭")
+    label: "Menu 2",
+    onClick: () => console.log("Menu 2 clicked")
   }
 ];
 
@@ -108,13 +123,13 @@ interface MenuItem {
 const items: MenuItem[] = [
   {
     key: "menu1",
-    label: "메뉴 1",
-    onClick: () => console.log("메뉴 1 클릭")
+    label: "Menu 1",
+    onClick: () => console.log("Menu 1 clicked")
   },
   {
     key: "menu2",
-    label: "메뉴 2",
-    onClick: () => console.log("메뉴 2 클릭")
+    label: "Menu 2",
+    onClick: () => console.log("Menu 2 clicked")
   }
 ];
 
@@ -129,40 +144,63 @@ export default function Example() {
 }`
     },
     {
-      title: "Size",
+      title: "Trigger",
       render: (
-        <div>
-          <Dropdown items={basicItems} trigger="click">
-            <Button icon={<AngleDown size={16} />} iconPosition="right">
-              Click me!
-            </Button>
-          </Dropdown>
+        <div className="flex flex-col gap-20">
+          <div>
+            <Dropdown items={basicItems} trigger="click">
+              <Button icon={<AngleDown size={16} />} iconPosition="right">
+                Click me!
+              </Button>
+            </Dropdown>
+          </div>
+          <div>
+            <Dropdown items={basicItems} trigger="contextMenu">
+              <Button icon={<AngleDown size={16} />} iconPosition="right">
+                Right Click me!
+              </Button>
+            </Dropdown>
+          </div>
         </div>
       ),
-      description: "드롭다운의 크기를 설정할 수 있습니다.",
+      description:
+        lang === "ko"
+          ? "드롭다운의 트리거를 설정할 수 있습니다."
+          : "You can set the trigger for the dropdown.",
       jscode: `import { Dropdown, Button } from "sud-ui";
 import { AngleDown } from "sud-icons";
 
 const items = [
   {
     key: "menu1",
-    label: "메뉴 1",
-    onClick: () => console.log("메뉴 1 클릭")
+    label: "Menu 1",
+    onClick: () => console.log("Menu 1 clicked")
   },
   {
     key: "menu2",
-    label: "메뉴 2",
-    onClick: () => console.log("메뉴 2 클릭")
+    label: "Menu 2",
+    onClick: () => console.log("Menu 2 clicked")
   }
 ];
 
 export default function Example() {
   return (
-    <Dropdown items={items} trigger="click">
-      <Button icon={<AngleDown size={16} />} iconPosition="right">
-        Click me!
-      </Button>
-    </Dropdown>
+    <div className="flex flex-col gap-20">
+      <div>
+        <Dropdown items={items} trigger="click">
+          <Button icon={<AngleDown size={16} />} iconPosition="right">
+            Click me!
+          </Button>
+        </Dropdown>
+      </div>
+      <div>
+        <Dropdown items={items} trigger="contextMenu">
+          <Button icon={<AngleDown size={16} />} iconPosition="right">
+            Right Click me!
+          </Button>
+        </Dropdown>
+      </div>
+    </div>
   );
 }`,
       tscode: `import { Dropdown, Button } from "sud-ui";
@@ -177,143 +215,79 @@ interface MenuItem {
 const items: MenuItem[] = [
   {
     key: "menu1",
-    label: "메뉴 1",
-    onClick: () => console.log("메뉴 1 클릭")
+    label: "Menu 1",
+    onClick: () => console.log("Menu 1 clicked")
   },
   {
     key: "menu2",
-    label: "메뉴 2",
-    onClick: () => console.log("메뉴 2 클릭")
+    label: "Menu 2",
+    onClick: () => console.log("Menu 2 clicked")
   }
 ];
 
 export default function Example() {
   return (
-    <Dropdown items={items} trigger="click">
-      <Button icon={<AngleDown size={16} />} iconPosition="right">
-        Click me!
-      </Button>
-    </Dropdown>
+    <div className="flex flex-col gap-20">
+      <div>
+        <Dropdown items={items} trigger="click">
+          <Button icon={<AngleDown size={16} />} iconPosition="right">
+            Click me!
+          </Button>
+        </Dropdown>
+      </div>
+      <div>
+        <Dropdown items={items} trigger="contextMenu">
+          <Button icon={<AngleDown size={16} />} iconPosition="right">
+            Right Click me!
+          </Button>
+        </Dropdown>
+      </div>
+    </div>
   );
 }`
     },
     {
       title: "Disabled",
+      render: <div></div>,
+      description:
+        lang === "ko"
+          ? "드롭다운을 비활성화할 수 있습니다."
+          : "You can disable the dropdown.",
       render: (
         <div>
-          <Dropdown items={basicItems} trigger="contextMenu">
-            <Button icon={<AngleDown size={16} />} iconPosition="right">
-              Right Click me!
-            </Button>
-          </Dropdown>
-        </div>
-      ),
-      description: "드롭다운을 비활성화할 수 있습니다.",
-      jscode: `import { Dropdown, Button } from "sud-ui";
-import { AngleDown } from "sud-icons";
-
-const items = [
-  {
-    key: "menu1",
-    label: "메뉴 1",
-    onClick: () => console.log("메뉴 1 클릭")
-  },
-  {
-    key: "menu2",
-    label: "메뉴 2",
-    onClick: () => console.log("메뉴 2 클릭")
-  }
-];
-
-export default function Example() {
-  return (
-    <Dropdown items={items} trigger="contextMenu">
-      <Button icon={<AngleDown size={16} />} iconPosition="right">
-        Right Click me!
-      </Button>
-    </Dropdown>
-  );
-}`,
-      tscode: `import { Dropdown, Button } from "sud-ui";
-import { AngleDown } from "sud-icons";
-
-interface MenuItem {
-  key: string;
-  label: string;
-  onClick: () => void;
-}
-
-const items: MenuItem[] = [
-  {
-    key: "menu1",
-    label: "메뉴 1",
-    onClick: () => console.log("메뉴 1 클릭")
-  },
-  {
-    key: "menu2",
-    label: "메뉴 2",
-    onClick: () => console.log("메뉴 2 클릭")
-  }
-];
-
-export default function Example() {
-  return (
-    <Dropdown items={items} trigger="contextMenu">
-      <Button icon={<AngleDown size={16} />} iconPosition="right">
-        Right Click me!
-      </Button>
-    </Dropdown>
-  );
-}`
-    },
-    {
-      title: "Icon",
-      render: (
-        <div style={{ display: "flex", gap: "8px" }}>
-          <Dropdown items={basicItems} colorType="default">
-            <Button icon={<AngleDown size={16} />} iconPosition="right">
-              Default
-            </Button>
-          </Dropdown>
-          <Dropdown items={basicItems} colorType="primary">
+          <Dropdown items={basicItems} disabled>
             <Button
-              colorType="primary"
               icon={<AngleDown size={16} />}
               iconPosition="right"
+              disabled
             >
-              Primary
+              Disabled
             </Button>
           </Dropdown>
         </div>
       ),
-      description: "드롭다운에 아이콘을 추가할 수 있습니다.",
       jscode: `import { Dropdown, Button } from "sud-ui";
 import { AngleDown } from "sud-icons";
 
 const items = [
   {
     key: "menu1",
-    label: "메뉴 1",
-    onClick: () => console.log("메뉴 1 클릭")
+    label: "Menu 1",
+    onClick: () => console.log("Menu 1 clicked")
   },
   {
     key: "menu2",
-    label: "메뉴 2",
-    onClick: () => console.log("메뉴 2 클릭")
+    label: "Menu 2",
+    onClick: () => console.log("Menu 2 clicked")
   }
 ];
 
 export default function Example() {
   return (
-    <div style={{ display: 'flex', gap: '8px' }}>
-      <Dropdown items={items} colorType="default">
-        <Button icon={<AngleDown size={16} />} iconPosition="right" >
-          Default
-        </Button>
-      </Dropdown>
-      <Dropdown items={items} colorType="primary">
-        <Button icon={<AngleDown size={16} />} iconPosition="right" colorType="primary">
-          Primary
+    <div>
+      <Dropdown items={items} disabled>
+        <Button icon={<AngleDown size={16} />} iconPosition="right" disabled>
+          Disabled
         </Button>
       </Dropdown>
     </div>
@@ -331,33 +305,29 @@ interface MenuItem {
 const items: MenuItem[] = [
   {
     key: "menu1",
-    label: "메뉴 1",
-    onClick: () => console.log("메뉴 1 클릭")
+    label: "Menu 1",
+    onClick: () => console.log("Menu 1 clicked")
   },
   {
     key: "menu2",
-    label: "메뉴 2",
-    onClick: () => console.log("메뉴 2 클릭")
+    label: "Menu 2",
+    onClick: () => console.log("Menu 2 clicked")
   }
 ];
 
 export default function Example() {
   return (
-    <div style={{ display: 'flex', gap: '8px' }}>
-      <Dropdown items={items} colorType="default">
-        <Button icon={<AngleDown size={16} />} iconPosition="right">
-          Default
-        </Button>
-      </Dropdown>
-      <Dropdown items={items} colorType="primary">
-        <Button icon={<AngleDown size={16} />} iconPosition="right" colorType="primary">
-          Primary
+    <div>
+      <Dropdown items={items} disabled>
+        <Button icon={<AngleDown size={16} />} iconPosition="right" disabled>
+          Disabled
         </Button>
       </Dropdown>
     </div>
   );
 }`
     },
+
     {
       title: "Color Customization",
       render: (
@@ -378,20 +348,23 @@ export default function Example() {
           </Dropdown>
         </div>
       ),
-      description: "드롭다운의 색상을 커스텀할 수 있습니다.",
+      description:
+        lang === "ko"
+          ? "드롭다운의 색상을 커스텀할 수 있습니다."
+          : "You can customize the color of the dropdown.",
       jscode: `import { Dropdown, Button } from "sud-ui";
 import { AngleDown } from "sud-icons";
 
 const items = [
   {
     key: "menu1",
-    label: "메뉴 1",
-    onClick: () => console.log("메뉴 1 클릭")
+    label: "Menu 1",
+    onClick: () => console.log("Menu 1 clicked")
   },
   {
     key: "menu2",
-    label: "메뉴 2",
-    onClick: () => console.log("메뉴 2 클릭")
+    label: "Menu 2",
+    onClick: () => console.log("Menu 2 clicked")
   }
 ];
 
@@ -399,7 +372,7 @@ export default function Example() {
   return (
     <div style={{ display: 'flex', gap: '8px' }}>
       <Dropdown items={items} colorType="default">
-        <Button icon={<AngleDown size={16} />} iconPosition="right" >
+        <Button icon={<AngleDown size={16} />} iconPosition="right">
           Default
         </Button>
       </Dropdown>
@@ -423,13 +396,13 @@ interface MenuItem {
 const items: MenuItem[] = [
   {
     key: "menu1",
-    label: "메뉴 1",
-    onClick: () => console.log("메뉴 1 클릭")
+    label: "Menu 1",
+    onClick: () => console.log("Menu 1 clicked")
   },
   {
     key: "menu2",
-    label: "메뉴 2",
-    onClick: () => console.log("메뉴 2 클릭")
+    label: "Menu 2",
+    onClick: () => console.log("Menu 2 clicked")
   }
 ];
 
@@ -468,20 +441,22 @@ export default function Example() {
         </div>
       ),
       description:
-        "popupPlacement prop으로 드롭다운 메뉴의 위치를 지정할 수 있습니다.",
+        lang === "ko"
+          ? "popupPlacement prop으로 드롭다운 메뉴의 위치를 지정할 수 있습니다."
+          : "You can specify the position of the dropdown menu using the popupPlacement prop.",
       jscode: `import { Dropdown, Button } from "sud-ui";
 import { AngleDown, AngleUp, AngleLeft, AngleRight } from "sud-icons";
 
 const items = [
   {
     key: "menu1",
-    label: "메뉴 1",
-    onClick: () => console.log("메뉴 1 클릭")
+    label: "Menu 1",
+    onClick: () => console.log("Menu 1 clicked")
   },
   {
     key: "menu2",
-    label: "메뉴 2",
-    onClick: () => console.log("메뉴 2 클릭")
+    label: "Menu 2",
+    onClick: () => console.log("Menu 2 clicked")
   }
 ];
 
@@ -533,13 +508,13 @@ interface MenuItem {
 const items: MenuItem[] = [
   {
     key: "menu1",
-    label: "메뉴 1",
-    onClick: () => console.log("메뉴 1 클릭")
+    label: "Menu 1",
+    onClick: () => console.log("Menu 1 clicked")
   },
   {
     key: "menu2",
-    label: "메뉴 2",
-    onClick: () => console.log("메뉴 2 클릭")
+    label: "Menu 2",
+    onClick: () => console.log("Menu 2 clicked")
   }
 ];
 
@@ -569,7 +544,7 @@ const placementItems: PlacementItem[] = [
 
 export default function Example() {
   return (
-    <div style={{ display: 'flex', gap: '8px' }}>
+    <div style={{ display: "flex", gap: "8px" }}>
       {placementItems.map((item) => (
         <Dropdown
           key={item.placement}
@@ -591,21 +566,30 @@ export default function Example() {
     {
       key: "children",
       name: "children*",
-      description: "드롭다운을 트리거하는 요소 (PopupBase)",
+      description:
+        lang === "ko"
+          ? "드롭다운을 트리거하는 요소 (PopupBase)"
+          : "Element that triggers the dropdown (PopupBase)",
       type: "ReactNode",
       default: ""
     },
     {
       key: "title",
       name: "title",
-      description: "드롭다운 메뉴의 제목 (PopupBase)",
+      description:
+        lang === "ko"
+          ? "드롭다운 메뉴의 제목 (PopupBase)"
+          : "Title of the dropdown menu (PopupBase)",
       type: "string",
       default: ""
     },
     {
       key: "trigger",
       name: "trigger",
-      description: "드롭다운을 여는 방식 (PopupBase)",
+      description:
+        lang === "ko"
+          ? "드롭다운을 여는 방식 (PopupBase)"
+          : "How to open the dropdown (PopupBase)",
       type: (
         <>
           <Tag>hover</Tag> ｜ <Tag>click</Tag> ｜ <Tag>contextMenu</Tag>
@@ -616,49 +600,68 @@ export default function Example() {
     {
       key: "open",
       name: "open",
-      description: "드롭다운의 열림 상태 (PopupBase, 제어용)",
+      description:
+        lang === "ko"
+          ? "드롭다운의 열림 상태 (PopupBase, 제어용)"
+          : "Open state of the dropdown (PopupBase, controlled)",
       type: "boolean",
       default: ""
     },
     {
       key: "defaultOpen",
       name: "defaultOpen",
-      description: "드롭다운의 기본 열림 상태 (PopupBase)",
+      description:
+        lang === "ko"
+          ? "드롭다운의 기본 열림 상태 (PopupBase)"
+          : "Default open state of the dropdown (PopupBase)",
       type: "boolean",
       default: "false"
     },
     {
       key: "onOpenChange",
       name: "onOpenChange",
-      description: "드롭다운 열림 상태 변경 시 호출되는 콜백 (PopupBase)",
+      description:
+        lang === "ko"
+          ? "드롭다운 열림 상태 변경 시 호출되는 콜백 (PopupBase)"
+          : "Callback called when dropdown open state changes (PopupBase)",
       type: "(open: boolean) => void",
       default: ""
     },
     {
       key: "closeOnClick",
       name: "closeOnClick",
-      description: "메뉴 항목 클릭 시 드롭다운 닫기 여부 (PopupBase)",
+      description:
+        lang === "ko"
+          ? "메뉴 항목 클릭 시 드롭다운 닫기 여부 (PopupBase)"
+          : "Whether to close dropdown when menu item is clicked (PopupBase)",
       type: "boolean",
       default: "false"
     },
     {
       key: "disabled",
       name: "disabled",
-      description: "드롭다운 비활성화 여부 (PopupBase)",
+      description:
+        lang === "ko"
+          ? "드롭다운 비활성화 여부 (PopupBase)"
+          : "Whether to disable the dropdown (PopupBase)",
       type: "boolean",
       default: "false"
     },
     {
       key: "items",
       name: "items",
-      description: "드롭다운 메뉴 항목 배열 (Menu)",
+      description:
+        lang === "ko"
+          ? "드롭다운 메뉴 항목 배열 (Menu)"
+          : "Array of dropdown menu items (Menu)",
       type: "Array<MenuItem>",
       default: "[]"
     },
     {
       key: "expandType",
       name: "expandType",
-      description: "메뉴 확장 방식 (Menu)",
+      description:
+        lang === "ko" ? "메뉴 확장 방식 (Menu)" : "Menu expansion type (Menu)",
       type: (
         <>
           <Tag>popover</Tag> ｜ <Tag>dropdown</Tag>
@@ -669,7 +672,10 @@ export default function Example() {
     {
       key: "popupPlacement",
       name: "popupPlacement",
-      description: "드롭다운 팝업의 위치 (PopupBase)",
+      description:
+        lang === "ko"
+          ? "드롭다운 팝업의 위치 (PopupBase)"
+          : "Position of the dropdown popup (PopupBase)",
       type: (
         <>
           <Tag>top</Tag> ｜ <Tag>bottom</Tag> ｜ <Tag>right</Tag> ｜{" "}
@@ -681,7 +687,10 @@ export default function Example() {
     {
       key: "placement",
       name: "placement",
-      description: "메뉴의 위치 배열 (Menu)",
+      description:
+        lang === "ko"
+          ? "메뉴의 위치 배열 (Menu)"
+          : "Array of menu positions (Menu)",
       type: (
         <>
           [<Tag>top</Tag> ｜ <Tag>bottom</Tag> ｜ <Tag>right</Tag> ｜{" "}
@@ -698,7 +707,10 @@ export default function Example() {
     {
       key: "colorType",
       name: "colorType",
-      description: "색상 타입 (PopupBase, Menu)",
+      description:
+        lang === "ko"
+          ? "색상 타입 (PopupBase, Menu)"
+          : "Color type (PopupBase, Menu)",
       type: (
         <>
           <Tag>default</Tag> ｜ <Tag>primary</Tag> ｜ <Tag>secondary</Tag> ｜{" "}
@@ -711,35 +723,44 @@ export default function Example() {
     {
       key: "background",
       name: "background",
-      description: "배경색 (PopupBase)",
+      description:
+        lang === "ko" ? "배경색 (PopupBase)" : "Background color (PopupBase)",
       type: "string",
       default: ""
     },
     {
       key: "color",
       name: "color",
-      description: "텍스트 색상 (PopupBase)",
+      description:
+        lang === "ko" ? "텍스트 색상 (PopupBase)" : "Text color (PopupBase)",
       type: "string",
       default: ""
     },
     {
       key: "border",
       name: "border",
-      description: "테두리 표시 여부 (PopupBase)",
+      description:
+        lang === "ko"
+          ? "테두리 표시 여부 (PopupBase)"
+          : "Whether to show border (PopupBase)",
       type: "boolean",
       default: "true"
     },
     {
       key: "borderColor",
       name: "borderColor",
-      description: "테두리 색상 (PopupBase)",
+      description:
+        lang === "ko" ? "테두리 색상 (PopupBase)" : "Border color (PopupBase)",
       type: "string",
       default: ""
     },
     {
       key: "borderType",
       name: "borderType",
-      description: "테두리 스타일 (PopupBase)",
+      description:
+        lang === "ko"
+          ? "테두리 스타일 (PopupBase)"
+          : "Border style (PopupBase)",
       type: (
         <>
           <Tag>solid</Tag> ｜ <Tag>dashed</Tag> ｜ <Tag>dotted</Tag>
@@ -750,14 +771,16 @@ export default function Example() {
     {
       key: "borderWeight",
       name: "borderWeight",
-      description: "테두리 두께 (PopupBase)",
+      description:
+        lang === "ko" ? "테두리 두께 (PopupBase)" : "Border weight (PopupBase)",
       type: "number",
       default: "1"
     },
     {
       key: "shape",
       name: "shape",
-      description: "모서리 형태 (PopupBase)",
+      description:
+        lang === "ko" ? "모서리 형태 (PopupBase)" : "Corner shape (PopupBase)",
       type: (
         <>
           <Tag>rounded</Tag> ｜ <Tag>square</Tag>
@@ -768,7 +791,8 @@ export default function Example() {
     {
       key: "shadow",
       name: "shadow",
-      description: "그림자 크기 (PopupBase)",
+      description:
+        lang === "ko" ? "그림자 크기 (PopupBase)" : "Shadow size (PopupBase)",
       type: (
         <>
           <Tag>none</Tag> ｜ <Tag>sm</Tag> ｜ <Tag>md</Tag> ｜ <Tag>lg</Tag> ｜{" "}
@@ -780,14 +804,20 @@ export default function Example() {
     {
       key: "className",
       name: "className",
-      description: "추가 클래스명 (PopupBase)",
+      description:
+        lang === "ko"
+          ? "추가 클래스명 (PopupBase)"
+          : "Additional class name (PopupBase)",
       type: "string",
       default: ""
     },
     {
       key: "style",
       name: "style",
-      description: "추가 스타일 (PopupBase)",
+      description:
+        lang === "ko"
+          ? "추가 스타일 (PopupBase)"
+          : "Additional style (PopupBase)",
       type: "React.CSSProperties",
       default: "{}"
     }

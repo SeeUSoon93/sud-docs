@@ -3,6 +3,7 @@ import { handleInstallCopy } from "../../utils/utils";
 import { CodeBoxOutline, DocumentOutline } from "sud-icons";
 import React, { useState } from "react";
 import { useDarkMode } from "../../context/darkModeContext";
+import { useLang } from "../../context/langContext";
 
 export const MainTitle = ({ title, description, etc }) => {
   return (
@@ -98,7 +99,7 @@ export const SubTitle = ({ title }) => {
 export const InstallCommand = ({ command }) => {
   const [isHovered, setIsHovered] = useState(false);
   const { isDarkMode } = useDarkMode();
-
+  const { lang } = useLang();
   return (
     <Card
       colorType="sub"
@@ -111,7 +112,7 @@ export const InstallCommand = ({ command }) => {
     >
       <div
         className="flex item-cen w-100 pd-10"
-        onClick={() => handleInstallCopy(command)}
+        onClick={() => handleInstallCopy(command, lang)}
       >
         <Typography as="code" code size="lg">
           {command}
@@ -125,7 +126,7 @@ export const InstallCommand = ({ command }) => {
             right: "10px",
             background: isDarkMode ? "black" : "white"
           }}
-          onClick={() => handleInstallCopy(command)}
+          onClick={() => handleInstallCopy(command, lang)}
         >
           <DocumentOutline size={16} /> Copy
         </div>
@@ -159,7 +160,7 @@ export const CodeBlock = ({ code }) => {
           lineHeight: "1.6",
           cursor: "pointer"
         }}
-        onClick={() => handleInstallCopy(code)}
+        onClick={() => handleInstallCopy(code, lang)}
       >
         {code}
       </Typography>
@@ -171,7 +172,7 @@ export const CodeBlock = ({ code }) => {
             right: "10px",
             background: "white"
           }}
-          onClick={() => handleInstallCopy(code)}
+          onClick={() => handleInstallCopy(code, lang)}
         >
           <DocumentOutline size={16} /> Copy
         </div>

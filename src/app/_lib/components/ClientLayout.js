@@ -4,8 +4,7 @@ import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
 import { MobileProvider, useMobile } from "../context/mobileContext";
 import { DarkModeProvider, useDarkMode } from "../context/darkModeContext";
-import { DotSpinner } from "sud-ui";
-
+import { LangProvider, useLang } from "../context/langContext";
 import {
   Layout,
   Sider,
@@ -14,13 +13,20 @@ import {
   Header,
   SoonUIDesign,
   Typography,
-  FloatButton
+  FloatButton,
+  Div
 } from "sud-ui";
 import "sud-ui/dist/index.css";
 
 import MainHeader from "./layoutComponents/MainHeader";
 import MainSider from "./layoutComponents/MainSider";
-import { MoonFill, SunFill } from "sud-icons";
+import {
+  EnglishKorean,
+  KoreanEnglish,
+  MoonFill,
+  SettingOutline,
+  SunFill
+} from "sud-icons";
 import { LoadingPage } from "./LoadingPage";
 
 function LayoutContent({ children }) {
@@ -33,6 +39,7 @@ function LayoutContent({ children }) {
   const [selectSiderMenu, setSelectSiderMenu] = useState("");
 
   const { isDarkMode, setIsDarkMode } = useDarkMode();
+  const { lang, setLang } = useLang();
   const isHome = pathname === "/";
 
   useEffect(() => {
@@ -152,9 +159,30 @@ function LayoutContent({ children }) {
         </Layout>
       )}
       <FloatButton
-        colorType="default"
-        icon={isDarkMode ? <SunFill /> : <MoonFill />}
-        onClick={() => setIsDarkMode(!isDarkMode)}
+        className="hover-pulse-2 hover-shadow-8"
+        colorType="orchid"
+        border={false}
+        icon={<SettingOutline />}
+        size="xl"
+        actions={[
+          {
+            icon: isDarkMode ? (
+              <Div color="gold-8" children={<SunFill />} />
+            ) : (
+              <Div color="cool-gray-8" children={<MoonFill />} />
+            ),
+            onClick: () => setIsDarkMode(!isDarkMode)
+          },
+          {
+            icon: (
+              <Div
+                color="forest-8"
+                children={lang === "ko" ? <KoreanEnglish /> : <EnglishKorean />}
+              />
+            ),
+            onClick: () => setLang(lang === "ko" ? "en" : "ko")
+          }
+        ]}
       />
     </SoonUIDesign>
   );
@@ -164,17 +192,10 @@ export default function ClientLayout({ children }) {
   return (
     <MobileProvider>
       <DarkModeProvider>
-        <LayoutContent>{children}</LayoutContent>
+        <LangProvider>
+          <LayoutContent>{children}</LayoutContent>
+        </LangProvider>
       </DarkModeProvider>
     </MobileProvider>
   );
-}
-
-function getFirstSubKey(items) {
-  if (!items) return null;
-  for (const item of items) {
-    if (item.children?.length > 0) return item.children[0].key;
-    if (item.key) return item.key;
-  }
-  return null;
 }

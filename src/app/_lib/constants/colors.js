@@ -314,30 +314,126 @@ export const colors = {
 };
 
 export const colorPalettes = {
-  red: { name: "Red", description: "강렬하고 주목도가 높은 색상" },
-  rose: { name: "Rose", description: "부드럽고 로맨틱한 분홍색" },
-  coral: { name: "Coral", description: "따뜻하고 생동감 있는 산호색" },
-  orange: { name: "Orange", description: "활기차고 에너지 넘치는 색상" },
-  volcano: { name: "Volcano", description: "강렬한 붉은 오렌지색" },
-  apricot: { name: "Apricot", description: "부드러운 살구색" },
-  yellow: { name: "Yellow", description: "밝고 경쾌한 노란색" },
-  gold: { name: "Gold", description: "고급스러운 금색" },
-  amber: { name: "Amber", description: "따뜻한 황갈색" },
-  green: { name: "Green", description: "자연스러운 녹색" },
-  lime: { name: "Lime", description: "선명한 연두색" },
-  mint: { name: "Mint", description: "상쾌한 민트색" },
-  blue: { name: "Blue", description: "신뢰감 있는 파란색" },
-  sky: { name: "Sky", description: "맑은 하늘색" },
-  cerulean: { name: "Cerulean", description: "깊은 하늘색" },
-  indigo: { name: "Indigo", description: "고급스러운 남색" },
-  cobalt: { name: "Cobalt", description: "선명한 코발트색" },
-  navy: { name: "Navy", description: "깊이감 있는 남색" },
-  purple: { name: "Purple", description: "고귀한 보라색" },
-  plum: { name: "Plum", description: "깊은 자주색" },
-  orchid: { name: "Orchid", description: "우아한 난초색" },
-  forest: { name: "Forest", description: "깊은 숲색" },
-  sage: { name: "Sage", description: "차분한 세이지색" },
-  neutral: { name: "Neutral", description: "중립적인 회색" },
-  "warm-gray": { name: "Warm Gray", description: "따뜻한 회색" },
-  "cool-gray": { name: "Cool Gray", description: "차가운 회색" }
+  red: {
+    name: "Red",
+    description: {
+      ko: "강렬하고 주목도가 높은 색상",
+      en: "Strong and attention-grabbing color"
+    }
+  },
+  rose: {
+    name: "Rose",
+    description: {
+      ko: "부드럽고 로맨틱한 분홍색",
+      en: "Soft and romantic pink"
+    }
+  },
+  coral: {
+    name: "Coral",
+    description: {
+      ko: "따뜻하고 생동감 있는 산호색",
+      en: "Warm and vibrant coral"
+    }
+  },
+  orange: {
+    name: "Orange",
+    description: {
+      ko: "활기차고 에너지 넘치는 색상",
+      en: "Energetic and vibrant orange"
+    }
+  },
+  volcano: {
+    name: "Volcano",
+    description: {
+      ko: "강렬한 붉은 오렌지색",
+      en: "Strong and vibrant red-orange"
+    }
+  },
+  apricot: {
+    name: "Apricot",
+    description: { ko: "부드러운 살구색", en: "Soft and warm apricot" }
+  },
+  yellow: {
+    name: "Yellow",
+    description: { ko: "밝고 경쾌한 노란색", en: "Bright and cheerful yellow" }
+  },
+  gold: {
+    name: "Gold",
+    description: { ko: "고급스러운 금색", en: "Luxurious and rich gold" }
+  },
+  amber: {
+    name: "Amber",
+    description: { ko: "따뜻한 황갈색", en: "Warm and rich amber" }
+  },
+  green: {
+    name: "Green",
+    description: { ko: "자연스러운 녹색", en: "Natural and fresh green" }
+  },
+  lime: {
+    name: "Lime",
+    description: { ko: "선명한 연두색", en: "Bright and vibrant lime" }
+  },
+  mint: {
+    name: "Mint",
+    description: { ko: "상쾌한 민트색", en: "Fresh and cool mint" }
+  },
+  blue: {
+    name: "Blue",
+    description: {
+      ko: "신뢰감 있는 파란색",
+      en: "Trustworthy and reliable blue"
+    }
+  },
+  sky: {
+    name: "Sky",
+    description: { ko: "맑은 하늘색", en: "Clear and bright sky blue" }
+  },
+  cerulean: {
+    name: "Cerulean",
+    description: { ko: "깊은 하늘색", en: "Deep and rich cerulean" }
+  },
+  indigo: {
+    name: "Indigo",
+    description: { ko: "고급스러운 남색", en: "Luxurious and deep indigo" }
+  },
+  cobalt: {
+    name: "Cobalt",
+    description: { ko: "선명한 코발트색", en: "Bright and intense cobalt" }
+  },
+  navy: {
+    name: "Navy",
+    description: { ko: "깊이감 있는 남색", en: "Deep and sophisticated navy" }
+  },
+  purple: {
+    name: "Purple",
+    description: { ko: "고귀한 보라색", en: "Noble and rich purple" }
+  },
+  plum: {
+    name: "Plum",
+    description: { ko: "깊은 자주색", en: "Deep and rich plum" }
+  },
+  orchid: {
+    name: "Orchid",
+    description: { ko: "우아한 난초색", en: "Elegant and delicate orchid" }
+  },
+  forest: {
+    name: "Forest",
+    description: { ko: "깊은 숲색", en: "Deep and natural forest green" }
+  },
+  sage: {
+    name: "Sage",
+    description: { ko: "차분한 세이지색", en: "Calm and muted sage" }
+  },
+  neutral: {
+    name: "Neutral",
+    description: { ko: "중립적인 회색", en: "Neutral and balanced gray" }
+  },
+  "warm-gray": {
+    name: "Warm Gray",
+    description: { ko: "따뜻한 회색", en: "Warm and soft gray" }
+  },
+  "cool-gray": {
+    name: "Cool Gray",
+    description: { ko: "차가운 회색", en: "Cool and crisp gray" }
+  }
 };

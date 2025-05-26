@@ -2,6 +2,7 @@
 
 import Frame from "../Frame";
 import { useMobile } from "../../_lib/context/mobileContext";
+import { useLang } from "../../_lib/context/langContext";
 import { Tag } from "sud-ui";
 import * as sud from "sud-ui";
 import { LogoSud } from "sud-icons";
@@ -9,35 +10,66 @@ import { useState } from "react";
 
 export default function Layout() {
   const { isMobile } = useMobile();
-
+  const { lang } = useLang();
   const name = "Layout";
   const description = (
     <>
-      웹 애플리케이션의 레이아웃을 구성하는 컴포넌트입니다. Header, Sider,
-      Content, Footer 컴포넌트를 조합하여 다양한 레이아웃을 구성할 수 있습니다.
-      <br />
-      <Tag>Layout</Tag> <Tag>Header</Tag> <Tag>Sider</Tag> <Tag>Content</Tag>{" "}
-      <Tag>Footer</Tag> 컴포넌트와 함께 사용합니다.
-      <br />
-      <br />
-      Layout 컴포넌트는 자동으로 화면 전체를 차지하며, 내부 컴포넌트들의 크기에
-      따라 Content 영역이 자동으로 조절됩니다. Sider의 위치는 siderPosition
-      prop을 통해 조절할 수 있습니다.
+      {lang === "ko" ? (
+        <>
+          웹 애플리케이션의 레이아웃을 구성하는 컴포넌트입니다. Header, Sider,
+          Content, Footer 컴포넌트를 조합하여 다양한 레이아웃을 구성할 수
+          있습니다.
+          <br />
+          <Tag>Layout</Tag> <Tag>Header</Tag> <Tag>Sider</Tag>{" "}
+          <Tag>Content</Tag> <Tag>Footer</Tag> 컴포넌트와 함께 사용합니다.
+          <br />
+          <br />
+          Layout 컴포넌트는 자동으로 화면 전체를 차지하며, 내부 컴포넌트들의
+          크기에 따라 Content 영역이 자동으로 조절됩니다. Sider의 위치는
+          siderPosition prop을 통해 조절할 수 있습니다.
+        </>
+      ) : (
+        <>
+          A component for structuring web application layouts. You can create
+          various layouts by combining Header, Sider, Content, and Footer
+          components.
+          <br />
+          Used together with <Tag>Layout</Tag> <Tag>Header</Tag>{" "}
+          <Tag>Sider</Tag> <Tag>Content</Tag> <Tag>Footer</Tag> components.
+          <br />
+          <br />
+          The Layout component automatically occupies the full screen, and the
+          Content area adjusts automatically based on the size of internal
+          components. The Sider position can be controlled through the
+          siderPosition prop.
+        </>
+      )}
     </>
   );
   const IMPORT_COMMAND = `import { Layout, Header, Sider, Content, Footer } from "sud-ui";`;
 
-  const cautions = [
-    "Header, Sider, Content, Footer 컴포넌트는 반드시 Layout 컴포넌트 내부에 위치해야 합니다.",
-    "Layout 내부에 다른 Layout을 중첩하여 사용할 수 있습니다.",
-    "Sider의 위치는 'above-header' 또는 'below-header'로 설정할 수 있습니다.",
-    "각 컴포넌트의 크기는 자동으로 계산되며, Content 영역이 나머지 공간을 채웁니다."
-  ];
+  const cautions =
+    lang === "ko"
+      ? [
+          "Header, Sider, Content, Footer 컴포넌트는 반드시 Layout 컴포넌트 내부에 위치해야 합니다.",
+          "Layout 내부에 다른 Layout을 중첩하여 사용할 수 있습니다.",
+          "Sider의 위치는 'above-header' 또는 'below-header'로 설정할 수 있습니다.",
+          "각 컴포넌트의 크기는 자동으로 계산되며, Content 영역이 나머지 공간을 채웁니다."
+        ]
+      : [
+          "Header, Sider, Content, and Footer components must be placed inside the Layout component.",
+          "You can nest another Layout inside the Layout component.",
+          "The Sider position can be set to either 'above-header' or 'below-header'.",
+          "The size of each component is calculated automatically, and the Content area fills the remaining space."
+        ];
 
   const examples = [
     {
-      title: "기본 레이아웃",
-      description: "기본적인 레이아웃 구성입니다.",
+      title: "Basic Layout",
+      description:
+        lang === "ko"
+          ? "기본적인 레이아웃 구성입니다."
+          : "Basic layout structure.",
       render: (
         <div
           className={`grid ${isMobile ? "col-1" : "col-2"} gap-20`}
@@ -165,8 +197,10 @@ export default function Layout() {
     },
     {
       title: "Header-Content-Footer",
-      description: "Header, Content, Footer 컴포넌트를 사용한 레이아웃입니다.",
-
+      description:
+        lang === "ko"
+          ? "Header, Content, Footer 컴포넌트를 사용한 레이아웃입니다."
+          : "Layout using Header, Content, and Footer components.",
       jscode: `import React from 'react';
 import { Layout, Header, Content, Footer, Avatar, Typography } from 'sud-ui';
 import { LogoSud } from 'sud-ui';
@@ -190,7 +224,7 @@ const BasicLayout = () => {
       </Content>
       <Footer
         className="flex jus-cen item-cen"
-        colorType="info"
+        colorType="sub"
         border={false}
         height="40px"
       >
@@ -224,7 +258,7 @@ const BasicLayout: React.FC = () => {
       </Content>
       <Footer
         className="flex jus-cen item-cen"
-        colorType="info"
+        colorType="sub"
         border={false}
         height="40px"
       >
@@ -257,7 +291,7 @@ export default BasicLayout;`,
             </sud.Content>
             <sud.Footer
               className="flex jus-cen item-cen ta-cen"
-              colorType="info"
+              colorType="sub"
               border={false}
               height="40px"
             >
@@ -269,7 +303,10 @@ export default BasicLayout;`,
     },
     {
       title: "Above-Header-Sider-Content",
-      description: "Above-Header-Sider-Content 레이아웃입니다.",
+      description:
+        lang === "ko"
+          ? "Above-Header-Sider-Content 레이아웃입니다."
+          : "Above-Header-Sider-Content layout.",
       render: (
         <div style={{ width: "100%", height: "50vh" }}>
           {(() => {
@@ -278,18 +315,18 @@ export default BasicLayout;`,
             const menuItems = [
               {
                 key: "dashboard",
-                label: "대시보드",
+                label: "Dashboard",
                 children: [
-                  { key: "overview", label: "개요" },
-                  { key: "analytics", label: "분석" }
+                  { key: "overview", label: "Overview" },
+                  { key: "analytics", label: "Analytics" }
                 ]
               },
               {
                 key: "management",
-                label: "관리",
+                label: "Management",
                 children: [
-                  { key: "users", label: "사용자" },
-                  { key: "settings", label: "설정" }
+                  { key: "users", label: "Users" },
+                  { key: "settings", label: "Settings" }
                 ]
               }
             ];
@@ -314,7 +351,7 @@ export default BasicLayout;`,
               <sud.Layout siderPosition="above-header">
                 <sud.Header
                   className="flex jus-cen item-cen"
-                  colorType="info"
+                  colorType="sub"
                   shadow="sm"
                   border={false}
                 >
@@ -330,7 +367,7 @@ export default BasicLayout;`,
                   <sud.Menu
                     items={menuItems}
                     expandType="accordion"
-                    colorType="info"
+                    colorType="sub"
                     onSelect={handleMenuSelect}
                   />
                 </sud.Sider>
@@ -339,8 +376,8 @@ export default BasicLayout;`,
                   background="sky-1"
                 >
                   {selectedMenu
-                    ? `${selectedMenu} 선택됨`
-                    : "메뉴를 선택해주세요"}
+                    ? `${selectedMenu} selected`
+                    : "Please select a menu"}
                 </sud.Content>
               </sud.Layout>
             );
@@ -357,18 +394,18 @@ const AboveHeaderSiderContent = () => {
   const menuItems = [
     {
       key: "dashboard",
-      label: "대시보드",
+      label: "Dashboard",
       children: [
-        { key: "overview", label: "개요" },
-        { key: "analytics", label: "분석" }
+        { key: "overview", label: "Overview" },
+        { key: "analytics", label: "Analytics" }
       ]
     },
     {
       key: "management",
-      label: "관리",
+      label: "Management",
       children: [
-        { key: "users", label: "사용자" },
-        { key: "settings", label: "설정" }
+        { key: "users", label: "Users" },
+        { key: "settings", label: "Settings" }
       ]
     }
   ];
@@ -393,7 +430,7 @@ const AboveHeaderSiderContent = () => {
     <Layout siderPosition="above-header">
       <Header
         className="flex jus-cen item-cen"
-        colorType="info"
+        colorType="sub"
         shadow="sm"
         border={false}
       >
@@ -409,7 +446,7 @@ const AboveHeaderSiderContent = () => {
         <Menu
           items={menuItems}
           expandType="accordion"
-          colorType="info"
+          colorType="sub"
           onSelect={handleMenuSelect}
         />
       </Sider>
@@ -417,7 +454,7 @@ const AboveHeaderSiderContent = () => {
         className="flex jus-cen item-cen"
         background="sky-1"
       >
-        {selectedMenu ? \`\${selectedMenu} 선택됨\` : "메뉴를 선택해주세요"}
+        {selectedMenu ? \`\${selectedMenu} selected\` : "Please select a menu"}
       </Content>
     </Layout>
   );
@@ -440,18 +477,18 @@ const AboveHeaderSiderContent: React.FC = () => {
   const menuItems: MenuItem[] = [
     {
       key: "dashboard",
-      label: "대시보드",
+      label: "Dashboard",
       children: [
-        { key: "overview", label: "개요" },
-        { key: "analytics", label: "분석" }
+        { key: "overview", label: "Overview" },
+        { key: "analytics", label: "Analytics" }
       ]
     },
     {
       key: "management",
-      label: "관리",
+      label: "Management",
       children: [
-        { key: "users", label: "사용자" },
-        { key: "settings", label: "설정" }
+        { key: "users", label: "Users" },
+        { key: "settings", label: "Settings" }
       ]
     }
   ];
@@ -476,7 +513,7 @@ const AboveHeaderSiderContent: React.FC = () => {
     <Layout siderPosition="above-header">
       <Header
         className="flex jus-cen item-cen"
-        colorType="info"
+        colorType="sub"
         shadow="sm"
         border={false}
       >
@@ -492,7 +529,7 @@ const AboveHeaderSiderContent: React.FC = () => {
         <Menu
           items={menuItems}
           expandType="accordion"
-          colorType="info"
+          colorType="sub"
           onSelect={handleMenuSelect}
         />
       </Sider>
@@ -500,7 +537,7 @@ const AboveHeaderSiderContent: React.FC = () => {
         className="flex jus-cen item-cen"
         background="sky-1"
       >
-        {selectedMenu ? \`\${selectedMenu} 선택됨\` : "메뉴를 선택해주세요"}
+        {selectedMenu ? \`\${selectedMenu} selected\` : "Please select a menu"}
       </Content>
     </Layout>
   );
@@ -511,13 +548,15 @@ export default AboveHeaderSiderContent;`
     {
       title: "Nested-Layout",
       description:
-        "Layout 컴포넌트를 Content 안에 중첩하여 사용하는 예제입니다.",
+        lang === "ko"
+          ? "Layout 컴포넌트를 Content 안에 중첩하여 사용하는 예제입니다."
+          : "Example of nesting a Layout component inside Content.",
       render: (
         <div style={{ width: "100%", height: "50vh" }}>
           <sud.Layout>
             <sud.Header
               className="flex jus-cen item-cen"
-              colorType="info"
+              colorType="sub"
               shadow="sm"
               border={false}
             >
@@ -532,11 +571,11 @@ export default AboveHeaderSiderContent;`
             >
               <sud.Menu
                 items={[
-                  { key: "dashboard", label: "대시보드" },
-                  { key: "users", label: "사용자" },
-                  { key: "settings", label: "설정" }
+                  { key: "dashboard", label: "Dashboard" },
+                  { key: "users", label: "Users" },
+                  { key: "settings", label: "Settings" }
                 ]}
-                colorType="info"
+                colorType="sub"
               />
             </sud.Sider>
             <sud.Content>
@@ -548,13 +587,13 @@ export default AboveHeaderSiderContent;`
                   border={false}
                   height={60}
                 >
-                  서브 헤더
+                  Sub Header
                 </sud.Header>
                 <sud.Content
                   className="flex jus-cen item-cen"
                   background="sky-1"
                 >
-                  중첩된 레이아웃의 콘텐츠
+                  Nested Layout Content
                 </sud.Content>
               </sud.Layout>
             </sud.Content>
@@ -570,7 +609,7 @@ const NestedLayout = () => {
     <Layout>
       <Header
         className="flex jus-cen item-cen"
-        colorType="info"
+        colorType="sub"
         shadow="sm"
         border={false}
       >
@@ -585,11 +624,11 @@ const NestedLayout = () => {
       >
         <Menu
           items={[
-            { key: "dashboard", label: "대시보드" },
-            { key: "users", label: "사용자" },
-            { key: "settings", label: "설정" }
+            { key: "dashboard", label: "Dashboard" },
+            { key: "users", label: "Users" },
+            { key: "settings", label: "Settings" }
           ]}
-          colorType="info"
+          colorType="sub"
         />
       </Sider>
       <Content>
@@ -601,10 +640,10 @@ const NestedLayout = () => {
             border={false}
             height="60"
           >
-            서브 헤더
+            Sub Header
           </Header>
           <Content className="flex jus-cen item-cen">
-            중첩된 레이아웃의 콘텐츠
+            Nested Layout Content
           </Content>
         </Layout>
       </Content>
@@ -624,16 +663,16 @@ interface MenuItem {
 
 const NestedLayout: React.FC = () => {
   const menuItems: MenuItem[] = [
-    { key: "dashboard", label: "대시보드" },
-    { key: "users", label: "사용자" },
-    { key: "settings", label: "설정" }
+    { key: "dashboard", label: "Dashboard" },
+    { key: "users", label: "Users" },
+    { key: "settings", label: "Settings" }
   ];
 
   return (
     <Layout>
       <Header
         className="flex jus-cen item-cen"
-        colorType="info"
+        colorType="sub"
         shadow="sm"
         border={false}
       >
@@ -648,7 +687,7 @@ const NestedLayout: React.FC = () => {
       >
         <Menu
           items={menuItems}
-          colorType="info"
+          colorType="sub"
         />
       </Sider>
       <Content>
@@ -660,10 +699,10 @@ const NestedLayout: React.FC = () => {
             border={false}
             height="60"
           >
-            서브 헤더
+            Sub Header
           </Header>
           <Content className="flex jus-cen item-cen">
-            중첩된 레이아웃의 콘텐츠
+            Nested Layout Content
           </Content>
         </Layout>
       </Content>
@@ -675,16 +714,19 @@ export default NestedLayout;`
     },
     {
       title: "Sider-Content",
-      description: "Sider와 Content만 있는 간단한 레이아웃입니다.",
+      description:
+        lang === "ko"
+          ? "Sider와 Content만 있는 간단한 레이아웃입니다."
+          : "Simple layout with only Sider and Content.",
       render: (
         <div style={{ width: "100%", height: "50vh" }}>
           {(() => {
             const [selectedMenu, setSelectedMenu] = useState("");
 
             const menuItems = [
-              { key: "dashboard", label: "대시보드" },
-              { key: "users", label: "사용자" },
-              { key: "settings", label: "설정" }
+              { key: "dashboard", label: "Dashboard" },
+              { key: "users", label: "Users" },
+              { key: "settings", label: "Settings" }
             ];
 
             const handleMenuSelect = (key) => {
@@ -703,7 +745,7 @@ export default NestedLayout;`
                 >
                   <sud.Menu
                     items={menuItems}
-                    colorType="info"
+                    colorType="sub"
                     onSelect={handleMenuSelect}
                   />
                 </sud.Sider>
@@ -712,8 +754,8 @@ export default NestedLayout;`
                   background="sky-1"
                 >
                   {selectedMenu
-                    ? `${selectedMenu} 페이지`
-                    : "메뉴를 선택해주세요"}
+                    ? `${selectedMenu} page`
+                    : "Please select a menu"}
                 </sud.Content>
               </sud.Layout>
             );
@@ -727,9 +769,9 @@ const SiderContentLayout = () => {
   const [selectedMenu, setSelectedMenu] = useState("");
 
   const menuItems = [
-    { key: "dashboard", label: "대시보드" },
-    { key: "users", label: "사용자" },
-    { key: "settings", label: "설정" }
+    { key: "dashboard", label: "Dashboard" },
+    { key: "users", label: "Users" },
+    { key: "settings", label: "Settings" }
   ];
 
   const handleMenuSelect = (key) => {
@@ -748,12 +790,12 @@ const SiderContentLayout = () => {
       >
         <Menu
           items={menuItems}
-          colorType="info"
+          colorType="sub"
           onSelect={handleMenuSelect}
         />
       </Sider>
       <Content className="flex jus-cen item-cen" background="sky-1">
-        {selectedMenu ? \`\${selectedMenu} 페이지\` : "메뉴를 선택해주세요"}
+        {selectedMenu ? \`\${selectedMenu} page\` : "Please select a menu"}
       </Content>
     </Layout>
   );
@@ -772,9 +814,9 @@ const SiderContentLayout: React.FC = () => {
   const [selectedMenu, setSelectedMenu] = useState<string>("");
 
   const menuItems: MenuItem[] = [
-    { key: "dashboard", label: "대시보드" },
-    { key: "users", label: "사용자" },
-    { key: "settings", label: "설정" }
+    { key: "dashboard", label: "Dashboard" },
+    { key: "users", label: "Users" },
+    { key: "settings", label: "Settings" }
   ];
 
   const handleMenuSelect = (key: string): void => {
@@ -793,12 +835,12 @@ const SiderContentLayout: React.FC = () => {
       >
         <Menu
           items={menuItems}
-          colorType="info"
+          colorType="sub"
           onSelect={handleMenuSelect}
         />
       </Sider>
       <Content className="flex jus-cen item-cen" background="sky-1">
-        {selectedMenu ? \`\${selectedMenu} 페이지\` : "메뉴를 선택해주세요"}
+        {selectedMenu ? \`\${selectedMenu} page\` : "Please select a menu"}
       </Content>
     </Layout>
   );
@@ -812,6 +854,7 @@ export default SiderContentLayout;`
     <Frame
       component={{ name, description, IMPORT_COMMAND, cautions, examples }}
       isMobile={isMobile}
+      lang={lang}
     />
   );
 }

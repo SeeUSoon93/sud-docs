@@ -13,11 +13,13 @@ import {
 } from "../../_lib/components/common/render";
 import { handleInstallCopy, handleSearch } from "../../_lib/utils/utils";
 import { useRouter } from "next/navigation";
+import { useLang } from "../../_lib/context/langContext";
 export default function ComponentOverview() {
   const { isMobile } = useMobile();
   const router = useRouter();
   const INSTALL_COMMAND = "npm install sud-ui";
   const [search, setSearch] = useState("");
+  const { lang } = useLang();
   const { isDarkMode } = useDarkMode();
 
   const filteredData = overViewData
@@ -36,21 +38,39 @@ export default function ComponentOverview() {
   return (
     <div className="flex flex-col gap-40 pd-20 w-100">
       <MainTitle
-        title={"Component Overview"}
+        title={lang === "ko" ? "컴포넌트 개요" : "Component Overview"}
         description={
           <>
-            Soon UI Design에서는 웹 애플리케이션을 쉽고 빠르게 개발할 수 있도록
-            다양한 UI 컴포넌트를 제공합니다.
+            {lang === "ko" ? (
+              <>
+                Soon UI Design에서는 웹 애플리케이션을 쉽고 빠르게 개발할 수
+                있도록 다양한 UI 컴포넌트를 제공합니다.
+              </>
+            ) : (
+              <>
+                Soon UI Design provides various UI components to help you
+                develop web applications easily and quickly.
+              </>
+            )}
           </>
         }
       />
 
       <SubTitleAndDescription
-        title={"사용하기전에"}
+        title={lang === "ko" ? "사용하기전에" : "Before Using"}
         description={
           <>
-            Soon UI Design 컴포넌트를 사용하려면 <Tag>sud-ui</Tag> 패키지를
-            설치해야 합니다.
+            {lang === "ko" ? (
+              <>
+                Soon UI Design 컴포넌트를 사용하려면 <Tag>sud-ui</Tag> 패키지를
+                설치해야 합니다.
+              </>
+            ) : (
+              <>
+                To use Soon UI Design components, you need to install the{" "}
+                <Tag>sud-ui</Tag> package.
+              </>
+            )}
           </>
         }
         etc={
@@ -61,14 +81,18 @@ export default function ComponentOverview() {
         }
       />
       <SubTitleAndDescription
-        title={"Component 종류"}
+        title={lang === "ko" ? "Component 종류" : "Component Types"}
         etc={
           <div className="flex flex-col gap-20">
             <Input
               size="sm"
-              placeholder="컴포넌트 이름을 검색하세요."
+              placeholder={
+                lang === "ko"
+                  ? "컴포넌트 이름을 검색하세요."
+                  : "Search component name"
+              }
               afterIcon={<Search size={20} />}
-              style={{ flex: 1 }}
+              style={{ width: "100%" }}
               value={search}
               onChange={(e) => handleSearch(e, setSearch)}
             />

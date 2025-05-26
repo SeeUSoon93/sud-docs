@@ -354,7 +354,7 @@ export const overViewData = [
         link: "/component/datePicker",
         item: (
           <div className="flex jus-cen item-cen">
-            <sudUi.DatePicker />
+            <sudUi.DatePicker placeholder="Select Date" />
           </div>
         )
       },
@@ -436,7 +436,7 @@ export const overViewData = [
         link: "/component/select",
         item: (
           <div className="flex jus-cen item-cen">
-            <sudUi.Select />
+            <sudUi.Select placeholder="Select" />
           </div>
         )
       },
@@ -466,7 +466,7 @@ export const overViewData = [
         link: "/component/timePicker",
         item: (
           <div className="flex jus-cen item-cen">
-            <sudUi.TimePicker />
+            <sudUi.TimePicker placeholder="Select Time" />
           </div>
         )
       }

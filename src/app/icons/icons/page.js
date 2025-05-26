@@ -4,6 +4,7 @@ import { useState } from "react";
 import * as Icons from "sud-icons";
 import { Button, Input, Segmented, Typography, Tag } from "sud-ui";
 import { useMobile } from "../../_lib/context/mobileContext";
+import { useLang } from "../../_lib/context/langContext";
 import {
   InstallCommand,
   MainTitle,
@@ -17,12 +18,14 @@ import {
 
 export default function Icon() {
   const { isMobile } = useMobile();
+  const { lang } = useLang();
   const INSTALL_COMMAND = "npm install sud-icons";
+
   const segments = [
-    { label: "All", value: "All" },
-    { label: "Filled", value: "Filled" },
-    { label: "Outlined", value: "Outlined" },
-    { label: "Logo", value: "Logo" }
+    { label: lang === "ko" ? "전체" : "All", value: "All" },
+    { label: lang === "ko" ? "채움" : "Filled", value: "Filled" },
+    { label: lang === "ko" ? "테두리" : "Outlined", value: "Outlined" },
+    { label: lang === "ko" ? "로고" : "Logo", value: "Logo" }
   ];
 
   const [selected, setSelected] = useState("All");
@@ -51,27 +54,40 @@ export default function Icon() {
   return (
     <div className="flex flex-col gap-40 pd-20 w-100">
       <MainTitle
-        title={"아이콘 (Icon)"}
-        description={"Soon UI Design 아이콘 팩입니다."}
+        title={lang === "ko" ? "아이콘" : "Icon"}
+        description={
+          lang === "ko"
+            ? "Soon UI Design 아이콘 팩입니다."
+            : "Icon pack for Soon UI Design."
+        }
       />
 
       <SubTitleAndDescription
-        title={"사용하기전에"}
+        title={lang === "ko" ? "사용하기전에" : "Before using"}
         description={
           <>
-            Soon UI Design 아이콘 팩을 사용하려면
-            <Tag>sud-icons</Tag> 패키지를 설치해야 합니다.
+            {lang === "ko" ? (
+              <>
+                Soon UI Design 아이콘 팩을 사용하려면 <Tag>sud-icons</Tag>{" "}
+                패키지를 설치해야 합니다.
+              </>
+            ) : (
+              <>
+                To use the Soon UI Design icon pack, you need to install the{" "}
+                <Tag>sud-icons</Tag> package.
+              </>
+            )}
           </>
         }
         etc={
           <InstallCommand
             command={INSTALL_COMMAND}
-            onClick={() => handleInstallCopy(INSTALL_COMMAND)}
+            onClick={() => handleInstallCopy(INSTALL_COMMAND, lang)}
           />
         }
       />
       <SubTitleAndDescription
-        title={"아이콘 목록"}
+        title={lang === "ko" ? "아이콘 목록" : "Icon List"}
         etc={
           <div className="flex flex-col gap-20">
             <div className="flex gap-10 flex-col">
@@ -79,13 +95,18 @@ export default function Icon() {
                 value={selected}
                 onChange={(value) => handleSegmentChange(value, setSelected)}
                 options={segments}
+                colorType="info"
                 block
               />
               <Input
                 size="sm"
-                placeholder="아이콘 이름을 검색하세요."
+                placeholder={
+                  lang === "ko"
+                    ? "아이콘 이름을 검색하세요."
+                    : "Search for an icon name."
+                }
                 afterIcon={<Icons.Search size={20} />}
-                style={{ flex: 1 }}
+                style={{ width: "100%" }}
                 value={search}
                 onChange={(e) => handleSearch(e, setSearch)}
               />
@@ -106,7 +127,10 @@ export default function Icon() {
                     icon={<Component size="30" />}
                     colorType="default"
                     onClick={() =>
-                      handleInstallCopy(`import {${name}} from "sud-icons";`)
+                      handleInstallCopy(
+                        `import {${name}} from "sud-icons";`,
+                        lang
+                      )
                     }
                     style={{ padding: 25 }}
                   />

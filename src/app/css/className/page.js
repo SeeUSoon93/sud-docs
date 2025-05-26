@@ -1,6 +1,7 @@
 "use client";
 
 import { useMobile } from "../../_lib/context/mobileContext";
+import { useLang } from "../../_lib/context/langContext";
 import { Typography, Card, Input, toast } from "sud-ui";
 import { classNameExamples } from "./data/classNameData";
 import { useState } from "react";
@@ -13,6 +14,7 @@ import {
 
 export default function ClassName() {
   const { isMobile } = useMobile();
+  const { lang } = useLang();
   const [search, setSearch] = useState("");
 
   const filteredExamples = classNameExamples.filter(
@@ -28,30 +30,56 @@ export default function ClassName() {
         title={"className"}
         description={
           <>
-            Soon UI Design에서는 <b>className</b>을 이용하여 css스타일을 적용할
-            수 있습니다.
-            <br />
-            className으로 css스타일을 적용하기 위해서는 아래처럼 css 파일을
-            불러와야 합니다.
+            {lang === "ko" ? (
+              <>
+                Soon UI Design에서는 <b>className</b>을 이용하여 css스타일을
+                적용할 수 있습니다.
+                <br />
+                className으로 css스타일을 적용하기 위해서는 아래처럼 css 파일을
+                불러와야 합니다.
+              </>
+            ) : (
+              <>
+                In Soon UI Design, you can apply CSS styles using{" "}
+                <b>className</b>.
+                <br />
+                To apply CSS styles with className, you need to import the CSS
+                file as shown below.
+              </>
+            )}
           </>
         }
         etc={<InstallCommand command="import 'sud-ui/dist/style.css';" />}
       />
 
       <SubTitleAndDescription
-        title={"className 규칙"}
+        title={lang === "ko" ? "className 규칙" : "className Rules"}
         description={
           <>
-            Soon UI Design에서는 <b>className</b>을 이용하여 css스타일을 적용할
-            수 있습니다.
-            <br />
-            <br />
+            {lang === "ko" ? (
+              <>
+                Soon UI Design에서는 <b>className</b>을 이용하여 css스타일을
+                적용할 수 있습니다.
+                <br />
+                <br />
+              </>
+            ) : (
+              <>
+                In Soon UI Design, you can apply CSS styles using{" "}
+                <b>className</b>.
+                <br />
+                <br />
+              </>
+            )}
           </>
         }
         search={
           <Input
-            placeholder="검색어를 입력해주세요."
+            placeholder={
+              lang === "ko" ? "검색어를 입력해주세요." : "Enter search term"
+            }
             value={search}
+            style={{ width: "100%" }}
             onChange={(e) => setSearch(e.target.value)}
           />
         }

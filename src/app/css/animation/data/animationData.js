@@ -3,12 +3,20 @@ import { Tag } from "sud-ui";
 export const animationExamples = [
   {
     title: "Flash",
-    description: (
-      <>
-        <Tag>sud-hover-[1-10]</Tag> 클래스를 사용하여 밝기가 잠시 변하는 효과를
-        적용할 수 있습니다.
-      </>
-    ),
+    description: {
+      ko: (
+        <>
+          <Tag>sud-hover-[1-10]</Tag> 클래스를 사용하여 밝기가 잠시 변하는
+          효과를 적용할 수 있습니다.
+        </>
+      ),
+      en: (
+        <>
+          You can apply a temporary brightness change effect using the{" "}
+          <Tag>sud-hover-[1-10]</Tag> class.
+        </>
+      )
+    },
     className: "sud-hover-",
     jscode: `import { Card, Avatar, Radio, Typography } from "sud-ui";
 import { useState } from "react";
@@ -101,12 +109,20 @@ const FlashExample: React.FC = () => {
   },
   {
     title: "Scale",
-    description: (
-      <>
-        <Tag>hover-scale-[1-10]</Tag> 클래스를 사용하여 호버 시 크기 변화를
-        적용할 수 있습니다.
-      </>
-    ),
+    description: {
+      ko: (
+        <>
+          <Tag>hover-scale-[1-10]</Tag> 클래스를 사용하여 호버 시 크기 변화를
+          적용할 수 있습니다.
+        </>
+      ),
+      en: (
+        <>
+          You can apply a size change effect on hover using the{" "}
+          <Tag>hover-scale-[1-10]</Tag> class.
+        </>
+      )
+    },
     className: "hover-scale-",
     jscode: `import { Card, Avatar, Radio, Typography } from "sud-ui";
 import { useState } from "react";
@@ -199,12 +215,20 @@ const ScaleExample: React.FC = () => {
   },
   {
     title: "Pulse",
-    description: (
-      <>
-        <Tag>hover-pulse-[1-10]</Tag> 클래스를 사용하여 호버 시 펄스 효과를
-        적용할 수 있습니다.
-      </>
-    ),
+    description: {
+      ko: (
+        <>
+          <Tag>hover-pulse-[1-10]</Tag> 클래스를 사용하여 호버 시 펄스 효과를
+          적용할 수 있습니다.
+        </>
+      ),
+      en: (
+        <>
+          You can apply a pulse effect on hover using the{" "}
+          <Tag>hover-pulse-[1-10]</Tag> class.
+        </>
+      )
+    },
     className: "hover-pulse-",
     jscode: `import { Card, Avatar, Radio, Typography } from "sud-ui";
 import { useState } from "react";
@@ -297,12 +321,20 @@ const PulseExample: React.FC = () => {
   },
   {
     title: "Bounce",
-    description: (
-      <>
-        <Tag>hover-bounce-[1-10]</Tag>클래스를 사용하여 호버 시 위아래로 튀는
-        효과를 적용할 수 있습니다.
-      </>
-    ),
+    description: {
+      ko: (
+        <>
+          <Tag>hover-bounce-[1-10]</Tag>클래스를 사용하여 호버 시 위아래로 튀는
+          효과를 적용할 수 있습니다.
+        </>
+      ),
+      en: (
+        <>
+          You can apply a bouncing effect on hover using the{" "}
+          <Tag>hover-bounce-[1-10]</Tag> class.
+        </>
+      )
+    },
     className: "hover-bounce-",
     jscode: `import { Card, Avatar, Radio, Typography } from "sud-ui";
 import { useState } from "react";
@@ -395,12 +427,20 @@ const BounceExample: React.FC = () => {
   },
   {
     title: "Shake",
-    description: (
-      <>
-        <Tag>hover-shake-[1-10]</Tag>클래스를 사용하여 호버 시 좌우로 흔들리는
-        효과를 적용할 수 있습니다.
-      </>
-    ),
+    description: {
+      ko: (
+        <>
+          <Tag>hover-shake-[1-10]</Tag>클래스를 사용하여 호버 시 좌우로 흔들리는
+          효과를 적용할 수 있습니다.
+        </>
+      ),
+      en: (
+        <>
+          You can apply a shaking effect on hover using the{" "}
+          <Tag>hover-shake-[1-10]</Tag> class.
+        </>
+      )
+    },
     className: "hover-shake-",
     jscode: `import { Card, Avatar, Radio, Typography } from "sud-ui";
 import { useState } from "react";
@@ -493,12 +533,20 @@ const ShakeExample: React.FC = () => {
   },
   {
     title: "Shadow",
-    description: (
-      <>
-        <Tag>hover-shadow-[1-10]</Tag>클래스를 사용하여 호버 시 그림자 효과를
-        적용할 수 있습니다.
-      </>
-    ),
+    description: {
+      ko: (
+        <>
+          <Tag>hover-shadow-[1-10]</Tag>클래스를 사용하여 호버 시 그림자 효과를
+          적용할 수 있습니다.
+        </>
+      ),
+      en: (
+        <>
+          You can apply a shadow effect on hover using the{" "}
+          <Tag>hover-shadow-[1-10]</Tag> class.
+        </>
+      )
+    },
     className: "hover-shadow-",
     jscode: `import { Card, Avatar, Radio, Typography } from "sud-ui";
 import { useState } from "react";

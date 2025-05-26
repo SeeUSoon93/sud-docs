@@ -1,8 +1,16 @@
 "use client";
 
-import { Image, Menu, Typography, Button, Divider } from "sud-ui";
+import { Image, Menu, Typography, Button, Divider, Card, Div } from "sud-ui";
 import { useRouter } from "next/navigation";
-import { MenuHamburger } from "sud-icons";
+import {
+  EnglishKorean,
+  KoreanEnglish,
+  MenuHamburger,
+  MoonFill,
+  SunFill
+} from "sud-icons";
+import { useDarkMode } from "../../context/darkModeContext";
+import { useLang } from "../../context/langContext";
 
 export default function MainHeader({
   setSelectHeadMenu,
@@ -11,6 +19,8 @@ export default function MainHeader({
   onMenuClick
 }) {
   const router = useRouter();
+  const { isDarkMode, setIsDarkMode } = useDarkMode();
+  const { lang, setLang } = useLang();
 
   const handleMenuClick = (key) => {
     const [page, sub] = key.split("/");
@@ -27,25 +37,25 @@ export default function MainHeader({
   const items = [
     {
       key: "start",
-      label: "시작하기"
+      label: lang === "ko" ? "시작하기" : "Start"
     },
     {
       key: "css",
-      label: "CSS",
+      label: lang === "ko" ? "CSS" : "CSS",
       children: [
-        { key: "color", label: "color" },
-        { key: "font", label: "font" },
-        { key: "animation", label: "animation" },
-        { key: "className", label: "className" }
+        { key: "color", label: lang === "ko" ? "색상" : "Color" },
+        { key: "font", label: lang === "ko" ? "폰트" : "Font" },
+        { key: "animation", label: lang === "ko" ? "애니메이션" : "Animation" },
+        { key: "className", label: lang === "ko" ? "클래스명" : "ClassName" }
       ]
     },
     {
       key: "component",
-      label: "Component"
+      label: lang === "ko" ? "컴포넌트" : "Component"
     },
     {
       key: "icons",
-      label: "Icons"
+      label: lang === "ko" ? "아이콘" : "Icons"
     }
   ];
 
@@ -85,12 +95,27 @@ export default function MainHeader({
             </Typography>
           </div>
           {/* 메뉴 */}
-          <Menu
-            items={mapMenuItems(items)}
-            horizontal={true}
-            expandType="popover"
-            border
-          />
+          <Div className="flex gap-10 item-cen">
+            <Menu
+              items={mapMenuItems(items)}
+              horizontal={true}
+              expandType="popover"
+              border
+            />
+
+            <Button
+              shadow="none"
+              icon={lang === "ko" ? <EnglishKorean /> : <KoreanEnglish />}
+              onClick={() => setLang(lang === "ko" ? "en" : "ko")}
+            >
+              {lang === "ko" ? "A" : "가"}
+            </Button>
+            <Button
+              shadow="none"
+              icon={isDarkMode ? <SunFill /> : <MoonFill />}
+              onClick={() => setIsDarkMode(!isDarkMode)}
+            />
+          </Div>
         </div>
       ) : (
         <div className="flex flex-col w-100 h-100 item-cen jus-cen">

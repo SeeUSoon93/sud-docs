@@ -3,16 +3,32 @@ import Frame from "../Frame";
 import { useMobile } from "../../_lib/context/mobileContext";
 import { Card, Collapse, Radio, Tag, Typography } from "sud-ui";
 import { useState } from "react";
+import { useLang } from "../../_lib/context/langContext";
 
 export default function CollapsePage() {
   const { isMobile } = useMobile();
+  const { lang } = useLang();
   const name = "Collapse";
-  const description = <>콘텐츠를 접거나 열 수 있는 컴포넌트입니다.</>;
+  const description = (
+    <>
+      {lang === "ko" ? (
+        <>콘텐츠를 접거나 열 수 있는 컴포넌트입니다.</>
+      ) : (
+        <>A component that allows content to be collapsed or expanded.</>
+      )}
+    </>
+  );
   const IMPORT_COMMAND = "import { Collapse } from 'sud-ui';";
-  const whenToUse = [
-    "콘텐츠를 접거나 열 수 있는 경우.",
-    "사용자에게 콘텐츠를 접거나 열 수 있는 버튼을 제공할 때."
-  ];
+  const whenToUse =
+    lang === "ko"
+      ? [
+          "콘텐츠를 접거나 열 수 있는 경우.",
+          "사용자에게 콘텐츠를 접거나 열 수 있는 버튼을 제공할 때."
+        ]
+      : [
+          "When content can be collapsed or expanded.",
+          "When you need to provide users with a button to collapse or expand content."
+        ];
 
   const [shape, setShape] = useState("rounded");
   const shapeOptions = [
@@ -60,19 +76,22 @@ export default function CollapsePage() {
           items={[
             {
               key: "base-1",
-              label: "패널 1",
-              children: "패널 1의 내용입니다."
+              label: "Panel 1",
+              children: "Content of Panel 1"
             },
-            { key: "base-2", label: "패널 2", children: "패널 2의 내용입니다." }
+            { key: "base-2", label: "Panel 2", children: "Content of Panel 2" }
           ]}
         />
       ),
-      description: "기본적인 아코디언 컴포넌트입니다.",
+      description:
+        lang === "ko"
+          ? "기본적인 아코디언 컴포넌트입니다."
+          : "Basic accordion component.",
       jscode: `import { Collapse } from "sud-ui";
 
 const items = [
-  { key: "base-1", label: "패널 1", children: "패널 1의 내용입니다." },
-  { key: "base-2", label: "패널 2", children: "패널 2의 내용입니다." }
+  { key: "base-1", label: "Panel 1", children: "Content of Panel 1" },
+  { key: "base-2", label: "Panel 2", children: "Content of Panel 2" }
 ];
 
 export default function Example() {
@@ -88,8 +107,8 @@ interface CollapseItem {
 }
 
 const items: CollapseItem[] = [
-  { key: "base-1", label: "패널 1", children: "패널 1의 내용입니다." },
-  { key: "base-2", label: "패널 2", children: "패널 2의 내용입니다." }
+  { key: "base-1", label: "Panel 1", children: "Content of Panel 1" },
+  { key: "base-2", label: "Panel 2", children: "Content of Panel 2" }
 ];
 
 export default function Example() {
@@ -122,7 +141,10 @@ export default function Example() {
           />
         </div>
       ),
-      description: "아코디언의 크기를 설정할 수 있습니다.",
+      description:
+        lang === "ko"
+          ? "아코디언의 크기를 설정할 수 있습니다."
+          : "You can set the size of the accordion.",
       jscode: `import { Collapse, Radio, Card } from "sud-ui";
 import { useState } from "react";
 
@@ -216,24 +238,27 @@ export default function Example() {
           items={[
             {
               key: "1",
-              label: "활성화",
-              children: "이 패널은 활성화되어 있습니다."
+              label: "Enabled",
+              children: "This panel is enabled."
             },
             {
               key: "2",
-              label: "비활성화",
-              children: "이 패널은 비활성화되어 있습니다."
+              label: "Disabled",
+              children: "This panel is disabled."
             }
           ]}
           disabledKeys={["2"]}
         />
       ),
-      description: "아코디언을 비활성화할 수 있습니다.",
+      description:
+        lang === "ko"
+          ? "아코디언을 비활성화할 수 있습니다."
+          : "You can disable the accordion.",
       jscode: `import { Collapse } from "sud-ui";
 
 const items = [
-  { key: "1", label: "활성화", children: "이 패널은 활성화되어 있습니다." },
-  { key: "2", label: "비활성화", children: "이 패널은 비활성화되어 있습니다." }
+  { key: "1", label: "Enabled", children: "This panel is enabled." },
+  { key: "2", label: "Disabled", children: "This panel is disabled." }
 ];
 
 export default function Example() {
@@ -249,8 +274,8 @@ interface CollapseItem {
 }
 
 const items: CollapseItem[] = [
-  { key: "1", label: "활성화", children: "이 패널은 활성화되어 있습니다." },
-  { key: "2", label: "비활성화", children: "이 패널은 비활성화되어 있습니다." }
+  { key: "1", label: "Enabled", children: "This panel is enabled." },
+  { key: "2", label: "Disabled", children: "This panel is disabled." }
 ];
 
 export default function Example() {
@@ -277,7 +302,7 @@ export default function Example() {
             items={[
               {
                 key: color,
-                label: "커스텀 색상 [" + color + "]",
+                label: "Custom Color [" + color + "]",
                 children: "headerBackground='" + color + "-3'"
               }
             ]}
@@ -289,7 +314,10 @@ export default function Example() {
           />
         </div>
       ),
-      description: "아코디언의 색상을 커스텀할 수 있습니다.",
+      description:
+        lang === "ko"
+          ? "아코디언의 색상을 커스텀할 수 있습니다."
+          : "You can customize the colors of the accordion.",
       jscode: `import { Collapse, Radio, Card } from "sud-ui";
 import { useState } from "react";
 
@@ -324,7 +352,7 @@ export default function Example() {
         items={[
           {
             key: color,
-            label: "커스텀 색상 [" + color + "]",
+            label: "Custom Color [" + color + "]",
             children: "headerBackground='" + color + "-3'"
           }
         ]}
@@ -382,7 +410,7 @@ export default function Example() {
         items={[
           {
             key: color,
-            label: "커스텀 색상 [" + color + "]",
+            label: "Custom Color [" + color + "]",
             children: "headerBackground='" + color + "-3'"
           }
         ]}
@@ -402,63 +430,74 @@ export default function Example() {
     {
       key: "items",
       name: "items*",
-      description: "아코디언 아이템 배열",
+      description:
+        lang === "ko" ? "아코디언 아이템 배열" : "Array of accordion items",
       type: "CollapseItem[]",
       default: "[]"
     },
     {
       key: "openKeys",
       name: "openKeys",
-      description: "열린 아이템의 key 배열 (제어 컴포넌트)",
+      description:
+        lang === "ko"
+          ? "열린 아이템의 key 배열 (제어 컴포넌트)"
+          : "Array of keys for open items (controlled component)",
       type: "string[]",
       default: ""
     },
     {
       key: "defaultOpenKeys",
       name: "defaultOpenKeys",
-      description: "기본으로 열린 아이템의 key 배열 (비제어 컴포넌트)",
+      description:
+        lang === "ko"
+          ? "기본으로 열린 아이템의 key 배열 (비제어 컴포넌트)"
+          : "Array of keys for items open by default (uncontrolled component)",
       type: "string[]",
       default: ""
     },
     {
       key: "onChange",
       name: "onChange",
-      description: "아이템 열림/닫힘 시 호출되는 콜백",
+      description:
+        lang === "ko"
+          ? "아이템 열림/닫힘 시 호출되는 콜백"
+          : "Callback called when items are opened/closed",
       type: "(openKeys: string[]) => void",
       default: ""
     },
     {
       key: "border",
       name: "border",
-      description: "테두리 표시 여부",
+      description:
+        lang === "ko" ? "테두리 표시 여부" : "Whether to show border",
       type: "boolean",
       default: "true"
     },
     {
       key: "borderColor",
       name: "borderColor",
-      description: "테두리 색상",
+      description: lang === "ko" ? "테두리 색상" : "Border color",
       type: "string",
       default: ""
     },
     {
       key: "borderType",
       name: "borderType",
-      description: "테두리 스타일",
+      description: lang === "ko" ? "테두리 스타일" : "Border style",
       type: "string",
       default: <Tag>solid</Tag>
     },
     {
       key: "borderWeight",
       name: "borderWeight",
-      description: "테두리 두께",
+      description: lang === "ko" ? "테두리 두께" : "Border weight",
       type: "number",
       default: "1"
     },
     {
       key: "headerColorType",
       name: "headerColorType",
-      description: "헤더 색상 타입",
+      description: lang === "ko" ? "헤더 색상 타입" : "Header color type",
       type: (
         <>
           <Tag>default</Tag> ｜ <Tag>primary</Tag> ｜ <Tag>secondary</Tag> ｜{" "}
@@ -471,21 +510,21 @@ export default function Example() {
     {
       key: "headerBackground",
       name: "headerBackground",
-      description: "헤더 배경색",
+      description: lang === "ko" ? "헤더 배경색" : "Header background color",
       type: "string",
       default: ""
     },
     {
       key: "headerColor",
       name: "headerColor",
-      description: "헤더 텍스트 색상",
+      description: lang === "ko" ? "헤더 텍스트 색상" : "Header text color",
       type: "string",
       default: ""
     },
     {
       key: "contentColorType",
       name: "contentColorType",
-      description: "내용 색상 타입",
+      description: lang === "ko" ? "내용 색상 타입" : "Content color type",
       type: (
         <>
           <Tag>default</Tag> ｜ <Tag>primary</Tag> ｜ <Tag>secondary</Tag> ｜{" "}
@@ -498,21 +537,21 @@ export default function Example() {
     {
       key: "contentBackground",
       name: "contentBackground",
-      description: "내용 배경색",
+      description: lang === "ko" ? "내용 배경색" : "Content background color",
       type: "string",
       default: ""
     },
     {
       key: "contentColor",
       name: "contentColor",
-      description: "내용 텍스트 색상",
+      description: lang === "ko" ? "내용 텍스트 색상" : "Content text color",
       type: "string",
       default: ""
     },
     {
       key: "shadow",
       name: "shadow",
-      description: "그림자 효과",
+      description: lang === "ko" ? "그림자 효과" : "Shadow effect",
       type: (
         <>
           <Tag>none</Tag> ｜ <Tag>sm</Tag> ｜ <Tag>md</Tag> ｜ <Tag>lg</Tag> ｜{" "}
@@ -524,21 +563,24 @@ export default function Example() {
     {
       key: "disabledKeys",
       name: "disabledKeys",
-      description: "비활성화된 아이템의 key 배열",
+      description:
+        lang === "ko"
+          ? "비활성화된 아이템의 key 배열"
+          : "Array of keys for disabled items",
       type: "string[]",
       default: ""
     },
     {
       key: "className",
       name: "className",
-      description: "추가 클래스명",
+      description: lang === "ko" ? "추가 클래스명" : "Additional class name",
       type: "string",
       default: ""
     },
     {
       key: "size",
       name: "size",
-      description: "아코디언 크기",
+      description: lang === "ko" ? "아코디언 크기" : "Accordion size",
       type: (
         <>
           <Tag>sm</Tag> ｜ <Tag>md</Tag> ｜ <Tag>lg</Tag>
@@ -549,7 +591,7 @@ export default function Example() {
     {
       key: "shape",
       name: "shape",
-      description: "아코디언 모양",
+      description: lang === "ko" ? "아코디언 모양" : "Accordion shape",
       type: (
         <>
           <Tag>rounded</Tag> ｜ <Tag>square</Tag>
@@ -560,7 +602,7 @@ export default function Example() {
     {
       key: "style",
       name: "style",
-      description: "추가 스타일",
+      description: lang === "ko" ? "추가 스타일" : "Additional style",
       type: "React.CSSProperties",
       default: ""
     }
@@ -578,6 +620,7 @@ export default function Example() {
       }}
       grid={true}
       isMobile={isMobile}
+      lang={lang}
     />
   );
 }

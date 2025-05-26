@@ -2,7 +2,6 @@ export const fontExampleCode = {
   javascript: `import { Card, Segmented, Typography } from "sud-ui";
 import { useState } from "react";
 
-// 폰트 두께 데이터 정의
 const weightData = {
   pretendard: [
     { label: "T", value: "T" },
@@ -73,7 +72,6 @@ function FontExample() {
   typescript: `import { Card, Segmented, Typography } from "sud-ui";
 import { useState } from "react";
 
-// 폰트 두께 데이터 정의
 const weightData = {
   pretendard: [
     { label: "T", value: "T" },

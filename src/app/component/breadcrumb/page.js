@@ -4,24 +4,43 @@ import Frame from "../Frame";
 import { useMobile } from "../../_lib/context/mobileContext";
 import { Breadcrumb, Dropdown, Tag, Typography } from "sud-ui";
 import { AngleDown, HomeOutline, TriangleRight } from "sud-icons";
+import { useLang } from "../../_lib/context/langContext";
+
 export default function BreadcrumbPage() {
   const { isMobile } = useMobile();
+  const { lang } = useLang();
 
   const name = "Breadcrumb";
   const description = (
     <>
-      계층구조 내에서 현재 위치를 표시합니다. 또한 계층 구조에서 상위 단계로
-      이동할 수 있습니다.
+      {lang === "ko" ? (
+        <>
+          계층구조 내에서 현재 위치를 표시합니다. 또한 계층 구조에서 상위 단계로
+          이동할 수 있습니다.
+        </>
+      ) : (
+        <>
+          Displays the current location within a hierarchical structure. It also
+          allows navigation to higher levels in the hierarchy.
+        </>
+      )}
     </>
   );
 
   const IMPORT_COMMAND = "import { Breadcrumb } from 'sud-ui';";
 
-  const whenToUse = [
-    "계층 구조가 두 개 이상인 경우.",
-    "사용자에게 현재 위치를 표시하고 싶을 때.",
-    "상위 단계로 이동할 수 있는 버튼을 제공할 때."
-  ];
+  const whenToUse =
+    lang === "ko"
+      ? [
+          "계층 구조가 두 개 이상인 경우.",
+          "사용자에게 현재 위치를 표시하고 싶을 때.",
+          "상위 단계로 이동할 수 있는 버튼을 제공할 때."
+        ]
+      : [
+          "When there are two or more levels in the hierarchy.",
+          "When you want to show users their current location.",
+          "When you need to provide navigation to higher levels."
+        ];
 
   const items = [
     { label: "Home", href: "/" },
@@ -65,13 +84,14 @@ export default function BreadcrumbPage() {
 
   const examples = [
     {
-      title: "기본 사용",
+      title: "Basic Usage",
       render: (
         <>
           <Breadcrumb items={items} />
         </>
       ),
-      description: "기본적인 사용 방법입니다.",
+      description:
+        lang === "ko" ? "기본적인 사용 방법입니다." : "Basic usage example.",
       jscode: `import React from 'react';
 import { Breadcrumb } from 'sud-ui';
 
@@ -107,13 +127,16 @@ const BasicBreadcrumb: React.FC = () => {
 export default BasicBreadcrumb;`
     },
     {
-      title: "Icon 사용",
+      title: "With Icon",
       render: (
         <>
           <Breadcrumb items={itemsWithIcon} />
         </>
       ),
-      description: "Menu에 Icon을 사용할 수 있습니다.",
+      description:
+        lang === "ko"
+          ? "Menu에 Icon을 사용할 수 있습니다."
+          : "You can use icons in the menu.",
       jscode: `import React from 'react';
 import { Breadcrumb } from 'sud-ui';
 import { HomeOutline } from 'sud-icons';
@@ -151,13 +174,16 @@ const IconBreadcrumb: React.FC = () => {
 export default IconBreadcrumb;`
     },
     {
-      title: "Separator 변형",
+      title: "Custom Separator",
       render: (
         <>
           <Breadcrumb items={items} separator="/" />
         </>
       ),
-      description: "Separator를 변형하여 사용할 수 있습니다.",
+      description:
+        lang === "ko"
+          ? "Separator를 변형하여 사용할 수 있습니다."
+          : "You can customize the separator.",
       jscode: `import React from 'react';
 import { Breadcrumb } from 'sud-ui';
 
@@ -193,7 +219,7 @@ const CustomSeparatorBreadcrumb: React.FC = () => {
 export default CustomSeparatorBreadcrumb;`
     },
     {
-      title: "Separator 변형-ICON",
+      title: "Icon Separator",
       render: (
         <>
           <Breadcrumb
@@ -202,7 +228,10 @@ export default CustomSeparatorBreadcrumb;`
           />
         </>
       ),
-      description: "Separator를 변형하여 사용할 수 있습니다.",
+      description:
+        lang === "ko"
+          ? "Separator를 변형하여 사용할 수 있습니다."
+          : "You can use an icon as a separator.",
       jscode: `import React from 'react';
 import { Breadcrumb } from 'sud-ui';
 import { HomeOutline, TriangleRight } from 'sud-icons';
@@ -250,13 +279,16 @@ const IconSeparatorBreadcrumb: React.FC = () => {
 export default IconSeparatorBreadcrumb;`
     },
     {
-      title: "Dropdown 사용",
+      title: "With Dropdown",
       render: (
         <>
           <Breadcrumb items={itemWithDropdown} />
         </>
       ),
-      description: "Dropdown을 사용하여 하위 메뉴를 표시할 수 있습니다.",
+      description:
+        lang === "ko"
+          ? "Dropdown을 사용하여 하위 메뉴를 표시할 수 있습니다."
+          : "You can display sub-menus using a dropdown.",
       jscode: `import React from 'react';
 import { Breadcrumb, Dropdown, Typography } from 'sud-ui';
 import { AngleDown } from 'sud-icons';
@@ -344,7 +376,7 @@ const DropdownBreadcrumb: React.FC = () => {
 export default DropdownBreadcrumb;`
     },
     {
-      title: "커스텀 스타일",
+      title: "Custom Style",
       render: (
         <>
           <Breadcrumb
@@ -361,7 +393,9 @@ export default DropdownBreadcrumb;`
         </>
       ),
       description:
-        "linkStyle, separatorStyle, itemStyle을 통해 각 요소의 스타일을 커스텀할 수 있습니다.",
+        lang === "ko"
+          ? "linkStyle, separatorStyle, itemStyle을 통해 각 요소의 스타일을 커스텀할 수 있습니다."
+          : "You can customize the style of each element using linkStyle, separatorStyle, and itemStyle.",
       jscode: `import React from 'react';
 import { Breadcrumb } from 'sud-ui';
 
@@ -436,63 +470,69 @@ export default CustomStyleBreadcrumb;`
       key: "items",
       name: "items",
       description:
-        "브레드크럼 항목 목록. 각 항목은 { label: ReactNode, href?: string } 형태로 구성됩니다.",
+        lang === "ko"
+          ? "브레드크럼 항목 목록. 각 항목은 { label: ReactNode, href?: string } 형태로 구성됩니다."
+          : "List of breadcrumb items. Each item is structured as { label: ReactNode, href?: string }.",
       type: "BreadcrumbItem[]",
       default: ""
     },
     {
       key: "separator",
       name: "separator",
-      description: "항목 사이의 구분자",
+      description:
+        lang === "ko" ? "항목 사이의 구분자" : "Separator between items",
       type: "ReactNode",
       default: "'>'"
     },
     {
       key: "className",
       name: "className",
-      description: "추가 클래스명",
+      description: lang === "ko" ? "추가 클래스명" : "Additional class name",
       type: "string",
       default: ""
     },
     {
       key: "style",
       name: "style",
-      description: "컨테이너 스타일",
+      description: lang === "ko" ? "컨테이너 스타일" : "Container style",
       type: "React.CSSProperties",
       default: ""
     },
     {
       key: "separatorStyle",
       name: "separatorStyle",
-      description: "구분자 스타일",
+      description: lang === "ko" ? "구분자 스타일" : "Separator style",
       type: "React.CSSProperties",
       default: ""
     },
     {
       key: "linkStyle",
       name: "linkStyle",
-      description: "링크 스타일",
+      description: lang === "ko" ? "링크 스타일" : "Link style",
       type: "React.CSSProperties",
       default: ""
     },
     {
       key: "itemStyle",
       name: "itemStyle",
-      description: "항목 스타일",
+      description: lang === "ko" ? "항목 스타일" : "Item style",
       type: "React.CSSProperties",
       default: ""
     },
     {
       key: "listStyle",
       name: "listStyle",
-      description: "목록 스타일",
+      description: lang === "ko" ? "목록 스타일" : "List style",
       type: "React.CSSProperties",
       default: ""
     },
     {
       key: "size",
       name: "size",
-      description: "텍스트 크기 (Typography size prop과 동일)",
+      description:
+        lang === "ko"
+          ? "텍스트 크기 (Typography size prop과 동일)"
+          : "Text size (same as Typography size prop)",
       type: (
         <>
           <Tag>xs</Tag> ｜ <Tag>sm</Tag> ｜ <Tag>base</Tag> ｜ <Tag>lg</Tag> ｜{" "}
@@ -516,6 +556,7 @@ export default CustomStyleBreadcrumb;`
       }}
       grid={true}
       isMobile={isMobile}
+      lang={lang}
     />
   );
 }

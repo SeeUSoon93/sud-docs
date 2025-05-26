@@ -10,7 +10,8 @@ export default function IconsRedirectPage() {
   const pathname = usePathname();
 
   useEffect(() => {
-    const redirectPath = getRedirectPath(pathname, itemsList);
+    const menuItems = itemsList("icons", "ko"); // 기본값으로 한국어 설정
+    const redirectPath = getRedirectPath(pathname, menuItems);
     if (redirectPath) {
       router.replace(redirectPath);
     }

@@ -2,7 +2,9 @@
 
 import { Menu } from "sud-ui";
 import { useRouter } from "next/navigation";
+import { useLang } from "../../context/langContext";
 import { itemsList } from "../layoutData/menuMap";
+import { useEffect, useState } from "react";
 
 export default function MainSider({
   selectHeadMenu,
@@ -12,6 +14,13 @@ export default function MainSider({
   isMobile
 }) {
   const router = useRouter();
+  const { lang } = useLang();
+  const [items, setItems] = useState([]);
+
+  useEffect(() => {
+    const menuItems = itemsList(selectHeadMenu, lang);
+    setItems(menuItems ? menuItems[selectHeadMenu] || [] : []);
+  }, [selectHeadMenu, lang]);
 
   return (
     <div className="h-100 w-100">
@@ -19,7 +28,7 @@ export default function MainSider({
         type="default"
         selectedTextColor="info"
         selectedKey={selectSiderMenu} // ✅ 이걸로 항상 최신 sub 반영
-        items={itemsList[selectHeadMenu] || []}
+        items={items}
         onSelect={(key) => {
           setSelectSiderMenu(key);
           router.push(`/${selectHeadMenu}/${key}`);
