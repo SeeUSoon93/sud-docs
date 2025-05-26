@@ -2,12 +2,14 @@
 
 import Frame from "../Frame";
 import { useMobile } from "../../_lib/context/mobileContext";
+import { useLang } from "../../_lib/context/langContext";
 import { OTP, Tag, Radio, Card } from "sud-ui";
 
 import React, { useState } from "react";
 
 export default function OTPPage() {
   const { isMobile } = useMobile();
+  const { lang } = useLang();
   const [size, setSize] = useState("md");
   const [type, setType] = useState("int");
   const [value, setValue] = useState("");
@@ -17,23 +19,24 @@ export default function OTPPage() {
   const [textValue, setTextValue] = useState("");
   const [numberValue, setNumberValue] = useState("");
   const [maxLengthValue, setMaxLengthValue] = useState("");
-  const [clearableValue, setClearableValue] = useState("지워보세요!");
   const [passwordValue, setPasswordValue] = useState("");
   const [labelValue, setLabelValue] = useState("");
-  const [underlineValue, setUnderlineValue] = useState("");
-  const [autoCompleteValue, setAutoCompleteValue] = useState("");
   const [errorValue, setErrorValue] = useState("");
   const [shape, setShape] = useState("rounded");
-  const [iconPosition, setIconPosition] = useState("after");
-  const [prefixSuffix, setPrefixSuffix] = useState("prefix");
   const [colorValue, setColorValue] = useState("");
 
   const name = "OTP";
-  const description = <>OTP 입력 컴포넌트입니다.</>;
+  const description = (
+    <>
+      {lang === "ko" ? "OTP 입력 컴포넌트입니다." : "The OTP input component."}
+    </>
+  );
 
   const IMPORT_COMMAND = "import { OTP } from 'sud-ui';";
 
-  const whenToUse = ["텍스트를 입력할 때."];
+  const whenToUse = [
+    lang === "ko" ? "OTP를 입력할 때." : "When you need to input OTP."
+  ];
 
   const sizeOptions = [
     {
@@ -75,32 +78,10 @@ export default function OTPPage() {
     }
   ];
 
-  const iconPositionOptions = [
-    {
-      label: "앞",
-      value: "before"
-    },
-    {
-      label: "뒤",
-      value: "after"
-    }
-  ];
-
-  const prefixSuffixOptions = [
-    {
-      label: "접두사",
-      value: "prefix"
-    },
-    {
-      label: "접미사",
-      value: "suffix"
-    }
-  ];
-
   const examples = [
     {
       title: "Basic Usage",
-      description: "기본적인 OTP 입력 컴포넌트입니다.",
+      description: lang === "ko" ? "기본적인 사용 방법입니다." : "Basic usage.",
       render: (
         <>
           <OTP value={value} onChange={(e) => setValue(e.target.value)} />
@@ -139,7 +120,10 @@ export default BasicOTP;`
     },
     {
       title: "Size",
-      description: "OTP 입력 필드의 크기를 설정할 수 있습니다.",
+      description:
+        lang === "ko"
+          ? "OTP 입력 필드의 크기를 설정할 수 있습니다."
+          : "You can set the size of the OTP input field.",
       render: (
         <div className="flex flex-col gap-20">
           <Card style={{ width: "100%" }} shadow="none" colorType="sub">
@@ -237,7 +221,10 @@ export default SizeOTP;`
     },
     {
       title: "Disabled",
-      description: "disabled 속성을 추가하면 OTP 입력 필드가 비활성화됩니다.",
+      description:
+        lang === "ko"
+          ? "disabled 속성을 추가하면 OTP 입력 필드가 비활성화됩니다."
+          : "When you add the disabled property, the OTP input field is disabled.",
       render: (
         <>
           <OTP
@@ -283,7 +270,9 @@ export default DisabledOTP;`
     {
       title: "Read Only",
       description:
-        "readOnly 속성을 추가하면 OTP 입력 필드가 읽기 전용으로 변경됩니다.",
+        lang === "ko"
+          ? "readOnly 속성을 추가하면 OTP 입력 필드가 읽기 전용으로 변경됩니다."
+          : "When you add the readOnly property, the OTP input field is changed to read-only.",
       render: (
         <>
           <OTP
@@ -328,7 +317,10 @@ export default ReadOnlyOTP;`
     },
     {
       title: "OTP Type",
-      description: "OTP 입력 필드의 타입을 설정할 수 있습니다.",
+      description:
+        lang === "ko"
+          ? "OTP 입력 필드의 타입을 설정할 수 있습니다."
+          : "You can set the type of the OTP input field.",
       render: (
         <div className="flex flex-col gap-20">
           <Card style={{ width: "100%" }} shadow="none" colorType="sub">
@@ -438,7 +430,10 @@ export default TypeOTP;`
     },
     {
       title: "Length",
-      description: "OTP 입력 필드의 길이를 설정할 수 있습니다.",
+      description:
+        lang === "ko"
+          ? "OTP 입력 필드의 길이를 설정할 수 있습니다."
+          : "You can set the length of the OTP input field.",
       render: (
         <>
           <OTP
@@ -484,7 +479,9 @@ export default LengthOTP;`
     {
       title: "Password",
       description:
-        "password 속성을 추가하면 OTP 입력 필드가 비밀번호 입력 필드로 변경됩니다.",
+        lang === "ko"
+          ? "password 속성을 추가하면 OTP 입력 필드가 비밀번호 입력 필드로 변경됩니다."
+          : "When you add the password property, the OTP input field is changed to a password input field.",
       render: (
         <>
           <OTP
@@ -530,13 +527,15 @@ export default PasswordOTP;`
     {
       title: "Label",
       description:
-        "label 속성을 추가하면 OTP 입력 필드의 라벨을 설정할 수 있습니다.",
+        lang === "ko"
+          ? "label 속성을 추가하면 OTP 입력 필드의 라벨을 설정할 수 있습니다."
+          : "When you add the label property, you can set the label of the OTP input field.",
       render: (
         <>
           <OTP
             value={labelValue}
             onChange={(e) => setLabelValue(e.target.value)}
-            label="OTP 입력"
+            label="OTP input"
           />
         </>
       ),
@@ -550,7 +549,7 @@ const LabelOTP = () => {
     <OTP
       value={value}
       onChange={(e) => setValue(e.target.value)}
-      label="OTP 입력"
+      label="OTP input"
     />
   );
 };
@@ -566,7 +565,7 @@ const LabelOTP: React.FC = () => {
     <OTP
       value={value}
       onChange={(e) => setValue(e.target.value)}
-      label="OTP 입력"
+      label="OTP input"
     />
   );
 };
@@ -575,14 +574,17 @@ export default LabelOTP;`
     },
     {
       title: "Error State",
-      description: "에러 상태와 메시지를 표시할 수 있습니다.",
+      description:
+        lang === "ko"
+          ? "에러 상태와 메시지를 표시할 수 있습니다."
+          : "You can display the error state and message.",
       render: (
         <>
           <OTP
             value={errorValue}
             onChange={(e) => setErrorValue(e.target.value)}
             error={errorValue.length > 0}
-            errorText="에러 메시지가 표시됩니다."
+            errorText="The error message is displayed."
           />
         </>
       ),
@@ -597,7 +599,7 @@ const ErrorOTP = () => {
       value={value}
       onChange={(e) => setValue(e.target.value)}
       error={value.length > 0}
-      errorText="에러 메시지가 표시됩니다."
+      errorText="The error message is displayed."
     />
   );
 };
@@ -614,7 +616,7 @@ const ErrorOTP: React.FC = () => {
       value={value}
       onChange={(e) => setValue(e.target.value)}
       error={value.length > 0}
-      errorText="에러 메시지가 표시됩니다."
+      errorText="The error message is displayed."
     />
   );
 };
@@ -623,7 +625,10 @@ export default ErrorOTP;`
     },
     {
       title: "Shape",
-      description: "OTP 입력 필드의 모서리 모양을 설정할 수 있습니다.",
+      description:
+        lang === "ko"
+          ? "OTP 입력 필드의 모서리 모양을 설정할 수 있습니다."
+          : "You can set the shape of the OTP input field.",
       render: (
         <div className="flex flex-col gap-20">
           <Card style={{ width: "100%" }} shadow="none" colorType="sub">
@@ -707,7 +712,10 @@ export default ShapeOTP;`
     },
     {
       title: "Color Customization",
-      description: "OTP 입력 필드의 색상을 커스텀할 수 있습니다.",
+      description:
+        lang === "ko"
+          ? "OTP 입력 필드의 색상을 커스텀할 수 있습니다."
+          : "You can customize the color of the OTP input field.",
       render: (
         <OTP
           value={colorValue}
@@ -756,7 +764,10 @@ export default CustomColorOTP;`
     },
     {
       title: "Alphanumeric Type",
-      description: "영문자와 숫자를 모두 입력할 수 있는 OTP 입력 필드입니다.",
+      description:
+        lang === "ko"
+          ? "영문자와 숫자를 모두 입력할 수 있는 OTP 입력 필드입니다."
+          : "The OTP input field that allows you to enter both letters and numbers.",
       render: (
         <div className="flex flex-col gap-20">
           <Card style={{ width: "100%" }} shadow="none" colorType="sub">
@@ -870,28 +881,40 @@ export default AlphanumericOTP;`
     {
       key: "value",
       name: "value",
-      description: "OTP 입력 필드의 값",
+      description:
+        lang === "ko"
+          ? "OTP 입력 필드의 값"
+          : "The value of the OTP input field.",
       type: "string",
       default: '""'
     },
     {
       key: "onChange",
       name: "onChange",
-      description: "값이 변경될 때 호출되는 함수",
+      description:
+        lang === "ko"
+          ? "값이 변경될 때 호출되는 함수"
+          : "The function called when the value changes.",
       type: "(e: { target: { value: string } }) => void",
       default: "() => {}"
     },
     {
       key: "length",
       name: "length",
-      description: "OTP 입력 필드의 개수",
+      description:
+        lang === "ko"
+          ? "OTP 입력 필드의 개수"
+          : "The number of OTP input fields.",
       type: "number",
       default: "6"
     },
     {
       key: "type",
       name: "type",
-      description: "OTP 입력 필드의 타입",
+      description:
+        lang === "ko"
+          ? "OTP 입력 필드의 타입"
+          : "The type of the OTP input field.",
       type: (
         <>
           <Tag>text</Tag> ｜ <Tag>int</Tag>
@@ -902,7 +925,10 @@ export default AlphanumericOTP;`
     {
       key: "size",
       name: "size",
-      description: "OTP 입력 필드의 크기",
+      description:
+        lang === "ko"
+          ? "OTP 입력 필드의 크기"
+          : "The size of the OTP input field.",
       type: (
         <>
           <Tag>sm</Tag> ｜ <Tag>md</Tag> ｜ <Tag>lg</Tag>
@@ -913,7 +939,10 @@ export default AlphanumericOTP;`
     {
       key: "shape",
       name: "shape",
-      description: "OTP 입력 필드의 모서리 모양",
+      description:
+        lang === "ko"
+          ? "OTP 입력 필드의 모서리 모양"
+          : "The shape of the OTP input field.",
       type: (
         <>
           <Tag>rounded</Tag> ｜ <Tag>square</Tag> ｜ <Tag>capsule</Tag>
@@ -924,77 +953,93 @@ export default AlphanumericOTP;`
     {
       key: "disabled",
       name: "disabled",
-      description: "OTP 입력 필드 비활성화 여부",
+      description:
+        lang === "ko"
+          ? "OTP 입력 필드 비활성화 여부"
+          : "The disabled state of the OTP input field.",
       type: "boolean",
       default: "false"
     },
     {
       key: "readOnly",
       name: "readOnly",
-      description: "읽기 전용 여부",
+      description:
+        lang === "ko"
+          ? "읽기 전용 여부"
+          : "The read-only state of the OTP input field.",
       type: "boolean",
       default: "false"
     },
     {
       key: "password",
       name: "password",
-      description: "비밀번호 입력 필드 여부",
+      description:
+        lang === "ko"
+          ? "비밀번호 입력 필드 여부"
+          : "The password input field state.",
       type: "boolean",
       default: "false"
     },
     {
       key: "label",
       name: "label",
-      description: "OTP 입력 필드의 라벨",
+      description:
+        lang === "ko"
+          ? "OTP 입력 필드의 라벨"
+          : "The label of the OTP input field.",
       type: "string | ReactNode",
       default: "-"
     },
     {
       key: "error",
       name: "error",
-      description: "에러 상태 여부",
+      description:
+        lang === "ko"
+          ? "에러 상태 여부"
+          : "The error state of the OTP input field.",
       type: "boolean",
       default: "false"
     },
     {
       key: "errorText",
       name: "errorText",
-      description: "에러 메시지",
+      description: lang === "ko" ? "에러 메시지" : "The error message.",
       type: "string",
       default: "-"
     },
     {
       key: "background",
       name: "background",
-      description: "배경색",
+      description: lang === "ko" ? "배경색" : "The background color.",
       type: "string",
       default: "-"
     },
     {
       key: "color",
       name: "color",
-      description: "텍스트 색상",
+      description: lang === "ko" ? "텍스트 색상" : "The text color.",
       type: "string",
       default: "-"
     },
     {
       key: "border",
       name: "border",
-      description: "테두리 표시 여부",
+      description:
+        lang === "ko" ? "테두리 표시 여부" : "The display state of the border.",
       type: "boolean",
       default: "true"
     },
     {
       key: "borderColor",
       name: "borderColor",
-      description: "테두리 색상",
+      description: lang === "ko" ? "테두리 색상" : "The border color.",
       type: "string",
       default: "-"
     },
     {
       key: "borderType",
       name: "borderType",
-      description: "테두리 스타일",
+      description: lang === "ko" ? "테두리 스타일" : "The border style.",
       type: (
         <>
           <Tag>solid</Tag> ｜ <Tag>dashed</Tag> ｜ <Tag>dotted</Tag>
@@ -1005,14 +1050,14 @@ export default AlphanumericOTP;`
     {
       key: "borderWeight",
       name: "borderWeight",
-      description: "테두리 두께",
+      description: lang === "ko" ? "테두리 두께" : "The border weight.",
       type: "number",
       default: "1"
     },
     {
       key: "shadow",
       name: "shadow",
-      description: "그림자 크기",
+      description: lang === "ko" ? "그림자 크기" : "The shadow size.",
       type: (
         <>
           <Tag>none</Tag> ｜ <Tag>sm</Tag> ｜ <Tag>md</Tag> ｜ <Tag>lg</Tag> ｜{" "}
@@ -1024,14 +1069,15 @@ export default AlphanumericOTP;`
     {
       key: "className",
       name: "className",
-      description: "추가 클래스명",
+      description:
+        lang === "ko" ? "추가 클래스명" : "The additional class name.",
       type: "string",
       default: '""'
     },
     {
       key: "style",
       name: "style",
-      description: "추가 스타일",
+      description: lang === "ko" ? "추가 스타일" : "The additional style.",
       type: "React.CSSProperties",
       default: "{}"
     }

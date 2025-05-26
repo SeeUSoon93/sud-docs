@@ -2,19 +2,28 @@
 
 import Frame from "../Frame";
 import { useMobile } from "../../_lib/context/mobileContext";
-import { Tag, Avatar, ColorPicker, Button, Card, Typography } from "sud-ui";
+import { useLang } from "../../_lib/context/langContext";
+import { Tag, ColorPicker, Button, Card, Typography } from "sud-ui";
 
 import React, { useState } from "react";
 
 export default function ColorPickerPage() {
   const { isMobile } = useMobile();
+  const { lang } = useLang();
 
   const name = "ColorPicker";
-  const description = <>색상을 선택할 수 있는 컴포넌트입니다.</>;
-
+  const description = (
+    <>
+      {lang === "ko"
+        ? "색상을 선택할 수 있는 컴포넌트입니다."
+        : "A component that allows you to select a color."}
+    </>
+  );
   const IMPORT_COMMAND = "import { ColorPicker } from 'sud-ui';";
 
-  const whenToUse = ["색상을 선택할 때"];
+  const whenToUse = [
+    lang === "ko" ? "색상을 선택할 때" : "When you need to select a color."
+  ];
 
   const [basicOpen, setBasicOpen] = useState(false);
   const [customTriggerOpen, setCustomTriggerOpen] = useState(false);
@@ -27,7 +36,7 @@ export default function ColorPickerPage() {
   const examples = [
     {
       title: "Basic Usage",
-      description: "기본적인 버튼 컴포넌트입니다.",
+      description: lang === "ko" ? "기본적인 사용 방법입니다." : "Basic usage.",
       render: (
         <>
           <ColorPicker open={basicOpen} setOpen={setBasicOpen} />
@@ -52,7 +61,10 @@ export default function Example(): JSX.Element {
     },
     {
       title: "Custom Trigger",
-      description: "커스텀 트리거를 사용할 수 있습니다.",
+      description:
+        lang === "ko"
+          ? "커스텀 트리거를 사용할 수 있습니다."
+          : "You can use a custom trigger.",
       render: (
         <>
           <ColorPicker
@@ -130,7 +142,10 @@ export default function Example(): JSX.Element {
     },
     {
       title: "Color Format",
-      description: "색상 포맷을 선택할 수 있습니다.",
+      description:
+        lang === "ko"
+          ? "색상 포맷을 선택할 수 있습니다."
+          : "You can select a color format.",
       render: (
         <div className="flex gap-10">
           <ColorPicker
@@ -265,56 +280,74 @@ export default function Example(): JSX.Element {
     {
       key: "color",
       name: "color",
-      description: "선택된 색상 값",
+      description:
+        lang === "ko" ? "선택된 색상 값" : "The selected color value.",
       type: "string",
       default: "#1677FF"
     },
     {
       key: "onChange",
       name: "onChange",
-      description: "색상이 변경될 때 호출되는 함수",
+      description:
+        lang === "ko"
+          ? "색상이 변경될 때 호출되는 함수"
+          : "The function called when the color changes.",
       type: "(color: { hex: string, rgb: { r: number, g: number, b: number }, hsb: { h: number, s: number, b: number }, alpha: number }) => void",
       default: "-"
     },
     {
       key: "open",
       name: "open",
-      description: "컬러피커의 열림 상태",
+      description:
+        lang === "ko"
+          ? "컬러피커의 열림 상태"
+          : "The open state of the color picker.",
       type: "boolean",
       default: "false"
     },
     {
       key: "setOpen",
       name: "setOpen",
-      description: "컬러피커의 열림 상태를 변경하는 함수",
+      description:
+        lang === "ko"
+          ? "컬러피커의 열림 상태를 변경하는 함수"
+          : "The function to change the open state of the color picker.",
       type: "(open: boolean) => void",
       default: "() => {}"
     },
     {
       key: "children",
       name: "children",
-      description: "컬러피커의 커스텀 트리거 요소",
+      description:
+        lang === "ko"
+          ? "컬러피커의 커스텀 트리거 요소"
+          : "The custom trigger element of the color picker.",
       type: "ReactNode",
       default: "-"
     },
     {
       key: "trigger",
       name: "trigger",
-      description: "컬러피커를 여는 트리거 방식",
+      description:
+        lang === "ko"
+          ? "컬러피커를 여는 트리거 방식"
+          : "The trigger method to open the color picker.",
       type: "string",
       default: "click"
     },
     {
       key: "placement",
       name: "placement",
-      description: "컬러피커의 위치",
+      description:
+        lang === "ko" ? "컬러피커의 위치" : "The position of the color picker.",
       type: "string",
       default: "bottom"
     },
     {
       key: "size",
       name: "size",
-      description: "컬러피커의 크기",
+      description:
+        lang === "ko" ? "컬러피커의 크기" : "The size of the color picker.",
       type: (
         <>
           <Tag>sm</Tag> ｜ <Tag>md</Tag> ｜ <Tag>lg</Tag>
@@ -325,63 +358,82 @@ export default function Example(): JSX.Element {
     {
       key: "style",
       name: "style",
-      description: "추가 스타일",
+      description: lang === "ko" ? "추가 스타일" : "Additional style.",
       type: "CSSProperties",
       default: "{ padding: 5 }"
     },
     {
       key: "className",
       name: "className",
-      description: "추가 클래스명",
+      description: lang === "ko" ? "추가 클래스명" : "Additional class name.",
       type: "string",
       default: '""'
     },
     {
       key: "popConfirmProps",
       name: "popConfirmProps",
-      description: "PopConfirm 컴포넌트에 전달되는 props",
+      description:
+        lang === "ko"
+          ? "PopConfirm 컴포넌트에 전달되는 props"
+          : "The props passed to the PopConfirm component.",
       type: "object",
       default: "{}"
     },
     {
       key: "selectProps",
       name: "selectProps",
-      description: "Select 컴포넌트에 전달되는 props",
+      description:
+        lang === "ko"
+          ? "Select 컴포넌트에 전달되는 props"
+          : "The props passed to the Select component.",
       type: "object",
       default: "{}"
     },
     {
       key: "inputProps",
       name: "inputProps",
-      description: "Input 컴포넌트에 전달되는 props",
+      description:
+        lang === "ko"
+          ? "Input 컴포넌트에 전달되는 props"
+          : "The props passed to the Input component.",
       type: "object",
       default: "{}"
     },
     {
       key: "sliderProps",
       name: "sliderProps",
-      description: "Slider 컴포넌트에 전달되는 props",
+      description:
+        lang === "ko"
+          ? "Slider 컴포넌트에 전달되는 props"
+          : "The props passed to the Slider component.",
       type: "object",
       default: "{}"
     },
     {
       key: "cardProps",
       name: "cardProps",
-      description: "Card 컴포넌트에 전달되는 props",
+      description:
+        lang === "ko"
+          ? "Card 컴포넌트에 전달되는 props"
+          : "The props passed to the Card component.",
       type: "object",
       default: "{}"
     },
     {
       key: "buttonProps",
       name: "buttonProps",
-      description: "Button 컴포넌트에 전달되는 props",
+      description:
+        lang === "ko"
+          ? "Button 컴포넌트에 전달되는 props"
+          : "The props passed to the Button component.",
       type: "object",
       default: "{}"
     },
     {
       key: "rest",
       name: "rest",
-      description: "추가 HTML 속성",
+      description:
+        lang === "ko" ? "추가 HTML 속성" : "Additional HTML attributes.",
       type: "HTMLAttributes",
       default: "-"
     }

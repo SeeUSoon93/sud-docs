@@ -2,46 +2,46 @@
 
 import Frame from "../Frame";
 import { useMobile } from "../../_lib/context/mobileContext";
+import { useLang } from "../../_lib/context/langContext";
 import { Textarea, Tag, Radio, Card, Button } from "sud-ui";
 
 import React, { useState } from "react";
-import { Search, PieChartOutline, Chat } from "sud-icons";
+import { PieChartOutline, Chat } from "sud-icons";
 
 export default function TextareaPage() {
   const { isMobile } = useMobile();
+  const { lang } = useLang();
   const [size, setSize] = useState("md");
-  const [type, setType] = useState("text");
   const [value, setValue] = useState("");
   const [sizeValue, setSizeValue] = useState("");
   const [disabledValue, setDisabledValue] = useState("");
   const [readOnlyValue, setReadOnlyValue] = useState("");
-  const [textValue, setTextValue] = useState("");
-  const [numberValue, setNumberValue] = useState("");
   const [maxLengthValue, setMaxLengthValue] = useState("");
-  const [clearableValue, setClearableValue] = useState("지워보세요!");
-  const [passwordValue, setPasswordValue] = useState("");
   const [labelValue, setLabelValue] = useState("");
   const [underlineValue, setUnderlineValue] = useState("");
-  const [autoCompleteValue, setAutoCompleteValue] = useState("");
   const [errorValue, setErrorValue] = useState("");
   const [shape, setShape] = useState("rounded");
-  const [iconPosition, setIconPosition] = useState("after");
-  const [prefixSuffix, setPrefixSuffix] = useState("prefix");
   const [colorValue, setColorValue] = useState("");
   const [shapeValue, setShapeValue] = useState("");
-  const [iconValue, setIconValue] = useState("");
-  const [prefixSuffixValue, setPrefixSuffixValue] = useState("");
-  const [thousandValue, setThousandValue] = useState("");
   const [resizableValue, setResizableValue] = useState("");
   const [autoSizeValue, setAutoSizeValue] = useState("");
   const [bottomAddonValue, setBottomAddonValue] = useState("");
 
   const name = "Textarea";
-  const description = <>텍스트를 입력할 수 있는 입력 컴포넌트입니다.</>;
+  const description = (
+    <>
+      {lang === "ko"
+        ? "텍스트를 입력할 수 있는 입력 컴포넌트입니다."
+        : "A text input component that allows you to enter text."}
+    </>
+  );
 
   const IMPORT_COMMAND = "import { Textarea } from 'sud-ui';";
 
-  const whenToUse = ["텍스트를 입력할 때."];
+  const whenToUse =
+    lang === "ko"
+      ? ["긴 텍스트를 입력할 때."]
+      : ["When you need to enter long text."];
 
   const sizeOptions = [
     {
@@ -57,16 +57,6 @@ export default function TextareaPage() {
       value: "lg"
     }
   ];
-  const typeOptions = [
-    {
-      label: "text",
-      value: "text"
-    },
-    {
-      label: "number",
-      value: "number"
-    }
-  ];
 
   const shapeOptions = [
     {
@@ -79,38 +69,16 @@ export default function TextareaPage() {
     }
   ];
 
-  const iconPositionOptions = [
-    {
-      label: "앞",
-      value: "before"
-    },
-    {
-      label: "뒤",
-      value: "after"
-    }
-  ];
-
-  const prefixSuffixOptions = [
-    {
-      label: "접두사",
-      value: "prefix"
-    },
-    {
-      label: "접미사",
-      value: "suffix"
-    }
-  ];
-
   const examples = [
     {
       title: "Basic Usage",
-      description: "기본적인 입력 컴포넌트입니다.",
+      description: lang === "ko" ? "기본적인 사용 방법입니다." : "Basic usage.",
       render: (
         <>
           <Textarea
             value={value}
             onChange={(e) => setValue(e.target.value)}
-            placeholder="텍스트를 입력해주세요."
+            placeholder="Enter text here"
           />
         </>
       ),
@@ -124,7 +92,7 @@ const BasicTextarea = () => {
     <Textarea
       value={value}
       onChange={(e) => setValue(e.target.value)}
-      placeholder="텍스트를 입력해주세요."
+      placeholder="Enter text here"
     />
   );
 };
@@ -140,7 +108,7 @@ const BasicTextarea: React.FC = () => {
     <Textarea
       value={value}
       onChange={(e) => setValue(e.target.value)}
-      placeholder="텍스트를 입력해주세요."
+      placeholder="Enter text here"
     />
   );
 };
@@ -149,7 +117,10 @@ export default BasicTextarea;`
     },
     {
       title: "Size",
-      description: "Textarea 의 크기를 설정할 수 있습니다.",
+      description:
+        lang === "ko"
+          ? "Textarea 의 크기를 설정할 수 있습니다."
+          : "You can set the size of the Textarea.",
       render: (
         <div className="flex flex-col gap-20">
           <Card style={{ width: "100%" }} shadow="none" colorType="sub">
@@ -166,7 +137,7 @@ export default BasicTextarea;`
             size={size}
             value={sizeValue}
             onChange={(e) => setSizeValue(e.target.value)}
-            placeholder={`${size} 크기의 Textarea 입니다.`}
+            placeholder={`${size} size Textarea`}
           />
         </div>
       ),
@@ -199,7 +170,7 @@ const SizeTextarea = () => {
         size={size}
         value={value}
         onChange={(e) => setValue(e.target.value)}
-        placeholder={\`\${size} 크기의 Textarea 입니다.\`}
+        placeholder={\`\${size} size Textarea\`}  
       />
     </div>
   );
@@ -240,7 +211,7 @@ const SizeTextarea: React.FC = () => {
         size={size}
         value={value}
         onChange={(e) => setValue(e.target.value)}
-        placeholder={\`\${size} 크기의 Textarea 입니다.\`}
+        placeholder={\`\${size} size Textarea\`}
       />
     </div>
   );
@@ -250,14 +221,17 @@ export default SizeTextarea;`
     },
     {
       title: "Disabled",
-      description: "disabled 속성을 추가하면 입력 필드가 비활성화됩니다.",
+      description:
+        lang === "ko"
+          ? "disabled 속성을 추가하면 입력 필드가 비활성화됩니다."
+          : "When you add the disabled property, the input field is disabled.",
       render: (
         <>
           <Textarea
             value={disabledValue}
             onChange={(e) => setDisabledValue(e.target.value)}
             disabled
-            placeholder="비활성화된 Textarea 입니다."
+            placeholder="Disabled Textarea"
           />
         </>
       ),
@@ -272,7 +246,7 @@ const DisabledTextarea = () => {
       value={value}
       onChange={(e) => setValue(e.target.value)}
       disabled
-      placeholder="비활성화된 Textarea 입니다."
+      placeholder="Disabled Textarea"
     />
   );
 };
@@ -289,7 +263,7 @@ const DisabledTextarea: React.FC = () => {
       value={value}
       onChange={(e) => setValue(e.target.value)}
       disabled
-      placeholder="비활성화된 Textarea 입니다."
+      placeholder="Disabled Textarea"
     />
   );
 };
@@ -299,14 +273,16 @@ export default DisabledTextarea;`
     {
       title: "Read Only",
       description:
-        "readOnly 속성을 추가하면 입력 필드가 읽기 전용으로 변경됩니다.",
+        lang === "ko"
+          ? "readOnly 속성을 추가하면 입력 필드가 읽기 전용으로 변경됩니다."
+          : "When you add the readOnly property, the input field becomes read-only.",
       render: (
         <>
           <Textarea
             value={readOnlyValue}
             onChange={(e) => setReadOnlyValue(e.target.value)}
             readOnly
-            placeholder="읽기 전용 Textarea 입니다."
+            placeholder="Read Only Textarea"
           />
         </>
       ),
@@ -321,7 +297,7 @@ const ReadOnlyTextarea = () => {
       value={value}
       onChange={(e) => setValue(e.target.value)}
       readOnly
-      placeholder="읽기 전용 Textarea 입니다."
+      placeholder="Read Only Textarea"
     />
   );
 };
@@ -338,7 +314,7 @@ const ReadOnlyTextarea: React.FC = () => {
       value={value}
       onChange={(e) => setValue(e.target.value)}
       readOnly
-      placeholder="읽기 전용 Textarea 입니다."
+      placeholder="Read Only Textarea"
     />
   );
 };
@@ -347,14 +323,17 @@ export default ReadOnlyTextarea;`
     },
     {
       title: "Max Length",
-      description: "최대 입력 길이를 설정할 수 있습니다.",
+      description:
+        lang === "ko"
+          ? "최대 입력 길이를 설정할 수 있습니다."
+          : "You can set the maximum input length.",
       render: (
         <>
           <Textarea
             value={maxLengthValue}
             onChange={(e) => setMaxLengthValue(e.target.value)}
             maxLength={120}
-            placeholder="최대 길이를 설정한 Textarea 입니다."
+            placeholder="Max Length Textarea"
           />
         </>
       ),
@@ -368,8 +347,8 @@ const MaxLengthTextarea = () => {
     <Textarea
       value={value}
       onChange={(e) => setValue(e.target.value)}
-      maxLength={12}
-      placeholder="최대 길이를 설정한 Textarea 입니다."
+      maxLength={120}
+      placeholder="Max Length Textarea"
     />
   );
 };
@@ -385,8 +364,8 @@ const MaxLengthTextarea: React.FC = () => {
     <Textarea
       value={value}
       onChange={(e) => setValue(e.target.value)}
-      maxLength={12}
-      placeholder="최대 길이를 설정한 Textarea 입니다."
+      maxLength={120}
+      placeholder="Max Length Textarea"
     />
   );
 };
@@ -396,14 +375,16 @@ export default MaxLengthTextarea;`
     {
       title: "Label",
       description:
-        "label 속성을 추가하면 입력 필드의 라벨을 설정할 수 있습니다.",
+        lang === "ko"
+          ? "label 속성을 추가하면 입력 필드의 라벨을 설정할 수 있습니다."
+          : "When you add the label property, you can set the label of the input field.",
       render: (
         <>
           <Textarea
             value={labelValue}
             onChange={(e) => setLabelValue(e.target.value)}
             label="Introduction"
-            placeholder="label 속성을 추가한 Textarea 입니다."
+            placeholder="Label Textarea"
           />
         </>
       ),
@@ -418,7 +399,7 @@ const LabelTextarea = () => {
       value={value}
       onChange={(e) => setValue(e.target.value)}
       label="name"
-      placeholder="label 속성을 추가한 Textarea 입니다."
+      placeholder="Label Textarea"
     />
   );
 };
@@ -435,7 +416,7 @@ const LabelTextarea: React.FC = () => {
       value={value}
       onChange={(e) => setValue(e.target.value)}
       label="name"
-      placeholder="label 속성을 추가한 Textarea 입니다."
+      placeholder="Label Textarea"
     />
   );
 };
@@ -444,14 +425,17 @@ export default LabelTextarea;`
     },
     {
       title: "Underline",
-      description: "밑줄 스타일의 입력 필드입니다.",
+      description:
+        lang === "ko"
+          ? "밑줄 스타일의 입력 필드입니다."
+          : "The input field with a line style.",
       render: (
         <>
           <Textarea
             value={underlineValue}
             onChange={(e) => setUnderlineValue(e.target.value)}
             underline
-            placeholder="밑줄 스타일의 Textarea 입니다."
+            placeholder="Underline Textarea"
           />
         </>
       ),
@@ -466,7 +450,7 @@ const UnderlineTextarea = () => {
       value={value}
       onChange={(e) => setValue(e.target.value)}
       underline
-      placeholder="밑줄 스타일의 Textarea 입니다."
+      placeholder="Underline Textarea"
     />
   );
 };
@@ -483,7 +467,7 @@ const UnderlineTextarea: React.FC = () => {
       value={value}
       onChange={(e) => setValue(e.target.value)}
       underline
-      placeholder="밑줄 스타일의 Textarea 입니다."
+      placeholder="Underline Textarea"
     />
   );
 };
@@ -492,15 +476,18 @@ export default UnderlineTextarea;`
     },
     {
       title: "Error State",
-      description: "에러 상태와 메시지를 표시할 수 있습니다.",
+      description:
+        lang === "ko"
+          ? "에러 상태와 메시지를 표시할 수 있습니다."
+          : "You can display the error state and message.",
       render: (
         <>
           <Textarea
             value={errorValue}
             onChange={(e) => setErrorValue(e.target.value)}
             error={errorValue.length > 0}
-            errorText="에러 메시지가 표시됩니다."
-            placeholder="에러 상태의 Textarea 입니다."
+            errorText="Error Message"
+            placeholder="Error Textarea"
           />
         </>
       ),
@@ -515,8 +502,8 @@ const ErrorTextarea = () => {
       value={value}
       onChange={(e) => setValue(e.target.value)}
       error={value.length > 0}
-      errorText="에러 메시지가 표시됩니다."
-      placeholder="에러 상태의 Textarea 입니다."
+      errorText="Error Message"
+      placeholder="Error Textarea"
     />
   );
 };
@@ -533,8 +520,8 @@ const ErrorTextarea: React.FC = () => {
       value={value}
       onChange={(e) => setValue(e.target.value)}
       error={value.length > 0}
-      errorText="에러 메시지가 표시됩니다."
-      placeholder="에러 상태의 Textarea 입니다."
+      errorText="Error Message"
+      placeholder="Error Textarea"
     />
   );
 };
@@ -543,7 +530,10 @@ export default ErrorTextarea;`
     },
     {
       title: "Shape",
-      description: "입력 필드의 모서리 모양을 설정할 수 있습니다.",
+      description:
+        lang === "ko"
+          ? "입력 필드의 모서리 모양을 설정할 수 있습니다."
+          : "You can set the shape of the input field.",
       render: (
         <div className="flex flex-col gap-20">
           <Card style={{ width: "100%" }} shadow="none" colorType="sub">
@@ -560,7 +550,7 @@ export default ErrorTextarea;`
             shape={shape}
             value={shapeValue}
             onChange={(e) => setShapeValue(e.target.value)}
-            placeholder={`${shape} 모양의 Textarea 입니다.`}
+            placeholder={`${shape} Shape Textarea`}
           />
         </div>
       ),
@@ -592,7 +582,7 @@ const ShapeTextarea = () => {
         shape={shape}
         value={shapeValue}
         onChange={(e) => setShapeValue(e.target.value)}
-        placeholder={\`\${shape} 모양의 Textarea 입니다.\`}
+        placeholder={\`\${shape} Shape Textarea\`}
       />
     </div>
   );
@@ -632,7 +622,7 @@ const ShapeTextarea: React.FC = () => {
         shape={shape}
         value={shapeValue}
         onChange={(e) => setShapeValue(e.target.value)}
-        placeholder={\`\${shape} 모양의 Textarea 입니다.\`}
+        placeholder={\`\${shape} Shape Textarea\`}
       />
     </div>
   );
@@ -642,10 +632,13 @@ export default ShapeTextarea;`
     },
     {
       title: "Color Customization",
-      description: "입력 필드의 색상을 커스텀할 수 있습니다.",
+      description:
+        lang === "ko"
+          ? "입력 필드의 색상을 커스텀할 수 있습니다."
+          : "You can customize the color of the input field.",
       render: (
         <Textarea
-          placeholder="textColor를 입력하세요"
+          placeholder="Enter text here"
           value={colorValue}
           onChange={(e) => setColorValue(e.target.value)}
           color={"orange-8"}
@@ -661,7 +654,7 @@ const CustomColorTextarea = () => {
 
   return (
     <Textarea
-      placeholder="textColor를 입력하세요"
+      placeholder="Enter text here"
       value={value}
       onChange={(e) => setValue(e.target.value)}
       color="orange-8"
@@ -680,7 +673,7 @@ const CustomColorTextarea: React.FC = () => {
 
   return (
     <Textarea
-      placeholder="textColor를 입력하세요"
+      placeholder="Enter text here"
       value={value}
       onChange={(e) => setValue(e.target.value)}
       color="orange-8"
@@ -694,13 +687,16 @@ export default CustomColorTextarea;`
     },
     {
       title: "Resizable",
-      description: "크기 조절 가능한 입력 필드입니다.",
+      description:
+        lang === "ko"
+          ? "크기 조절 가능한 입력 필드입니다."
+          : "The input field with a resizable.",
       render: (
         <Textarea
           value={resizableValue}
           onChange={(e) => setResizableValue(e.target.value)}
           resizable
-          placeholder="크기 조절 가능한 Textarea 입니다."
+          placeholder="Resizable Textarea"
         />
       ),
       jscode: `import React, { useState } from 'react';
@@ -714,7 +710,7 @@ const ResizableTextarea = () => {
       value={value}
       onChange={(e) => setValue(e.target.value)}
       resizable
-      placeholder="크기 조절 가능한 Textarea 입니다."
+      placeholder="Resizable Textarea"
     />
   );
 };
@@ -731,7 +727,7 @@ const ResizableTextarea: React.FC = () => {
       value={value}
       onChange={(e) => setValue(e.target.value)}
       resizable
-      placeholder="크기 조절 가능한 Textarea 입니다."
+      placeholder="Resizable Textarea"
     />
   );
 };
@@ -740,13 +736,16 @@ export default ResizableTextarea;`
     },
     {
       title: "Auto Size",
-      description: "자동 크기 조절 가능한 입력 필드입니다.",
+      description:
+        lang === "ko"
+          ? "자동 크기 조절 가능한 입력 필드입니다."
+          : "The input field with a resizable.",
       render: (
         <Textarea
           value={autoSizeValue}
           onChange={(e) => setAutoSizeValue(e.target.value)}
           autoSize
-          placeholder="자동 크기 조절 가능한 Textarea 입니다."
+          placeholder="Auto Size Textarea"
         />
       ),
       jscode: `import React, { useState } from 'react';
@@ -760,7 +759,7 @@ const AutoSizeTextarea = () => {
       value={value}
       onChange={(e) => setValue(e.target.value)}
       autoSize
-      placeholder="자동 크기 조절 가능한 Textarea 입니다."
+      placeholder="Auto Size Textarea"
     />
   );
 };
@@ -777,7 +776,7 @@ const AutoSizeTextarea: React.FC = () => {
       value={value}
       onChange={(e) => setValue(e.target.value)}
       autoSize
-      placeholder="자동 크기 조절 가능한 Textarea 입니다."
+      placeholder="Auto Size Textarea"
     />
   );
 };
@@ -786,23 +785,26 @@ export default AutoSizeTextarea;`
     },
     {
       title: "Bottom Addon",
-      description: "하단에 추가 요소를 표시할 수 있습니다.",
+      description:
+        lang === "ko"
+          ? "하단에 추가 요소를 표시할 수 있습니다."
+          : "You can display additional elements at the bottom.",
       render: (
         <Textarea
-          placeholder="하단 버튼 영역이 있는 Textarea"
+          placeholder="Bottom Button Area Textarea"
           value={bottomAddonValue}
           onChange={(e) => setBottomAddonValue(e.target.value)}
           autoSize
           bottomLeft={
             <Button size="sm" colorType="cool-gray">
-              취소
+              Cancel
             </Button>
           }
           bottomRight={
             <div style={{ display: "flex", gap: 6 }}>
               <Button size="sm" icon={<PieChartOutline size={16} />} />
               <Button size="sm" icon={<Chat size={16} />} colorType="primary">
-                보내기
+                Send
               </Button>
             </div>
           }
@@ -817,20 +819,20 @@ const BottomAddonTextarea = () => {
 
   return (
     <Textarea
-      placeholder="하단 버튼 영역이 있는 Textarea"
+      placeholder="Bottom Button Area Textarea"
       value={value}
       onChange={(e) => setValue(e.target.value)}
       autoSize
       bottomLeft={
         <Button size="sm" colorType="cool-gray">
-          취소
+          Cancel
         </Button>
       }
       bottomRight={
         <div style={{ display: "flex", gap: 6 }}>
           <Button size="sm" icon={<PieChartOutline size={16} />} />
           <Button size="sm" icon={<Chat size={16} />} colorType="primary">
-            보내기
+            Send
           </Button>
         </div>
       }
@@ -848,20 +850,20 @@ const BottomAddonTextarea: React.FC = () => {
 
   return (
     <Textarea
-      placeholder="하단 버튼 영역이 있는 Textarea"
+      placeholder="Bottom Button Area Textarea"
       value={value}
       onChange={(e) => setValue(e.target.value)}
       autoSize
       bottomLeft={
         <Button size="sm" colorType="cool-gray">
-          취소
+          Cancel
         </Button>
       }
       bottomRight={
         <div style={{ display: "flex", gap: 6 }}>
           <Button size="sm" icon={<PieChartOutline size={16} />} />
           <Button size="sm" icon={<Chat size={16} />} colorType="primary">
-            보내기
+            Send
           </Button>
         </div>
       }
@@ -876,28 +878,36 @@ export default BottomAddonTextarea;`
     {
       key: "value",
       name: "value",
-      description: "입력 필드의 값",
+      description:
+        lang === "ko" ? "입력 필드의 값" : "The value of the input field.",
       type: "string",
       default: '""'
     },
     {
       key: "onChange",
       name: "onChange",
-      description: "값이 변경될 때 호출되는 함수",
+      description:
+        lang === "ko"
+          ? "값이 변경될 때 호출되는 함수"
+          : "The function called when the value changes.",
       type: "(e: { target: { value: string } }) => void",
       default: "() => {}"
     },
     {
       key: "placeholder",
       name: "placeholder",
-      description: "입력 필드의 placeholder 텍스트",
+      description:
+        lang === "ko"
+          ? "입력 필드의 placeholder 텍스트"
+          : "The placeholder text of the input field.",
       type: "string",
       default: "-"
     },
     {
       key: "size",
       name: "size",
-      description: "입력 필드의 크기",
+      description:
+        lang === "ko" ? "입력 필드의 크기" : "The size of the input field.",
       type: (
         <>
           <Tag>sm</Tag> ｜ <Tag>md</Tag> ｜ <Tag>lg</Tag>
@@ -908,7 +918,10 @@ export default BottomAddonTextarea;`
     {
       key: "shape",
       name: "shape",
-      description: "입력 필드의 모서리 모양",
+      description:
+        lang === "ko"
+          ? "입력 필드의 모서리 모양"
+          : "The shape of the input field.",
       type: (
         <>
           <Tag>rounded</Tag> ｜ <Tag>square</Tag>
@@ -919,119 +932,133 @@ export default BottomAddonTextarea;`
     {
       key: "disabled",
       name: "disabled",
-      description: "입력 필드 비활성화 여부",
+      description:
+        lang === "ko"
+          ? "입력 필드 비활성화 여부"
+          : "The disabled state of the input field.",
       type: "boolean",
       default: "false"
     },
     {
       key: "readOnly",
       name: "readOnly",
-      description: "읽기 전용 여부",
+      description:
+        lang === "ko"
+          ? "읽기 전용 여부"
+          : "The read-only state of the input field.",
       type: "boolean",
       default: "false"
     },
     {
       key: "maxLength",
       name: "maxLength",
-      description: "최대 입력 길이",
+      description:
+        lang === "ko" ? "최대 입력 길이" : "The maximum input length.",
       type: "number",
       default: "-"
     },
     {
       key: "label",
       name: "label",
-      description: "입력 필드의 라벨",
+      description:
+        lang === "ko" ? "입력 필드의 라벨" : "The label of the input field.",
       type: "string | ReactNode",
       default: "-"
     },
     {
       key: "underline",
       name: "underline",
-      description: "밑줄 스타일 여부",
+      description:
+        lang === "ko" ? "밑줄 스타일 여부" : "The underline style state.",
       type: "boolean",
       default: "false"
     },
     {
       key: "error",
       name: "error",
-      description: "에러 상태 여부",
+      description: lang === "ko" ? "에러 상태 여부" : "The error state state.",
       type: "boolean",
       default: "false"
     },
     {
       key: "errorText",
       name: "errorText",
-      description: "에러 메시지",
+      description: lang === "ko" ? "에러 메시지" : "The error message.",
       type: "string",
       default: "-"
     },
     {
       key: "rows",
       name: "rows",
-      description: "기본 행 수",
+      description: lang === "ko" ? "기본 행 수" : "The default number of rows.",
       type: "number",
       default: "4"
     },
     {
       key: "resizable",
       name: "resizable",
-      description: "크기 조절 가능 여부",
+      description:
+        lang === "ko" ? "크기 조절 가능 여부" : "The resizable state.",
       type: "boolean",
       default: "false"
     },
     {
       key: "autoSize",
       name: "autoSize",
-      description: "자동 크기 조절 여부",
+      description:
+        lang === "ko" ? "자동 크기 조절 여부" : "The auto-size state.",
       type: "boolean",
       default: "false"
     },
     {
       key: "bottomLeft",
       name: "bottomLeft",
-      description: "하단 왼쪽 요소",
+      description:
+        lang === "ko" ? "하단 왼쪽 요소" : "The bottom left element.",
       type: "ReactNode",
       default: "-"
     },
     {
       key: "bottomRight",
       name: "bottomRight",
-      description: "하단 오른쪽 요소",
+      description:
+        lang === "ko" ? "하단 오른쪽 요소" : "The bottom right element.",
       type: "ReactNode",
       default: "-"
     },
     {
       key: "background",
       name: "background",
-      description: "배경색",
+      description: lang === "ko" ? "배경색" : "The background color.",
       type: "string",
       default: "-"
     },
     {
       key: "color",
       name: "color",
-      description: "텍스트 색상",
+      description: lang === "ko" ? "텍스트 색상" : "The text color.",
       type: "string",
       default: "-"
     },
     {
       key: "border",
       name: "border",
-      description: "테두리 표시 여부",
+      description:
+        lang === "ko" ? "테두리 표시 여부" : "The display state of the border.",
       type: "boolean",
       default: "true"
     },
     {
       key: "borderColor",
       name: "borderColor",
-      description: "테두리 색상",
+      description: lang === "ko" ? "테두리 색상" : "The border color.",
       type: "string",
       default: "-"
     },
     {
       key: "borderType",
       name: "borderType",
-      description: "테두리 스타일",
+      description: lang === "ko" ? "테두리 스타일" : "The border style.",
       type: (
         <>
           <Tag>solid</Tag> ｜ <Tag>dashed</Tag> ｜ <Tag>dotted</Tag>
@@ -1042,14 +1069,14 @@ export default BottomAddonTextarea;`
     {
       key: "borderWeight",
       name: "borderWeight",
-      description: "테두리 두께",
+      description: lang === "ko" ? "테두리 두께" : "The border weight.",
       type: "number",
       default: "1"
     },
     {
       key: "shadow",
       name: "shadow",
-      description: "그림자 크기",
+      description: lang === "ko" ? "그림자 크기" : "The shadow size.",
       type: (
         <>
           <Tag>none</Tag> ｜ <Tag>sm</Tag> ｜ <Tag>md</Tag> ｜ <Tag>lg</Tag> ｜{" "}
@@ -1061,14 +1088,15 @@ export default BottomAddonTextarea;`
     {
       key: "className",
       name: "className",
-      description: "추가 클래스명",
+      description:
+        lang === "ko" ? "추가 클래스명" : "The additional class name.",
       type: "string",
       default: '""'
     },
     {
       key: "style",
       name: "style",
-      description: "추가 스타일",
+      description: lang === "ko" ? "추가 스타일" : "The additional style.",
       type: "React.CSSProperties",
       default: "{}"
     }

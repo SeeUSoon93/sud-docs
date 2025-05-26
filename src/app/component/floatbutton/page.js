@@ -2,12 +2,11 @@
 
 import Frame from "../Frame";
 import { useMobile } from "../../_lib/context/mobileContext";
-import { Tag, Radio, Button, Card, Divider, Input, FloatButton } from "sud-ui";
+import { useLang } from "../../_lib/context/langContext";
+import { Tag, Card, FloatButton } from "sud-ui";
 
-import React, { useState } from "react";
 import {
   AngleLeft,
-  AngleUp,
   Chat,
   CircleFill,
   Close,
@@ -19,21 +18,33 @@ import {
 
 export default function FloatButtonPage() {
   const { isMobile } = useMobile();
+  const { lang } = useLang();
 
   const name = "FloatButton";
-  const description = <>페이지 위에 고정되어 있는 버튼 컴포넌트입니다.</>;
+  const description =
+    lang === "ko" ? (
+      <>페이지 위에 고정되어 있는 버튼 컴포넌트입니다.</>
+    ) : (
+      <>A component that is fixed to the top of the page.</>
+    );
 
   const IMPORT_COMMAND = "import { FloatButton } from 'sud-ui';";
 
-  const whenToUse = [
-    "사이트의 글로벌 기능을 제공할 때",
-    "어떤 페이지에서든 볼 수 있는 버튼이 필요할 때"
-  ];
+  const whenToUse =
+    lang === "ko"
+      ? [
+          "사이트의 글로벌 기능을 제공할 때",
+          "어떤 페이지에서든 볼 수 있는 버튼이 필요할 때"
+        ]
+      : [
+          "When providing a global feature of a site",
+          "When a button that can be seen on any page is needed"
+        ];
 
   const examples = [
     {
       title: "Basic Usage",
-      description: "기본적인 사용법입니다.",
+      description: lang === "ko" ? "기본적인 사용 방법입니다." : "Basic usage.",
       render: (
         <div className="flex flex-col gap-20 jus-cen item-cen">
           <Card
@@ -84,7 +95,10 @@ export default function Example(): JSX.Element {
     },
     {
       title: "Shape",
-      description: "버튼의 모양을 설정합니다.",
+      description:
+        lang === "ko"
+          ? "버튼의 모양을 설정합니다."
+          : "Set the shape of the button.",
       render: (
         <div className="flex flex-col gap-20 jus-cen item-cen">
           <Card
@@ -180,7 +194,10 @@ export default function Example(): JSX.Element {
     },
     {
       title: "Placement",
-      description: "버튼의 위치를 설정합니다.",
+      description:
+        lang === "ko"
+          ? "버튼의 위치를 설정합니다."
+          : "Set the position of the button.",
       render: (
         <div className="flex flex-col gap-20 jus-cen item-cen">
           <Card
@@ -297,7 +314,10 @@ export default function Example(): JSX.Element {
     },
     {
       title: "Extended Button",
-      description: "확장 버튼을 사용할 수 있습니다.",
+      description:
+        lang === "ko"
+          ? "확장 버튼을 사용할 수 있습니다."
+          : "You can use the extended button.",
       render: (
         <div className="flex flex-col gap-20 jus-cen item-cen">
           <Card
@@ -385,7 +405,10 @@ export default function Example(): JSX.Element {
     },
     {
       title: "Extended Button Direction",
-      description: "확장 버튼의 방향을 설정합니다.",
+      description:
+        lang === "ko"
+          ? "확장 버튼의 방향을 설정합니다."
+          : "Set the direction of the extended button.",
       render: (
         <div className="flex flex-col gap-20 jus-cen item-cen">
           <Card
@@ -479,28 +502,34 @@ export default function Example(): JSX.Element {
     {
       key: "icon",
       name: "icon",
-      description: "버튼에 표시할 아이콘",
+      description:
+        lang === "ko"
+          ? "버튼에 표시할 아이콘"
+          : "The icon to display on the button.",
       type: "ReactNode",
       default: "-"
     },
     {
       key: "onClick",
       name: "onClick",
-      description: "클릭 이벤트 핸들러",
+      description:
+        lang === "ko" ? "클릭 이벤트 핸들러" : "The click event handler.",
       type: "(event: React.MouseEvent) => void",
       default: "-"
     },
     {
       key: "actions",
       name: "actions",
-      description: "확장 버튼 목록",
+      description:
+        lang === "ko" ? "확장 버튼 목록" : "The list of extended buttons.",
       type: "Array<ButtonProps>",
       default: "[]"
     },
     {
       key: "placement",
       name: "placement",
-      description: "버튼의 위치",
+      description:
+        lang === "ko" ? "버튼의 위치" : "The position of the button.",
       type: (
         <>
           <Tag>bottom-right</Tag> ｜ <Tag>bottom-left</Tag> ｜{" "}
@@ -514,7 +543,10 @@ export default function Example(): JSX.Element {
     {
       key: "direction",
       name: "direction",
-      description: "확장 버튼 방향",
+      description:
+        lang === "ko"
+          ? "확장 버튼 방향"
+          : "The direction of the extended button.",
       type: (
         <>
           <Tag>up</Tag> ｜ <Tag>down</Tag> ｜ <Tag>left</Tag> ｜{" "}
@@ -527,7 +559,7 @@ export default function Example(): JSX.Element {
     {
       key: "shape",
       name: "shape",
-      description: "버튼의 모양",
+      description: lang === "ko" ? "버튼의 모양" : "The shape of the button.",
       type: (
         <>
           <Tag>circle</Tag> ｜ <Tag>rounded</Tag> ｜ <Tag>square</Tag>
@@ -538,7 +570,8 @@ export default function Example(): JSX.Element {
     {
       key: "colorType",
       name: "colorType",
-      description: "버튼의 색상 타입",
+      description:
+        lang === "ko" ? "버튼의 색상 타입" : "The color type of the button.",
       type: (
         <>
           <Tag>default</Tag> ｜ <Tag>primary</Tag> ｜ <Tag>secondary</Tag> ｜{" "}
@@ -551,56 +584,74 @@ export default function Example(): JSX.Element {
     {
       key: "background",
       name: "background",
-      description: "버튼의 배경색",
+      description:
+        lang === "ko" ? "버튼의 배경색" : "The background color of the button.",
       type: "string",
       default: "-"
     },
     {
       key: "color",
       name: "color",
-      description: "버튼의 텍스트 색상",
+      description:
+        lang === "ko" ? "버튼의 텍스트 색상" : "The text color of the button.",
       type: "string",
       default: "-"
     },
     {
       key: "border",
       name: "border",
-      description: "테두리 표시 여부",
+      description:
+        lang === "ko" ? "테두리 표시 여부" : "Whether to display the border.",
       type: "boolean",
       default: "false"
     },
     {
       key: "borderColor",
       name: "borderColor",
-      description: "버튼의 테두리 색상",
+      description:
+        lang === "ko"
+          ? "버튼의 테두리 색상"
+          : "The border color of the button.",
       type: "string",
       default: "-"
     },
     {
       key: "borderType",
       name: "borderType",
-      description: "버튼의 테두리 스타일",
+      description:
+        lang === "ko"
+          ? "버튼의 테두리 스타일"
+          : "The border style of the button.",
       type: "string",
       default: "solid"
     },
     {
       key: "borderWeight",
       name: "borderWeight",
-      description: "버튼의 테두리 두께",
+      description:
+        lang === "ko"
+          ? "버튼의 테두리 두께"
+          : "The border weight of the button.",
       type: "number",
       default: "1"
     },
     {
       key: "disabled",
       name: "disabled",
-      description: "버튼 비활성화 여부",
+      description:
+        lang === "ko"
+          ? "버튼 비활성화 여부"
+          : "Whether the button is disabled.",
       type: "boolean",
       default: "false"
     },
     {
       key: "shadow",
       name: "shadow",
-      description: "버튼의 그림자 효과",
+      description:
+        lang === "ko"
+          ? "버튼의 그림자 효과"
+          : "The shadow effect of the button.",
       type: (
         <>
           <Tag>none</Tag> ｜ <Tag>sm</Tag> ｜ <Tag>md</Tag> ｜ <Tag>lg</Tag>
@@ -611,7 +662,10 @@ export default function Example(): JSX.Element {
     {
       key: "subColorType",
       name: "subColorType",
-      description: "확장 버튼의 기본 색상 타입",
+      description:
+        lang === "ko"
+          ? "확장 버튼의 기본 색상 타입"
+          : "The default color type of the extended button.",
       type: (
         <>
           <Tag>default</Tag> ｜ <Tag>primary</Tag> ｜ <Tag>secondary</Tag> ｜{" "}
@@ -624,7 +678,7 @@ export default function Example(): JSX.Element {
     {
       key: "size",
       name: "size",
-      description: "버튼의 크기",
+      description: lang === "ko" ? "버튼의 크기" : "The size of the button.",
       type: (
         <>
           <Tag>xs</Tag> ｜ <Tag>sm</Tag> ｜ <Tag>md</Tag> ｜ <Tag>lg</Tag> ｜{" "}
@@ -636,42 +690,44 @@ export default function Example(): JSX.Element {
     {
       key: "style",
       name: "style",
-      description: "추가 스타일",
+      description: lang === "ko" ? "추가 스타일" : "Additional style.",
       type: "CSSProperties",
       default: "{}"
     },
     {
       key: "ariaLabel",
       name: "ariaLabel",
-      description: "ARIA 라벨",
+      description: lang === "ko" ? "ARIA 라벨" : "ARIA label.",
       type: "string",
       default: "-"
     },
     {
       key: "ariaPressed",
       name: "ariaPressed",
-      description: "ARIA pressed 상태",
+      description: lang === "ko" ? "ARIA pressed 상태" : "ARIA pressed state.",
       type: "boolean",
       default: "-"
     },
     {
       key: "ariaExpanded",
       name: "ariaExpanded",
-      description: "ARIA expanded 상태",
+      description:
+        lang === "ko" ? "ARIA expanded 상태" : "ARIA expanded state.",
       type: "boolean",
       default: "-"
     },
     {
       key: "ariaControls",
       name: "ariaControls",
-      description: "ARIA controls 속성",
+      description:
+        lang === "ko" ? "ARIA controls 속성" : "ARIA controls attribute.",
       type: "string",
       default: "-"
     },
     {
       key: "role",
       name: "role",
-      description: "ARIA 역할",
+      description: lang === "ko" ? "ARIA 역할" : "ARIA role.",
       type: "string",
       default: "button"
     }

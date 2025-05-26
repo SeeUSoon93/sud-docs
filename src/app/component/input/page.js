@@ -2,13 +2,15 @@
 
 import Frame from "../Frame";
 import { useMobile } from "../../_lib/context/mobileContext";
-import { Input, Tag, Radio, Card, Select, Button } from "sud-ui";
+import { useLang } from "../../_lib/context/langContext";
+import { Input, Tag, Radio, Card, Button } from "sud-ui";
 
 import React, { useState } from "react";
 import { Search } from "sud-icons";
 
 export default function InputPage() {
   const { isMobile } = useMobile();
+  const { lang } = useLang();
   const [size, setSize] = useState("md");
   const [type, setType] = useState("text");
   const [value, setValue] = useState("");
@@ -18,7 +20,7 @@ export default function InputPage() {
   const [textValue, setTextValue] = useState("");
   const [numberValue, setNumberValue] = useState("");
   const [maxLengthValue, setMaxLengthValue] = useState("");
-  const [clearableValue, setClearableValue] = useState("지워보세요!");
+  const [clearableValue, setClearableValue] = useState("Try to clear!");
   const [passwordValue, setPasswordValue] = useState("");
   const [labelValue, setLabelValue] = useState("");
   const [underlineValue, setUnderlineValue] = useState("");
@@ -27,18 +29,23 @@ export default function InputPage() {
   const [shape, setShape] = useState("rounded");
   const [iconPosition, setIconPosition] = useState("after");
   const [prefixSuffix, setPrefixSuffix] = useState("prefix");
-  const [colorValue, setColorValue] = useState("");
+  const [colorValue, setColorValue] = useState("orange");
   const [shapeValue, setShapeValue] = useState("");
   const [iconValue, setIconValue] = useState("");
   const [prefixSuffixValue, setPrefixSuffixValue] = useState("");
   const [thousandValue, setThousandValue] = useState("");
 
   const name = "Input";
-  const description = <>텍스트를 입력할 수 있는 입력 컴포넌트입니다.</>;
+  const description =
+    lang === "ko"
+      ? "텍스트를 입력할 수 있는 입력 컴포넌트입니다."
+      : "A text input component that allows you to enter text.";
 
   const IMPORT_COMMAND = "import { Input } from 'sud-ui';";
 
-  const whenToUse = ["텍스트를 입력할 때."];
+  const whenToUse = [
+    lang === "ko" ? "텍스트를 입력할 때." : "When you need to enter text."
+  ];
 
   const sizeOptions = [
     {
@@ -82,22 +89,22 @@ export default function InputPage() {
 
   const iconPositionOptions = [
     {
-      label: "앞",
+      label: "before",
       value: "before"
     },
     {
-      label: "뒤",
+      label: "after",
       value: "after"
     }
   ];
 
   const prefixSuffixOptions = [
     {
-      label: "접두사",
+      label: "prefix",
       value: "prefix"
     },
     {
-      label: "접미사",
+      label: "suffix",
       value: "suffix"
     }
   ];
@@ -105,13 +112,13 @@ export default function InputPage() {
   const examples = [
     {
       title: "Basic Usage",
-      description: "기본적인 입력 컴포넌트입니다.",
+      description: lang === "ko" ? "기본적인 사용 방법입니다." : "Basic usage.",
       render: (
         <>
           <Input
             value={value}
             onChange={(e) => setValue(e.target.value)}
-            placeholder="텍스트를 입력해주세요."
+            placeholder="Enter text."
           />
         </>
       ),
@@ -125,7 +132,7 @@ const BasicInput = () => {
     <Input
       value={value}
       onChange={(e) => setValue(e.target.value)}
-      placeholder="텍스트를 입력해주세요."
+      placeholder="Enter text."
     />
   );
 };
@@ -141,7 +148,7 @@ const BasicInput: React.FC = () => {
     <Input
       value={value}
       onChange={(e) => setValue(e.target.value)}
-      placeholder="텍스트를 입력해주세요."
+      placeholder="Enter text."
     />
   );
 };
@@ -150,7 +157,10 @@ export default BasicInput;`
     },
     {
       title: "Size",
-      description: "Input 의 크기를 설정할 수 있습니다.",
+      description:
+        lang === "ko"
+          ? "Input 의 크기를 설정할 수 있습니다."
+          : "You can set the size of the Input.",
       render: (
         <div className="flex flex-col gap-20">
           <Card style={{ width: "100%" }} shadow="none" colorType="sub">
@@ -167,7 +177,7 @@ export default BasicInput;`
             size={size}
             value={sizeValue}
             onChange={(e) => setSizeValue(e.target.value)}
-            placeholder={`${size} 크기의 Input 입니다.`}
+            placeholder={`${size} size Input`}
           />
         </div>
       ),
@@ -241,7 +251,7 @@ const SizeInput: React.FC = () => {
         size={size}
         value={value}
         onChange={(e) => setValue(e.target.value)}
-        placeholder={\`\${size} 크기의 Input 입니다.\`}
+        placeholder={\`\${size} size Input\`}
       />
     </div>
   );
@@ -251,14 +261,17 @@ export default SizeInput;`
     },
     {
       title: "Disabled",
-      description: "disabled 속성을 추가하면 입력 필드가 비활성화됩니다.",
+      description:
+        lang === "ko"
+          ? "disabled 속성을 추가하면 입력 필드가 비활성화됩니다."
+          : "When you add the disabled property, the input field is disabled.",
       render: (
         <>
           <Input
             value={disabledValue}
             onChange={(e) => setDisabledValue(e.target.value)}
             disabled
-            placeholder="비활성화된 Input 입니다."
+            placeholder="Disabled Input"
           />
         </>
       ),
@@ -273,7 +286,7 @@ const DisabledInput = () => {
       value={value}
       onChange={(e) => setValue(e.target.value)}
       disabled
-      placeholder="비활성화된 Input 입니다."
+      placeholder="Disabled Input"
     />
   );
 };
@@ -290,7 +303,7 @@ const DisabledInput: React.FC = () => {
       value={value}
       onChange={(e) => setValue(e.target.value)}
       disabled
-      placeholder="비활성화된 Input 입니다."
+      placeholder="Disabled Input"
     />
   );
 };
@@ -300,14 +313,16 @@ export default DisabledInput;`
     {
       title: "Read Only",
       description:
-        "readOnly 속성을 추가하면 입력 필드가 읽기 전용으로 변경됩니다.",
+        lang === "ko"
+          ? "readOnly 속성을 추가하면 입력 필드가 읽기 전용으로 변경됩니다."
+          : "When you add the readOnly property, the input field is read-only.",
       render: (
         <>
           <Input
             value={readOnlyValue}
             onChange={(e) => setReadOnlyValue(e.target.value)}
             readOnly
-            placeholder="읽기 전용 Input 입니다."
+            placeholder="Read Only Input"
           />
         </>
       ),
@@ -322,7 +337,7 @@ const ReadOnlyInput = () => {
       value={value}
       onChange={(e) => setValue(e.target.value)}
       readOnly
-      placeholder="읽기 전용 Input 입니다."
+      placeholder="Read Only Input"
     />
   );
 };
@@ -339,7 +354,7 @@ const ReadOnlyInput: React.FC = () => {
       value={value}
       onChange={(e) => setValue(e.target.value)}
       readOnly
-      placeholder="읽기 전용 Input 입니다."
+      placeholder="Read Only Input"
     />
   );
 };
@@ -348,7 +363,10 @@ export default ReadOnlyInput;`
     },
     {
       title: "Input Type",
-      description: "입력 필드의 타입을 설정할 수 있습니다.",
+      description:
+        lang === "ko"
+          ? "입력 필드의 타입을 설정할 수 있습니다."
+          : "You can set the type of the input field.",
       render: (
         <div className="flex flex-col gap-20">
           <Card style={{ width: "100%" }} shadow="none" colorType="sub">
@@ -369,7 +387,7 @@ export default ReadOnlyInput;`
                 ? setTextValue(e.target.value)
                 : setNumberValue(e.target.value)
             }
-            placeholder={`${type} 타입의 Input 입니다.`}
+            placeholder={`${type} type Input`}
           />
         </div>
       ),
@@ -406,7 +424,7 @@ const TypeInput = () => {
             ? setTextValue(e.target.value)
             : setNumberValue(e.target.value)
         }
-        placeholder={\`\${type} 타입의 Input 입니다.\`}
+        placeholder={\`\${type} type Input\`}
       />
     </div>
   );
@@ -451,7 +469,7 @@ const TypeInput: React.FC = () => {
             ? setTextValue(e.target.value)
             : setNumberValue(e.target.value)
         }
-        placeholder={\`\${type} 타입의 Input 입니다.\`}
+        placeholder={\`\${type} type Input\`}
       />
     </div>
   );
@@ -461,14 +479,17 @@ export default TypeInput;`
     },
     {
       title: "Max Length",
-      description: "최대 입력 길이를 설정할 수 있습니다.",
+      description:
+        lang === "ko"
+          ? "최대 입력 길이를 설정할 수 있습니다."
+          : "You can set the maximum input length.",
       render: (
         <>
           <Input
             value={maxLengthValue}
             onChange={(e) => setMaxLengthValue(e.target.value)}
             maxLength={12}
-            placeholder="최대 길이를 설정한 Input 입니다."
+            placeholder="Max Length Input"
           />
         </>
       ),
@@ -483,7 +504,7 @@ const MaxLengthInput = () => {
       value={value}
       onChange={(e) => setValue(e.target.value)}
       maxLength={12}
-      placeholder="최대 길이를 설정한 Input 입니다."
+        placeholder="Max Length Input"
     />
   );
 };
@@ -500,7 +521,7 @@ const MaxLengthInput: React.FC = () => {
       value={value}
       onChange={(e) => setValue(e.target.value)}
       maxLength={12}
-      placeholder="최대 길이를 설정한 Input 입니다."
+      placeholder="Max Length Input"
     />
   );
 };
@@ -510,14 +531,16 @@ export default MaxLengthInput;`
     {
       title: "Clearable",
       description:
-        "clearable 속성을 추가하면 입력 필드의 값을 지울 수 있습니다.",
+        lang === "ko"
+          ? "clearable 속성을 추가하면 입력 필드의 값을 지울 수 있습니다."
+          : "When you add the clearable property, you can clear the value of the input field.",
       render: (
         <>
           <Input
             value={clearableValue}
             onChange={(e) => setClearableValue(e.target.value)}
             clearable
-            placeholder="clearable 속성을 추가한 Input 입니다."
+            placeholder="Clearable Input"
           />
         </>
       ),
@@ -525,14 +548,14 @@ export default MaxLengthInput;`
 import { Input } from 'sud-ui';
 
 const ClearableInput = () => {
-  const [value, setValue] = useState("지워보세요!");
+  const [value, setValue] = useState("Try to clear!");
 
   return (
     <Input
       value={value}
       onChange={(e) => setValue(e.target.value)}
       clearable
-      placeholder="clearable 속성을 추가한 Input 입니다."
+      placeholder="Clearable Input"
     />
   );
 };
@@ -542,14 +565,14 @@ export default ClearableInput;`,
 import { Input } from 'sud-ui';
 
 const ClearableInput: React.FC = () => {
-  const [value, setValue] = useState("지워보세요!");
+  const [value, setValue] = useState("Try to clear!");
 
   return (
     <Input
       value={value}
       onChange={(e) => setValue(e.target.value)}
       clearable
-      placeholder="clearable 속성을 추가한 Input 입니다."
+      placeholder="Clearable Input"
     />
   );
 };
@@ -559,14 +582,16 @@ export default ClearableInput;`
     {
       title: "Password",
       description:
-        "password 속성을 추가하면 입력 필드가 비밀번호 입력 필드로 변경됩니다.",
+        lang === "ko"
+          ? "password 속성을 추가하면 입력 필드가 비밀번호 입력 필드로 변경됩니다."
+          : "When you add the password property, the input field is changed to a password input field.",
       render: (
         <>
           <Input
             value={passwordValue}
             onChange={(e) => setPasswordValue(e.target.value)}
             password
-            placeholder="password 속성을 추가한 Input 입니다."
+            placeholder="Password Input"
           />
         </>
       ),
@@ -581,7 +606,7 @@ const PasswordInput = () => {
       value={value}
       onChange={(e) => setValue(e.target.value)}
       password
-      placeholder="password 속성을 추가한 Input 입니다."
+      placeholder="Password Input"
     />
   );
 };
@@ -598,7 +623,7 @@ const PasswordInput: React.FC = () => {
       value={value}
       onChange={(e) => setValue(e.target.value)}
       password
-      placeholder="password 속성을 추가한 Input 입니다."
+      placeholder="Password Input"
     />
   );
 };
@@ -608,14 +633,16 @@ export default PasswordInput;`
     {
       title: "Label",
       description:
-        "label 속성을 추가하면 입력 필드의 라벨을 설정할 수 있습니다.",
+        lang === "ko"
+          ? "label 속성을 추가하면 입력 필드의 라벨을 설정할 수 있습니다."
+          : "When you add the label property, you can set the label of the input field.",
       render: (
         <>
           <Input
             value={labelValue}
             onChange={(e) => setLabelValue(e.target.value)}
             label="name"
-            placeholder="label 속성을 추가한 Input 입니다."
+            placeholder="Label Input"
           />
         </>
       ),
@@ -630,7 +657,7 @@ const LabelInput = () => {
       value={value}
       onChange={(e) => setValue(e.target.value)}
       label="name"
-      placeholder="label 속성을 추가한 Input 입니다."
+      placeholder="Label Input"
     />
   );
 };
@@ -647,7 +674,7 @@ const LabelInput: React.FC = () => {
       value={value}
       onChange={(e) => setValue(e.target.value)}
       label="name"
-      placeholder="label 속성을 추가한 Input 입니다."
+      placeholder="Label Input"
     />
   );
 };
@@ -656,14 +683,17 @@ export default LabelInput;`
     },
     {
       title: "Underline",
-      description: "밑줄 스타일의 입력 필드입니다.",
+      description:
+        lang === "ko"
+          ? "밑줄 스타일의 입력 필드입니다."
+          : "An input field with a line style.",
       render: (
         <>
           <Input
             value={underlineValue}
             onChange={(e) => setUnderlineValue(e.target.value)}
             underline
-            placeholder="밑줄 스타일의 Input 입니다."
+            placeholder="Underline Input"
           />
         </>
       ),
@@ -678,7 +708,7 @@ const UnderlineInput = () => {
       value={value}
       onChange={(e) => setValue(e.target.value)}
       underline
-      placeholder="밑줄 스타일의 Input 입니다."
+      placeholder="Underline Input"
     />
   );
 };
@@ -695,7 +725,7 @@ const UnderlineInput: React.FC = () => {
       value={value}
       onChange={(e) => setValue(e.target.value)}
       underline
-      placeholder="밑줄 스타일의 Input 입니다."
+      placeholder="Underline Input"
     />
   );
 };
@@ -704,14 +734,17 @@ export default UnderlineInput;`
     },
     {
       title: "Auto Complete",
-      description: "자동 완성 기능이 있는 입력 필드입니다.",
+      description:
+        lang === "ko"
+          ? "자동 완성 기능이 있는 입력 필드입니다."
+          : "An input field with auto-completion functionality.",
       render: (
         <>
           <Input
             value={autoCompleteValue}
             onChange={(e) => setAutoCompleteValue(e.target.value)}
             autoComplete="email"
-            placeholder="이메일을 입력해주세요."
+            placeholder="Auto Complete Input"
           />
         </>
       ),
@@ -726,7 +759,7 @@ const AutoCompleteInput = () => {
       value={value}
       onChange={(e) => setValue(e.target.value)}
       autoComplete="email"
-      placeholder="이메일을 입력해주세요."
+      placeholder="Auto Complete Input"
     />
   );
 };
@@ -743,7 +776,7 @@ const AutoCompleteInput: React.FC = () => {
       value={value}
       onChange={(e) => setValue(e.target.value)}
       autoComplete="email"
-      placeholder="이메일을 입력해주세요."
+      placeholder="Auto Complete Input"
     />
   );
 };
@@ -752,15 +785,18 @@ export default AutoCompleteInput;`
     },
     {
       title: "Error State",
-      description: "에러 상태와 메시지를 표시할 수 있습니다.",
+      description:
+        lang === "ko"
+          ? "에러 상태와 메시지를 표시할 수 있습니다."
+          : "You can display an error state and message.",
       render: (
         <>
           <Input
             value={errorValue}
             onChange={(e) => setErrorValue(e.target.value)}
             error={errorValue.length > 0}
-            errorText="에러 메시지가 표시됩니다."
-            placeholder="에러 상태의 Input 입니다."
+            errorText="Error Message"
+            placeholder="Error Input"
           />
         </>
       ),
@@ -775,8 +811,8 @@ const ErrorInput = () => {
       value={value}
       onChange={(e) => setValue(e.target.value)}
       error={value.length > 0}
-      errorText="에러 메시지가 표시됩니다."
-      placeholder="에러 상태의 Input 입니다."
+      errorText="Error Message"
+      placeholder="Error Input"
     />
   );
 };
@@ -793,8 +829,8 @@ const ErrorInput: React.FC = () => {
       value={value}
       onChange={(e) => setValue(e.target.value)}
       error={value.length > 0}
-      errorText="에러 메시지가 표시됩니다."
-      placeholder="에러 상태의 Input 입니다."
+      errorText="Error Message"
+      placeholder="Error Input"
     />
   );
 };
@@ -803,7 +839,10 @@ export default ErrorInput;`
     },
     {
       title: "Shape",
-      description: "입력 필드의 모서리 모양을 설정할 수 있습니다.",
+      description:
+        lang === "ko"
+          ? "입력 필드의 모서리 모양을 설정할 수 있습니다."
+          : "You can set the shape of the input field.",
       render: (
         <div className="flex flex-col gap-20">
           <Card style={{ width: "100%" }} shadow="none" colorType="sub">
@@ -820,7 +859,7 @@ export default ErrorInput;`
             shape={shape}
             value={shapeValue}
             onChange={(e) => setShapeValue(e.target.value)}
-            placeholder={`${shape} 모양의 Input 입니다.`}
+            placeholder={`${shape} Shape Input`}
           />
         </div>
       ),
@@ -853,7 +892,7 @@ const ShapeInput = () => {
         shape={shape}
         value={shapeValue}
         onChange={(e) => setShapeValue(e.target.value)}
-        placeholder={\`\${shape} 모양의 Input 입니다.\`}
+        placeholder={\`\${shape} Shape Input\`}
       />
     </div>
   );
@@ -894,7 +933,7 @@ const ShapeInput: React.FC = () => {
         shape={shape}
         value={shapeValue}
         onChange={(e) => setShapeValue(e.target.value)}
-        placeholder={\`\${shape} 모양의 Input 입니다.\`}
+        placeholder={\`\${shape} Shape Input\`}
       />
     </div>
   );
@@ -904,7 +943,10 @@ export default ShapeInput;`
     },
     {
       title: "Icon",
-      description: "입력 필드 앞뒤에 아이콘을 추가할 수 있습니다.",
+      description:
+        lang === "ko"
+          ? "입력 필드 앞뒤에 아이콘을 추가할 수 있습니다."
+          : "You can add an icon before and after the input field.",
       render: (
         <div className="flex flex-col gap-20">
           <Card style={{ width: "100%" }} shadow="none" colorType="sub">
@@ -923,7 +965,7 @@ export default ShapeInput;`
               : { afterIcon: <Search /> })}
             value={iconValue}
             onChange={(e) => setIconValue(e.target.value)}
-            placeholder="아이콘이 있는 Input 입니다."
+            placeholder="Icon Input"
           />
         </div>
       ),
@@ -935,8 +977,8 @@ const IconInput = () => {
   const [iconValue, setIconValue] = useState('');
   
   const iconPositionOptions = [
-    { label: '앞', value: 'before' },
-    { label: '뒤', value: 'after' }
+    { label: 'before', value: 'before' },
+    { label: 'after', value: 'after' }
   ];
 
   return (
@@ -957,7 +999,7 @@ const IconInput = () => {
           : { afterIcon: <Search /> })}
         value={iconValue}
         onChange={(e) => setIconValue(e.target.value)}
-        placeholder="아이콘이 있는 Input 입니다."
+        placeholder="Icon Input"
       />
     </div>
   );
@@ -977,8 +1019,8 @@ const IconInput: React.FC = () => {
   const [iconValue, setIconValue] = useState<string>('');
   
   const iconPositionOptions: IconPositionOption[] = [
-    { label: '앞', value: 'before' },
-    { label: '뒤', value: 'after' }
+    { label: 'before', value: 'before' },
+    { label: 'after', value: 'after' }
   ];
 
   return (
@@ -999,7 +1041,7 @@ const IconInput: React.FC = () => {
           : { afterIcon: <Search /> })}
         value={iconValue}
         onChange={(e) => setIconValue(e.target.value)}
-        placeholder="아이콘이 있는 Input 입니다."
+        placeholder="Icon Input"
       />
     </div>
   );
@@ -1009,7 +1051,10 @@ export default IconInput;`
     },
     {
       title: "Prefix/Suffix",
-      description: "입력 필드 앞뒤에 텍스트를 추가할 수 있습니다.",
+      description:
+        lang === "ko"
+          ? "입력 필드 앞뒤에 텍스트를 추가할 수 있습니다."
+          : "You can add text before and after the input field.",
       render: (
         <div className="flex flex-col gap-20">
           <Card style={{ width: "100%" }} shadow="none" colorType="sub">
@@ -1026,10 +1071,10 @@ export default IconInput;`
             <Input
               {...(prefixSuffix === "prefix"
                 ? { prefix: "₩" }
-                : { suffix: "원" })}
+                : { suffix: "KRW" })}
               value={prefixSuffixValue}
               onChange={(e) => setPrefixSuffixValue(e.target.value)}
-              placeholder="접두사/접미사가 있는 Input 입니다."
+              placeholder="Prefix/Suffix Input"
             />
 
             <Input
@@ -1037,20 +1082,20 @@ export default IconInput;`
                 ? {
                     prefix: (
                       <Button size="sm" colorType="primary" shadow="none">
-                        검색
+                        Search
                       </Button>
                     )
                   }
                 : {
                     suffix: (
                       <Button size="sm" colorType="primary">
-                        확인
+                        Confirm
                       </Button>
                     )
                   })}
               value={prefixSuffixValue}
               onChange={(e) => setPrefixSuffixValue(e.target.value)}
-              placeholder="접두사/접미사가 있는 Input 입니다."
+              placeholder="Prefix/Suffix Input"
             />
           </div>
         </div>
@@ -1062,8 +1107,8 @@ const PrefixSuffixInput = () => {
   const [prefixSuffix, setPrefixSuffix] = useState('prefix');
   
   const prefixSuffixOptions = [
-    { label: '접두사', value: 'prefix' },
-    { label: '접미사', value: 'suffix' }
+    { label: 'prefix', value: 'prefix' },
+    { label: 'suffix', value: 'suffix' }
   ];
 
   return (
@@ -1082,19 +1127,19 @@ const PrefixSuffixInput = () => {
         <Input
           {...(prefixSuffix === "prefix"
             ? { prefix: "₩" }
-            : { suffix: "원" })}
+            : { suffix: "KRW" })}
         value={prefixSuffixValue}
         onChange={(e) => setPrefixSuffixValue(e.target.value)}
-          placeholder="접두사/접미사가 있는 Input 입니다."
+          placeholder="Prefix/Suffix Input"
         />
 
         <Input
           {...(prefixSuffix === "prefix"
-            ? { prefix: <Button size="sm" colorType="primary" shadow="none">검색</Button> }
-            : { suffix: <Button size="sm" colorType="primary">확인</Button> })}
+            ? { prefix: <Button size="sm" colorType="primary" shadow="none">Search</Button> }
+            : { suffix: <Button size="sm" colorType="primary">Confirm</Button> })}
           value={prefixSuffixValue}
           onChange={(e) => setPrefixSuffixValue(e.target.value)}
-          placeholder="접두사/접미사가 있는 Input 입니다."
+          placeholder="Prefix/Suffix Input"
         />
       </div>
     </div>
@@ -1114,8 +1159,8 @@ const PrefixSuffixInput: React.FC = () => {
   const [prefixSuffix, setPrefixSuffix] = useState<string>('prefix');
   
   const prefixSuffixOptions: PrefixSuffixOption[] = [
-    { label: '접두사', value: 'prefix' },
-    { label: '접미사', value: 'suffix' }
+    { label: 'prefix', value: 'prefix' },
+    { label: 'suffix', value: 'suffix' }
   ];
 
   return (
@@ -1134,19 +1179,19 @@ const PrefixSuffixInput: React.FC = () => {
         <Input
         {...(prefixSuffix === "prefix"
           ? { prefix: "₩" }
-          : { suffix: "원" })}
+          : { suffix: "KRW" })}
         value={prefixSuffixValue}
         onChange={(e) => setPrefixSuffixValue(e.target.value)}
-          placeholder="접두사/접미사가 있는 Input 입니다."
+          placeholder="Prefix/Suffix Input"
         />
 
         <Input
           {...(prefixSuffix === "prefix"
-            ? { prefix: <Button size="sm" colorType="primary" shadow="none">검색</Button> }
-            : { suffix: <Button size="sm" colorType="primary">확인</Button> })}
+            ? { prefix: <Button size="sm" colorType="primary" shadow="none">Search</Button> }
+            : { suffix: <Button size="sm" colorType="primary">Confirm</Button> })}
           value={prefixSuffixValue}
           onChange={(e) => setPrefixSuffixValue(e.target.value)}
-          placeholder="접두사/접미사가 있는 Input 입니다."
+          placeholder="Prefix/Suffix Input"
         />
       </div>
   );
@@ -1156,16 +1201,31 @@ export default PrefixSuffixInput;`
     },
     {
       title: "Color Customization",
-      description: "입력 필드의 색상을 커스텀할 수 있습니다.",
+      description:
+        lang === "ko"
+          ? "입력 필드의 색상을 커스텀할 수 있습니다."
+          : "You can customize the color of the input field.",
       render: (
-        <Input
-          placeholder="textColor를 입력하세요"
-          value={colorValue}
-          onChange={(e) => setColorValue(e.target.value)}
-          color={"orange-8"}
-          background={"orange-1"}
-          borderColor={"orange-8"}
-        />
+        <div className="flex flex-col gap-20">
+          <Input
+            placeholder="Enter textColor"
+            value={colorValue}
+            onChange={(e) => setColorValue(e.target.value)}
+            color={`${colorValue}-8`}
+            background={`${colorValue}-1`}
+            borderColor={`${colorValue}-8`}
+          />
+          <div className="flex flex-wra gap-10">
+            <Tag colorType="blue">blue</Tag>
+            <Tag colorType="green">green</Tag>
+            <Tag colorType="orange">orange</Tag>
+            <Tag colorType="red">red</Tag>s<Tag colorType="forest">forest</Tag>
+            <Tag colorType="purple">purple</Tag>
+            <Tag colorType="volcano">volcano</Tag>
+            <Tag colorType="lime">lime</Tag>
+            ...
+          </div>
+        </div>
       ),
       jscode: `import React, { useState } from 'react';
 import { Input } from 'sud-ui';
@@ -1174,14 +1234,27 @@ const CustomColorInput = () => {
   const [value, setValue] = useState("");
 
   return (
-    <Input
-      placeholder="textColor를 입력하세요"
-      value={value}
-      onChange={(e) => setValue(e.target.value)}
-      color="orange-8"
-      background="orange-1"
-      borderColor="orange-8"
-    />
+    <div className="flex flex-col gap-20">
+      <Input
+        placeholder="Enter textColor"
+        value={value}
+        onChange={(e) => setValue(e.target.value)}
+        color={\`\${value}-8\`\}
+        background={\`\${value}-1\`\}
+        borderColor={\`\${value}-8\`\}
+      />
+      <div className="flex flex-wra gap-10">
+        <Tag colorType="blue">blue</Tag>
+        <Tag colorType="green">green</Tag>
+        <Tag colorType="orange">orange</Tag>
+        <Tag colorType="red">red</Tag>
+        <Tag colorType="forest">forest</Tag>
+        <Tag colorType="purple">purple</Tag>
+        <Tag colorType="volcano">volcano</Tag>
+        <Tag colorType="lime">lime</Tag>
+        ...
+      </div>
+    </div>
   );
 };
 
@@ -1193,14 +1266,27 @@ const CustomColorInput: React.FC = () => {
   const [value, setValue] = useState("");
 
   return (
-    <Input
-      placeholder="textColor를 입력하세요"
-      value={value}
-      onChange={(e) => setValue(e.target.value)}
-      color="orange-8"
-      background="orange-1"
-      borderColor="orange-8"
-    />
+    <div className="flex flex-col gap-20">
+      <Input
+        placeholder="Enter textColor"
+        value={value}
+        onChange={(e) => setValue(e.target.value)}
+        color={\`\${value}-8\`\}
+        background={\`\${value}-1\`\}
+        borderColor={\`\${value}-8\`\}
+      />
+      <div className="flex flex-wra gap-10">
+        <Tag colorType="blue">blue</Tag>
+        <Tag colorType="green">green</Tag>
+        <Tag colorType="orange">orange</Tag>
+        <Tag colorType="red">red</Tag>
+        <Tag colorType="forest">forest</Tag>
+        <Tag colorType="purple">purple</Tag>
+        <Tag colorType="volcano">volcano</Tag>
+        <Tag colorType="lime">lime</Tag>
+        ...
+      </div>
+    </div>
   );
 };
 
@@ -1208,13 +1294,16 @@ export default CustomColorInput;`
     },
     {
       title: "Thousand Separator",
-      description: "숫자 입력 시 3자리마다 콤마를 추가합니다.",
+      description:
+        lang === "ko"
+          ? "숫자 입력 시 3자리마다 콤마를 추가합니다."
+          : "Add a comma every three digits when entering a number.",
       render: (
         <Input
           thousandSeparator
           value={thousandValue}
           onChange={(e) => setThousandValue(e.target.value)}
-          placeholder="숫자를 입력하세요"
+          placeholder="Enter number"
         />
       ),
       jscode: `import React, { useState } from 'react';
@@ -1229,7 +1318,7 @@ const ThousandSeparatorInput = () => {
       thousandSeparator
       value={value}
       onChange={(e) => setValue(e.target.value)}
-      placeholder="숫자를 입력하세요"
+      placeholder="Enter number"
     />
   );
 };
@@ -1247,7 +1336,7 @@ const ThousandSeparatorInput: React.FC = () => {
       thousandSeparator
       value={value}
       onChange={(e) => setValue(e.target.value)}
-      placeholder="숫자를 입력하세요"
+      placeholder="Enter number"
     />
   );
 };
@@ -1259,35 +1348,46 @@ export default ThousandSeparatorInput;`
     {
       key: "value",
       name: "value",
-      description: "입력 필드의 값",
+      description:
+        lang === "ko" ? "입력 필드의 값" : "The value of the input field",
       type: "string",
       default: '""'
     },
     {
       key: "onChange",
       name: "onChange",
-      description: "값이 변경될 때 호출되는 함수",
+      description:
+        lang === "ko"
+          ? "값이 변경될 때 호출되는 함수"
+          : "The function called when the value changes",
       type: "(e: { target: { value: string } }) => void",
       default: "() => {}"
     },
     {
       key: "placeholder",
       name: "placeholder",
-      description: "입력 필드의 placeholder 텍스트",
+      description:
+        lang === "ko"
+          ? "입력 필드의 placeholder 텍스트"
+          : "The placeholder text of the input field",
       type: "string",
       default: "-"
     },
     {
       key: "type",
       name: "type",
-      description: "입력 필드의 타입 (HTML input의 모든 type 지원)",
+      description:
+        lang === "ko"
+          ? "입력 필드의 타입 (HTML input의 모든 type 지원)"
+          : "The type of the input field (All HTML input types are supported)",
       type: "string",
       default: "text"
     },
     {
       key: "size",
       name: "size",
-      description: "입력 필드의 크기",
+      description:
+        lang === "ko" ? "입력 필드의 크기" : "The size of the input field",
       type: (
         <>
           <Tag>sm</Tag> ｜ <Tag>md</Tag> ｜ <Tag>lg</Tag>
@@ -1298,7 +1398,10 @@ export default ThousandSeparatorInput;`
     {
       key: "shape",
       name: "shape",
-      description: "입력 필드의 모서리 모양",
+      description:
+        lang === "ko"
+          ? "입력 필드의 모서리 모양"
+          : "The shape of the input field",
       type: (
         <>
           <Tag>rounded</Tag> ｜ <Tag>square</Tag> ｜ <Tag>capsule</Tag>
@@ -1309,133 +1412,162 @@ export default ThousandSeparatorInput;`
     {
       key: "disabled",
       name: "disabled",
-      description: "입력 필드 비활성화 여부",
+      description:
+        lang === "ko"
+          ? "입력 필드 비활성화 여부"
+          : "The disabled state of the input field",
       type: "boolean",
       default: "false"
     },
     {
       key: "readOnly",
       name: "readOnly",
-      description: "읽기 전용 여부",
+      description:
+        lang === "ko"
+          ? "읽기 전용 여부"
+          : "The read-only state of the input field",
       type: "boolean",
       default: "false"
     },
     {
       key: "password",
       name: "password",
-      description: "비밀번호 입력 필드 여부",
+      description:
+        lang === "ko"
+          ? "비밀번호 입력 필드 여부"
+          : "The password input field state",
       type: "boolean",
       default: "false"
     },
     {
       key: "maxLength",
       name: "maxLength",
-      description: "최대 입력 길이",
+      description:
+        lang === "ko" ? "최대 입력 길이" : "The maximum input length",
       type: "number",
       default: "-"
     },
     {
       key: "clearable",
       name: "clearable",
-      description: "값을 지울 수 있는 버튼 표시 여부",
+      description:
+        lang === "ko"
+          ? "값을 지울 수 있는 버튼 표시 여부"
+          : "The display state of the button to clear the value",
       type: "boolean",
       default: "false"
     },
     {
       key: "label",
       name: "label",
-      description: "입력 필드의 라벨",
+      description:
+        lang === "ko" ? "입력 필드의 라벨" : "The label of the input field",
       type: "string | ReactNode",
       default: "-"
     },
     {
       key: "underline",
       name: "underline",
-      description: "밑줄 스타일 여부",
+      description:
+        lang === "ko" ? "밑줄 스타일 여부" : "The underline style state",
       type: "boolean",
       default: "false"
     },
     {
       key: "autoComplete",
       name: "autoComplete",
-      description: "자동 완성 속성",
+      description:
+        lang === "ko" ? "자동 완성 속성" : "The auto-complete attribute",
       type: "string",
       default: "-"
     },
     {
       key: "error",
       name: "error",
-      description: "에러 상태 여부",
+      description: lang === "ko" ? "에러 상태 여부" : "The error state",
       type: "boolean",
       default: "false"
     },
     {
       key: "errorText",
       name: "errorText",
-      description: "에러 메시지",
+      description: lang === "ko" ? "에러 메시지" : "The error message",
       type: "string",
       default: "-"
     },
     {
       key: "beforeIcon",
       name: "beforeIcon",
-      description: "입력 필드 앞에 표시될 아이콘",
+      description:
+        lang === "ko"
+          ? "입력 필드 앞에 표시될 아이콘"
+          : "The icon displayed before the input field",
       type: "ReactNode",
       default: "-"
     },
     {
       key: "afterIcon",
       name: "afterIcon",
-      description: "입력 필드 뒤에 표시될 아이콘",
+      description:
+        lang === "ko"
+          ? "입력 필드 뒤에 표시될 아이콘"
+          : "The icon displayed after the input field",
       type: "ReactNode",
       default: "-"
     },
     {
       key: "prefix",
       name: "prefix",
-      description: "입력 필드 앞에 표시될 텍스트",
+      description:
+        lang === "ko"
+          ? "입력 필드 앞에 표시될 텍스트"
+          : "The text displayed before the input field",
       type: "ReactNode",
       default: "-"
     },
     {
       key: "suffix",
       name: "suffix",
-      description: "입력 필드 뒤에 표시될 텍스트",
+      description:
+        lang === "ko"
+          ? "입력 필드 뒤에 표시될 텍스트"
+          : "The text displayed after the input field",
       type: "ReactNode",
       default: "-"
     },
     {
       key: "background",
       name: "background",
-      description: "배경색",
+      description: lang === "ko" ? "배경색" : "The background color",
       type: "string",
       default: "-"
     },
     {
       key: "color",
       name: "color",
-      description: "텍스트 색상",
+      description: lang === "ko" ? "텍스트 색상" : "The text color",
       type: "string",
       default: "-"
     },
     {
       key: "border",
       name: "border",
-      description: "테두리 표시 여부",
+      description:
+        lang === "ko" ? "테두리 표시 여부" : "The display state of the border",
       type: "boolean",
       default: "true"
     },
     {
       key: "borderColor",
       name: "borderColor",
-      description: "테두리 색상",
+      description: lang === "ko" ? "테두리 색상" : "The border color",
       type: "string",
       default: "-"
     },
     {
       key: "borderType",
       name: "borderType",
-      description: "테두리 스타일",
+      description: lang === "ko" ? "테두리 스타일" : "The border style",
       type: (
         <>
           <Tag>solid</Tag> ｜ <Tag>dashed</Tag> ｜ <Tag>dotted</Tag>
@@ -1446,14 +1578,14 @@ export default ThousandSeparatorInput;`
     {
       key: "borderWeight",
       name: "borderWeight",
-      description: "테두리 두께",
+      description: lang === "ko" ? "테두리 두께" : "The border weight",
       type: "number",
       default: "1"
     },
     {
       key: "shadow",
       name: "shadow",
-      description: "그림자 크기",
+      description: lang === "ko" ? "그림자 크기" : "The shadow size",
       type: (
         <>
           <Tag>none</Tag> ｜ <Tag>sm</Tag> ｜ <Tag>md</Tag> ｜ <Tag>lg</Tag> ｜{" "}
@@ -1465,21 +1597,25 @@ export default ThousandSeparatorInput;`
     {
       key: "className",
       name: "className",
-      description: "추가 클래스명",
+      description:
+        lang === "ko" ? "추가 클래스명" : "The additional class name",
       type: "string",
       default: '""'
     },
     {
       key: "style",
       name: "style",
-      description: "추가 스타일",
+      description: lang === "ko" ? "추가 스타일" : "The additional style",
       type: "React.CSSProperties",
       default: "{}"
     },
     {
       key: "thousandSeparator",
       name: "thousandSeparator",
-      description: "숫자 입력 시 3자리마다 콤마 추가 여부",
+      description:
+        lang === "ko"
+          ? "숫자 입력 시 3자리마다 콤마 추가 여부"
+          : "The display state of the comma every three digits when entering a number",
       type: "boolean",
       default: "false"
     }

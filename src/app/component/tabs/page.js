@@ -2,37 +2,48 @@
 
 import Frame from "../Frame";
 import { useMobile } from "../../_lib/context/mobileContext";
+import { useLang } from "../../_lib/context/langContext";
 import { Tabs, Tag, Radio, Card } from "sud-ui";
 
 import React, { useState } from "react";
 
 export default function TabsPage() {
   const { isMobile } = useMobile();
+  const { lang } = useLang();
   const [align, setAlign] = useState("left");
   const [size, setSize] = useState("md");
 
   const name = "Tabs";
-  const description = <>탭을 사용하여 여러 뷰를 전환할 수 있습니다.</>;
+  const description = (
+    <>
+      {lang === "ko"
+        ? "탭을 사용하여 여러 뷰를 전환할 수 있습니다."
+        : "Use tabs to switch between multiple views."}
+    </>
+  );
 
   const IMPORT_COMMAND = "import { Tabs } from 'sud-ui';";
 
-  const whenToUse = ["여러 뷰를 전환할 때."];
+  const whenToUse =
+    lang === "ko"
+      ? ["여러 뷰를 전환할 때."]
+      : ["When you need to switch between multiple views."];
 
   const options = [
     {
       key: "home",
-      label: "홈",
-      children: <div>홈 컨텐츠입니다.</div>
+      label: "Home",
+      children: <div>Home Content</div>
     },
     {
       key: "components",
-      label: "컴포넌트",
-      children: <div>컴포넌트 컨텐츠입니다.</div>
+      label: "Components",
+      children: <div>Components Content</div>
     },
     {
       key: "css",
       label: "CSS",
-      children: <div>CSS 컨텐츠입니다.</div>
+      children: <div>CSS Content</div>
     }
   ];
 
@@ -80,7 +91,7 @@ export default function TabsPage() {
   const examples = [
     {
       title: "Basic Usage",
-      description: "기본적인 탭 컴포넌트입니다.",
+      description: lang === "ko" ? "기본적인 사용 방법입니다." : "Basic usage.",
       render: (
         <>
           <Tabs options={options} />
@@ -93,18 +104,18 @@ const BasicTabs = () => {
   const options = [
     {
       key: "home",
-      label: "홈",
-      children: <div>홈 컨텐츠입니다.</div>
+      label: "Home",
+      children: <div>Home Content</div>
     },
     {
       key: "components",
-      label: "컴포넌트",
-      children: <div>컴포넌트 컨텐츠입니다.</div>
+      label: "Components",
+      children: <div>Components Content</div>
     },
     {
       key: "css",
       label: "CSS",
-      children: <div>CSS 컨텐츠입니다.</div>
+      children: <div>CSS Content</div>
     }
   ];
   return <Tabs options={options} />;
@@ -118,18 +129,18 @@ const BasicTabs: React.FC = () => {
   const options = [
     {
       key: "home",
-      label: "홈",
-      children: <div>홈 컨텐츠입니다.</div>
+      label: "Home",
+      children: <div>Home Content</div>
     },
     {
       key: "components",
-      label: "컴포넌트",
-      children: <div>컴포넌트 컨텐츠입니다.</div>
+      label: "Components",
+      children: <div>Components Content</div>
     },
     {
       key: "css",
       label: "CSS",
-      children: <div>CSS 컨텐츠입니다.</div>
+      children: <div>CSS Content</div>
     }
   ];
   return <Tabs options={options} />;
@@ -139,18 +150,21 @@ export default BasicTabs;`
     },
     {
       title: "TabPane 사용",
-      description: "TabPane 컴포넌트를 사용한 방식입니다.",
+      description:
+        lang === "ko"
+          ? "TabPane 컴포넌트를 사용한 방식입니다."
+          : "Using the TabPane component.",
       render: (
         <>
           <Tabs>
-            <Tabs.TabPane label="홈">
-              <div>홈 컨텐츠입니다.</div>
+            <Tabs.TabPane label="Home">
+              <div>Home Content</div>
             </Tabs.TabPane>
-            <Tabs.TabPane label="컴포넌트">
-              <div>컴포넌트 컨텐츠입니다.</div>
+            <Tabs.TabPane label="Components">
+              <div>Components Content</div>
             </Tabs.TabPane>
             <Tabs.TabPane label="CSS">
-              <div>CSS 컨텐츠입니다.</div>
+              <div>CSS Content</div>
             </Tabs.TabPane>
           </Tabs>
         </>
@@ -161,14 +175,14 @@ import { Tabs } from 'sud-ui';
 const TabPaneExample = () => {
   return (
     <Tabs>
-      <Tabs.TabPane label="홈">
-        <div>홈 컨텐츠입니다.</div>
+      <Tabs.TabPane label="Home">
+        <div>Home Content</div>
       </Tabs.TabPane>
-      <Tabs.TabPane label="컴포넌트">
-        <div>컴포넌트 컨텐츠입니다.</div>
+      <Tabs.TabPane label="Components">
+        <div>Components Content</div>
       </Tabs.TabPane>
       <Tabs.TabPane label="CSS">
-        <div>CSS 컨텐츠입니다.</div>
+        <div>CSS Content</div>
       </Tabs.TabPane>
     </Tabs>
   );
@@ -181,14 +195,14 @@ import { Tabs } from 'sud-ui';
 const TabPaneExample: React.FC = () => {
   return (
     <Tabs>
-      <Tabs.TabPane label="홈">
-        <div>홈 컨텐츠입니다.</div>
+      <Tabs.TabPane label="Home">
+        <div>Home Content</div>
       </Tabs.TabPane>
-      <Tabs.TabPane label="컴포넌트">
-        <div>컴포넌트 컨텐츠입니다.</div>
+      <Tabs.TabPane label="Components">
+        <div>Components Content</div>
       </Tabs.TabPane>
       <Tabs.TabPane label="CSS">
-        <div>CSS 컨텐츠입니다.</div>
+        <div>CSS Content</div>
       </Tabs.TabPane>
     </Tabs>
   );
@@ -198,7 +212,10 @@ export default TabPaneExample;`
     },
     {
       title: "Disabled",
-      description: "탭을 비활성화할 수 있습니다.",
+      description:
+        lang === "ko"
+          ? "탭을 비활성화할 수 있습니다."
+          : "You can disable the tab.",
       render: (
         <>
           <Tabs disabledKeys={["components"]} options={options} />
@@ -211,18 +228,18 @@ const DisabledTabsExample = () => {
   const options = [
     {
       key: "home",
-      label: "홈",
-      children: <div>홈 컨텐츠입니다.</div>
+      label: "Home",
+      children: <div>Home Content</div>
     },
     {
       key: "components",
-      label: "컴포넌트",
-      children: <div>컴포넌트 컨텐츠입니다.</div>
+      label: "Components",
+      children: <div>Components Content</div>
     },
     {
       key: "css",
       label: "CSS",
-      children: <div>CSS 컨텐츠입니다.</div>
+      children: <div>CSS Content</div>
     }
   ];
   return <Tabs disabledKeys={["components"]} options={options} />;
@@ -236,18 +253,18 @@ const DisabledTabsExample: React.FC = () => {
   const options = [
     {
       key: "home",
-      label: "홈",
-      children: <div>홈 컨텐츠입니다.</div>
+      label: "Home",
+      children: <div>Home Content</div>
     },
     {
       key: "components",
-      label: "컴포넌트",
-      children: <div>컴포넌트 컨텐츠입니다.</div>
+      label: "Components",
+      children: <div>Components Content</div>
     },
     {
       key: "css",
       label: "CSS",
-      children: <div>CSS 컨텐츠입니다.</div>
+      children: <div>CSS Content</div>
     }
   ];
   return <Tabs disabledKeys={["components"]} options={options} />;
@@ -256,8 +273,11 @@ const DisabledTabsExample: React.FC = () => {
 export default DisabledTabsExample;`
     },
     {
-      title: "Position",
-      description: "탭의 위치를 설정할 수 있습니다.",
+      title: "Align",
+      description:
+        lang === "ko"
+          ? "탭의 정렬 위치를 설정할 수 있습니다."
+          : "You can set the alignment of the tab.",
       render: (
         <div className="flex flex-col gap-20">
           <Card style={{ width: "100%" }} shadow="none" colorType="sub">
@@ -288,18 +308,18 @@ const AlignTabs = () => {
   const options = [
     {
       key: "home",
-      label: "홈",
-      children: <div>홈 컨텐츠입니다.</div>
+      label: "Home",
+      children: <div>Home Content</div>
     },
     {
       key: "components",
-      label: "컴포넌트",
-      children: <div>컴포넌트 컨텐츠입니다.</div>
+      label: "Components",
+      children: <div>Components Content</div>
     },
     {
       key: "css",
       label: "CSS",
-      children: <div>CSS 컨텐츠입니다.</div>
+      children: <div>CSS Content</div>
     }
   ];
 
@@ -347,18 +367,18 @@ const AlignTabs: React.FC = () => {
   const options: Option[] = [
     {
       key: "home",
-      label: "홈",
-      children: <div>홈 컨텐츠입니다.</div>
+      label: "Home",
+      children: <div>Home Content</div>
     },
     {
       key: "components",
-      label: "컴포넌트",
-      children: <div>컴포넌트 컨텐츠입니다.</div>
+      label: "Components",
+      children: <div>Components Content</div>
     },
     {
       key: "css",
       label: "CSS",
-      children: <div>CSS 컨텐츠입니다.</div>
+      children: <div>CSS Content</div>
     }
   ];
 
@@ -383,7 +403,10 @@ export default AlignTabs;`
     },
     {
       title: "Size",
-      description: "탭의 크기를 설정할 수 있습니다.",
+      description:
+        lang === "ko"
+          ? "탭의 크기를 설정할 수 있습니다."
+          : "You can set the size of the tab.",
       render: (
         <div className="flex flex-col gap-20">
           <Card style={{ width: "100%" }} shadow="none" colorType="sub">
@@ -417,18 +440,18 @@ const SizeTabs = () => {
   const options = [
     {
       key: "home",
-      label: "홈",
-      children: <div>홈 컨텐츠입니다.</div>
+      label: "Home",
+      children: <div>Home Content</div>
     },
     {
       key: "components",
-      label: "컴포넌트",
-      children: <div>컴포넌트 컨텐츠입니다.</div>
+      label: "Components",
+      children: <div>Components Content</div>
     },
     {
       key: "css",
       label: "CSS",
-      children: <div>CSS 컨텐츠입니다.</div>
+      children: <div>CSS Content</div>
     }
   ];
 
@@ -479,18 +502,18 @@ const SizeTabs: React.FC = () => {
   const options: Option[] = [
     {
       key: "home",
-      label: "홈",
-      children: <div>홈 컨텐츠입니다.</div>
+      label: "Home",
+      children: <div>Home Content</div>
     },
     {
       key: "components",
-      label: "컴포넌트",
-      children: <div>컴포넌트 컨텐츠입니다.</div>
+      label: "Components",
+      children: <div>Components Content</div>
     },
     {
       key: "css",
       label: "CSS",
-      children: <div>CSS 컨텐츠입니다.</div>
+      children: <div>CSS Content</div>
     }
   ];
 
@@ -514,8 +537,11 @@ const SizeTabs: React.FC = () => {
 export default SizeTabs;`
     },
     {
-      title: "Type",
-      description: "탭의 타입을 설정할 수 있습니다.",
+      title: "Custom Color",
+      description:
+        lang === "ko"
+          ? "탭의 색상을 커스텀할 수 있습니다."
+          : "You can customize the color of the tab.",
       render: (
         <Tabs
           colorType={{ active: "primary", inactive: "info" }}
@@ -527,20 +553,20 @@ import { Tabs } from 'sud-ui';
 
 const CustomColorTabs = () => {
   const options = [
-    {
+        {
       key: "home",
-      label: "홈",
-      children: <div>홈 컨텐츠입니다.</div>
+      label: "Home",
+      children: <div>Home Content</div>
     },
     {
       key: "components",
-      label: "컴포넌트",
-      children: <div>컴포넌트 컨텐츠입니다.</div>
+      label: "Components",
+      children: <div>Components Content</div>
     },
     {
       key: "css",
       label: "CSS",
-      children: <div>CSS 컨텐츠입니다.</div>
+      children: <div>CSS Content</div>
     }
   ];
 
@@ -564,178 +590,20 @@ interface Option {
 
 const CustomColorTabs: React.FC = () => {
   const options: Option[] = [
-    {
+        {
       key: "home",
-      label: "홈",
-      children: <div>홈 컨텐츠입니다.</div>
+      label: "Home",
+      children: <div>Home Content</div>
     },
     {
       key: "components",
-      label: "컴포넌트",
-      children: <div>컴포넌트 컨텐츠입니다.</div>
+      label: "Components",
+      children: <div>Components Content</div>
     },
     {
       key: "css",
       label: "CSS",
-      children: <div>CSS 컨텐츠입니다.</div>
-    }
-  ];
-
-  return (
-    <Tabs 
-      colorType={{ active: "primary", inactive: "info" }}
-      options={options} 
-    />
-  );
-};
-
-export default CustomColorTabs;`
-    },
-    {
-      title: "Icon",
-      description: "탭에 아이콘을 추가할 수 있습니다.",
-      render: (
-        <>
-          <Tabs
-            colorType={{ active: "primary", inactive: "info" }}
-            options={options}
-          />
-        </>
-      ),
-      jscode: `import React from 'react';
-import { Tabs } from 'sud-ui';
-
-const IconTabs = () => {
-  const options = [
-    {
-      key: "home",
-      label: "홈",
-      children: <div>홈 컨텐츠입니다.</div>
-    },
-    {
-      key: "components",
-      label: "컴포넌트",
-      children: <div>컴포넌트 컨텐츠입니다.</div>
-    },
-    {
-      key: "css",
-      label: "CSS",
-      children: <div>CSS 컨텐츠입니다.</div>
-    }
-  ];
-
-  return (
-    <Tabs 
-      colorType={{ active: "primary", inactive: "info" }}
-      options={options} 
-    />
-  );
-};
-
-export default IconTabs;`,
-      tscode: `import React from 'react';
-import { Tabs } from 'sud-ui';
-
-interface Option {
-  key: string;
-  label: string;
-  children: React.ReactNode;
-}
-
-const IconTabs: React.FC = () => {
-  const options: Option[] = [
-    {
-      key: "home",
-      label: "홈",
-      children: <div>홈 컨텐츠입니다.</div>
-    },
-    {
-      key: "components",
-      label: "컴포넌트",
-      children: <div>컴포넌트 컨텐츠입니다.</div>
-    },
-    {
-      key: "css",
-      label: "CSS",
-      children: <div>CSS 컨텐츠입니다.</div>
-    }
-  ];
-
-  return (
-    <Tabs 
-      colorType={{ active: "primary", inactive: "info" }}
-      options={options} 
-    />
-  );
-};
-
-export default IconTabs;`
-    },
-    {
-      title: "Color Customization",
-      description: "탭의 색상을 커스텀할 수 있습니다.",
-      render: (
-        <Tabs
-          colorType={{ active: "primary", inactive: "info" }}
-          options={options}
-        />
-      ),
-      jscode: `import React from 'react';
-import { Tabs } from 'sud-ui';
-
-const CustomColorTabs = () => {
-  const options = [
-    {
-      key: "home",
-      label: "홈",
-      children: <div>홈 컨텐츠입니다.</div>
-    },
-    {
-      key: "components",
-      label: "컴포넌트",
-      children: <div>컴포넌트 컨텐츠입니다.</div>
-    },
-    {
-      key: "css",
-      label: "CSS",
-      children: <div>CSS 컨텐츠입니다.</div>
-    }
-  ];
-
-  return (
-    <Tabs 
-      colorType={{ active: "primary", inactive: "info" }}
-      options={options} 
-    />
-  );
-};
-
-export default CustomColorTabs;`,
-      tscode: `import React from 'react';
-import { Tabs } from 'sud-ui';
-
-interface Option {
-  key: string;
-  label: string;
-  children: React.ReactNode;
-}
-
-const CustomColorTabs: React.FC = () => {
-  const options: Option[] = [
-    {
-      key: "home",
-      label: "홈",
-      children: <div>홈 컨텐츠입니다.</div>
-    },
-    {
-      key: "components",
-      label: "컴포넌트",
-      children: <div>컴포넌트 컨텐츠입니다.</div>
-    },
-    {
-      key: "css",
-      label: "CSS",
-      children: <div>CSS 컨텐츠입니다.</div>
+      children: <div>CSS Content</div>
     }
   ];
 
@@ -754,42 +622,57 @@ export default CustomColorTabs;`
     {
       key: "value",
       name: "value",
-      description: "현재 선택된 탭의 키 값 (제어 컴포넌트)",
+      description:
+        lang === "ko"
+          ? "현재 선택된 탭의 키 값 (제어 컴포넌트)"
+          : "The key value of the currently selected tab (controlled component)",
       type: "string | number",
       default: "undefined"
     },
     {
       key: "defaultValue",
       name: "defaultValue",
-      description: "초기 선택된 탭의 키 값 (비제어 컴포넌트)",
+      description:
+        lang === "ko"
+          ? "초기 선택된 탭의 키 값 (비제어 컴포넌트)"
+          : "The key value of the initially selected tab (uncontrolled component)",
       type: "string | number",
       default: "undefined"
     },
     {
       key: "onChange",
       name: "onChange",
-      description: "탭 변경 시 호출되는 콜백 함수",
+      description:
+        lang === "ko"
+          ? "탭 변경 시 호출되는 콜백 함수"
+          : "The callback function called when the tab changes",
       type: "(key: string | number) => void",
       default: "undefined"
     },
     {
       key: "options",
       name: "options",
-      description: "탭 옵션 배열 (선언적 방식 사용 시)",
+      description:
+        lang === "ko"
+          ? "탭 옵션 배열 (선언적 방식 사용 시)"
+          : "The array of tab options (when using the declarative method)",
       type: "Array<{ key: string | number, label: string | ReactNode, children?: ReactNode }>",
       default: "undefined"
     },
     {
       key: "children",
       name: "children",
-      description: "TabPane 컴포넌트들 (선언적 방식 대신 사용)",
+      description:
+        lang === "ko"
+          ? "TabPane 컴포넌트들 (선언적 방식 대신 사용)"
+          : "TabPane components (used instead of the declarative method)",
       type: "ReactNode",
       default: "undefined"
     },
     {
       key: "size",
       name: "size",
-      description: "탭의 크기",
+      description: lang === "ko" ? "탭의 크기" : "The size of the tab",
       type: (
         <>
           <Tag>xs</Tag> ｜ <Tag>sm</Tag> ｜ <Tag>md</Tag> ｜ <Tag>lg</Tag> ｜{" "}
@@ -801,7 +684,8 @@ export default CustomColorTabs;`
     {
       key: "colorType",
       name: "colorType",
-      description: "탭의 색상 타입",
+      description:
+        lang === "ko" ? "탭의 색상 타입" : "The color type of the tab",
       type: (
         <>
           <Tag>
@@ -816,7 +700,8 @@ export default CustomColorTabs;`
     {
       key: "background",
       name: "background",
-      description: "탭의 배경색",
+      description:
+        lang === "ko" ? "탭의 배경색" : "The background color of the tab",
       type: (
         <>
           <Tag>{"{ active?: string, inactive?: string }"}</Tag>
@@ -827,7 +712,8 @@ export default CustomColorTabs;`
     {
       key: "color",
       name: "color",
-      description: "탭의 텍스트 색상",
+      description:
+        lang === "ko" ? "탭의 텍스트 색상" : "The text color of the tab",
       type: (
         <>
           <Tag>{"{ active?: string, inactive?: string }"}</Tag>
@@ -838,14 +724,16 @@ export default CustomColorTabs;`
     {
       key: "border",
       name: "border",
-      description: "테두리 표시 여부",
+      description:
+        lang === "ko" ? "테두리 표시 여부" : "Whether to display the border",
       type: "boolean",
       default: "true"
     },
     {
       key: "borderColor",
       name: "borderColor",
-      description: "탭의 테두리 색상",
+      description:
+        lang === "ko" ? "탭의 테두리 색상" : "The border color of the tab",
       type: (
         <>
           <Tag>{"{ active?: string, inactive?: string }"}</Tag>
@@ -856,42 +744,46 @@ export default CustomColorTabs;`
     {
       key: "borderType",
       name: "borderType",
-      description: "테두리 스타일",
+      description: lang === "ko" ? "테두리 스타일" : "The border style",
       type: "string",
       default: "solid"
     },
     {
       key: "borderWeight",
       name: "borderWeight",
-      description: "테두리 두께",
+      description: lang === "ko" ? "테두리 두께" : "The border weight",
       type: "number",
       default: "1"
     },
     {
       key: "style",
       name: "style",
-      description: "추가 스타일",
+      description: lang === "ko" ? "추가 스타일" : "Additional style",
       type: "CSSProperties",
       default: "{}"
     },
     {
       key: "className",
       name: "className",
-      description: "추가 클래스명",
+      description: lang === "ko" ? "추가 클래스명" : "Additional class name",
       type: "string",
       default: "''"
     },
     {
       key: "disabledKeys",
       name: "disabledKeys",
-      description: "비활성화할 탭의 키 배열",
+      description:
+        lang === "ko"
+          ? "비활성화할 탭의 키 배열"
+          : "The array of keys of the disabled tabs",
       type: "Array<string | number>",
       default: "[]"
     },
     {
       key: "align",
       name: "align",
-      description: "탭의 정렬 위치",
+      description:
+        lang === "ko" ? "탭의 정렬 위치" : "The alignment of the tab",
       type: (
         <>
           <Tag>left</Tag> ｜ <Tag>center</Tag> ｜ <Tag>right</Tag>
@@ -902,7 +794,10 @@ export default CustomColorTabs;`
     {
       key: "underlineColor",
       name: "underlineColor",
-      description: "탭 선택 시 하단 밑줄 색상",
+      description:
+        lang === "ko"
+          ? "탭 선택 시 하단 밑줄 색상"
+          : "The color of the bottom line when the tab is selected",
       type: (
         <>
           <Tag>{"{ active?: string, inactive?: string }"}</Tag>
@@ -913,7 +808,8 @@ export default CustomColorTabs;`
     {
       key: "activeStyle",
       name: "activeStyle",
-      description: "선택된 탭의 스타일",
+      description:
+        lang === "ko" ? "선택된 탭의 스타일" : "The style of the selected tab",
       type: (
         <>
           <Tag>
@@ -928,7 +824,10 @@ export default CustomColorTabs;`
     {
       key: "inactiveStyle",
       name: "inactiveStyle",
-      description: "선택되지 않은 탭의 스타일",
+      description:
+        lang === "ko"
+          ? "선택되지 않은 탭의 스타일"
+          : "The style of the unselected tab",
       type: (
         <>
           <Tag>
@@ -939,21 +838,24 @@ export default CustomColorTabs;`
         </>
       ),
       default: "-"
-    }
-  ];
-
-  const tabPaneProps = [
+    },
     {
-      key: "label",
-      name: "label",
-      description: "탭의 레이블",
+      key: "tabPaneProps.label",
+      name: "tabPaneProps.label",
+      description:
+        lang === "ko"
+          ? "탭의 레이블(tabPaneProps.label)"
+          : "The label of the tab(tabPaneProps.label)",
       type: "string | ReactNode",
       default: "undefined"
     },
     {
-      key: "children",
-      name: "children",
-      description: "탭의 내용",
+      key: "tabPaneProps.children",
+      name: "tabPaneProps.children",
+      description:
+        lang === "ko"
+          ? "탭의 내용(tabPaneProps.children)"
+          : "The content of the tab(tabPaneProps.children)",
       type: "ReactNode",
       default: "undefined"
     }
@@ -967,8 +869,7 @@ export default CustomColorTabs;`
         IMPORT_COMMAND,
         whenToUse,
         examples,
-        howToUseTableData,
-        tabPaneProps
+        howToUseTableData
       }}
       grid={true}
       isMobile={isMobile}

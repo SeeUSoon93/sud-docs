@@ -2,29 +2,36 @@
 
 import Frame from "../Frame";
 import { useMobile } from "../../_lib/context/mobileContext";
-import { Tag, Typography, Segmented, Avatar, Card, Radio } from "sud-ui";
-import { MoonOutline, SunOutline } from "sud-icons";
+import { useLang } from "../../_lib/context/langContext";
+import { Tag, Typography, Segmented, Card, Radio } from "sud-ui";
 import React, { useState } from "react";
 
 export default function SegmentedPage() {
   const { isMobile } = useMobile();
+  const { lang } = useLang();
   const [basicSelected, setBasicSelected] = React.useState("home");
-  const [iconSelected, setIconSelected] = React.useState("light");
-  const [avatarSelected, setAvatarSelected] = React.useState(1);
 
   const name = "Segmented";
   const description = (
     <>
-      여러 옵션을 표시하고 사용자가 단일 옵션을 선택할 수 있는 컴포넌트입니다.
+      {lang === "ko"
+        ? "여러 옵션을 표시하고 사용자가 단일 옵션을 선택할 수 있는 컴포넌트입니다."
+        : "A component that displays multiple options and allows the user to select a single option."}
     </>
   );
 
   const IMPORT_COMMAND = "import { Segmented } from 'sud-ui';";
 
-  const whenToUse = [
-    "여러 옵션을 표시하고 사용자가 단일 옵션을 선택할 때.",
-    "옵션을 선택하여 조건을 충족하는 데이터를 필터링할 때."
-  ];
+  const whenToUse =
+    lang === "ko"
+      ? [
+          "여러 옵션을 표시하고 사용자가 단일 옵션을 선택할 때.",
+          "옵션을 선택하여 조건을 충족하는 데이터를 필터링할 때."
+        ]
+      : [
+          "When you need to display multiple options and allow the user to select a single option.",
+          "When you select an option to filter data that meets a condition."
+        ];
 
   const basicItems = [
     {
@@ -68,7 +75,7 @@ export default function SegmentedPage() {
   const examples = [
     {
       title: "Basic Usage",
-      description: "기본적인 세그먼트 컴포넌트입니다.",
+      description: lang === "ko" ? "기본적인 사용 방법입니다." : "Basic usage.",
       render: (
         <>
           <Segmented
@@ -132,7 +139,10 @@ export default BasicSegmented;`
     },
     {
       title: "Size",
-      description: "세그먼트의 크기를 설정할 수 있습니다.",
+      description:
+        lang === "ko"
+          ? "세그먼트의 크기를 설정할 수 있습니다."
+          : "You can set the size of the segmented.",
       render: (
         <div className="flex flex-col gap-20">
           <Card style={{ width: "100%" }} shadow="none" colorType="sub">
@@ -246,12 +256,133 @@ const SizeSegmented: React.FC = () => {
 export default SizeSegmented;`
     },
     {
+      title: "Shape",
+      description:
+        lang === "ko"
+          ? "세그먼트의 모양을 설정할 수 있습니다."
+          : "You can set the shape of the segmented.",
+      render: (
+        <div className="flex flex-col gap-20">
+          <Card style={{ width: "100%" }} shadow="none" colorType="sub">
+            <div className="flex jus-cen">
+              <Radio.Group
+                direction="horizontal"
+                options={shapeOptions}
+                value={shape}
+                onChange={setShape}
+              />
+            </div>
+          </Card>
+          <Segmented
+            options={basicItems}
+            value={basicSelected}
+            onChange={handleBasicSelected}
+            shape={shape}
+          />
+        </div>
+      ),
+      jscode: `import React, { useState } from 'react';
+import { Segmented, Radio, Card } from 'sud-ui';
+
+const ShapeSegmented = () => {
+  const [shape, setShape] = useState('rounded');
+  const [selected, setSelected] = useState('home');
+  
+  const shapeOptions = [
+    { value: 'rounded', label: 'rounded' },
+    { value: 'square', label: 'square' },
+    { value: 'capsule', label: 'capsule' }
+  ];
+
+  const options = [
+    { value: 'home', label: 'Home' },
+    { value: 'components', label: 'Components' },
+    { value: 'css', label: 'CSS' },
+    { value: 'icons', label: 'Icons' }
+  ];
+
+  return (
+    <div className="flex flex-col gap-20">
+      <Card style={{ width: "100%" }} shadow="none" colorType="sub">
+        <div className="flex jus-cen">
+          <Radio.Group
+            direction="horizontal"
+            options={shapeOptions}
+            value={shape}
+            onChange={setShape}
+          />
+        </div>
+      </Card>
+      <Segmented
+        options={options}
+        value={selected}
+        onChange={setSelected}
+        shape={shape}
+      />
+    </div>
+  );
+};
+
+export default ShapeSegmented;`,
+      tscode: `import React, { useState } from 'react';
+import { Segmented, Radio, Card } from 'sud-ui';
+
+interface Option {
+  value: string;
+  label: string;
+}
+
+const ShapeSegmented: React.FC = () => {
+  const [shape, setShape] = useState<string>('rounded');
+  const [selected, setSelected] = useState<string>('home');
+  
+  const shapeOptions: Option[] = [
+    { value: 'rounded', label: 'rounded' },
+    { value: 'square', label: 'square' },
+    { value: 'capsule', label: 'capsule' }
+  ];
+
+  const options: Option[] = [
+    { value: 'home', label: 'Home' },
+    { value: 'components', label: 'Components' },
+    { value: 'css', label: 'CSS' },
+    { value: 'icons', label: 'Icons' }
+  ];
+
+  return (
+    <div className="flex flex-col gap-20">
+      <Card style={{ width: "100%" }} shadow="none" colorType="sub">
+        <div className="flex jus-cen">
+          <Radio.Group
+            direction="horizontal"
+            options={shapeOptions}
+            value={shape}
+            onChange={setShape}
+          />
+        </div>
+      </Card>
+      <Segmented
+        options={options}
+        value={selected}
+        onChange={setSelected}
+        shape={shape}
+      />
+    </div>
+  );
+};
+
+export default ShapeSegmented;`
+    },
+    {
       title: "Disabled",
-      description: "세그먼트를 비활성화할 수 있습니다.",
+      description:
+        lang === "ko"
+          ? "세그먼트를 비활성화할 수 있습니다."
+          : "You can disable the segmented.",
       render: (
         <div className="flex flex-col gap-20">
           <div className="flex flex-col gap-10">
-            <Typography pretendard="SB">전체 disabled</Typography>
+            <Typography pretendard="SB">All disabled</Typography>
             <Segmented
               options={basicItems}
               value={basicSelected}
@@ -260,7 +391,7 @@ export default SizeSegmented;`
             />
           </div>
           <div className="flex flex-col gap-10">
-            <Typography pretendard="SB">일부 disabled</Typography>
+            <Typography pretendard="SB">Partially disabled</Typography>
             <Segmented
               options={[
                 { value: "home", label: "Home" },
@@ -297,7 +428,7 @@ const DisabledSegmented = () => {
   return (
     <div className="flex flex-col gap-20">
       <div className="flex flex-col gap-10">
-        <Typography pretendard="SB">전체 disabled</Typography>
+        <Typography pretendard="SB">All disabled</Typography>
         <Segmented
           options={options}
           value={selected}
@@ -306,7 +437,7 @@ const DisabledSegmented = () => {
         />
       </div>
       <div className="flex flex-col gap-10">
-        <Typography pretendard="SB">일부 disabled</Typography>
+        <Typography pretendard="SB">Partially disabled</Typography>
         <Segmented
           options={disabledOptions}
           value={selected}
@@ -347,7 +478,7 @@ const DisabledSegmented: React.FC = () => {
   return (
     <div className="flex flex-col gap-20">
       <div className="flex flex-col gap-10">
-        <Typography pretendard="SB">전체 disabled</Typography>
+        <Typography pretendard="SB">All disabled</Typography>
         <Segmented
           options={options}
           value={selected}
@@ -356,7 +487,7 @@ const DisabledSegmented: React.FC = () => {
         />
       </div>
       <div className="flex flex-col gap-10">
-        <Typography pretendard="SB">일부 disabled</Typography>
+        <Typography pretendard="SB">Partially disabled</Typography>
         <Segmented
           options={disabledOptions}
           value={selected}
@@ -371,7 +502,10 @@ export default DisabledSegmented;`
     },
     {
       title: "Color Customization",
-      description: "세그먼트의 색상을 커스텀할 수 있습니다.",
+      description:
+        lang === "ko"
+          ? "세그먼트의 색상을 커스텀할 수 있습니다."
+          : "You can customize the color of the segmented.",
       render: (
         <Segmented
           options={basicItems}
@@ -440,35 +574,41 @@ export default ColorSegmented;`
     {
       key: "options",
       name: "options *",
-      description: "선택 옵션 배열",
+      description:
+        lang === "ko" ? "선택 옵션 배열" : "An array of selectable options.",
       type: "Array<{ value: string | number, label: string, disabled?: boolean }>",
       default: "[]"
     },
     {
       key: "value",
       name: "value",
-      description: "현재 선택된 값",
+      description:
+        lang === "ko" ? "현재 선택된 값" : "The currently selected value.",
       type: "string | number",
       default: "undefined"
     },
     {
       key: "onChange",
       name: "onChange",
-      description: "값 변경 시 호출되는 콜백 함수",
+      description:
+        lang === "ko"
+          ? "값 변경 시 호출되는 콜백 함수"
+          : "A callback function that is called when the value changes.",
       type: "(value: string | number) => void",
       default: "undefined"
     },
     {
       key: "disabled",
       name: "disabled",
-      description: "비활성화 여부",
+      description:
+        lang === "ko" ? "비활성화 여부" : "Whether the segmented is disabled.",
       type: "boolean",
       default: "false"
     },
     {
       key: "size",
       name: "size",
-      description: "크기",
+      description: lang === "ko" ? "크기" : "The size of the segmented.",
       type: (
         <>
           <Tag>sm</Tag> ｜ <Tag>md</Tag> ｜ <Tag>lg</Tag>
@@ -479,14 +619,18 @@ export default ColorSegmented;`
     {
       key: "block",
       name: "block",
-      description: "전체 너비 사용 여부",
+      description:
+        lang === "ko"
+          ? "전체 너비 사용 여부"
+          : "Whether the segmented uses the full width.",
       type: "boolean",
       default: "false"
     },
     {
       key: "colorType",
       name: "colorType",
-      description: "색상 타입",
+      description:
+        lang === "ko" ? "색상 타입" : "The color type of the segmented.",
       type: (
         <>
           <Tag>default</Tag> ｜ <Tag>primary</Tag> ｜ <Tag>success</Tag> ｜{" "}
@@ -498,7 +642,7 @@ export default ColorSegmented;`
     {
       key: "shape",
       name: "shape",
-      description: "모양",
+      description: lang === "ko" ? "모양" : "The shape of the segmented.",
       type: (
         <>
           <Tag>rounded</Tag> ｜ <Tag>square</Tag> ｜ <Tag>circle</Tag> ｜{" "}
@@ -510,35 +654,40 @@ export default ColorSegmented;`
     {
       key: "background",
       name: "background",
-      description: "배경색",
+      description:
+        lang === "ko" ? "배경색" : "The background color of the segmented.",
       type: "string",
       default: ""
     },
     {
       key: "color",
       name: "color",
-      description: "텍스트 색상",
+      description:
+        lang === "ko" ? "텍스트 색상" : "The text color of the segmented.",
       type: "string",
       default: ""
     },
     {
       key: "border",
       name: "border",
-      description: "테두리 표시 여부",
+      description:
+        lang === "ko" ? "테두리 표시 여부" : "Whether the border is displayed.",
       type: "boolean",
       default: "false"
     },
     {
       key: "borderColor",
       name: "borderColor",
-      description: "테두리 색상",
+      description:
+        lang === "ko" ? "테두리 색상" : "The border color of the segmented.",
       type: "string",
       default: ""
     },
     {
       key: "borderType",
       name: "borderType",
-      description: "테두리 스타일",
+      description:
+        lang === "ko" ? "테두리 스타일" : "The border style of the segmented.",
       type: (
         <>
           <Tag>solid</Tag> ｜ <Tag>dashed</Tag> ｜ <Tag>dotted</Tag>
@@ -549,14 +698,16 @@ export default ColorSegmented;`
     {
       key: "borderWeight",
       name: "borderWeight",
-      description: "테두리 두께",
+      description:
+        lang === "ko" ? "테두리 두께" : "The border weight of the segmented.",
       type: "number",
       default: "1"
     },
     {
       key: "shadow",
       name: "shadow",
-      description: "그림자 효과",
+      description:
+        lang === "ko" ? "그림자 효과" : "The shadow effect of the segmented.",
       type: (
         <>
           <Tag>none</Tag> ｜ <Tag>sm</Tag> ｜ <Tag>md</Tag> ｜ <Tag>lg</Tag> ｜{" "}
@@ -568,21 +719,21 @@ export default ColorSegmented;`
     {
       key: "style",
       name: "style",
-      description: "추가 스타일",
+      description: lang === "ko" ? "추가 스타일" : "Additional styles.",
       type: "React.CSSProperties",
       default: ""
     },
     {
       key: "className",
       name: "className",
-      description: "추가 클래스명",
+      description: lang === "ko" ? "추가 클래스명" : "Additional class name.",
       type: "string",
       default: ""
     },
     {
       key: "name",
       name: "name",
-      description: "접근성 이름",
+      description: lang === "ko" ? "접근성 이름" : "The accessibility name.",
       type: "string",
       default: "segmented-control"
     }

@@ -2,23 +2,33 @@
 
 import Frame from "../Frame";
 import { useMobile } from "../../_lib/context/mobileContext";
+import { useLang } from "../../_lib/context/langContext";
 import { Card, Input, List, Pagination, Radio, Tag, Typography } from "sud-ui";
 import React, { useState } from "react";
 
 export default function PaginationPage() {
   const { isMobile } = useMobile();
-
+  const { lang } = useLang();
   const name = "Pagination";
-  const description = (
-    <>긴 목록을 페이지네이션 형태로 나누어 보여주는 컴포넌트입니다.</>
-  );
+  const description =
+    lang === "ko" ? (
+      <>긴 목록을 페이지네이션 형태로 나누어 보여주는 컴포넌트입니다.</>
+    ) : (
+      <>A component that displays a long list in a paginated form.</>
+    );
 
   const IMPORT_COMMAND = "import { Pagination } from 'sud-ui';";
 
-  const whenToUse = [
-    "긴 목록을 페이지네이션 형태로 나누어 보여주고 싶을 때.",
-    "페이지를 나누어 데이터를 탐색할 때."
-  ];
+  const whenToUse =
+    lang === "ko"
+      ? [
+          "긴 목록을 페이지네이션 형태로 나누어 보여주고 싶을 때.",
+          "페이지를 나누어 데이터를 탐색할 때."
+        ]
+      : [
+          "When you want to display a long list in a paginated form.",
+          "When you want to explore data by dividing pages."
+        ];
 
   const [align, setAlign] = useState("left");
   const [pageSize, setPageSize] = useState(10);
@@ -34,7 +44,7 @@ export default function PaginationPage() {
   const examples = [
     {
       title: "Basic Usage",
-      description: "기본적인 페이지네이션 컴포넌트입니다.",
+      description: lang === "ko" ? "기본적인 사용 방법입니다." : "Basic usage.",
       render: (
         <>
           <Pagination total={50} />
@@ -58,8 +68,11 @@ const BasicPagination: React.FC = () => {
 export default BasicPagination;`
     },
     {
-      title: "Size",
-      description: "페이지네이션의 크기를 설정할 수 있습니다.",
+      title: "Align",
+      description:
+        lang === "ko"
+          ? "페이지네이션의 정렬 위치를 설정할 수 있습니다."
+          : "You can set the alignment of the pagination.",
       render: (
         <div className="flex flex-col gap-20">
           <Card style={{ width: "100%" }} shadow="none" colorType="sub">
@@ -139,8 +152,11 @@ const AlignPagination: React.FC = () => {
 export default AlignPagination;`
     },
     {
-      title: "Shape",
-      description: "페이지네이션의 모양을 설정할 수 있습니다.",
+      title: "Item Count",
+      description:
+        lang === "ko"
+          ? "한 페이지에 표시할 아이템 수를 설정할 수 있습니다."
+          : "You can set the number of items to display per page.",
       render: (
         <div className="flex flex-col gap-20">
           <Card style={{ width: "100%" }} shadow="none" colorType="sub">
@@ -151,7 +167,7 @@ export default AlignPagination;`
                 type="number"
                 min={1}
                 max={100}
-                placeholder="페이지당 아이템 수"
+                placeholder="Number of items per page"
               />
             </div>
           </Card>
@@ -159,7 +175,7 @@ export default AlignPagination;`
             <List
               dataSource={Array.from(
                 { length: 1000 },
-                (_, i) => `아이템 ${i + 1}`
+                (_, i) => `Item ${i + 1}`
               ).slice((currentPage - 1) * pageSize, currentPage * pageSize)}
               split={true}
               gap={8}
@@ -196,7 +212,7 @@ const PageSizePagination = () => {
             type="number"
             min={1}
             max={100}
-            placeholder="페이지당 아이템 수"
+            placeholder="Number of items per page"
           />
         </div>
       </Card>
@@ -204,7 +220,7 @@ const PageSizePagination = () => {
         <List
           dataSource={Array.from(
             { length: 1000 },
-            (_, i) => \`아이템 \${i + 1}\`
+            (_, i) => \`Item \${i + 1}\`
           ).slice((currentPage - 1) * pageSize, currentPage * pageSize)}
           split={true}
           gap={8}
@@ -242,7 +258,7 @@ const PageSizePagination: React.FC = () => {
             type="number"
             min={1}
             max={100}
-            placeholder="페이지당 아이템 수"
+            placeholder="Number of items per page"
           />
         </div>
       </Card>
@@ -250,7 +266,7 @@ const PageSizePagination: React.FC = () => {
         <List
           dataSource={Array.from(
             { length: 1000 },
-            (_, i) => \`아이템 \${i + 1}\`
+            (_, i) => \`Item \${i + 1}\`
           ).slice((currentPage - 1) * pageSize, currentPage * pageSize)}
           split={true}
           gap={8}
@@ -274,11 +290,16 @@ export default PageSizePagination;`
     },
     {
       title: "Color Customization",
-      description: "페이지네이션의 색상을 커스텀할 수 있습니다.",
+      description:
+        lang === "ko"
+          ? "페이지네이션의 색상을 커스텀할 수 있습니다."
+          : "You can customize the color of the pagination.",
       render: (
         <div className="flex flex-col gap-40 w-100">
           <div className="flex flex-col gap-20 w-100">
-            <Typography pretendard="SB">현재 페이지 버튼 커스텀</Typography>
+            <Typography pretendard="SB">
+              Customize Current Page Button
+            </Typography>
             <Pagination
               total={50}
               activeStyle={{
@@ -288,7 +309,7 @@ export default PageSizePagination;`
             />
           </div>
           <div className="flex flex-col gap-20 w-100">
-            <Typography pretendard="SB">전체 버튼 커스텀</Typography>
+            <Typography pretendard="SB">Customize All Buttons</Typography>
             <Pagination
               total={50}
               defaultStyle={{
@@ -311,7 +332,9 @@ const CustomStylePagination = () => {
   return (
     <div className="flex flex-col gap-40 w-100">
       <div className="flex flex-col gap-20 w-100">
-        <Typography pretendard="SB">현재 페이지 버튼 커스텀</Typography>
+        <Typography pretendard="SB">
+          Customize Current Page Button
+        </Typography>
         <Pagination
           total={50}
           activeStyle={{
@@ -321,7 +344,7 @@ const CustomStylePagination = () => {
         />
       </div>
       <div className="flex flex-col gap-20 w-100">
-        <Typography pretendard="SB">전체 버튼 커스텀</Typography>
+        <Typography pretendard="SB">Customize All Buttons</Typography>
         <Pagination
           total={50}
           defaultStyle={{
@@ -347,7 +370,9 @@ const CustomStylePagination: React.FC = () => {
   return (
     <div className="flex flex-col gap-40 w-100">
       <div className="flex flex-col gap-20 w-100">
-        <Typography pretendard="SB">현재 페이지 버튼 커스텀</Typography>
+        <Typography pretendard="SB">
+          Customize Current Page Button
+        </Typography>
         <Pagination
           total={50}
           activeStyle={{
@@ -357,7 +382,7 @@ const CustomStylePagination: React.FC = () => {
         />
       </div>
       <div className="flex flex-col gap-20 w-100">
-        <Typography pretendard="SB">전체 버튼 커스텀</Typography>
+        <Typography pretendard="SB">Customize All Buttons</Typography>
         <Pagination
           total={50}
           defaultStyle={{
@@ -378,9 +403,11 @@ const CustomStylePagination: React.FC = () => {
 export default CustomStylePagination;`
     },
     {
-      title: "표시할 버튼 수",
+      title: "Max Visible Buttons",
       description:
-        "maxVisibleButtons prop을 사용하여 한 번에 표시할 페이지 버튼의 수를 설정할 수 있습니다.",
+        lang === "ko"
+          ? "maxVisibleButtons prop을 사용하여 한 번에 표시할 페이지 버튼의 수를 설정할 수 있습니다."
+          : "You can set the number of page buttons to display at once using the maxVisibleButtons prop.",
       render: (
         <div className="flex flex-col gap-40 w-100">
           <Card style={{ width: "100%" }} shadow="none" colorType="sub">
@@ -454,28 +481,29 @@ export default MaxVisiblePagination;`
     {
       key: "current",
       name: "current",
-      description: "현재 페이지 번호",
+      description: lang === "ko" ? "현재 페이지 번호" : "Current page number",
       type: "number",
       default: "1"
     },
     {
       key: "defaultCurrent",
       name: "defaultCurrent",
-      description: "초기 페이지 번호",
+      description: lang === "ko" ? "초기 페이지 번호" : "Initial page number",
       type: "number",
       default: "1"
     },
     {
       key: "total",
       name: "total *",
-      description: "전체 아이템 수",
+      description: lang === "ko" ? "전체 아이템 수" : "Total number of items",
       type: "number",
       default: "0"
     },
     {
       key: "align",
       name: "align",
-      description: "페이지네이션 정렬 위치",
+      description:
+        lang === "ko" ? "페이지네이션 정렬 위치" : "Pagination alignment",
       type: (
         <>
           <Tag>left</Tag> ｜ <Tag>center</Tag> ｜ <Tag>right</Tag>
@@ -486,56 +514,77 @@ export default MaxVisiblePagination;`
     {
       key: "pageSize",
       name: "pageSize",
-      description: "한 페이지에 표시할 아이템 수",
+      description:
+        lang === "ko"
+          ? "한 페이지에 표시할 아이템 수"
+          : "Number of items per page",
       type: "number",
       default: "10"
     },
     {
       key: "onChange",
       name: "onChange",
-      description: "페이지 변경 시 호출되는 콜백 함수",
+      description:
+        lang === "ko"
+          ? "페이지 변경 시 호출되는 콜백 함수"
+          : "Callback function called when the page changes",
       type: "(page: number) => void",
       default: "undefined"
     },
     {
       key: "showPrevNext",
       name: "showPrevNext",
-      description: "이전/다음 페이지 버튼 표시 여부",
+      description:
+        lang === "ko"
+          ? "이전/다음 페이지 버튼 표시 여부"
+          : "Display previous/next page buttons",
       type: "boolean",
       default: "true"
     },
     {
       key: "showFirstLast",
       name: "showFirstLast",
-      description: "첫 페이지/마지막 페이지 버튼 표시 여부",
+      description:
+        lang === "ko"
+          ? "첫 페이지/마지막 페이지 버튼 표시 여부"
+          : "Display first/last page buttons",
       type: "boolean",
       default: "true"
     },
     {
       key: "maxVisibleButtons",
       name: "maxVisibleButtons",
-      description: "한 번에 표시할 최대 페이지 버튼 수",
+      description:
+        lang === "ko"
+          ? "한 번에 표시할 최대 페이지 버튼 수"
+          : "Maximum number of page buttons to display at once",
       type: "number",
       default: "5"
     },
     {
       key: "activeStyle",
       name: "activeStyle",
-      description: "현재 페이지 버튼의 스타일",
+      description:
+        lang === "ko"
+          ? "현재 페이지 버튼의 스타일"
+          : "Style of the current page button",
       type: "object",
       default: "{ colorType: 'primary', shadow: 'sm', ...ButtonProps }"
     },
     {
       key: "defaultStyle",
       name: "defaultStyle",
-      description: "기본 페이지 버튼의 스타일",
+      description:
+        lang === "ko"
+          ? "기본 페이지 버튼의 스타일"
+          : "Style of the default page button",
       type: "object",
       default: "{ colorType: 'default', shadow: 'sm', ...ButtonProps }"
     },
     {
       key: "style",
       name: "style",
-      description: "컨테이너 스타일",
+      description: lang === "ko" ? "컨테이너 스타일" : "Container style",
       type: "React.CSSProperties",
       default: "{}"
     }

@@ -2,19 +2,29 @@
 
 import Frame from "../Frame";
 import { useMobile } from "../../_lib/context/mobileContext";
+import { useLang } from "../../_lib/context/langContext";
 import { Tag, Card, DatePicker, Radio } from "sud-ui";
 
 import React, { useState } from "react";
 
 export default function DatePickerPage() {
   const { isMobile } = useMobile();
+  const { lang } = useLang();
 
   const name = "DatePicker";
-  const description = <>날짜를 선택할 수 있는 컴포넌트입니다.</>;
+  const description = (
+    <>
+      {lang === "ko"
+        ? "날짜를 선택할 수 있는 컴포넌트입니다."
+        : "A component that allows you to select a date."}
+    </>
+  );
 
   const IMPORT_COMMAND = "import { DatePicker } from 'sud-ui';";
 
-  const whenToUse = ["날짜를 선택할 때"];
+  const whenToUse = [
+    lang === "ko" ? "날짜를 선택할 때" : "When you need to select a date."
+  ];
 
   const [size, setSize] = useState("md");
   const [shape, setShape] = useState("rounded");
@@ -60,7 +70,7 @@ export default function DatePickerPage() {
   const examples = [
     {
       title: "Basic Usage",
-      description: "기본적인 버튼 컴포넌트입니다.",
+      description: lang === "ko" ? "기본적인 사용 방법입니다." : "Basic usage.",
       render: (
         <>
           <DatePicker value={value} onChange={setValue} />
@@ -85,7 +95,10 @@ export default function Example(): JSX.Element {
     },
     {
       title: "Disabled Usage",
-      description: "비활성화 상태의 버튼 컴포넌트입니다.",
+      description:
+        lang === "ko"
+          ? "비활성화 상태의 버튼 컴포넌트입니다."
+          : "A disabled button component.",
       render: (
         <>
           <DatePicker
@@ -114,7 +127,10 @@ export default function Example(): JSX.Element {
     },
     {
       title: "ReadOnly Usage",
-      description: "읽기 전용 상태의 버튼 컴포넌트입니다.",
+      description:
+        lang === "ko"
+          ? "읽기 전용 상태의 버튼 컴포넌트입니다."
+          : "A read-only button component.",
       render: (
         <>
           <DatePicker
@@ -149,7 +165,7 @@ export default function Example(): JSX.Element {
           <DatePicker
             value={localeValue}
             onChange={setLocaleValue}
-            locale="ko"
+            locale="en"
           />
         </>
       ),
@@ -172,7 +188,10 @@ export default function Example(): JSX.Element {
     },
     {
       title: "Size",
-      description: "DatePicker 의 크기를 설정할 수 있습니다.",
+      description:
+        lang === "ko"
+          ? "DatePicker 의 크기를 설정할 수 있습니다."
+          : "You can set the size of the DatePicker.",
       render: (
         <div className="flex flex-col gap-20">
           <Card style={{ width: "100%" }} shadow="none" colorType="sub">
@@ -241,7 +260,10 @@ export default function Example(): JSX.Element {
     },
     {
       title: "Shape ",
-      description: "DatePicker 의 모양을 설정할 수 있습니다.",
+      description:
+        lang === "ko"
+          ? "DatePicker 의 모양을 설정할 수 있습니다."
+          : "You can set the shape of the DatePicker.",
       render: (
         <div className="flex flex-col gap-20">
           <Card style={{ width: "100%" }} shadow="none" colorType="sub">
@@ -314,14 +336,17 @@ export default function Example(): JSX.Element {
     },
     {
       title: "Error Usage",
-      description: "DatePicker 의 에러 상태를 설정할 수 있습니다.",
+      description:
+        lang === "ko"
+          ? "DatePicker 의 에러 상태를 설정할 수 있습니다."
+          : "You can set the error state of the DatePicker.",
       render: (
         <>
           <DatePicker
             value={errorValue}
             onChange={setErrorValue}
             error
-            errorText="에러 메시지"
+            errorText="Error message"
           />
         </>
       ),
@@ -336,7 +361,7 @@ export default function Example() {
       value={value}
       onChange={setValue}
       error
-      errorText="에러 메시지"
+      errorText="Error message"
     />
   );
 }`,
@@ -351,17 +376,25 @@ export default function Example(): JSX.Element {
       value={value}
       onChange={setValue}
       error
-      errorText="에러 메시지"
+      errorText="Error message"
     />
   );
 }`
     },
     {
       title: "Range Usage",
-      description: "DatePicker 의 범위 선택 상태를 설정할 수 있습니다.",
+      description:
+        lang === "ko"
+          ? "DatePicker 의 범위 선택 상태를 설정할 수 있습니다."
+          : "You can set the range selection state of the DatePicker.",
       render: (
         <>
-          <DatePicker value={rangeValue} onChange={setRangeValue} range />
+          <DatePicker
+            value={rangeValue}
+            onChange={setRangeValue}
+            range
+            placeholder="Range Select"
+          />
         </>
       ),
       jscode: `import React, { useState } from "react";
@@ -373,7 +406,14 @@ export default function Example() {
     endDate: new Date()
   });
 
-  return <DatePicker value={value} onChange={setValue} range />;
+  return (
+    <DatePicker
+      value={value}
+      onChange={setValue}
+      range
+      placeholder="Range Select"
+    />
+  );
 }`,
       tscode: `import React, { useState } from "react";
 import { DatePicker } from "sud-ui";
@@ -389,12 +429,22 @@ export default function Example(): JSX.Element {
     endDate: new Date()
   });
 
-  return <DatePicker value={value} onChange={setValue} range />;
+  return (
+    <DatePicker
+      value={value}
+      onChange={setValue}
+      range
+      placeholder="Range Select"
+    />
+  );
 }`
     },
     {
       title: "Formatting",
-      description: "DatePicker 의 포맷을 설정할 수 있습니다.",
+      description:
+        lang === "ko"
+          ? "DatePicker 의 포맷을 설정할 수 있습니다."
+          : "You can set the format of the DatePicker.",
       render: (
         <>
           <DatePicker
@@ -427,42 +477,54 @@ export default function Example(): JSX.Element {
     {
       key: "value",
       name: "value",
-      description: "선택된 날짜 값",
+      description:
+        lang === "ko" ? "선택된 날짜 값" : "The selected date value.",
       type: "Date | { startDate: Date, endDate: Date }",
       default: "-"
     },
     {
       key: "onChange",
       name: "onChange",
-      description: "날짜가 변경될 때 호출되는 함수",
+      description:
+        lang === "ko"
+          ? "날짜가 변경될 때 호출되는 함수"
+          : "The function called when the date changes.",
       type: "(value: Date | { startDate: Date, endDate: Date }, text: string) => void",
       default: "() => {}"
     },
     {
       key: "colorType",
       name: "colorType",
-      description: "DatePicker의 색상 타입",
+      description:
+        lang === "ko"
+          ? "DatePicker의 색상 타입"
+          : "The color type of the DatePicker.",
       type: "string",
       default: "default"
     },
     {
       key: "shape",
       name: "shape",
-      description: "DatePicker의 모양",
+      description:
+        lang === "ko" ? "DatePicker의 모양" : "The shape of the DatePicker.",
       type: "string",
       default: "rounded"
     },
     {
       key: "shadow",
       name: "shadow",
-      description: "DatePicker의 그림자 크기",
+      description:
+        lang === "ko"
+          ? "DatePicker의 그림자 크기"
+          : "The shadow size of the DatePicker.",
       type: "string",
       default: "sm"
     },
     {
       key: "size",
       name: "size",
-      description: "DatePicker의 크기",
+      description:
+        lang === "ko" ? "DatePicker의 크기" : "The size of the DatePicker.",
       type: (
         <>
           <Tag>sm</Tag> ｜ <Tag>md</Tag> ｜ <Tag>lg</Tag>
@@ -473,126 +535,164 @@ export default function Example(): JSX.Element {
     {
       key: "disabled",
       name: "disabled",
-      description: "비활성화 여부",
+      description:
+        lang === "ko"
+          ? "비활성화 여부"
+          : "The disabled state of the DatePicker.",
       type: "boolean",
       default: "false"
     },
     {
       key: "readOnly",
       name: "readOnly",
-      description: "읽기 전용 여부",
+      description:
+        lang === "ko"
+          ? "읽기 전용 여부"
+          : "The read-only state of the DatePicker.",
       type: "boolean",
       default: "false"
     },
     {
       key: "error",
       name: "error",
-      description: "에러 상태",
+      description:
+        lang === "ko" ? "에러 상태" : "The error state of the DatePicker.",
       type: "boolean",
       default: "false"
     },
     {
       key: "errorText",
       name: "errorText",
-      description: "에러 메시지",
+      description:
+        lang === "ko" ? "에러 메시지" : "The error message of the DatePicker.",
       type: "string",
       default: "-"
     },
     {
       key: "className",
       name: "className",
-      description: "추가 클래스명",
+      description: lang === "ko" ? "추가 클래스명" : "Additional class name.",
       type: "string",
       default: '""'
     },
     {
       key: "placeholder",
       name: "placeholder",
-      description: "플레이스홀더 텍스트",
+      description:
+        lang === "ko"
+          ? "플레이스홀더 텍스트"
+          : "The placeholder text of the DatePicker.",
       type: "string",
       default: "날짜 선택"
     },
     {
       key: "format",
       name: "format",
-      description: "날짜 포맷",
+      description:
+        lang === "ko" ? "날짜 포맷" : "The date format of the DatePicker.",
       type: "string",
       default: "YYYY-MM-DD"
     },
     {
       key: "range",
       name: "range",
-      description: "날짜 범위 선택 여부",
+      description:
+        lang === "ko"
+          ? "날짜 범위 선택 여부"
+          : "The range selection state of the DatePicker.",
       type: "boolean",
       default: "false"
     },
     {
       key: "placement",
       name: "placement",
-      description: "캘린더 팝업의 위치",
+      description:
+        lang === "ko"
+          ? "캘린더 팝업의 위치"
+          : "The placement of the calendar popup.",
       type: "string",
       default: "top"
     },
     {
       key: "locale",
       name: "locale",
-      description: "언어 설정",
+      description:
+        lang === "ko" ? "언어 설정" : "The language setting of the DatePicker.",
       type: "string",
       default: "en"
     },
     {
       key: "popConfirmProps",
       name: "popConfirmProps",
-      description: "PopConfirm 컴포넌트에 전달되는 props",
+      description:
+        lang === "ko"
+          ? "PopConfirm 컴포넌트에 전달되는 props"
+          : "The props passed to the PopConfirm component.",
       type: "object",
       default: "{}"
     },
     {
       key: "inputProps",
       name: "inputProps",
-      description: "Input 컴포넌트에 전달되는 props",
+      description:
+        lang === "ko"
+          ? "Input 컴포넌트에 전달되는 props"
+          : "The props passed to the Input component.",
       type: "object",
       default: "{}"
     },
     {
       key: "calendarProps",
       name: "calendarProps",
-      description: "Calendar 컴포넌트에 전달되는 props",
+      description:
+        lang === "ko"
+          ? "Calendar 컴포넌트에 전달되는 props"
+          : "The props passed to the Calendar component.",
       type: "object",
       default: "{}"
     },
     {
       key: "id",
       name: "id",
-      description: "HTML id 속성",
+      description: lang === "ko" ? "HTML id 속성" : "The HTML id attribute.",
       type: "string",
       default: "-"
     },
     {
       key: "ariaLabel",
       name: "ariaLabel",
-      description: "접근성을 위한 레이블",
+      description:
+        lang === "ko"
+          ? "접근성을 위한 레이블"
+          : "The aria label for accessibility.",
       type: "string",
       default: "placeholder와 동일"
     },
     {
       key: "ariaRequired",
       name: "ariaRequired",
-      description: "필수 입력 여부",
+      description:
+        lang === "ko" ? "필수 입력 여부" : "The required input state.",
       type: "boolean",
       default: "-"
     },
     {
       key: "ariaInvalid",
       name: "ariaInvalid",
-      description: "유효하지 않은 상태 여부",
+      description:
+        lang === "ko"
+          ? "유효하지 않은 상태 여부"
+          : "The invalid state of the DatePicker.",
       type: "boolean",
       default: "-"
     },
     {
       key: "ariaDescribedby",
       name: "ariaDescribedby",
-      description: "설명을 제공하는 요소의 id",
+      description:
+        lang === "ko"
+          ? "설명을 제공하는 요소의 id"
+          : "The id of the element providing the description.",
       type: "string",
       default: "-"
     }

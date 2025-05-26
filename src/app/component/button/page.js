@@ -2,6 +2,7 @@
 
 import Frame from "../Frame";
 import { useMobile } from "../../_lib/context/mobileContext";
+import { useLang } from "../../_lib/context/langContext";
 import { Tag, Radio, Button, Card, Divider, Input } from "sud-ui";
 
 import React, { useState } from "react";
@@ -9,20 +10,34 @@ import { Chat } from "sud-icons";
 
 export default function ButtonPage() {
   const { isMobile } = useMobile();
+  const { lang } = useLang();
 
   const name = "Button";
-  const description = <>다양한 스타일과 상태를 지원하는 버튼 컴포넌트입니다.</>;
+  const description =
+    lang === "ko"
+      ? "다양한 스타일과 상태를 지원하는 버튼 컴포넌트입니다."
+      : "A button component with various styles and states.";
 
   const IMPORT_COMMAND = "import { Button } from 'sud-ui';";
 
-  const whenToUse = [
-    "사용자의 주요 행동을 유도할 때 (예: 제출, 저장, 확인)",
-    "폼이나 다이얼로그에서 작업을 완료하거나 취소할 때",
-    "사용자에게 추가 정보나 다음 단계로 이동할 수 있는 옵션을 제공할 때",
-    "작업의 진행 상태를 표시할 때 (로딩 상태)",
-    "사용자의 선택이나 결정을 확인할 때",
-    "주요 기능이나 액션에 대한 접근성을 제공할 때"
-  ];
+  const whenToUse =
+    lang === "ko"
+      ? [
+          "사용자의 주요 행동을 유도할 때 (예: 제출, 저장, 확인)",
+          "폼이나 다이얼로그에서 작업을 완료하거나 취소할 때",
+          "사용자에게 추가 정보나 다음 단계로 이동할 수 있는 옵션을 제공할 때",
+          "작업의 진행 상태를 표시할 때 (로딩 상태)",
+          "사용자의 선택이나 결정을 확인할 때",
+          "주요 기능이나 액션에 대한 접근성을 제공할 때"
+        ]
+      : [
+          "When you want to guide the user's main action (e.g. submit, save, confirm)",
+          "When the form or dialog is completed or canceled",
+          "When you provide additional information or options for the user to move to the next step",
+          "When displaying the progress of an operation (loading state)",
+          "When confirming the user's choice or decision",
+          "When providing accessibility to the main feature or action"
+        ];
   const [colorType, setColorType] = useState("default");
   const colorTypeOptions = [
     {
@@ -146,7 +161,7 @@ export default function ButtonPage() {
       value: "right"
     }
   ];
-  const [loadingText, setLoadingText] = useState("로딩 중...");
+  const [loadingText, setLoadingText] = useState("Loading...");
   const [iconPosition, setIconPosition] = useState("left");
 
   const iconPositionOptions = [
@@ -179,7 +194,7 @@ export default function ButtonPage() {
   const examples = [
     {
       title: "Basic Usage",
-      description: "기본적인 버튼 컴포넌트입니다.",
+      description: lang === "ko" ? "기본적인 사용 방법입니다." : "Basic usage.",
       render: (
         <div className="flex flex-col gap-20 jus-cen item-cen">
           <Card style={{ width: "100%" }} shadow="none" colorType="sub">
@@ -192,7 +207,7 @@ export default function ButtonPage() {
               />
             </div>
           </Card>
-          <Button colorType={colorType}>{colorType} 버튼</Button>
+          <Button colorType={colorType}>{colorType} Button</Button>
         </div>
       ),
       jscode: `import React, { useState } from "react";
@@ -226,7 +241,7 @@ export default function Example() {
           />
         </div>
       </Card>
-      <Button colorType={colorType}>{colorType} 버튼</Button>
+      <Button colorType={colorType}>{colorType} Button</Button>
     </div>
   );
 }`,
@@ -266,14 +281,17 @@ export default function Example(): JSX.Element {
           />
         </div>
       </Card>
-      <Button colorType={colorType}>{colorType} 버튼</Button>
+      <Button colorType={colorType}>{colorType} Button</Button>
     </div>
   );
 }`
     },
     {
       title: "borderType",
-      description: "버튼의 테두리 스타일을 설정할 수 있습니다.",
+      description:
+        lang === "ko"
+          ? "버튼의 테두리 스타일을 설정할 수 있습니다."
+          : "You can set the border style of the button.",
       render: (
         <div className="flex flex-col gap-20 jus-cen item-cen">
           <Card style={{ width: "100%" }} shadow="none" colorType="sub">
@@ -285,7 +303,7 @@ export default function Example(): JSX.Element {
             />
           </Card>
           <Button shadow="none" borderType={borderType} borderWeight={3}>
-            {borderType} 버튼
+            {borderType} Button
           </Button>
         </div>
       ),
@@ -317,7 +335,7 @@ export default function Example() {
         />
       </Card>
       <Button shadow="none" borderType={borderType} borderWeight={3}>
-        {borderType} 버튼
+        {borderType} Button
       </Button>
     </div>
   );
@@ -355,7 +373,7 @@ export default function Example(): JSX.Element {
         />
       </Card>
       <Button shadow="none" borderType={borderType} borderWeight={3}>
-        {borderType} 버튼
+        {borderType} Button
       </Button>
     </div>
   );
@@ -363,7 +381,10 @@ export default function Example(): JSX.Element {
     },
     {
       title: "shape",
-      description: "버튼의 모양을 설정할 수 있습니다.",
+      description:
+        lang === "ko"
+          ? "버튼의 모양을 설정할 수 있습니다."
+          : "You can set the shape of the button.",
       render: (
         <div className="flex flex-col gap-20 jus-cen item-cen">
           <Card style={{ width: "100%" }} shadow="none" colorType="sub">
@@ -374,7 +395,7 @@ export default function Example(): JSX.Element {
               onChange={setShape}
             />
           </Card>
-          <Button shape={shape}>{shape} 버튼</Button>
+          <Button shape={shape}>{shape} Button</Button>
         </div>
       ),
       jscode: `import React, { useState } from "react";
@@ -400,7 +421,7 @@ export default function Example() {
           onChange={setShape}
         />
       </Card>
-      <Button shape={shape}>{shape} 버튼</Button>
+      <Button shape={shape}>{shape} Button</Button>
     </div>
   );
 }`,
@@ -432,14 +453,17 @@ export default function Example(): JSX.Element {
           onChange={setShape}
         />
       </Card>
-      <Button shape={shape}>{shape} 버튼</Button>
+      <Button shape={shape}>{shape} Button</Button>
     </div>
   );
 }`
     },
     {
       title: "Loading",
-      description: "버튼을 로딩 상태로 설정할 수 있습니다.",
+      description:
+        lang === "ko"
+          ? "버튼을 로딩 상태로 설정할 수 있습니다."
+          : "You can set the button to a loading state.",
       render: (
         <div className="flex flex-col gap-20 jus-cen item-cen">
           <Card style={{ width: "100%" }} shadow="none" colorType="sub">
@@ -491,7 +515,7 @@ const loadingPositionOptions = [
 export default function Example() {
   const [loadingType, setLoadingType] = useState("default");
   const [loadingPosition, setLoadingPosition] = useState("right");
-  const [loadingText, setLoadingText] = useState("로딩 중...");
+  const [loadingText, setLoadingText] = useState("Loading...");
   
   return (
     <div className="flex flex-col gap-20 jus-cen item-cen">
@@ -550,7 +574,7 @@ const loadingPositionOptions: LoadingOption[] = [
 export default function Example(): JSX.Element {
   const [loadingType, setLoadingType] = useState<string>("default");
   const [loadingPosition, setLoadingPosition] = useState<string>("right");
-  const [loadingText, setLoadingText] = useState<string>("로딩 중...");
+  const [loadingText, setLoadingText] = useState<string>("Loading...");
   
   return (
     <div className="flex flex-col gap-20 jus-cen item-cen">
@@ -590,24 +614,30 @@ export default function Example(): JSX.Element {
     },
     {
       title: "Disabled",
-      description: "버튼을 비활성화할 수 있습니다.",
-      render: <Button disabled>비활성화 버튼</Button>,
+      description:
+        lang === "ko"
+          ? "버튼을 비활성화할 수 있습니다."
+          : "You can disable the button.",
+      render: <Button disabled>Disable Button</Button>,
       jscode: `import React from "react";
 import { Button } from "sud-ui";
 
 export default function Example() {
-  return <Button disabled>비활성화 버튼</Button>;
+  return <Button disabled>Disable Button</Button>;
 }`,
       tscode: `import React from "react";
 import { Button } from "sud-ui";
 
 export default function Example(): JSX.Element {
-  return <Button disabled>비활성화 버튼</Button>;
+  return <Button disabled>Disable Button</Button>;
 }`
     },
     {
       title: "Icon",
-      description: "버튼에 아이콘을 추가할 수 있습니다.",
+      description:
+        lang === "ko"
+          ? "버튼에 아이콘을 추가할 수 있습니다."
+          : "You can add an icon to the button.",
       render: (
         <div className="flex flex-col gap-20 jus-cen item-cen">
           <Card style={{ width: "100%" }} shadow="none" colorType="sub">
@@ -619,7 +649,7 @@ export default function Example(): JSX.Element {
             />
           </Card>
           <Button icon={<Chat size={16} />} iconPosition={iconPosition}>
-            아이콘 버튼
+            Icon Button
           </Button>
         </div>
       ),
@@ -646,7 +676,7 @@ export default function Example() {
         />
       </Card>
       <Button icon={<Chat size={16} />} iconPosition={iconPosition}>
-        아이콘 버튼
+        Icon Button
       </Button>
     </div>
   );
@@ -679,7 +709,7 @@ export default function Example(): JSX.Element {
         />
       </Card>
       <Button icon={<Chat size={16} />} iconPosition={iconPosition}>
-        아이콘 버튼
+        Icon Button
       </Button>
     </div>
   );
@@ -687,13 +717,16 @@ export default function Example(): JSX.Element {
     },
     {
       title: "Color Custom",
-      description: "버튼의 색상을 커스텀할 수 있습니다.",
+      description:
+        lang === "ko"
+          ? "버튼의 색상을 커스텀할 수 있습니다."
+          : "You can customize the color of the button.",
       render: (
         <Button
           background="linear-gradient(100deg, #0958d9 0%, #69b1ff 100%)"
           color="#ffffff"
         >
-          그라데이션 버튼
+          Gradient Button
         </Button>
       ),
       jscode: `import React from "react";
@@ -705,7 +738,7 @@ export default function Example() {
       background="linear-gradient(100deg, #0958d9 0%, #69b1ff 100%)"
       color="#ffffff"
     >
-      그라데이션 버튼
+      Gradient Button
     </Button>
   );
 }`,
@@ -718,14 +751,17 @@ export default function Example(): JSX.Element {
       background="linear-gradient(100deg, #0958d9 0%, #69b1ff 100%)"
       color="#ffffff"
     >
-      그라데이션 버튼
+      Gradient Button
     </Button>
   );
 }`
     },
     {
       title: "Size",
-      description: "버튼의 크기를 조절할 수 있습니다.",
+      description:
+        lang === "ko"
+          ? "버튼의 크기를 조절할 수 있습니다."
+          : "You can adjust the size of the button.",
       render: (
         <div className="flex flex-col gap-20 jus-cen item-cen">
           <Card style={{ width: "100%" }} shadow="none" colorType="sub">
@@ -736,7 +772,7 @@ export default function Example(): JSX.Element {
               onChange={setSize}
             />
           </Card>
-          <Button size={size}>{size} 버튼</Button>
+          <Button size={size}>{size} size Button</Button>
         </div>
       ),
       jscode: `import React, { useState } from "react";
@@ -761,7 +797,7 @@ export default function Example() {
           onChange={setSize}
         />
       </Card>
-      <Button size={size}>{size} 버튼</Button>
+      <Button size={size}>{size} size Button</Button>
     </div>
   );
 }`,
@@ -792,7 +828,7 @@ export default function Example(): JSX.Element {
           onChange={setSize}
         />
       </Card>
-      <Button size={size}>{size} 버튼</Button>
+      <Button size={size}>{size} size Button</Button>
     </div>
   );
 }`
@@ -802,56 +838,72 @@ export default function Example(): JSX.Element {
     {
       key: "colorType",
       name: "colorType",
-      description: "버튼의 색상 타입",
+      description:
+        lang === "ko" ? "버튼의 색상 타입" : "The color type of the button.",
       type: "string",
       default: "default"
     },
     {
       key: "background",
       name: "background",
-      description: "버튼의 배경색",
+      description:
+        lang === "ko" ? "버튼의 배경색" : "The background color of the button.",
       type: "string",
       default: "-"
     },
     {
       key: "color",
       name: "color",
-      description: "버튼의 텍스트 색상",
+      description:
+        lang === "ko" ? "버튼의 텍스트 색상" : "The text color of the button.",
       type: "string",
       default: "-"
     },
     {
       key: "borderColor",
       name: "borderColor",
-      description: "버튼의 테두리 색상",
+      description:
+        lang === "ko"
+          ? "버튼의 테두리 색상"
+          : "The border color of the button.",
       type: "string",
       default: "-"
     },
     {
       key: "borderType",
       name: "borderType",
-      description: "버튼의 테두리 스타일",
+      description:
+        lang === "ko"
+          ? "버튼의 테두리 스타일"
+          : "The border style of the button.",
       type: "string",
       default: "solid"
     },
     {
       key: "borderWeight",
       name: "borderWeight",
-      description: "버튼의 테두리 두께",
+      description:
+        lang === "ko"
+          ? "버튼의 테두리 두께"
+          : "The border weight of the button.",
       type: "number",
       default: "1"
     },
     {
       key: "icon",
       name: "icon",
-      description: "버튼에 표시할 아이콘",
+      description:
+        lang === "ko"
+          ? "버튼에 표시할 아이콘"
+          : "The icon to display on the button.",
       type: "ReactNode",
       default: "-"
     },
     {
       key: "iconPosition",
       name: "iconPosition",
-      description: "아이콘의 위치",
+      description:
+        lang === "ko" ? "아이콘의 위치" : "The position of the icon.",
       type: (
         <>
           <Tag>left</Tag> ｜ <Tag>right</Tag>
@@ -862,56 +914,72 @@ export default function Example(): JSX.Element {
     {
       key: "disabled",
       name: "disabled",
-      description: "버튼 비활성화 여부",
+      description:
+        lang === "ko"
+          ? "버튼 비활성화 여부"
+          : "The disabled state of the button.",
       type: "boolean",
       default: "false"
     },
     {
       key: "loading",
       name: "loading",
-      description: "로딩 상태 표시 여부",
+      description:
+        lang === "ko"
+          ? "로딩 상태 표시 여부"
+          : "The loading state of the button.",
       type: "boolean",
       default: "false"
     },
     {
       key: "loadingText",
       name: "loadingText",
-      description: "로딩 상태일 때 표시할 텍스트",
+      description:
+        lang === "ko"
+          ? "로딩 상태일 때 표시할 텍스트"
+          : "The text to display when the button is in a loading state.",
       type: "string",
       default: "-"
     },
     {
       key: "loadingType",
       name: "loadingType",
-      description: "로딩 스피너의 타입",
+      description:
+        lang === "ko"
+          ? "로딩 스피너의 타입"
+          : "The type of the loading spinner.",
       type: "string",
       default: "-"
     },
     {
       key: "shape",
       name: "shape",
-      description: "버튼의 모양",
+      description: lang === "ko" ? "버튼의 모양" : "The shape of the button.",
       type: "string",
       default: "rounded"
     },
     {
       key: "shadow",
       name: "shadow",
-      description: "버튼의 그림자 효과",
+      description:
+        lang === "ko"
+          ? "버튼의 그림자 효과"
+          : "The shadow effect of the button.",
       type: "string",
       default: "sm"
     },
     {
       key: "border",
       name: "border",
-      description: "테두리 표시 여부",
+      description:
+        lang === "ko" ? "테두리 표시 여부" : "The display of the border.",
       type: "boolean",
       default: "true"
     },
     {
       key: "size",
       name: "size",
-      description: "버튼의 크기",
+      description: lang === "ko" ? "버튼의 크기" : "The size of the button.",
       type: (
         <>
           <Tag>sm</Tag> ｜ <Tag>md</Tag> ｜ <Tag>lg</Tag>
@@ -922,56 +990,59 @@ export default function Example(): JSX.Element {
     {
       key: "onClick",
       name: "onClick",
-      description: "클릭 이벤트 핸들러",
+      description:
+        lang === "ko" ? "클릭 이벤트 핸들러" : "The click event handler.",
       type: "(event: React.MouseEvent) => void",
       default: "-"
     },
     {
       key: "className",
       name: "className",
-      description: "추가 클래스명",
+      description: lang === "ko" ? "추가 클래스명" : "Additional class name.",
       type: "string",
       default: '""'
     },
     {
       key: "style",
       name: "style",
-      description: "추가 스타일",
+      description: lang === "ko" ? "추가 스타일" : "Additional style.",
       type: "CSSProperties",
       default: "{}"
     },
     {
       key: "ariaLabel",
       name: "ariaLabel",
-      description: "ARIA 라벨",
+      description: lang === "ko" ? "ARIA 라벨" : "ARIA label.",
       type: "string",
       default: "-"
     },
     {
       key: "ariaPressed",
       name: "ariaPressed",
-      description: "ARIA pressed 상태",
+      description: lang === "ko" ? "ARIA pressed 상태" : "ARIA pressed state.",
       type: "boolean",
       default: "-"
     },
     {
       key: "ariaExpanded",
       name: "ariaExpanded",
-      description: "ARIA expanded 상태",
+      description:
+        lang === "ko" ? "ARIA expanded 상태" : "ARIA expanded state.",
       type: "boolean",
       default: "-"
     },
     {
       key: "ariaControls",
       name: "ariaControls",
-      description: "ARIA controls 속성",
+      description:
+        lang === "ko" ? "ARIA controls 속성" : "ARIA controls property.",
       type: "string",
       default: "-"
     },
     {
       key: "role",
       name: "role",
-      description: "ARIA 역할",
+      description: lang === "ko" ? "ARIA 역할" : "ARIA role.",
       type: "string",
       default: "button"
     }
