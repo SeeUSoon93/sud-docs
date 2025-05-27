@@ -505,8 +505,8 @@ export default function Example(): JSX.Element {
       name: "checked",
       description:
         lang === "ko"
-          ? "체크박스 버튼의 선택 상태 (제어 컴포넌트)"
-          : "The selected state of the Ceckbox button (controlled component)",
+          ? "체크박스의 선택 상태 (제어 컴포넌트)"
+          : "The selected state of the checkbox (controlled component)",
       type: "boolean",
       default: "-"
     },
@@ -515,8 +515,8 @@ export default function Example(): JSX.Element {
       name: "defaultChecked",
       description:
         lang === "ko"
-          ? "체크박스 버튼의 초기 선택 상태 (비제어 컴포넌트)"
-          : "The initial selected state of the Ceckbox button (uncontrolled component)",
+          ? "체크박스의 초기 선택 상태 (비제어 컴포넌트)"
+          : "The initial selected state of the checkbox (uncontrolled component)",
       type: "boolean",
       default: "false"
     },
@@ -526,17 +526,17 @@ export default function Example(): JSX.Element {
       description:
         lang === "ko"
           ? "선택 상태가 변경될 때 호출되는 함수"
-          : "The function called when the selection state changes.",
+          : "The function called when the selection state changes",
       type: "(checked: boolean) => void",
       default: "-"
     },
     {
       key: "labelPosition",
       name: "labelPosition",
-      description: lang === "ko" ? "라벨의 위치" : "The position of the label.",
+      description: lang === "ko" ? "라벨의 위치" : "The position of the label",
       type: (
         <>
-          <Tag>left</Tag> ｜ <Tag>right</Tag> ｜ <Tag>top</Tag> ｜{" "}
+          <Tag>left</Tag> | <Tag>right</Tag> | <Tag>top</Tag> |{" "}
           <Tag>bottom</Tag>
         </>
       ),
@@ -546,9 +546,7 @@ export default function Example(): JSX.Element {
       key: "color",
       name: "color",
       description:
-        lang === "ko"
-          ? "체크박스 버튼의 색상"
-          : "The color of the Ceckbox button.",
+        lang === "ko" ? "체크박스의 색상" : "The color of the checkbox",
       type: "string",
       default: "-"
     },
@@ -556,7 +554,7 @@ export default function Example(): JSX.Element {
       key: "disabled",
       name: "disabled",
       description:
-        lang === "ko" ? "비활성화 여부" : "The disabled state of the checkbox.",
+        lang === "ko" ? "비활성화 여부" : "Whether the checkbox is disabled",
       type: "boolean",
       default: "false"
     },
@@ -565,29 +563,29 @@ export default function Example(): JSX.Element {
       name: "colorType",
       description:
         lang === "ko"
-          ? "체크박스 버튼의 색상 타입"
-          : "The color type of the Ceckbox button.",
+          ? "체크박스의 색상 타입"
+          : "The color type of the checkbox",
       type: "string",
       default: "primary"
     },
     {
       key: "className",
       name: "className",
-      description: lang === "ko" ? "추가 클래스명" : "Additional class name.",
+      description: lang === "ko" ? "추가 클래스명" : "Additional class name",
       type: "string",
       default: '""'
     },
     {
       key: "style",
       name: "style",
-      description: lang === "ko" ? "추가 스타일" : "Additional style.",
+      description: lang === "ko" ? "추가 스타일" : "Additional style",
       type: "CSSProperties",
       default: "{}"
     },
     {
       key: "ariaLabel",
       name: "ariaLabel",
-      description: lang === "ko" ? "ARIA 라벨" : "ARIA label.",
+      description: lang === "ko" ? "ARIA 라벨" : "ARIA label",
       type: "string",
       default: "-"
     },
@@ -595,7 +593,159 @@ export default function Example(): JSX.Element {
       key: "ariaRequired",
       name: "ariaRequired",
       description:
-        lang === "ko" ? "ARIA required 속성" : "ARIA required property.",
+        lang === "ko" ? "ARIA required 속성" : "ARIA required property",
+      type: "boolean",
+      default: "-"
+    },
+    {
+      key: "ariaInvalid",
+      name: "ariaInvalid",
+      description:
+        lang === "ko" ? "ARIA invalid 속성" : "ARIA invalid property",
+      type: "boolean",
+      default: "-"
+    },
+    {
+      key: "ariaDescribedby",
+      name: "ariaDescribedby",
+      description:
+        lang === "ko" ? "ARIA describedby 속성" : "ARIA describedby property",
+      type: "string",
+      default: "-"
+    }
+  ];
+
+  const groupTableData = [
+    {
+      key: "options",
+      name: "options",
+      description:
+        lang === "ko"
+          ? "체크박스 그룹의 옵션 배열"
+          : "Array of checkbox group options",
+      type: "Array<{label: ReactNode, value: string, disabled?: boolean}>",
+      default: "[]"
+    },
+    {
+      key: "value",
+      name: "value",
+      description:
+        lang === "ko" ? "선택된 값들의 배열" : "Array of selected values",
+      type: "string[]",
+      default: "[]"
+    },
+    {
+      key: "onChange",
+      name: "onChange",
+      description:
+        lang === "ko"
+          ? "선택 상태가 변경될 때 호출되는 함수"
+          : "The function called when the selection state changes",
+      type: "(values: string[]) => void",
+      default: "-"
+    },
+    {
+      key: "layout",
+      name: "layout",
+      description: lang === "ko" ? "레이아웃 타입" : "Layout type",
+      type: (
+        <>
+          <Tag>flex</Tag> | <Tag>grid</Tag>
+        </>
+      ),
+      default: "flex"
+    },
+    {
+      key: "direction",
+      name: "direction",
+      description: lang === "ko" ? "배치 방향" : "Direction of arrangement",
+      type: (
+        <>
+          <Tag>horizontal</Tag> | <Tag>vertical</Tag>
+        </>
+      ),
+      default: "vertical"
+    },
+    {
+      key: "cols",
+      name: "cols",
+      description:
+        lang === "ko"
+          ? "그리드 레이아웃의 열 수"
+          : "Number of columns in grid layout",
+      type: "number",
+      default: "1"
+    },
+    {
+      key: "gap",
+      name: "gap",
+      description:
+        lang === "ko" ? "체크박스 간의 간격" : "Gap between checkboxes",
+      type: "number",
+      default: "8"
+    },
+    {
+      key: "disabled",
+      name: "disabled",
+      description:
+        lang === "ko"
+          ? "전체 그룹 비활성화 여부"
+          : "Whether the entire group is disabled",
+      type: "boolean",
+      default: "false"
+    },
+    {
+      key: "itemDisabled",
+      name: "itemDisabled",
+      description:
+        lang === "ko"
+          ? "비활성화할 체크박스 값들의 배열"
+          : "Array of checkbox values to disable",
+      type: "string[]",
+      default: "[]"
+    },
+    {
+      key: "color",
+      name: "color",
+      description:
+        lang === "ko" ? "체크박스의 색상" : "The color of the checkboxes",
+      type: "string",
+      default: "-"
+    },
+    {
+      key: "colorType",
+      name: "colorType",
+      description:
+        lang === "ko"
+          ? "체크박스의 색상 타입"
+          : "The color type of the checkboxes",
+      type: "string",
+      default: "primary"
+    },
+    {
+      key: "labelPosition",
+      name: "labelPosition",
+      description: lang === "ko" ? "라벨의 위치" : "The position of the labels",
+      type: (
+        <>
+          <Tag>left</Tag> | <Tag>right</Tag> | <Tag>top</Tag> |{" "}
+          <Tag>bottom</Tag>
+        </>
+      ),
+      default: "right"
+    },
+    {
+      key: "ariaLabel",
+      name: "ariaLabel",
+      description: lang === "ko" ? "ARIA 라벨" : "ARIA label",
+      type: "string",
+      default: "-"
+    },
+    {
+      key: "ariaRequired",
+      name: "ariaRequired",
+      description:
+        lang === "ko" ? "ARIA required 속성" : "ARIA required property",
       type: "boolean",
       default: "-"
     },
@@ -604,10 +754,31 @@ export default function Example(): JSX.Element {
       name: "name",
       description:
         lang === "ko"
-          ? "체크박스 버튼 그룹의 이름"
-          : "The name of the Ceckbox button group.",
+          ? "체크박스 그룹의 이름"
+          : "The name of the checkbox group",
       type: "string",
       default: "-"
+    },
+    {
+      key: "role",
+      name: "role",
+      description: lang === "ko" ? "ARIA role" : "ARIA role",
+      type: "string",
+      default: "checkboxgroup"
+    },
+    {
+      key: "className",
+      name: "className",
+      description: lang === "ko" ? "추가 클래스명" : "Additional class name",
+      type: "string",
+      default: '""'
+    },
+    {
+      key: "style",
+      name: "style",
+      description: lang === "ko" ? "추가 스타일" : "Additional style",
+      type: "CSSProperties",
+      default: "{}"
     }
   ];
 
@@ -619,7 +790,9 @@ export default function Example(): JSX.Element {
         IMPORT_COMMAND,
         whenToUse,
         examples,
-        howToUseTableData
+        howToUseTableData,
+        group: "Checkbox.Group",
+        groupTableData
       }}
       grid={true}
       isMobile={isMobile}

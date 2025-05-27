@@ -2,25 +2,35 @@
 
 import Frame from "../Frame";
 import { useMobile } from "../../_lib/context/mobileContext";
-import { Tag, Card, DatePicker, Radio, Rate } from "sud-ui";
+import { useLang } from "../../_lib/context/langContext";
+import { Rate } from "sud-ui";
 
-import React, { useState } from "react";
 import { MoodSadOutline, MoodSmileOutline, UserFill } from "sud-icons";
 
 export default function RatePage() {
   const { isMobile } = useMobile();
+  const { lang } = useLang();
 
   const name = "Rate";
-  const description = <>별점을 선택할 수 있는 컴포넌트입니다.</>;
+  const description = (
+    <>
+      {lang === "ko"
+        ? "점수를 선택할 수 있는 컴포넌트입니다."
+        : "A component that allows you to select a rating."}
+    </>
+  );
 
   const IMPORT_COMMAND = "import { Rate } from 'sud-ui';";
 
-  const whenToUse = ["별점을 선택할 때"];
+  const whenToUse =
+    lang === "ko"
+      ? ["점수를 선택할 때"]
+      : ["When you need to select a rating."];
 
   const examples = [
     {
       title: "Basic Usage",
-      description: "기본적인 사용 방법입니다.",
+      description: lang === "ko" ? "기본적인 사용 방법입니다." : "Basic usage.",
       render: (
         <>
           <Rate />
@@ -45,7 +55,8 @@ export default function Example(): JSX.Element {
     },
     {
       title: "Disabled",
-      description: "비활성화 상태입니다.",
+      description:
+        lang === "ko" ? "비활성화 할 수 있습니다." : "Can be disabled.",
       render: (
         <>
           <Rate disabled defaultValue={3} />
@@ -66,7 +77,10 @@ export default function Example(): JSX.Element {
     },
     {
       title: "Show Value",
-      description: "별점 값 표시 여부입니다.",
+      description:
+        lang === "ko"
+          ? "별점 값 표시 여부를 선택할 수 있습니다."
+          : "Can select whether to display the rating value.",
       render: (
         <>
           <Rate showValue />
@@ -87,7 +101,8 @@ export default function Example(): JSX.Element {
     },
     {
       title: "Heart Icon",
-      description: "하트 아이콘을 사용합니다.",
+      description:
+        lang === "ko" ? "하트 아이콘을 사용합니다." : "Use the heart icon.",
       render: (
         <>
           <Rate icon="heart" />
@@ -108,7 +123,10 @@ export default function Example(): JSX.Element {
     },
     {
       title: "Count",
-      description: "별점의 개수를 설정합니다.",
+      description:
+        lang === "ko"
+          ? "별점의 개수를 설정합니다."
+          : "Set the number of stars.",
       render: (
         <>
           <Rate count={100} showValue />
@@ -129,7 +147,10 @@ export default function Example(): JSX.Element {
     },
     {
       title: "Customize",
-      description: "아이콘, 색상, 크기를 커스텀합니다.",
+      description:
+        lang === "ko"
+          ? "아이콘, 색상, 크기를 커스텀합니다."
+          : "Customize the icon, color, and size.",
       render: (
         <div className="flex flex-col jus-cen gap-20">
           <Rate icon={<UserFill />} size={32} />
@@ -200,105 +221,116 @@ export default function Example(): JSX.Element {
     {
       key: "count",
       name: "count",
-      description: "별점의 개수",
+      description: lang === "ko" ? "별점의 개수" : "The number of stars.",
       type: "number",
       default: "5"
     },
     {
       key: "allowHalf",
       name: "allowHalf",
-      description: "반 별점 선택 가능 여부",
+      description:
+        lang === "ko" ? "반 별점 선택 가능 여부" : "Can select half stars.",
       type: "boolean",
       default: "true"
     },
     {
       key: "defaultValue",
       name: "defaultValue",
-      description: "기본 별점 값",
+      description: lang === "ko" ? "기본 별점 값" : "The default rating value.",
       type: "number",
       default: "0"
     },
     {
       key: "value",
       name: "value",
-      description: "제어되는 별점 값",
+      description:
+        lang === "ko" ? "제어되는 별점 값" : "The controlled rating value.",
       type: "number",
       default: "-"
     },
     {
       key: "onChange",
       name: "onChange",
-      description: "별점이 변경될 때 호출되는 함수",
+      description:
+        lang === "ko"
+          ? "별점이 변경될 때 호출되는 함수"
+          : "The function called when the rating changes.",
       type: "(value: number) => void",
       default: "() => {}"
     },
     {
       key: "disabled",
       name: "disabled",
-      description: "비활성화 여부",
+      description: lang === "ko" ? "비활성화 여부" : "Whether it is disabled.",
       type: "boolean",
       default: "false"
     },
     {
       key: "showValue",
       name: "showValue",
-      description: "별점 값 표시 여부",
+      description:
+        lang === "ko"
+          ? "별점 값 표시 여부"
+          : "Whether to display the rating value.",
       type: "boolean",
       default: "false"
     },
     {
       key: "activeColor",
       name: "activeColor",
-      description: "활성화된 별점의 색상",
+      description:
+        lang === "ko"
+          ? "활성화된 별점의 색상"
+          : "The color of the active star.",
       type: "string",
       default: "-"
     },
     {
       key: "inactiveColor",
       name: "inactiveColor",
-      description: "비활성화된 별점의 색상",
+      description:
+        lang === "ko"
+          ? "비활성화된 별점의 색상"
+          : "The color of the inactive star.",
       type: "string",
       default: "-"
     },
     {
       key: "size",
       name: "size",
-      description: "별점의 크기",
+      description: lang === "ko" ? "별점의 크기" : "The size of the star.",
       type: "number",
       default: "24"
     },
     {
       key: "className",
       name: "className",
-      description: "추가 클래스명",
+      description: lang === "ko" ? "추가 클래스명" : "Additional class name.",
       type: "string",
       default: '""'
     },
     {
       key: "style",
       name: "style",
-      description: "추가 스타일",
+      description: lang === "ko" ? "추가 스타일" : "Additional style.",
       type: "object",
       default: "{}"
     },
     {
       key: "ariaLabel",
       name: "ariaLabel",
-      description: "접근성을 위한 레이블",
+      description:
+        lang === "ko" ? "접근성을 위한 레이블" : "The label for accessibility.",
       type: "string",
       default: "별점 평가"
     },
     {
-      key: "testId",
-      name: "testId",
-      description: "테스트를 위한 식별자",
-      type: "string",
-      default: "rate"
-    },
-    {
       key: "icon",
       name: "icon",
-      description: "별점 아이콘 (star, heart 또는 JSX 요소)",
+      description:
+        lang === "ko"
+          ? "별점 아이콘 (star, heart 또는 JSX 요소)"
+          : "The star icon (star, heart or JSX element).",
       type: "string | ReactElement",
       default: "star"
     }

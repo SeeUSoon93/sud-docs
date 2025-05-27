@@ -560,6 +560,14 @@ export default function Example(): JSX.Element {
       default: "right"
     },
     {
+      key: "children",
+      name: "children",
+      description:
+        lang === "ko" ? "라디오 버튼의 라벨" : "The label of the radio button.",
+      type: "ReactNode",
+      default: "-"
+    },
+    {
       key: "color",
       name: "color",
       description:
@@ -620,14 +628,165 @@ export default function Example(): JSX.Element {
       key: "name",
       name: "name",
       description:
-        lang === "ko"
-          ? "라디오 버튼 그룹의 이름"
-          : "The name of the radio button group.",
+        lang === "ko" ? "라디오 버튼의 이름" : "The name of the radio button.",
       type: "string",
       default: "-"
     }
   ];
-
+  const groupTableData = [
+    {
+      key: "options",
+      name: "options",
+      description:
+        lang === "ko"
+          ? "라디오 버튼 옵션 배열"
+          : "Array of radio button options.",
+      type: "Array<{ label: ReactNode, value: string, disabled?: boolean }>",
+      default: "[]"
+    },
+    {
+      key: "value",
+      name: "value",
+      description:
+        lang === "ko" ? "현재 선택된 값" : "Currently selected value.",
+      type: "string",
+      default: "null"
+    },
+    {
+      key: "onChange",
+      name: "onChange",
+      description:
+        lang === "ko"
+          ? "값이 변경될 때 호출되는 함수"
+          : "Function called when value changes.",
+      type: "(value: string) => void",
+      default: "-"
+    },
+    {
+      key: "layout",
+      name: "layout",
+      description: lang === "ko" ? "레이아웃 타입" : "Layout type.",
+      type: (
+        <>
+          <Tag>flex</Tag> ｜ <Tag>grid</Tag>
+        </>
+      ),
+      default: "flex"
+    },
+    {
+      key: "direction",
+      name: "direction",
+      description: lang === "ko" ? "배치 방향" : "Direction of arrangement.",
+      type: (
+        <>
+          <Tag>horizontal</Tag> ｜ <Tag>vertical</Tag>
+        </>
+      ),
+      default: "vertical"
+    },
+    {
+      key: "cols",
+      name: "cols",
+      description:
+        lang === "ko"
+          ? "그리드 레이아웃의 열 수"
+          : "Number of columns in grid layout.",
+      type: "number",
+      default: "1"
+    },
+    {
+      key: "gap",
+      name: "gap",
+      description:
+        lang === "ko" ? "라디오 버튼 간격" : "Gap between radio buttons.",
+      type: "number",
+      default: "8"
+    },
+    {
+      key: "disabled",
+      name: "disabled",
+      description:
+        lang === "ko" ? "전체 그룹 비활성화" : "Disable entire group.",
+      type: "boolean",
+      default: "false"
+    },
+    {
+      key: "itemDisabled",
+      name: "itemDisabled",
+      description:
+        lang === "ko"
+          ? "비활성화할 옵션 값 배열"
+          : "Array of option values to disable.",
+      type: "string[]",
+      default: "[]"
+    },
+    {
+      key: "color",
+      name: "color",
+      description:
+        lang === "ko" ? "라디오 버튼 색상" : "Color of radio buttons.",
+      type: "string",
+      default: "-"
+    },
+    {
+      key: "colorType",
+      name: "colorType",
+      description:
+        lang === "ko"
+          ? "라디오 버튼 색상 타입"
+          : "Color type of radio buttons.",
+      type: "string",
+      default: "primary"
+    },
+    {
+      key: "labelPosition",
+      name: "labelPosition",
+      description: lang === "ko" ? "라벨 위치" : "Position of labels.",
+      type: (
+        <>
+          <Tag>left</Tag> ｜ <Tag>right</Tag> ｜ <Tag>top</Tag> ｜{" "}
+          <Tag>bottom</Tag>
+        </>
+      ),
+      default: "right"
+    },
+    {
+      key: "ariaLabel",
+      name: "ariaLabel",
+      description: lang === "ko" ? "ARIA 라벨" : "ARIA label.",
+      type: "string",
+      default: "-"
+    },
+    {
+      key: "ariaRequired",
+      name: "ariaRequired",
+      description:
+        lang === "ko" ? "ARIA required 속성" : "ARIA required property.",
+      type: "boolean",
+      default: "-"
+    },
+    {
+      key: "name",
+      name: "name",
+      description: lang === "ko" ? "라디오 그룹 이름" : "Name of radio group.",
+      type: "string",
+      default: "-"
+    },
+    {
+      key: "className",
+      name: "className",
+      description: lang === "ko" ? "추가 클래스명" : "Additional class name.",
+      type: "string",
+      default: '""'
+    },
+    {
+      key: "style",
+      name: "style",
+      description: lang === "ko" ? "추가 스타일" : "Additional style.",
+      type: "CSSProperties",
+      default: "{}"
+    }
+  ];
   return (
     <Frame
       component={{
@@ -636,7 +795,9 @@ export default function Example(): JSX.Element {
         IMPORT_COMMAND,
         whenToUse,
         examples,
-        howToUseTableData
+        howToUseTableData,
+        group: "Radio.Group",
+        groupTableData
       }}
       grid={true}
       isMobile={isMobile}

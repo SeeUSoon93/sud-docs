@@ -170,10 +170,6 @@ export default function Frame({ component, isMobile, grid, lang }) {
             {lang === "ko"
               ? "컴포넌트의 props를 설정하는 방법입니다."
               : "How to set the component's props."}
-            <br />
-            {lang === "ko"
-              ? "*은 필수 속성입니다."
-              : "* is a required property."}
           </>
         }
         etc={
@@ -195,6 +191,31 @@ export default function Frame({ component, isMobile, grid, lang }) {
           )
         }
       />
+      {/* 그룹 사용방법 */}
+      {component.group && component.groupTableData && (
+        <SubTitleAndDescription
+          title={null}
+          description={component.group}
+          etc={
+            isMobile ? (
+              <div className="flex flex-col gap-20">
+                {component.groupTableData.map((prop) => (
+                  <Table
+                    key={prop.key}
+                    columns={mobileColumn(prop)}
+                    dataSource={mobileDataSource(prop)}
+                  />
+                ))}
+              </div>
+            ) : (
+              <Table
+                columns={tableColumn}
+                dataSource={component.groupTableData}
+              />
+            )
+          }
+        />
+      )}
     </div>
   );
 }

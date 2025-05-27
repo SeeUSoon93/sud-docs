@@ -2,19 +2,21 @@
 
 import Frame from "../Frame";
 import { useMobile } from "../../_lib/context/mobileContext";
-import { Tag, Slider, Card, Divider, Typography, Radio } from "sud-ui";
+import { useLang } from "../../_lib/context/langContext";
+import { Tag, Slider, Card, Typography, Radio } from "sud-ui";
 
 import React, { useState } from "react";
 
 export default function SelectPage() {
   const { isMobile } = useMobile();
+  const { lang } = useLang();
   const [size, setSize] = useState("md");
   const [value, setValue] = useState(0);
   const [minmaxValue, setMinmaxValue] = useState(0);
   const [minmaxVisibleValue, setMinmaxVisibleValue] = useState(0);
   const [stepValue, setStepValue] = useState(1);
   const [verticalValue, setVerticalValue] = useState(0);
-  const [markValue, setMarkValue] = useState(0);
+  const [unitValue, setunitValue] = useState(0);
   const [sizeValue, setSizeValue] = useState("md");
   const [thumbSizeValue, setThumbSizeValue] = useState(0);
   const [fillValue, setFillValue] = useState(0);
@@ -23,12 +25,19 @@ export default function SelectPage() {
 
   const name = "Slider";
   const description = (
-    <>범위 내의 입력 값을 조절할 수 있는 슬라이더 컴포넌트입니다.</>
+    <>
+      {lang === "ko"
+        ? "범위 내의 입력 값을 조절할 수 있는 슬라이더 컴포넌트입니다."
+        : "Slider component that allows you to adjust input values within a range."}
+    </>
   );
 
   const IMPORT_COMMAND = "import { Select } from 'sud-ui';";
 
-  const whenToUse = ["범위 내의 입력 값을 조절할 때"];
+  const whenToUse =
+    lang === "ko"
+      ? ["범위 내의 입력 값을 조절할 때"]
+      : ["When you need to adjust input values within a range."];
 
   const sizeOptions = [
     {
@@ -45,29 +54,14 @@ export default function SelectPage() {
     }
   ];
 
-  const shapeOptions = [
-    {
-      label: "rounded",
-      value: "rounded"
-    },
-    {
-      label: "square",
-      value: "square"
-    },
-    {
-      label: "capsule",
-      value: "capsule"
-    }
-  ];
-
   const examples = [
     {
       title: "Basic Usage",
-      description: "기본적인 사용방법입니다.",
+      description: lang === "ko" ? "기본적인 사용 방법입니다." : "Basic usage.",
       render: (
         <div className="flex item-cen jus-bet">
           <Slider value={value} onChange={(e) => setValue(e)} width="80%" />
-          <Typography>현재 값 : {value}</Typography>
+          <Typography>Value : {value}</Typography>
         </div>
       ),
       jscode: `import React, { useState } from 'react';
@@ -83,7 +77,7 @@ const BasicSlider = () => {
         onChange={(e) => setValue(e)} 
         width="80%" 
       />
-      <div>현재 값 : {value}</div>
+      <div>Value : {value}</div>
     </div>
   );
 };
@@ -102,7 +96,7 @@ const BasicSlider: React.FC = () => {
         onChange={(e) => setValue(e)} 
         width="80%" 
       />
-      <div>현재 값 : {value}</div>
+      <div>Value : {value}</div>
     </div>
   );
 };
@@ -111,7 +105,10 @@ export default BasicSlider;`
     },
     {
       title: "Step",
-      description: "값 변경 단위를 설정할 수 있습니다.",
+      description:
+        lang === "ko"
+          ? "값 변경 단위를 설정할 수 있습니다."
+          : "You can set the value change step.",
       render: (
         <div className="flex item-cen jus-bet">
           <Slider
@@ -120,7 +117,7 @@ export default BasicSlider;`
             width="80%"
             step={10}
           />
-          <Typography>현재 값 : {stepValue}</Typography>
+          <Typography>Value : {stepValue}</Typography>
         </div>
       ),
       jscode: `import React, { useState } from 'react';
@@ -137,7 +134,7 @@ const StepSlider = () => {
         width="80%"
         step={10}
       />
-      <div>현재 값 : {value}</div>
+      <div>Value : {value}</div>
     </div>
   );
 };
@@ -157,7 +154,7 @@ const StepSlider: React.FC = () => {
         width="80%"
         step={10}
       />
-      <div>현재 값 : {value}</div>
+      <div>Value : {value}</div>
     </div>
   );
 };
@@ -166,7 +163,10 @@ export default StepSlider;`
     },
     {
       title: "min & max Usage",
-      description: "최소값과 최대값을 설정할 수 있습니다.",
+      description:
+        lang === "ko"
+          ? "최소값과 최대값을 설정할 수 있습니다."
+          : "You can set the minimum and maximum values.",
       render: (
         <div className="flex item-cen jus-bet">
           <Slider
@@ -176,7 +176,7 @@ export default StepSlider;`
             min={0}
             max={40}
           />
-          <Typography>현재 값 : {minmaxValue}</Typography>
+          <Typography>Value : {minmaxValue}</Typography>
         </div>
       ),
       jscode: `import React, { useState } from 'react';
@@ -194,7 +194,7 @@ const MinMaxSlider = () => {
         min={0}
         max={40}
       />
-      <div>현재 값 : {value}</div>
+      <div>Value : {value}</div>
     </div>
   );
 };
@@ -215,7 +215,7 @@ const MinMaxSlider: React.FC = () => {
         min={0}
         max={40}
       />
-      <div>현재 값 : {value}</div>
+      <div>Value : {value}</div>
     </div>
   );
 };
@@ -224,7 +224,10 @@ export default MinMaxSlider;`
     },
     {
       title: "minMaxVisible",
-      description: "최소/최대값 표시 여부를 설정할 수 있습니다.",
+      description:
+        lang === "ko"
+          ? "최소/최대값 표시 여부를 설정할 수 있습니다."
+          : "You can set the minimum/maximum value display.",
       render: (
         <div className="flex item-cen jus-bet">
           <Slider
@@ -235,7 +238,7 @@ export default MinMaxSlider;`
             min={0}
             max={100}
           />
-          <Typography>현재 값 : {minmaxVisibleValue}</Typography>
+          <Typography>Value : {minmaxVisibleValue}</Typography>
         </div>
       ),
       jscode: `import React, { useState } from 'react';
@@ -254,7 +257,7 @@ const MinMaxVisibleSlider = () => {
         min={0}
         max={100}
       />
-      <div>현재 값 : {value}</div>
+      <div>Value : {value}</div>
     </div>
   );
 };
@@ -276,7 +279,7 @@ const MinMaxVisibleSlider: React.FC = () => {
         min={0}
         max={100}
       />
-      <div>현재 값 : {value}</div>
+      <div>Value : {value}</div>
     </div>
   );
 };
@@ -284,26 +287,29 @@ const MinMaxVisibleSlider: React.FC = () => {
 export default MinMaxVisibleSlider;`
     },
     {
-      title: "mark",
-      description: "값의 단위를 설정할 수 있습니다.",
+      title: "Unit",
+      description:
+        lang === "ko"
+          ? "값의 단위를 설정할 수 있습니다."
+          : "You can set the value unit.",
       render: (
         <div className="flex item-cen jus-bet">
           <Slider
-            value={markValue}
-            onChange={(e) => setMarkValue(e)}
+            value={unitValue}
+            onChange={(e) => setunitValue(e)}
             width="80%"
             minMaxVisible={true}
             min={0}
             max={100}
-            mark="%"
+            unit="%"
           />
-          <Typography>현재 값 : {markValue}%</Typography>
+          <Typography>Value : {unitValue}%</Typography>
         </div>
       ),
       jscode: `import React, { useState } from 'react';
 import { Slider } from 'sud-ui';
 
-const MarkSlider = () => {
+const unitSlider = () => {
   const [value, setValue] = useState(0);
 
   return (
@@ -315,18 +321,18 @@ const MarkSlider = () => {
         minMaxVisible={true}
         min={0}
         max={100}
-        mark="%"
+        unit="%"
       />
-      <div>현재 값 : {value}%</div>
+      <div>Value : {value}%</div>
     </div>
   );
 };
 
-export default MarkSlider;`,
+export default unitSlider;`,
       tscode: `import React, { useState } from 'react';
 import { Slider } from 'sud-ui';
 
-const MarkSlider: React.FC = () => {
+const unitSlider: React.FC = () => {
   const [value, setValue] = useState<number>(0);
 
   return (
@@ -338,18 +344,21 @@ const MarkSlider: React.FC = () => {
         minMaxVisible={true}
         min={0}
         max={100}
-        mark="%"
+        unit="%"
       />
-      <div>현재 값 : {value}%</div>
+      <div>Value : {value}%</div>
     </div>
   );
 };
 
-export default MarkSlider;`
+export default unitSlider;`
     },
     {
       title: "Size",
-      description: "슬라이더의 크기를 설정할 수 있습니다.",
+      description:
+        lang === "ko"
+          ? "슬라이더의 크기를 설정할 수 있습니다."
+          : "You can set the slider size.",
       render: (
         <div className="flex flex-col gap-20">
           <Card style={{ width: "100%" }} shadow="none" colorType="sub">
@@ -442,7 +451,10 @@ export default SizeSlider;`
     },
     {
       title: "Disabled",
-      description: "슬라이더를 비활성화 할 수 있습니다.",
+      description:
+        lang === "ko"
+          ? "슬라이더를 비활성화 할 수 있습니다."
+          : "You can disable the slider.",
       render: (
         <Slider
           value={disabledValue}
@@ -485,7 +497,10 @@ export default DisabledSlider;`
     },
     {
       title: "Fill",
-      description: "슬라이더의 채워진 영역 표시 여부를 설정할 수 있습니다.",
+      description:
+        lang === "ko"
+          ? "슬라이더의 채워진 영역 표시 여부를 설정할 수 있습니다."
+          : "You can set the filled area display.",
       render: (
         <Slider
           value={fillValue}
@@ -528,7 +543,10 @@ export default FillSlider;`
     },
     {
       title: "ThumbSize",
-      description: "슬라이더의 썸네일 크기를 설정할 수 있습니다.",
+      description:
+        lang === "ko"
+          ? "슬라이더의 썸네일 크기를 설정할 수 있습니다."
+          : "You can set the slider thumbnail size.",
       render: (
         <Slider
           value={thumbSizeValue}
@@ -571,7 +589,10 @@ export default ThumbSizeSlider;`
     },
     {
       title: "Color Customization",
-      description: "슬라이더의 색상을 설정할 수 있습니다.",
+      description:
+        lang === "ko"
+          ? "슬라이더의 색상을 설정할 수 있습니다."
+          : "You can set the slider color.",
       render: (
         <Slider
           value={colorValue}
@@ -620,7 +641,10 @@ export default ColorSlider;`
     },
     {
       title: "Vertical",
-      description: "수직 방향 슬라이더 여부를 설정할 수 있습니다.",
+      description:
+        lang === "ko"
+          ? "수직 방향 슬라이더 여부를 설정할 수 있습니다."
+          : "You can set the vertical slider.",
       render: (
         <div className="grid col-3">
           <Slider
@@ -634,7 +658,7 @@ export default ColorSlider;`
             vertical={true}
             minMaxVisible={true}
           />
-          <Typography>현재 값 : {verticalValue}</Typography>
+          <Typography>Value : {verticalValue}</Typography>
         </div>
       ),
       jscode: `import React, { useState } from 'react';
@@ -656,7 +680,7 @@ const VerticalSlider = () => {
         vertical={true}
         minMaxVisible={true}
       />
-      <Typography>현재 값 : {value}</Typography>
+      <Typography>Value : {value}</Typography>
     </div>
   );
 };
@@ -681,7 +705,7 @@ const VerticalSlider: React.FC = () => {
         vertical={true}
         minMaxVisible={true}
       />
-      <Typography>현재 값 : {value}</Typography>
+      <Typography>Value : {value}</Typography>
     </div>
   );
 };
@@ -694,56 +718,62 @@ export default VerticalSlider;`
     {
       key: "value",
       name: "value",
-      description: "슬라이더의 현재 값",
+      description:
+        lang === "ko" ? "슬라이더의 Value" : "The value of the slider.",
       type: "number",
       default: "0"
     },
     {
       key: "onChange",
       name: "onChange",
-      description: "값이 변경될 때 호출되는 함수",
+      description:
+        lang === "ko"
+          ? "값이 변경될 때 호출되는 함수"
+          : "The function called when the value changes.",
       type: "(value: number) => void",
       default: "() => {}"
     },
     {
       key: "min",
       name: "min",
-      description: "최소값",
+      description: lang === "ko" ? "최소값" : "The minimum value.",
       type: "number",
       default: "0"
     },
     {
       key: "max",
       name: "max",
-      description: "최대값",
+      description: lang === "ko" ? "최대값" : "The maximum value.",
       type: "number",
       default: "100"
     },
     {
       key: "step",
       name: "step",
-      description: "값 변경 단위",
+      description: lang === "ko" ? "값 변경 단위" : "The value change unit.",
       type: "number",
       default: "1"
     },
     {
       key: "vertical",
       name: "vertical",
-      description: "수직 방향 슬라이더 여부",
+      description:
+        lang === "ko" ? "수직 방향 슬라이더 여부" : "The vertical slider.",
       type: "boolean",
       default: "false"
     },
     {
       key: "disabled",
       name: "disabled",
-      description: "비활성화 여부",
+      description: lang === "ko" ? "비활성화 여부" : "The disabled state.",
       type: "boolean",
       default: "false"
     },
     {
       key: "size",
       name: "size",
-      description: "슬라이더의 크기",
+      description:
+        lang === "ko" ? "슬라이더의 크기" : "The size of the slider.",
       type: (
         <>
           <Tag>sm</Tag> ｜ <Tag>md</Tag> ｜ <Tag>lg</Tag>
@@ -754,28 +784,40 @@ export default VerticalSlider;`
     {
       key: "width",
       name: "width",
-      description: "슬라이더의 너비 (수평 방향일 때)",
+      description:
+        lang === "ko"
+          ? "슬라이더의 너비 (수평 방향일 때)"
+          : "The width of the slider (when horizontal).",
       type: "number | string",
       default: "-"
     },
     {
       key: "height",
       name: "height",
-      description: "슬라이더의 높이 (수직 방향일 때)",
+      description:
+        lang === "ko"
+          ? "슬라이더의 높이 (수직 방향일 때)"
+          : "The height of the slider (when vertical).",
       type: "number | string",
       default: "-"
     },
     {
       key: "minMaxVisible",
       name: "minMaxVisible",
-      description: "최소/최대값 표시 여부",
+      description:
+        lang === "ko"
+          ? "최소/최대값 표시 여부"
+          : "The minimum/maximum value display.",
       type: "boolean",
       default: "false"
     },
     {
       key: "colorType",
       name: "colorType",
-      description: "슬라이더의 색상 타입",
+      description:
+        lang === "ko"
+          ? "슬라이더의 색상 타입"
+          : "The color type of the slider.",
       type: (
         <>
           <Tag>primary</Tag> ｜ <Tag>secondary</Tag> ｜ <Tag>success</Tag> ｜{" "}
@@ -785,37 +827,41 @@ export default VerticalSlider;`
       default: <Tag>primary</Tag>
     },
     {
-      key: "mark",
-      name: "mark",
-      description: "값 뒤에 표시될 단위 (예: %, px 등)",
+      key: "unit",
+      name: "unit",
+      description:
+        lang === "ko"
+          ? "값 뒤에 표시될 단위 (예: %, px 등)"
+          : "The unit displayed after the value (e.g., %, px, etc.).",
       type: "string",
       default: "''"
     },
     {
       key: "background",
       name: "background",
-      description: "배경색",
+      description: lang === "ko" ? "배경색" : "The background color.",
       type: "string",
       default: "-"
     },
     {
       key: "trackColor",
       name: "trackColor",
-      description: "트랙 색상",
+      description: lang === "ko" ? "트랙 색상" : "The track color.",
       type: "string",
       default: "-"
     },
     {
       key: "fill",
       name: "fill",
-      description: "채워진 영역 표시 여부",
+      description:
+        lang === "ko" ? "채워진 영역 표시 여부" : "The filled area display.",
       type: "boolean",
       default: "true"
     },
     {
       key: "shadow",
       name: "shadow",
-      description: "그림자 크기",
+      description: lang === "ko" ? "그림자 크기" : "The shadow size.",
       type: (
         <>
           <Tag>none</Tag> ｜ <Tag>sm</Tag> ｜ <Tag>md</Tag> ｜ <Tag>lg</Tag> ｜{" "}
@@ -827,14 +873,14 @@ export default VerticalSlider;`
     {
       key: "border",
       name: "border",
-      description: "테두리 표시 여부",
+      description: lang === "ko" ? "테두리 표시 여부" : "The border display.",
       type: "boolean",
       default: "true"
     },
     {
       key: "borderType",
       name: "borderType",
-      description: "테두리 스타일",
+      description: lang === "ko" ? "테두리 스타일" : "The border style.",
       type: (
         <>
           <Tag>solid</Tag> ｜ <Tag>dashed</Tag> ｜ <Tag>dotted</Tag>
@@ -845,84 +891,89 @@ export default VerticalSlider;`
     {
       key: "borderWeight",
       name: "borderWeight",
-      description: "테두리 두께",
+      description: lang === "ko" ? "테두리 두께" : "The border weight.",
       type: "number",
       default: "1"
     },
     {
       key: "borderColor",
       name: "borderColor",
-      description: "테두리 색상",
+      description: lang === "ko" ? "테두리 색상" : "The border color.",
       type: "string",
       default: "-"
     },
     {
       key: "thumbSize",
       name: "thumbSize",
-      description: "썸네일 크기",
+      description: lang === "ko" ? "썸네일 크기" : "The thumbnail size.",
       type: "number",
       default: "-"
     },
     {
       key: "thumbBorder",
       name: "thumbBorder",
-      description: "썸네일 테두리 표시 여부",
+      description:
+        lang === "ko"
+          ? "썸네일 테두리 표시 여부"
+          : "The thumbnail border display.",
       type: "boolean",
       default: "true"
     },
     {
       key: "popupClassName",
       name: "popupClassName",
-      description: "팝업의 클래스명",
+      description: lang === "ko" ? "팝업의 클래스명" : "The popup class name.",
       type: "string",
       default: "''"
     },
     {
       key: "popupStyle",
       name: "popupStyle",
-      description: "팝업의 스타일",
+      description: lang === "ko" ? "팝업의 스타일" : "The popup style.",
       type: "React.CSSProperties",
       default: "{}"
     },
     {
       key: "popupProps",
       name: "popupProps",
-      description: "팝업 속성",
+      description: lang === "ko" ? "팝업 속성" : "The popup properties.",
       type: "PopupBaseProps",
       default: "{}"
     },
     {
       key: "id",
       name: "id",
-      description: "고유 ID",
+      description: lang === "ko" ? "고유 ID" : "The unique ID.",
       type: "string",
       default: "-"
     },
     {
       key: "ariaLabel",
       name: "ariaLabel",
-      description: "접근성 레이블",
+      description: lang === "ko" ? "접근성 레이블" : "The accessibility label.",
       type: "string",
       default: "-"
     },
     {
       key: "ariaValueText",
       name: "ariaValueText",
-      description: "접근성 값 텍스트",
+      description:
+        lang === "ko" ? "접근성 값 텍스트" : "The accessibility value text.",
       type: "string",
       default: "-"
     },
     {
       key: "className",
       name: "className",
-      description: "추가 클래스명",
+      description:
+        lang === "ko" ? "추가 클래스명" : "The additional class name.",
       type: "string",
       default: '""'
     },
     {
       key: "style",
       name: "style",
-      description: "추가 스타일",
+      description: lang === "ko" ? "추가 스타일" : "The additional styles.",
       type: "React.CSSProperties",
       default: "{}"
     }

@@ -2,13 +2,15 @@
 
 import Frame from "../Frame";
 import { useMobile } from "../../_lib/context/mobileContext";
-import { Tag, Slider, Card, Radio, Switch } from "sud-ui";
+import { useLang } from "../../_lib/context/langContext";
+import { Tag, Card, Radio, Switch } from "sud-ui";
 
 import React, { useState } from "react";
 import { Check, Close } from "sud-icons";
 
 export default function SwitchPage() {
   const { isMobile } = useMobile();
+  const { lang } = useLang();
   const [size, setSize] = useState("sm");
   const [basicChecked, setBasicChecked] = useState(false);
   const [disabledChecked, setDisabledChecked] = useState(true);
@@ -21,11 +23,20 @@ export default function SwitchPage() {
   const [thumbIconChecked, setThumbIconChecked] = useState(false);
 
   const name = "Switch";
-  const description = <>두 가지 상태를 전환할 수 있는 스위치 컴포넌트입니다.</>;
+  const description = (
+    <>
+      {lang === "ko"
+        ? "두 가지 상태를 전환할 수 있는 스위치 컴포넌트입니다."
+        : "The switch component that can switch between two states."}
+    </>
+  );
 
   const IMPORT_COMMAND = "import { Switch } from 'sud-ui';";
 
-  const whenToUse = ["두 가지 상태를 전환할 때"];
+  const whenToUse =
+    lang === "ko"
+      ? ["두 가지 상태를 전환할 때"]
+      : ["When you need to switch between two states."];
 
   const sizeOptions = [
     {
@@ -45,7 +56,7 @@ export default function SwitchPage() {
   const examples = [
     {
       title: "Basic Usage",
-      description: "기본적인 사용방법입니다.",
+      description: lang === "ko" ? "기본적인 사용 방법입니다." : "Basic usage.",
       render: (
         <>
           <Switch checked={basicChecked} onChange={setBasicChecked} />
@@ -88,7 +99,10 @@ export default BasicSwitch;`
     },
     {
       title: "Size",
-      description: "스위치의 크기를 설정할 수 있습니다.",
+      description:
+        lang === "ko"
+          ? "스위치의 크기를 설정할 수 있습니다."
+          : "You can set the size of the switch.",
       render: (
         <div className="flex flex-col gap-20">
           <Card style={{ width: "100%" }} shadow="none" colorType="sub">
@@ -187,7 +201,10 @@ export default SizeSwitch;`
     },
     {
       title: "Disabled",
-      description: "비활성화 상태의 스위치입니다.",
+      description:
+        lang === "ko"
+          ? "비활성화 상태의 스위치입니다."
+          : "The disabled switch.",
       render: (
         <>
           <Switch
@@ -236,7 +253,10 @@ export default DisabledSwitch;`
     },
     {
       title: "Color Customization",
-      description: "스위치의 색상을 커스텀할 수 있습니다.",
+      description:
+        lang === "ko"
+          ? "스위치의 색상을 커스텀할 수 있습니다."
+          : "You can customize the color of the switch.",
       render: (
         <div className="flex flex-col gap-20">
           <Switch
@@ -303,7 +323,10 @@ export default ColorSwitch;`
     },
     {
       title: "With Text & Icon",
-      description: "스위치의 텍스트와 아이콘을 커스텀할 수 있습니다.",
+      description:
+        lang === "ko"
+          ? "스위치의 텍스트와 아이콘을 커스텀할 수 있습니다."
+          : "You can customize the text and icon of the switch.",
       render: (
         <div className="flex flex-col gap-20">
           <Switch
@@ -377,7 +400,10 @@ export default TextIconSwitch;`
     },
     {
       title: "Thumb Customization",
-      description: "스위치의 썸네일을 커스텀할 수 있습니다.",
+      description:
+        lang === "ko"
+          ? "스위치의 썸네일을 커스텀할 수 있습니다."
+          : "You can customize the thumbnail of the switch.",
       render: (
         <div className="flex flex-col gap-20">
           <Switch
@@ -452,77 +478,97 @@ export default ThumbSwitch;`
     {
       key: "checked",
       name: "checked",
-      description: "스위치의 현재 상태 (제어 컴포넌트)",
+      description:
+        lang === "ko"
+          ? "스위치의 현재 상태 (제어 컴포넌트)"
+          : "The current state of the switch (controlled component)",
       type: "boolean",
       default: "false"
     },
     {
       key: "defaultChecked",
       name: "defaultChecked",
-      description: "스위치의 초기 상태 (비제어 컴포넌트)",
+      description:
+        lang === "ko"
+          ? "스위치의 초기 상태 (비제어 컴포넌트)"
+          : "The initial state of the switch (uncontrolled component)",
       type: "boolean",
       default: "false"
     },
     {
       key: "onChange",
       name: "onChange",
-      description: "상태가 변경될 때 호출되는 함수",
+      description:
+        lang === "ko"
+          ? "상태가 변경될 때 호출되는 함수"
+          : "The function called when the state changes",
       type: "(checked: boolean) => void",
       default: "() => {}"
     },
     {
       key: "disabled",
       name: "disabled",
-      description: "비활성화 여부",
+      description:
+        lang === "ko" ? "비활성화 여부" : "The disabled state of the switch",
       type: "boolean",
       default: "false"
     },
     {
       key: "onColor",
       name: "onColor",
-      description: "켜진 상태의 배경색",
+      description:
+        lang === "ko"
+          ? "켜진 상태의 배경색"
+          : "The background color of the on state",
       type: "string",
       default: "-"
     },
     {
       key: "offColor",
       name: "offColor",
-      description: "꺼진 상태의 배경색",
+      description:
+        lang === "ko"
+          ? "꺼진 상태의 배경색"
+          : "The background color of the off state",
       type: "string",
       default: "-"
     },
     {
       key: "onText",
       name: "onText",
-      description: "켜진 상태의 텍스트",
+      description:
+        lang === "ko" ? "켜진 상태의 텍스트" : "The text of the on state",
       type: "string",
       default: "-"
     },
     {
       key: "offText",
       name: "offText",
-      description: "꺼진 상태의 텍스트",
+      description:
+        lang === "ko" ? "꺼진 상태의 텍스트" : "The text of the off state",
       type: "string",
       default: "-"
     },
     {
       key: "onIcon",
       name: "onIcon",
-      description: "켜진 상태의 아이콘",
+      description:
+        lang === "ko" ? "켜진 상태의 아이콘" : "The icon of the on state",
       type: "ReactNode",
       default: "-"
     },
     {
       key: "offIcon",
       name: "offIcon",
-      description: "꺼진 상태의 아이콘",
+      description:
+        lang === "ko" ? "꺼진 상태의 아이콘" : "The icon of the off state",
       type: "ReactNode",
       default: "-"
     },
     {
       key: "shadow",
       name: "shadow",
-      description: "그림자 크기",
+      description: lang === "ko" ? "그림자 크기" : "The size of the shadow",
       type: (
         <>
           <Tag>none</Tag> ｜ <Tag>sm</Tag> ｜ <Tag>md</Tag> ｜ <Tag>lg</Tag> ｜{" "}
@@ -534,7 +580,7 @@ export default ThumbSwitch;`
     {
       key: "size",
       name: "size",
-      description: "스위치의 크기",
+      description: lang === "ko" ? "스위치의 크기" : "The size of the switch",
       type: (
         <>
           <Tag>sm</Tag> ｜ <Tag>md</Tag> ｜ <Tag>lg</Tag>
@@ -545,7 +591,8 @@ export default ThumbSwitch;`
     {
       key: "colorType",
       name: "colorType",
-      description: "스위치의 색상 타입",
+      description:
+        lang === "ko" ? "스위치의 색상 타입" : "The color type of the switch",
       type: (
         <>
           <Tag>primary</Tag> ｜ <Tag>secondary</Tag> ｜ <Tag>success</Tag> ｜{" "}
@@ -557,28 +604,28 @@ export default ThumbSwitch;`
     {
       key: "className",
       name: "className",
-      description: "추가 클래스명",
+      description: lang === "ko" ? "추가 클래스명" : "Additional class name",
       type: "string",
       default: '""'
     },
     {
       key: "style",
       name: "style",
-      description: "추가 스타일",
+      description: lang === "ko" ? "추가 스타일" : "Additional styles",
       type: "React.CSSProperties",
       default: "{}"
     },
     {
       key: "id",
       name: "id",
-      description: "고유 ID",
+      description: lang === "ko" ? "고유 ID" : "The unique ID",
       type: "string",
       default: "-"
     },
     {
       key: "ariaLabel",
       name: "ariaLabel",
-      description: "접근성 레이블",
+      description: lang === "ko" ? "접근성 레이블" : "The accessibility label",
       type: "string",
       default: "-"
     }

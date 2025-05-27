@@ -790,77 +790,24 @@ export default CustomColorTabs;`
         </>
       ),
       default: <Tag>left</Tag>
-    },
+    }
+  ];
+  const groupTableData = [
     {
-      key: "underlineColor",
-      name: "underlineColor",
-      description:
-        lang === "ko"
-          ? "탭 선택 시 하단 밑줄 색상"
-          : "The color of the bottom line when the tab is selected",
-      type: (
-        <>
-          <Tag>{"{ active?: string, inactive?: string }"}</Tag>
-        </>
-      ),
-      default: "-"
-    },
-    {
-      key: "activeStyle",
-      name: "activeStyle",
-      description:
-        lang === "ko" ? "선택된 탭의 스타일" : "The style of the selected tab",
-      type: (
-        <>
-          <Tag>
-            {
-              "{ background?: string, color?: string, borderColor?: string, [key: string]: any }"
-            }
-          </Tag>
-        </>
-      ),
-      default: "-"
-    },
-    {
-      key: "inactiveStyle",
-      name: "inactiveStyle",
-      description:
-        lang === "ko"
-          ? "선택되지 않은 탭의 스타일"
-          : "The style of the unselected tab",
-      type: (
-        <>
-          <Tag>
-            {
-              "{ background?: string, color?: string, borderColor?: string, [key: string]: any }"
-            }
-          </Tag>
-        </>
-      ),
-      default: "-"
-    },
-    {
-      key: "tabPaneProps.label",
-      name: "tabPaneProps.label",
-      description:
-        lang === "ko"
-          ? "탭의 레이블(tabPaneProps.label)"
-          : "The label of the tab(tabPaneProps.label)",
+      key: "label",
+      name: "label",
+      description: lang === "ko" ? "탭의 레이블" : "The label of the tab",
       type: "string | ReactNode",
       default: "undefined"
     },
     {
-      key: "tabPaneProps.children",
-      name: "tabPaneProps.children",
-      description:
-        lang === "ko"
-          ? "탭의 내용(tabPaneProps.children)"
-          : "The content of the tab(tabPaneProps.children)",
+      key: "children",
+      name: "children",
+      description: lang === "ko" ? "탭의 내용" : "The content of the tab",
       type: "ReactNode",
       default: "undefined"
     }
   ];
-
   return (
     <Frame
       component={{
@@ -869,7 +816,9 @@ export default CustomColorTabs;`
         IMPORT_COMMAND,
         whenToUse,
         examples,
-        howToUseTableData
+        howToUseTableData,
+        group: "Tabs.TabPane",
+        groupTableData
       }}
       grid={true}
       isMobile={isMobile}

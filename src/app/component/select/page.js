@@ -2,38 +2,53 @@
 
 import Frame from "../Frame";
 import { useMobile } from "../../_lib/context/mobileContext";
-import { Tag, Radio, Card, Select, Button } from "sud-ui";
+import { useLang } from "../../_lib/context/langContext";
+import { Tag, Radio, Card, Select } from "sud-ui";
 
 import React, { useState } from "react";
 import { Search, TriangleDown } from "sud-icons";
 
 export default function SelectPage() {
   const { isMobile } = useMobile();
+  const { lang } = useLang();
   const [size, setSize] = useState("md");
   const [value, setValue] = useState("");
   const [sizeValue, setSizeValue] = useState("");
   const [disabledValue, setDisabledValue] = useState("");
   const [readOnlyValue, setReadOnlyValue] = useState("");
-  const [clearableValue, setClearableValue] = useState("");
+  const [clearableValue, setClearableValue] = useState("Try to Clear!");
   const [labelValue, setLabelValue] = useState("");
   const [underlineValue, setUnderlineValue] = useState("");
   const [errorValue, setErrorValue] = useState("");
   const [shape, setShape] = useState("rounded");
-  const [colorValue, setColorValue] = useState("");
+  const [colorValue, setColorValue] = useState("cool-gray");
   const [shapeValue, setShapeValue] = useState("");
   const [iconValue, setIconValue] = useState("");
   const [multiValue, setMultiValue] = useState("");
 
   const name = "Select";
-  const description = <>선택사항을 드롭다운으로 보여주는 메뉴입니다.</>;
+  const description = (
+    <>
+      {lang === "ko"
+        ? "선택사항을 드롭다운으로 보여주는 메뉴입니다."
+        : "A menu that shows a dropdown of selectable options."}
+    </>
+  );
 
   const IMPORT_COMMAND = "import { Select } from 'sud-ui';";
 
-  const whenToUse = [
-    "선택 옵션이 많을 때",
-    "선택 옵션이 길어질 때",
-    "입력과 선택이 필요한 경우"
-  ];
+  const whenToUse =
+    lang === "ko"
+      ? [
+          "선택 옵션이 많을 때",
+          "선택 옵션이 길어질 때",
+          "입력과 선택이 필요한 경우"
+        ]
+      : [
+          "When there are many select options.",
+          "When the select options are long.",
+          "When input and select are needed."
+        ];
 
   const sizeOptions = [
     {
@@ -67,30 +82,53 @@ export default function SelectPage() {
 
   const options = [
     {
-      label: "옵션 1",
+      label: "Option 1",
       value: "option1"
     },
     {
-      label: "옵션 2",
+      label: "Option 2",
       value: "option2"
     },
     {
-      label: "옵션 3",
+      label: "Option 3",
       value: "option3"
+    }
+  ];
+
+  const colorOptions = [
+    {
+      label: "cool-gray",
+      value: "cool-gray"
+    },
+    {
+      label: "forest",
+      value: "forest"
+    },
+    {
+      label: "volcano",
+      value: "volcano"
+    },
+    {
+      label: "gold",
+      value: "gold"
+    },
+    {
+      label: "cerulean",
+      value: "cerulean"
     }
   ];
 
   const examples = [
     {
       title: "Basic Usage",
-      description: "기본적인 Select 컴포넌트입니다.",
+      description: lang === "ko" ? "기본적인 사용 방법입니다." : "Basic usage.",
       render: (
         <>
           <Select
             options={options}
             value={value}
             onChange={(e) => setValue(e)}
-            placeholder="옵션을 선택해주세요."
+            placeholder="Select an option."
           />
         </>
       ),
@@ -101,17 +139,17 @@ const BasicSelect = () => {
   const [value, setValue] = useState("");
 
   const options = [
-    { label: '옵션 1', value: 'option1' },
-    { label: '옵션 2', value: 'option2' },
-    { label: '옵션 3', value: 'option3' }
+    { label: 'Option 1', value: 'option1' },
+    { label: 'Option 2', value: 'option2' },
+    { label: 'Option 3', value: 'option3' }
   ];
 
   return (
     <Select
-          options={options}
+      options={options}
       value={value}
       onChange={(e) => setValue(e)}
-      placeholder="옵션을 선택해주세요."
+      placeholder="Select an option."
     />
   );
 };
@@ -129,17 +167,17 @@ const BasicSelect: React.FC = () => {
   const [value, setValue] = useState<string>("");
 
   const options: Option[] = [
-    { label: '옵션 1', value: 'option1' },
-    { label: '옵션 2', value: 'option2' },
-    { label: '옵션 3', value: 'option3' }
+    { label: 'Option 1', value: 'option1' },
+    { label: 'Option 2', value: 'option2' },
+    { label: 'Option 3', value: 'option3' }
   ];
 
   return (
     <Select
-          options={options}
+      options={options}
       value={value}
       onChange={(e) => setValue(e)}
-      placeholder="옵션을 선택해주세요."
+      placeholder="Select an option."
     />
   );
 };
@@ -148,7 +186,10 @@ export default BasicSelect;`
     },
     {
       title: "Size",
-      description: "Select 의 크기를 설정할 수 있습니다.",
+      description:
+        lang === "ko"
+          ? "Select 의 크기를 설정할 수 있습니다."
+          : "Can set the size of the Select.",
       render: (
         <div className="flex flex-col gap-20">
           <Card style={{ width: "100%" }} shadow="none" colorType="sub">
@@ -166,7 +207,7 @@ export default BasicSelect;`
             value={sizeValue}
             onChange={(e) => setSizeValue(e)}
             options={options}
-            placeholder={`${size} 크기의 Select 입니다.`}
+            placeholder={`${size} size Select.`}
           />
         </div>
       ),
@@ -184,9 +225,9 @@ const SizeSelect = () => {
   ];
 
   const options = [
-    { label: '옵션 1', value: 'option1' },
-    { label: '옵션 2', value: 'option2' },
-    { label: '옵션 3', value: 'option3' }
+    { label: 'Option 1', value: 'option1' },
+    { label: 'Option 2', value: 'option2' },
+    { label: 'Option 3', value: 'option3' }
   ];
 
   return (
@@ -207,7 +248,7 @@ const SizeSelect = () => {
         value={value}
         onChange={(e) => setValue(e)}
         options={options}
-        placeholder={\`\${size} 크기의 Select 입니다.\`}
+        placeholder={\`\${size} size Select.\`}
       />
     </div>
   );
@@ -233,9 +274,9 @@ const SizeSelect: React.FC = () => {
   ];
 
   const options: SizeOption[] = [
-    { label: '옵션 1', value: 'option1' },
-    { label: '옵션 2', value: 'option2' },
-    { label: '옵션 3', value: 'option3' }
+    { label: 'Option 1', value: 'option1' },
+    { label: 'Option 2', value: 'option2' },
+    { label: 'Option 3', value: 'option3' }
   ];
 
   return (
@@ -256,7 +297,7 @@ const SizeSelect: React.FC = () => {
         value={value}
         onChange={(e) => setValue(e)}
         options={options}
-        placeholder={\`\${size} 크기의 Select 입니다.\`}
+        placeholder={\`\${size} size Select.\`}
       />
     </div>
   );
@@ -266,7 +307,10 @@ export default SizeSelect;`
     },
     {
       title: "Disabled",
-      description: "disabled 속성을 추가하면 입력 필드가 비활성화됩니다.",
+      description:
+        lang === "ko"
+          ? "disabled 속성을 추가하면 입력 필드가 비활성화됩니다."
+          : "Can add the disabled property to make the input field inactive.",
       render: (
         <>
           <Select
@@ -274,7 +318,7 @@ export default SizeSelect;`
             value={disabledValue}
             onChange={(e) => setDisabledValue(e)}
             disabled
-            placeholder="비활성화된 Select 입니다."
+            placeholder="Disabled Select."
           />
         </>
       ),
@@ -286,11 +330,11 @@ const DisabledSelect = () => {
 
   return (
     <Select
-          options={options}
+      options={options}
       value={value}
       onChange={(e) => setValue(e)}
       disabled
-      placeholder="비활성화된 Select 입니다."
+      placeholder="Disabled Select."
     />
   );
 };
@@ -304,11 +348,11 @@ const DisabledSelect: React.FC = () => {
 
   return (
     <Select
-          options={options}
+      options={options}
       value={value}
       onChange={(e) => setValue(e)}
       disabled
-      placeholder="비활성화된 Select 입니다."
+      placeholder="Disabled Select."
     />
   );
 };
@@ -318,7 +362,9 @@ export default DisabledSelect;`
     {
       title: "Read Only",
       description:
-        "readOnly 속성을 추가하면 입력 필드가 읽기 전용으로 변경됩니다.",
+        lang === "ko"
+          ? "readOnly 속성을 추가하면 입력 필드가 읽기 전용으로 변경됩니다."
+          : "Can add the readOnly property to make the input field read-only.",
       render: (
         <>
           <Select
@@ -326,7 +372,7 @@ export default DisabledSelect;`
             value={readOnlyValue}
             onChange={(e) => setReadOnlyValue(e)}
             readOnly
-            placeholder="읽기 전용 Select 입니다."
+            placeholder="Read Only Select."
           />
         </>
       ),
@@ -338,11 +384,11 @@ const ReadOnlySelect = () => {
 
   return (
     <Select
-          options={options}
+      options={options}
       value={value}
       onChange={(e) => setValue(e)}
       readOnly
-      placeholder="읽기 전용 Select 입니다."
+      placeholder="Read Only Select."
     />
   );
 };
@@ -356,11 +402,11 @@ const ReadOnlySelect: React.FC = () => {
 
   return (
     <Select
-          options={options}
+      options={options}
       value={value}
       onChange={(e) => setValue(e)}
       readOnly
-      placeholder="읽기 전용 Select 입니다."
+      placeholder="Read Only Select."
     />
   );
 };
@@ -370,13 +416,11 @@ export default ReadOnlySelect;`
     {
       title: "Searchable",
       description:
-        "Searchable 속성을 추가하면 입력 필드에 검색 기능을 추가할 수 있습니다.",
+        lang === "ko"
+          ? "Searchable 속성을 추가하면 입력 필드에 검색 기능을 추가할 수 있습니다."
+          : "Can add the searchable property to add a search function to the input field.",
       render: (
-        <Select
-          options={options}
-          searchable
-          placeholder="검색 기능을 추가한 Select 입니다."
-        />
+        <Select options={options} searchable placeholder="Searchable Select." />
       ),
       jscode: `import React, { useState } from 'react';
 import { Select } from 'sud-ui';
@@ -385,17 +429,13 @@ const SearchableSelect = () => {
   const [value, setValue] = useState("");
 
   const options = [
-    { label: "옵션 1", value: "option1" },
-    { label: "옵션 2", value: "option2" },
-    { label: "옵션 3", value: "option3" }
+    { label: "Option 1", value: "option1" },
+    { label: "Option 2", value: "option2" },
+    { label: "Option 3", value: "option3" }
   ];
 
   return (
-    <Select
-      options={options}
-      searchable
-      placeholder="검색 기능을 추가한 Select 입니다."
-    />
+    <Select options={options} searchable placeholder="Searchable Select." />
   );
 };
 
@@ -407,17 +447,13 @@ const SearchableSelect: React.FC = () => {
   const [value, setValue] = useState("");
 
   const options: Option[] = [
-    { label: "옵션 1", value: "option1" },
-    { label: "옵션 2", value: "option2" },
-    { label: "옵션 3", value: "option3" }
+    { label: "Option 1", value: "option1" },
+    { label: "Option 2", value: "option2" },
+    { label: "Option 3", value: "option3" }
   ];
 
   return (
-    <Select
-          options={options}
-      searchable
-      placeholder="검색 기능을 추가한 Select 입니다."
-    />
+    <Select options={options} searchable placeholder="Searchable Select." />
   );
 };
 
@@ -426,7 +462,9 @@ export default SearchableSelect;`
     {
       title: "Clearable",
       description:
-        "clearable 속성을 추가하면 입력 필드의 값을 지울 수 있습니다.",
+        lang === "ko"
+          ? "clearable 속성을 추가하면 입력 필드의 값을 지울 수 있습니다."
+          : "Can add the clearable property to clear the value of the input field.",
       render: (
         <>
           <Select
@@ -434,7 +472,7 @@ export default SearchableSelect;`
             value={clearableValue}
             onChange={(e) => setClearableValue(e)}
             clearable
-            placeholder="clearable 속성을 추가한 Select 입니다."
+            placeholder="Clearable Select."
           />
         </>
       ),
@@ -442,15 +480,21 @@ export default SearchableSelect;`
 import { Select } from 'sud-ui';
 
 const ClearableSelect = () => {
-  const [value, setValue] = useState("지워보세요!");
+  const [value, setValue] = useState("Try to Clear!");
+
+  const options = [
+    { label: "Option 1", value: "option1" },
+    { label: "Option 2", value: "option2" },
+    { label: "Option 3", value: "option3" }
+  ];
 
   return (
     <Select
-          options={options}
+      options={options}
       value={value}
       onChange={(e) => setValue(e)}
       clearable
-      placeholder="clearable 속성을 추가한 Select 입니다."
+      placeholder="Clearable Select."
     />
   );
 };
@@ -460,7 +504,13 @@ export default ClearableSelect;`,
 import { Select } from 'sud-ui';
 
 const ClearableSelect: React.FC = () => {
-  const [value, setValue] = useState("지워보세요!");
+  const [value, setValue] = useState("Try to Clear!");
+
+  const options: Option[] = [
+    { label: "Option 1", value: "option1" },
+    { label: "Option 2", value: "option2" },
+    { label: "Option 3", value: "option3" }
+  ];
 
   return (
     <Select
@@ -468,7 +518,7 @@ const ClearableSelect: React.FC = () => {
       value={value}
       onChange={(e) => setValue(e)}
       clearable
-      placeholder="clearable 속성을 추가한 Select 입니다."
+      placeholder="Clearable Select."
     />
   );
 };
@@ -478,7 +528,9 @@ export default ClearableSelect;`
     {
       title: "Label",
       description:
-        "label 속성을 추가하면 입력 필드의 라벨을 설정할 수 있습니다.",
+        lang === "ko"
+          ? "label 속성을 추가하면 입력 필드의 라벨을 설정할 수 있습니다."
+          : "Can add the label property to set the label of the input field.",
       render: (
         <>
           <Select
@@ -486,7 +538,7 @@ export default ClearableSelect;`
             value={labelValue}
             onChange={(e) => setLabelValue(e)}
             label="name"
-            placeholder="label 속성을 추가한 Select 입니다."
+            placeholder="Label Select."
           />
         </>
       ),
@@ -496,13 +548,19 @@ import { Select } from 'sud-ui';
 const LabelSelect = () => {
   const [value, setValue] = useState("");
 
+  const options = [
+    { label: "Option 1", value: "option1" },
+    { label: "Option 2", value: "option2" },
+    { label: "Option 3", value: "option3" }
+  ];
+
   return (
     <Select
-          options={options}
+      options={options}
       value={value}
       onChange={(e) => setValue(e)}
       label="name"
-      placeholder="label 속성을 추가한 Select 입니다."
+      placeholder="Label Select."
     />
   );
 };
@@ -514,13 +572,19 @@ import { Select } from 'sud-ui';
 const LabelSelect: React.FC = () => {
   const [value, setValue] = useState("");
 
+  const options: Option[] = [
+    { label: "Option 1", value: "option1" },
+    { label: "Option 2", value: "option2" },
+    { label: "Option 3", value: "option3" }
+  ];
+
   return (
     <Select
-          options={options}
+      options={options}
       value={value}
       onChange={(e) => setValue(e)}
       label="name"
-      placeholder="label 속성을 추가한 Select 입니다."
+      placeholder="Label Select."
     />
   );
 };
@@ -529,7 +593,10 @@ export default LabelSelect;`
     },
     {
       title: "Underline",
-      description: "밑줄 스타일의 입력 필드입니다.",
+      description:
+        lang === "ko"
+          ? "밑줄 스타일의 입력 필드입니다."
+          : "An input field with a line style.",
       render: (
         <>
           <Select
@@ -538,7 +605,7 @@ export default LabelSelect;`
             underline
             options={options}
             shadow="none"
-            placeholder="밑줄 스타일의 Select 입니다."
+            placeholder="Underline Select."
           />
         </>
       ),
@@ -548,13 +615,19 @@ import { Select } from 'sud-ui';
 const UnderlineSelect = () => {
   const [value, setValue] = useState("");
 
+  const options = [
+    { label: "Option 1", value: "option1" },
+    { label: "Option 2", value: "option2" },
+    { label: "Option 3", value: "option3" }
+  ];
+
   return (
     <Select
-          options={options}
+      options={options}
       value={value}
       onChange={(e) => setValue(e)}
       underline
-      placeholder="밑줄 스타일의 Select 입니다."
+      placeholder="Underline Select."
     />
   );
 };
@@ -566,13 +639,19 @@ import { Select } from 'sud-ui';
 const UnderlineSelect: React.FC = () => {
   const [value, setValue] = useState("");
 
+  const options = [
+    { label: "Option 1", value: "option1" },
+    { label: "Option 2", value: "option2" },
+    { label: "Option 3", value: "option3" }
+  ];
+
   return (
     <Select
-          options={options}
+      options={options}
       value={value}
       onChange={(e) => setValue(e)}
       underline
-      placeholder="밑줄 스타일의 Select 입니다."
+      placeholder="Underline Select."
     />
   );
 };
@@ -581,7 +660,10 @@ export default UnderlineSelect;`
     },
     {
       title: "Error State",
-      description: "에러 상태와 메시지를 표시할 수 있습니다.",
+      description:
+        lang === "ko"
+          ? "에러 상태와 메시지를 표시할 수 있습니다."
+          : "Can display an error state and message.",
       render: (
         <>
           <Select
@@ -589,8 +671,8 @@ export default UnderlineSelect;`
             value={errorValue}
             onChange={(e) => setErrorValue(e)}
             error={errorValue.length > 0}
-            errorText="에러 메시지가 표시됩니다."
-            placeholder="에러 상태의 Select 입니다."
+            errorText="Error Message."
+            placeholder="Error State Select."
           />
         </>
       ),
@@ -600,14 +682,20 @@ import { Select } from 'sud-ui';
 const ErrorSelect = () => {
   const [value, setValue] = useState("");
 
+  const options = [
+    { label: "Option 1", value: "option1" },
+    { label: "Option 2", value: "option2" },
+    { label: "Option 3", value: "option3" }
+  ];
+
   return (
     <Select
-          options={options}
+      options={options}
       value={value}
       onChange={(e) => setValue(e)}
       error={value.length > 0}
-      errorText="에러 메시지가 표시됩니다."
-      placeholder="에러 상태의 Select 입니다."
+      errorText="Error Message."
+      placeholder="Error State Select."
     />
   );
 };
@@ -619,14 +707,20 @@ import { Select } from 'sud-ui';
 const ErrorSelect: React.FC = () => {
   const [value, setValue] = useState("");
 
+  const options: Option[] = [
+    { label: "Option 1", value: "option1" },
+    { label: "Option 2", value: "option2" },
+    { label: "Option 3", value: "option3" }
+  ];
+
   return (
     <Select
-          options={options}
+      options={options}
       value={value}
       onChange={(e) => setValue(e)}
       error={value.length > 0}
-      errorText="에러 메시지가 표시됩니다."
-      placeholder="에러 상태의 Select 입니다."
+      errorText="Error Message."
+      placeholder="Error State Select."
     />
   );
 };
@@ -635,7 +729,10 @@ export default ErrorSelect;`
     },
     {
       title: "Shape",
-      description: "입력 필드의 모서리 모양을 설정할 수 있습니다.",
+      description:
+        lang === "ko"
+          ? "입력 필드의 모서리 모양을 설정할 수 있습니다."
+          : "Can set the shape of the input field.",
       render: (
         <div className="flex flex-col gap-20">
           <Card style={{ width: "100%" }} shadow="none" colorType="sub">
@@ -653,7 +750,7 @@ export default ErrorSelect;`
             shape={shape}
             value={shapeValue}
             onChange={(e) => setShapeValue(e)}
-            placeholder={`${shape} 모양의 Select 입니다.`}
+            placeholder={`${shape} shape Select.`}
           />
         </div>
       ),
@@ -670,6 +767,12 @@ const ShapeSelect = () => {
     { label: 'capsule', value: 'capsule' }
   ];
 
+  const options = [
+    { label: "Option 1", value: "option1" },
+    { label: "Option 2", value: "option2" },
+    { label: "Option 3", value: "option3" }
+  ];
+
   return (
     <div className="flex flex-col gap-20">
       <Card style={{ width: "100%" }} shadow="none" colorType="sub">
@@ -683,11 +786,11 @@ const ShapeSelect = () => {
         </div>
       </Card>
       <Select
-          options={options}
+        options={options}
         shape={shape}
         value={shapeValue}
         onChange={(e) => setShapeValue(e)}
-        placeholder={\`\${shape} 모양의 Select 입니다.\`}
+        placeholder={\`\${shape} shape Select.\`}
       />
     </div>
   );
@@ -712,6 +815,12 @@ const ShapeSelect: React.FC = () => {
     { label: 'capsule', value: 'capsule' }
   ];
 
+  const options: Option[] = [
+    { label: "Option 1", value: "option1" },
+    { label: "Option 2", value: "option2" },
+    { label: "Option 3", value: "option3" }
+  ];
+
   return (
     <div className="flex flex-col gap-20">
       <Card style={{ width: "100%" }} shadow="none" colorType="sub">
@@ -725,11 +834,11 @@ const ShapeSelect: React.FC = () => {
         </div>
       </Card>
       <Select
-          options={options}
+        options={options}
         shape={shape}
         value={shapeValue}
         onChange={(e) => setShapeValue(e)}
-        placeholder={\`\${shape} 모양의 Select 입니다.\`}
+        placeholder={\`\${shape} shape Select.\`}
       />
     </div>
   );
@@ -739,33 +848,44 @@ export default ShapeSelect;`
     },
     {
       title: "Color Customization",
-      description: "입력 필드의 색상을 커스텀할 수 있습니다.",
+      description:
+        lang === "ko"
+          ? "입력 필드의 색상을 커스텀할 수 있습니다."
+          : "Can customize the color of the input field.",
       render: (
         <Select
-          options={options}
-          placeholder="textColor를 입력하세요"
+          options={colorOptions}
+          placeholder="Color Customization Select."
           value={colorValue}
           onChange={(e) => setColorValue(e)}
-          color={"orange-8"}
-          background={"orange-1"}
-          borderColor={"orange-8"}
+          color={`${colorValue}-8`}
+          background={`${colorValue}-1`}
+          borderColor={`${colorValue}-6`}
         />
       ),
       jscode: `import React, { useState } from 'react';
 import { Select } from 'sud-ui';
 
 const CustomColorSelect = () => {
-  const [value, setValue] = useState("");
+  const [value, setValue] = useState("cool-gray");
+
+  const options = [
+    { label: "cool-gray", value: "cool-gray" },
+    { label: "forest", value: "forest" },
+    { label: "volcano", value: "volcano" },
+    { label: "gold", value: "gold" },
+    { label: "cerulean", value: "cerulean" }
+  ];
 
   return (
     <Select
-          options={options}
-      placeholder="textColor를 입력하세요"
+      options={options}
+      placeholder="Color Customization Select."
       value={value}
       onChange={(e) => setValue(e)}
-      color="orange-8"
-      background="orange-1"
-      borderColor="orange-8"
+      color={\`\${colorValue}-8\`}
+      background={\`\${colorValue}-1\`}
+      borderColor={\`\${colorValue}-8\`}
     />
   );
 };
@@ -775,17 +895,25 @@ export default CustomColorSelect;`,
 import { Select } from 'sud-ui';
 
 const CustomColorSelect: React.FC = () => {
-  const [value, setValue] = useState("");
+  const [value, setValue] = useState("cool-gray");
+
+  const options = [
+    { label: "cool-gray", value: "cool-gray" },
+    { label: "forest", value: "forest" },
+    { label: "volcano", value: "volcano" },
+    { label: "gold", value: "gold" },
+    { label: "cerulean", value: "cerulean" }
+  ];
 
   return (
     <Select
-          options={options}
-      placeholder="textColor를 입력하세요"
+      options={options}
+      placeholder="Color Customization Select."
       value={value}
       onChange={(e) => setValue(e)}
-      color="orange-8"
-      background="orange-1"
-      borderColor="orange-8"
+      color={\`\${colorValue}-8\`}
+      background={\`\${colorValue}-1\`}
+      borderColor={\`\${colorValue}-8\`}
     />
   );
 };
@@ -794,11 +922,14 @@ export default CustomColorSelect;`
     },
     {
       title: "Custom Icon",
-      description: "입력 필드의 앞뒤 아이콘을 커스텀할 수 있습니다.",
+      description:
+        lang === "ko"
+          ? "입력 필드의 앞뒤 아이콘을 커스텀할 수 있습니다."
+          : "Can customize the icons before and after the input field.",
       render: (
         <Select
           options={options}
-          placeholder="textColor를 입력하세요"
+          placeholder="Icon Customization Select."
           value={iconValue}
           onChange={(e) => setIconValue(e)}
           afterIcon={<Search />}
@@ -813,15 +944,15 @@ const CustomIconSelect = () => {
   const [value, setValue] = useState("");
 
   const options = [
-    { label: "옵션 1", value: "option1" },
-    { label: "옵션 2", value: "option2" },
-    { label: "옵션 3", value: "option3" }
+    { label: "Option 1", value: "option1" },
+    { label: "Option 2", value: "option2" },
+    { label: "Option 3", value: "option3" }
   ];
 
   return (
     <Select
       options={options}
-      placeholder="textColor를 입력하세요"
+      placeholder="Icon Customization Select."
       value={value}
       onChange={(e) => setValue(e)}
       afterIcon={<Search />}
@@ -844,15 +975,15 @@ const CustomIconSelect: React.FC = () => {
   const [value, setValue] = useState<string>("");
 
   const options: Option[] = [
-    { label: "옵션 1", value: "option1" },
-    { label: "옵션 2", value: "option2" },
-    { label: "옵션 3", value: "option3" }
+    { label: "Option 1", value: "option1" },
+    { label: "Option 2", value: "option2" },
+    { label: "Option 3", value: "option3" }
   ];
 
   return (
     <Select
       options={options}
-      placeholder="textColor를 입력하세요"
+      placeholder="Icon Customization Select."
       value={value}
       onChange={(e) => setValue(e)}
       afterIcon={<Search />}
@@ -865,14 +996,18 @@ export default CustomIconSelect;`
     },
     {
       title: "Multi Mode",
-      description: "다중 선택 모드를 사용할 수 있습니다.",
+      description:
+        lang === "ko"
+          ? "다중 선택 모드를 사용할 수 있습니다."
+          : "Can use the multi-select mode.",
       render: (
         <Select
           options={options}
-          placeholder="textColor를 입력하세요"
+          placeholder="Multi Mode Select."
           value={multiValue}
           onChange={(e) => setMultiValue(e)}
           multiMode
+          tagColorType="sky"
         />
       ),
       jscode: `import React, { useState } from 'react';
@@ -882,18 +1017,19 @@ const MultiModeSelect = () => {
   const [value, setValue] = useState([]);
 
   const options = [
-    { label: "옵션 1", value: "option1" },
-    { label: "옵션 2", value: "option2" },
-    { label: "옵션 3", value: "option3" }
+    { label: "Option 1", value: "option1" },
+    { label: "Option 2", value: "option2" },
+    { label: "Option 3", value: "option3" }
   ];
 
   return (
     <Select
       options={options}
-      placeholder="textColor를 입력하세요"
+      placeholder="Multi Mode Select."
       value={value}
       onChange={(e) => setValue(e)}
       multiMode
+      tagColorType="sky"
     />
   );
 };
@@ -911,130 +1047,72 @@ const MultiModeSelect: React.FC = () => {
   const [value, setValue] = useState<string[]>([]);
 
   const options: Option[] = [
-    { label: "옵션 1", value: "option1" },
-    { label: "옵션 2", value: "option2" },
-    { label: "옵션 3", value: "option3" }
+    { label: "Option 1", value: "option1" },
+    { label: "Option 2", value: "option2" },
+    { label: "Option 3", value: "option3" }
   ];
 
   return (
     <Select
       options={options}
-      placeholder="textColor를 입력하세요"
+      placeholder="Multi Mode Select."
       value={value}
       onChange={(e) => setValue(e)}
       multiMode
+      tagColorType="sky"
     />
   );
 };
 
 export default MultiModeSelect;`
-    },
-    {
-      title: "Multi Mode Custom",
-      description: "다중 선택 모드를 사용할 수 있습니다.",
-      render: (
-        <Select
-          options={options}
-          placeholder="textColor를 입력하세요"
-          value={multiValue}
-          onChange={(e) => setMultiValue(e)}
-          multiMode
-          showSelectedCount
-          tagColorType="sky"
-        />
-      ),
-      jscode: `import React, { useState } from 'react';
-import { Select } from 'sud-ui';
-
-const MultiModeCustomSelect = () => {
-  const [value, setValue] = useState([]);
-
-  const options = [
-    { label: "옵션 1", value: "option1" },
-    { label: "옵션 2", value: "option2" },
-    { label: "옵션 3", value: "option3" }
-  ];
-
-  return (
-    <Select
-      options={options}
-      placeholder="textColor를 입력하세요"
-      value={value}
-      onChange={(e) => setValue(e)}
-      multiMode
-      showSelectedCount
-      tagColorType="sky"
-    />
-  );
-};
-
-export default MultiModeCustomSelect;`,
-      tscode: `import React, { useState } from 'react';
-import { Select } from 'sud-ui';
-
-interface Option {
-  label: string;
-  value: string;
-}
-
-const MultiModeCustomSelect: React.FC = () => {
-  const [value, setValue] = useState<string[]>([]);
-
-  const options: Option[] = [
-    { label: "옵션 1", value: "option1" },
-    { label: "옵션 2", value: "option2" },
-    { label: "옵션 3", value: "option3" }
-  ];
-
-  return (
-    <Select
-      options={options}
-      placeholder="textColor를 입력하세요"
-      value={value}
-      onChange={(e) => setValue(e)}
-      multiMode
-      showSelectedCount
-      tagColorType="sky"
-    />
-  );
-};
-
-export default MultiModeCustomSelect;`
     }
   ];
   const howToUseTableData = [
     {
       key: "value",
       name: "value",
-      description: "선택된 값 (multiMode일 경우 배열)",
+      description:
+        lang === "ko"
+          ? "선택된 값 (multiMode일 경우 배열)"
+          : "Selected value (array if multiMode).",
       type: "string | string[]",
       default: "null"
     },
     {
       key: "onChange",
       name: "onChange",
-      description: "값이 변경될 때 호출되는 함수",
+      description:
+        lang === "ko"
+          ? "값이 변경될 때 호출되는 함수"
+          : "Function called when the value changes.",
       type: "(value: string | string[]) => void",
       default: "() => {}"
     },
     {
       key: "placeholder",
       name: "placeholder",
-      description: "아무것도 선택되지 않았을 때 표시되는 텍스트",
+      description:
+        lang === "ko"
+          ? "아무것도 선택되지 않았을 때 표시되는 텍스트"
+          : "Text displayed when nothing is selected.",
       type: "string",
       default: "'선택하세요'"
     },
     {
       key: "options",
       name: "options",
-      description: "선택 가능한 옵션 목록",
+      description:
+        lang === "ko" ? "선택 가능한 옵션 목록" : "List of selectable options.",
       type: "Array<{label: string, value: string}>",
       default: "[]"
     },
     {
       key: "size",
       name: "size",
-      description: "Select 컴포넌트의 크기",
+      description:
+        lang === "ko"
+          ? "Select 컴포넌트의 크기"
+          : "Size of the Select component.",
       type: (
         <>
           <Tag>sm</Tag> ｜ <Tag>md</Tag> ｜ <Tag>lg</Tag>
@@ -1045,7 +1123,10 @@ export default MultiModeCustomSelect;`
     {
       key: "shape",
       name: "shape",
-      description: "Select 컴포넌트의 모서리 모양",
+      description:
+        lang === "ko"
+          ? "Select 컴포넌트의 모서리 모양"
+          : "Shape of the Select component.",
       type: (
         <>
           <Tag>rounded</Tag> ｜ <Tag>square</Tag> ｜ <Tag>capsule</Tag>
@@ -1056,63 +1137,88 @@ export default MultiModeCustomSelect;`
     {
       key: "disabled",
       name: "disabled",
-      description: "Select 컴포넌트 비활성화 여부",
+      description:
+        lang === "ko"
+          ? "Select 컴포넌트 비활성화 여부"
+          : "Disabled state of the Select component.",
       type: "boolean",
       default: "false"
     },
     {
       key: "readOnly",
       name: "readOnly",
-      description: "읽기 전용 여부",
+      description:
+        lang === "ko"
+          ? "읽기 전용 여부"
+          : "Read-only state of the Select component.",
       type: "boolean",
       default: "false"
     },
     {
       key: "clearable",
       name: "clearable",
-      description: "선택한 값을 지울 수 있는 버튼 표시 여부",
+      description:
+        lang === "ko"
+          ? "선택한 값을 지울 수 있는 버튼 표시 여부"
+          : "Display a button to clear the selected value.",
       type: "boolean",
       default: "false"
     },
     {
       key: "label",
       name: "label",
-      description: "Select 컴포넌트의 라벨",
+      description:
+        lang === "ko"
+          ? "Select 컴포넌트의 라벨"
+          : "Label of the Select component.",
       type: "string | ReactNode",
       default: "-"
     },
     {
       key: "underline",
       name: "underline",
-      description: "밑줄 스타일 여부",
+      description:
+        lang === "ko"
+          ? "밑줄 스타일 여부"
+          : "Underline style of the Select component.",
       type: "boolean",
       default: "false"
     },
     {
       key: "error",
       name: "error",
-      description: "에러 상태 여부",
+      description:
+        lang === "ko"
+          ? "에러 상태 여부"
+          : "Error state of the Select component.",
       type: "boolean",
       default: "false"
     },
     {
       key: "errorText",
       name: "errorText",
-      description: "에러 메시지",
+      description:
+        lang === "ko"
+          ? "에러 메시지"
+          : "Error message of the Select component.",
       type: "string",
       default: "-"
     },
     {
       key: "beforeIcon",
       name: "beforeIcon",
-      description: "Select 컴포넌트에 표시될 아이콘",
+      description:
+        lang === "ko"
+          ? "Select 컴포넌트에 표시될 아이콘"
+          : "Icon displayed in the Select component.",
       type: "ReactNode",
       default: "<AngleDown size={16} />"
     },
     {
       key: "shadow",
       name: "shadow",
-      description: "그림자 크기",
+      description:
+        lang === "ko" ? "그림자 크기" : "Shadow size of the Select component.",
       type: (
         <>
           <Tag>none</Tag> ｜ <Tag>sm</Tag> ｜ <Tag>md</Tag> ｜ <Tag>lg</Tag> ｜{" "}
@@ -1124,70 +1230,83 @@ export default MultiModeCustomSelect;`
     {
       key: "multiMode",
       name: "multiMode",
-      description: "다중 선택 모드 활성화 여부",
+      description:
+        lang === "ko"
+          ? "다중 선택 모드 활성화 여부"
+          : "Enable multi-select mode.",
       type: "boolean",
       default: "false"
     },
     {
       key: "showSelectedCount",
       name: "showSelectedCount",
-      description: "다중 선택 모드에서 선택된 항목 수 표시 여부",
+      description:
+        lang === "ko"
+          ? "다중 선택 모드에서 선택된 항목 수 표시 여부"
+          : "Display the number of selected items in multi-select mode.",
       type: "boolean",
       default: "false"
     },
     {
       key: "Searchable",
       name: "Searchable",
-      description: "검색 기능 사용 여부",
+      description:
+        lang === "ko" ? "검색 기능 사용 여부" : "Enable search functionality.",
       type: "boolean",
       default: "true"
     },
     {
       key: "tagColorType",
       name: "tagColorType",
-      description: "다중 선택 모드에서 태그의 색상 타입",
+      description:
+        lang === "ko"
+          ? "다중 선택 모드에서 태그의 색상 타입"
+          : "Color type of the tag in multi-select mode.",
       type: "string",
       default: "'default'"
     },
     {
       key: "colorType",
       name: "colorType",
-      description: "Select 컴포넌트의 색상 타입",
+      description:
+        lang === "ko"
+          ? "Select 컴포넌트의 색상 타입"
+          : "Color type of the Select component.",
       type: "string",
       default: "'default'"
     },
     {
       key: "background",
       name: "background",
-      description: "배경색",
+      description: lang === "ko" ? "배경색" : "Background color.",
       type: "string",
       default: "-"
     },
     {
       key: "color",
       name: "color",
-      description: "텍스트 색상",
+      description: lang === "ko" ? "텍스트 색상" : "Text color.",
       type: "string",
       default: "-"
     },
     {
       key: "border",
       name: "border",
-      description: "테두리 표시 여부",
+      description: lang === "ko" ? "테두리 표시 여부" : "Display the border.",
       type: "boolean",
       default: "true"
     },
     {
       key: "borderColor",
       name: "borderColor",
-      description: "테두리 색상",
+      description: lang === "ko" ? "테두리 색상" : "Border color.",
       type: "string",
       default: "-"
     },
     {
       key: "borderType",
       name: "borderType",
-      description: "테두리 스타일",
+      description: lang === "ko" ? "테두리 스타일" : "Border style.",
       type: (
         <>
           <Tag>solid</Tag> ｜ <Tag>dashed</Tag> ｜ <Tag>dotted</Tag>
@@ -1198,28 +1317,31 @@ export default MultiModeCustomSelect;`
     {
       key: "borderWeight",
       name: "borderWeight",
-      description: "테두리 두께",
+      description: lang === "ko" ? "테두리 두께" : "Border weight.",
       type: "number",
       default: "1"
     },
     {
       key: "dropdownStyle",
       name: "dropdownStyle",
-      description: "드롭다운 메뉴의 추가 스타일",
+      description:
+        lang === "ko"
+          ? "드롭다운 메뉴의 추가 스타일"
+          : "Additional styles for the dropdown menu.",
       type: "React.CSSProperties",
       default: "{}"
     },
     {
       key: "className",
       name: "className",
-      description: "추가 클래스명",
+      description: lang === "ko" ? "추가 클래스명" : "Additional class name.",
       type: "string",
       default: '""'
     },
     {
       key: "style",
       name: "style",
-      description: "추가 스타일",
+      description: lang === "ko" ? "추가 스타일" : "Additional styles.",
       type: "React.CSSProperties",
       default: "{}"
     }

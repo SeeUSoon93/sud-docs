@@ -2,19 +2,27 @@
 
 import Frame from "../Frame";
 import { useMobile } from "../../_lib/context/mobileContext";
+import { useLang } from "../../_lib/context/langContext";
 import { Tag, Card, TimePicker, Radio } from "sud-ui";
 
 import React, { useState } from "react";
 
 export default function TimePickerPage() {
   const { isMobile } = useMobile();
-
+  const { lang } = useLang();
   const name = "TimePicker";
-  const description = <>날짜를 선택할 수 있는 컴포넌트입니다.</>;
+  const description = (
+    <>
+      {lang === "ko"
+        ? "날짜를 선택할 수 있는 컴포넌트입니다."
+        : "A component that allows you to select a date."}
+    </>
+  );
 
   const IMPORT_COMMAND = "import { TimePicker } from 'sud-ui';";
 
-  const whenToUse = ["날짜를 선택할 때"];
+  const whenToUse =
+    lang === "ko" ? ["날짜를 선택할 때"] : ["When selecting a date"];
 
   const [size, setSize] = useState("md");
   const [shape, setShape] = useState("rounded");
@@ -62,7 +70,7 @@ export default function TimePickerPage() {
   const examples = [
     {
       title: "Basic Usage",
-      description: "기본적인 버튼 컴포넌트입니다.",
+      description: lang === "ko" ? "기본적인 사용 방법입니다." : "Basic usage.",
       render: (
         <>
           <TimePicker value={value} onChange={setValue} />
@@ -87,7 +95,10 @@ export default function Example(): JSX.Element {
     },
     {
       title: "Disabled Usage",
-      description: "비활성화 상태의 버튼 컴포넌트입니다.",
+      description:
+        lang === "ko"
+          ? "비활성화 상태의 버튼 컴포넌트입니다."
+          : "Disabled button component.",
       render: (
         <>
           <TimePicker
@@ -116,7 +127,10 @@ export default function Example(): JSX.Element {
     },
     {
       title: "ReadOnly Usage",
-      description: "읽기 전용 상태의 버튼 컴포넌트입니다.",
+      description:
+        lang === "ko"
+          ? "읽기 전용 상태의 버튼 컴포넌트입니다."
+          : "Read-only button component.",
       render: (
         <>
           <TimePicker
@@ -146,7 +160,10 @@ export default function Example(): JSX.Element {
 
     {
       title: "Size",
-      description: "TimePicker 의 크기를 설정할 수 있습니다.",
+      description:
+        lang === "ko"
+          ? "TimePicker 의 크기를 설정할 수 있습니다."
+          : "Set the size of the TimePicker.",
       render: (
         <div className="flex flex-col gap-20">
           <Card style={{ width: "100%" }} shadow="none" colorType="sub">
@@ -215,7 +232,10 @@ export default function Example(): JSX.Element {
     },
     {
       title: "Shape ",
-      description: "TimePicker 의 모양을 설정할 수 있습니다.",
+      description:
+        lang === "ko"
+          ? "TimePicker 의 모양을 설정할 수 있습니다."
+          : "Set the shape of the TimePicker.",
       render: (
         <div className="flex flex-col gap-20">
           <Card style={{ width: "100%" }} shadow="none" colorType="sub">
@@ -288,14 +308,17 @@ export default function Example(): JSX.Element {
     },
     {
       title: "Error Usage",
-      description: "TimePicker 의 에러 상태를 설정할 수 있습니다.",
+      description:
+        lang === "ko"
+          ? "TimePicker 의 에러 상태를 설정할 수 있습니다."
+          : "Set the error state of the TimePicker.",
       render: (
         <>
           <TimePicker
             value={errorValue}
             onChange={setErrorValue}
             error
-            errorText="에러 메시지"
+            errorText="error message"
           />
         </>
       ),
@@ -310,7 +333,7 @@ export default function Example() {
       value={value}
       onChange={setValue}
       error
-      errorText="에러 메시지"
+      errorText="error message"
     />
   );
 }`,
@@ -325,14 +348,17 @@ export default function Example(): JSX.Element {
       value={value}
       onChange={setValue}
       error
-      errorText="에러 메시지"
+      errorText="error message"
     />
   );
 }`
     },
     {
       title: "Range Usage",
-      description: "TimePicker 의 범위 선택 상태를 설정할 수 있습니다.",
+      description:
+        lang === "ko"
+          ? "TimePicker 의 범위 선택 상태를 설정할 수 있습니다."
+          : "Set the range selection state of the TimePicker.",
       render: (
         <>
           <TimePicker value={rangeValue} onChange={setRangeValue} range />
@@ -368,7 +394,10 @@ export default function Example(): JSX.Element {
     },
     {
       title: "Formatting",
-      description: "TimePicker 의 포맷을 설정할 수 있습니다.",
+      description:
+        lang === "ko"
+          ? "TimePicker 의 포맷을 설정할 수 있습니다."
+          : "Set the format of the TimePicker.",
       render: (
         <>
           <TimePicker
@@ -397,7 +426,10 @@ export default function Example(): JSX.Element {
     },
     {
       title: "12Hours Usage",
-      description: "12시간제 사용 여부를 설정할 수 있습니다.",
+      description:
+        lang === "ko"
+          ? "12시간제 사용 여부를 설정할 수 있습니다."
+          : "Set the 12-hour format usage.",
       render: (
         <>
           <TimePicker
@@ -426,7 +458,10 @@ export default function Example(): JSX.Element {
     },
     {
       title: "Step Usage",
-      description: "분 단위 선택 단계를 설정할 수 있습니다.",
+      description:
+        lang === "ko"
+          ? "분 단위 선택 단계를 설정할 수 있습니다."
+          : "Set the minute unit selection step.",
       render: (
         <>
           <TimePicker value={stepValue} onChange={setStepValue} step={10} />
@@ -455,42 +490,53 @@ export default function Example(): JSX.Element {
     {
       key: "value",
       name: "value",
-      description: "선택된 시간 값",
+      description: lang === "ko" ? "선택된 시간 값" : "The selected time value",
       type: "Date | { startTime: Date, endTime: Date }",
       default: "-"
     },
     {
       key: "onChange",
       name: "onChange",
-      description: "시간이 변경될 때 호출되는 함수",
+      description:
+        lang === "ko"
+          ? "시간이 변경될 때 호출되는 함수"
+          : "The function called when the time changes",
       type: "(value: Date | { startTime: Date, endTime: Date }, text: string) => void",
       default: "() => {}"
     },
     {
       key: "colorType",
       name: "colorType",
-      description: "TimePicker의 색상 타입",
+      description:
+        lang === "ko"
+          ? "TimePicker의 색상 타입"
+          : "The color type of the TimePicker",
       type: "string",
       default: "default"
     },
     {
       key: "shape",
       name: "shape",
-      description: "TimePicker의 모양",
+      description:
+        lang === "ko" ? "TimePicker의 모양" : "The shape of the TimePicker",
       type: "string",
       default: "rounded"
     },
     {
       key: "shadow",
       name: "shadow",
-      description: "TimePicker의 그림자 크기",
+      description:
+        lang === "ko"
+          ? "TimePicker의 그림자 크기"
+          : "The shadow size of the TimePicker",
       type: "string",
       default: "sm"
     },
     {
       key: "size",
       name: "size",
-      description: "TimePicker의 크기",
+      description:
+        lang === "ko" ? "TimePicker의 크기" : "The size of the TimePicker",
       type: (
         <>
           <Tag>sm</Tag> ｜ <Tag>md</Tag> ｜ <Tag>lg</Tag>
@@ -501,140 +547,171 @@ export default function Example(): JSX.Element {
     {
       key: "disabled",
       name: "disabled",
-      description: "비활성화 여부",
+      description:
+        lang === "ko"
+          ? "비활성화 여부"
+          : "The disabled state of the TimePicker",
       type: "boolean",
       default: "false"
     },
     {
       key: "readOnly",
       name: "readOnly",
-      description: "읽기 전용 여부",
+      description:
+        lang === "ko"
+          ? "읽기 전용 여부"
+          : "The read-only state of the TimePicker",
       type: "boolean",
       default: "false"
     },
     {
       key: "error",
       name: "error",
-      description: "에러 상태",
+      description:
+        lang === "ko" ? "에러 상태" : "The error state of the TimePicker",
       type: "boolean",
       default: "false"
     },
     {
       key: "errorText",
       name: "errorText",
-      description: "에러 메시지",
+      description:
+        lang === "ko" ? "에러 메시지" : "The error message of the TimePicker",
       type: "string",
       default: "-"
     },
     {
       key: "className",
       name: "className",
-      description: "추가 클래스명",
+      description:
+        lang === "ko" ? "추가 클래스명" : "The additional class name",
       type: "string",
       default: '""'
     },
     {
       key: "placeholder",
       name: "placeholder",
-      description: "플레이스홀더 텍스트",
+      description:
+        lang === "ko" ? "플레이스홀더 텍스트" : "The placeholder text",
       type: "string",
       default: "시간 선택"
     },
     {
       key: "format",
       name: "format",
-      description: "시간 포맷",
+      description: lang === "ko" ? "시간 포맷" : "The time format",
       type: "string",
       default: "HH:mm:ss"
     },
     {
       key: "range",
       name: "range",
-      description: "시간 범위 선택 여부",
+      description:
+        lang === "ko" ? "시간 범위 선택 여부" : "The range selection state",
       type: "boolean",
       default: "false"
     },
     {
       key: "placement",
       name: "placement",
-      description: "시간 선택 팝업의 위치",
+      description:
+        lang === "ko"
+          ? "시간 선택 팝업의 위치"
+          : "The position of the time selection popup",
       type: "string",
       default: "top"
     },
     {
       key: "showSecond",
       name: "showSecond",
-      description: "초 단위 표시 여부",
+      description:
+        lang === "ko" ? "초 단위 표시 여부" : "The display of the second unit",
       type: "boolean",
       default: "false"
     },
     {
       key: "use12Hours",
       name: "use12Hours",
-      description: "12시간제 사용 여부",
+      description:
+        lang === "ko" ? "12시간제 사용 여부" : "The 12-hour format usage",
       type: "boolean",
       default: "false"
     },
     {
       key: "step",
       name: "step",
-      description: "시간 선택 단계",
+      description: lang === "ko" ? "시간 선택 단계" : "The time selection step",
       type: "number",
       default: "1"
     },
     {
       key: "popConfirmProps",
       name: "popConfirmProps",
-      description: "PopConfirm 컴포넌트에 전달되는 props",
+      description:
+        lang === "ko"
+          ? "PopConfirm 컴포넌트에 전달되는 props"
+          : "The props passed to the PopConfirm component",
       type: "object",
       default: "{}"
     },
     {
       key: "inputProps",
       name: "inputProps",
-      description: "Input 컴포넌트에 전달되는 props",
+      description:
+        lang === "ko"
+          ? "Input 컴포넌트에 전달되는 props"
+          : "The props passed to the Input component",
       type: "object",
       default: "{}"
     },
     {
       key: "timePickerProps",
       name: "timePickerProps",
-      description: "TimeSelector 컴포넌트에 전달되는 props",
+      description:
+        lang === "ko"
+          ? "TimeSelector 컴포넌트에 전달되는 props"
+          : "The props passed to the TimeSelector component",
       type: "object",
       default: "{}"
     },
     {
       key: "id",
       name: "id",
-      description: "HTML id 속성",
+      description: lang === "ko" ? "HTML id 속성" : "The HTML id attribute",
       type: "string",
       default: "-"
     },
     {
       key: "ariaLabel",
       name: "ariaLabel",
-      description: "접근성을 위한 레이블",
+      description:
+        lang === "ko" ? "접근성을 위한 레이블" : "The accessibility label",
       type: "string",
       default: "placeholder와 동일"
     },
     {
       key: "ariaRequired",
       name: "ariaRequired",
-      description: "필수 입력 여부",
+      description:
+        lang === "ko" ? "필수 입력 여부" : "The required input state",
       type: "boolean",
       default: "-"
     },
     {
       key: "ariaInvalid",
       name: "ariaInvalid",
-      description: "유효하지 않은 상태 여부",
+      description:
+        lang === "ko" ? "유효하지 않은 상태 여부" : "The invalid state",
       type: "boolean",
       default: "-"
     },
     {
       key: "ariaDescribedby",
       name: "ariaDescribedby",
-      description: "설명을 제공하는 요소의 id",
+      description:
+        lang === "ko"
+          ? "설명을 제공하는 요소의 id"
+          : "The id of the element providing the description",
       type: "string",
       default: "-"
     }

@@ -870,6 +870,7 @@ export default GroupAvatar;`
         whenToUse,
         examples,
         howToUseTableData,
+        group: "Avatar.Group",
         groupTableData
       }}
       grid={true}
