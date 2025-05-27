@@ -13,7 +13,7 @@
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "sud-icons": "^1.0.1",
-    "sud-ui": "^0.1.527",
+    "sud-ui": "^0.1.528",
     "next-pwa": "^5.6.0"
   },
   "devDependencies": {

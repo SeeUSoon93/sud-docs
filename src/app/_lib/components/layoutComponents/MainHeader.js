@@ -119,7 +119,7 @@ export default function MainHeader({
         </div>
       ) : (
         <div className="flex flex-col w-100 h-100 item-cen jus-cen">
-          <div className="flex jus-bet w-100 item-cen">
+          <div className="flex jus-bet w-100 item-cen mg-b-10">
             <Button
               icon={<MenuHamburger size={20} />}
               onClick={onMenuClick}
@@ -150,11 +150,13 @@ export default function MainHeader({
             />
           </div>
           <Divider />
-          <Menu
-            items={mapMenuItems(items)}
-            horizontal={true}
-            expandType="popover"
-          />
+          <div className="mg-t-5">
+            <Menu
+              items={mapMenuItems(items)}
+              horizontal={true}
+              expandType="popover"
+            />
+          </div>
         </div>
       )}
     </>
