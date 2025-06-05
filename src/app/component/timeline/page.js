@@ -3,28 +3,15 @@
 import Frame from "../Frame";
 import { useMobile } from "../../_lib/context/mobileContext";
 import { useLang } from "../../_lib/context/langContext";
-import { Card, Radio, Tag, Timeline, toast } from "sud-ui";
+import { Card, Radio, Tag, Timeline } from "sud-ui";
 import { tagRender } from "../../_lib/components/common/render";
+
 import {
-  borderTypeTags,
-  shadowTypeTags,
-  shapeTypeTags,
-  tagColorTypeTags
-} from "../../_lib/components/common/defaultType";
-import {
-  LogoAdobeAcrobat,
-  LogoAdobeIllustrator,
-  LogoAdobePhotoshop,
   LogoDocker,
   LogoFastAPI,
-  LogoJava,
   LogoMongoDB,
   LogoNextjs,
-  LogoPython,
-  LogoReact,
-  LogoSud,
-  MoodSmileFill,
-  MoodSmileOutline
+  LogoSud
 } from "sud-icons";
 import { useState } from "react";
 
@@ -32,7 +19,7 @@ export default function TimelinePage() {
   const { isMobile } = useMobile();
   const { lang } = useLang();
 
-  const name = "Tag";
+  const name = "Timeline";
   const description = (
     <>
       {lang === "ko"
