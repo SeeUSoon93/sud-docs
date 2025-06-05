@@ -3,7 +3,7 @@
 import Frame from "../Frame";
 import { useMobile } from "../../_lib/context/mobileContext";
 import { useLang } from "../../_lib/context/langContext";
-import { Card, Segmented, Tag, Typography } from "sud-ui";
+import { Card, Input, Segmented, Tag, Typography } from "sud-ui";
 import { tagRender } from "../../_lib/components/common/render";
 import {
   fontSizeTypeTags,
@@ -38,6 +38,19 @@ export default function TypographyPage() {
 
   const [font, setFont] = useState("pretendard");
   const [weight, setWeight] = useState(weightData[font][0].value);
+  const [size, setSize] = useState("3xl");
+  const [color, setColor] = useState("");
+
+  const sizeData = [
+    { label: "xs", value: "xs" },
+    { label: "sm", value: "sm" },
+    { label: "base", value: "base" },
+    { label: "lg", value: "lg" },
+    { label: "xl", value: "xl" },
+    { label: "2xl", value: "2xl" },
+    { label: "3xl", value: "3xl" },
+    { label: "4xl", value: "4xl" }
+  ];
 
   useEffect(() => {
     setWeight(weightData[font][0].value);
@@ -68,15 +81,33 @@ export default function TypographyPage() {
                 value={weight}
                 onChange={(value) => setWeight(value)}
               />
+              <Segmented
+                block
+                options={sizeData}
+                value={size}
+                onChange={(value) => setSize(value)}
+              />
+              <Input
+                style={{ width: "100%" }}
+                shadow="none"
+                placeholder="Enter text color(palette value or HEX code. ex: #000000, forest, orange...)"
+                value={color}
+                onChange={(e) => setColor(e.target.value)}
+              />
             </div>
           </Card>
           <div className="flex flex-col jus-cen item-cen gap-10">
             {font === "intelone" ? (
-              <Typography as="p" size="3xl" code>
+              <Typography as="p" size={size} code color={color}>
                 The quick brown fox jumps over the lazy dog
               </Typography>
             ) : (
-              <Typography as="p" size="3xl" {...{ [font]: weight }}>
+              <Typography
+                as="p"
+                size={size}
+                {...{ [font]: weight }}
+                color={color}
+              >
                 {lang === "ko"
                   ? "다람쥐 헌 쳇바퀴에 타고파"
                   : "The quick brown fox jumps over the lazy dog"}
@@ -85,7 +116,7 @@ export default function TypographyPage() {
           </div>
         </div>
       ),
-      jscode: `import { Typography, Card, Segmented } from "sud-ui";
+      jscode: `import { Typography, Card, Segmented, Input } from "sud-ui";
 import { useState, useEffect } from "react";
 
 const weightData = {
@@ -115,9 +146,22 @@ const weightData = {
   intelone: [{ label: "Medium", value: "Medium" }]
 };
 
+const sizeData = [
+  { label: "xs", value: "xs" },
+  { label: "sm", value: "sm" },
+  { label: "base", value: "base" },
+  { label: "lg", value: "lg" },
+  { label: "xl", value: "xl" },
+  { label: "2xl", value: "2xl" },
+  { label: "3xl", value: "3xl" },
+  { label: "4xl", value: "4xl" }
+];
+
 export default function App() {
   const [font, setFont] = useState("pretendard");
   const [weight, setWeight] = useState(weightData[font][0].value);
+  const [size, setSize] = useState("3xl");
+  const [color, setColor] = useState("");
 
   useEffect(() => {
     setWeight(weightData[font][0].value);
@@ -144,15 +188,28 @@ export default function App() {
             value={weight}
             onChange={(value) => setWeight(value)}
           />
+          <Segmented
+            block
+            options={sizeData}
+            value={size}
+            onChange={(value) => setSize(value)}
+          />
+          <Input
+            style={{ width: "100%" }}
+            shadow="none"
+            placeholder="Enter text color(palette value or HEX code. ex: #000000, forest, orange...)"
+            value={color}
+            onChange={(e) => setColor(e.target.value)}
+          />
         </div>
       </Card>
       <div className="flex flex-col jus-cen item-cen gap-10">
         {font === "intelone" ? (
-          <Typography as="p" size="3xl" code>
+          <Typography as="p" size={size} code color={color}>
             The quick brown fox jumps over the lazy dog
           </Typography>
         ) : (
-          <Typography as="p" size="3xl" {...{ [font]: weight }}>
+          <Typography as="p" size={size} {...{ [font]: weight }} color={color}>
             The quick brown fox jumps over the lazy dog
           </Typography>
         )}
@@ -160,7 +217,7 @@ export default function App() {
     </div>
   )
 }`,
-      tscode: `import { Typography, Card, Segmented } from "sud-ui";
+      tscode: `import { Typography, Card, Segmented, Input } from "sud-ui";
 import React, { useState, useEffect } from "react";
 
 interface WeightOption {
@@ -199,9 +256,22 @@ const weightData: WeightData = {
   intelone: [{ label: "Medium", value: "Medium" }]
 };
 
+const sizeData = [
+  { label: "xs", value: "xs" },
+  { label: "sm", value: "sm" },
+  { label: "base", value: "base" },
+  { label: "lg", value: "lg" },
+  { label: "xl", value: "xl" },
+  { label: "2xl", value: "2xl" },
+  { label: "3xl", value: "3xl" },
+  { label: "4xl", value: "4xl" }
+];
+
 export default function App(): React.ReactElement {
   const [font, setFont] = useState<string>("pretendard");
   const [weight, setWeight] = useState<string>(weightData[font][0].value);
+  const [size, setSize] = useState<string>("3xl");
+  const [color, setColor] = useState<string>("");
 
   useEffect(() => {
     setWeight(weightData[font][0].value);
@@ -228,15 +298,28 @@ export default function App(): React.ReactElement {
             value={weight}
             onChange={(value) => setWeight(value)}
           />
+          <Segmented
+            block
+            options={sizeData}
+            value={size}
+            onChange={(value) => setSize(value)}
+          />
+          <Input
+            style={{ width: "100%" }}
+            shadow="none"
+            placeholder="Enter text color(palette value or HEX code. ex: #000000, forest, orange...)"
+            value={color}
+            onChange={(e) => setColor(e.target.value)}
+          />
         </div>
       </Card>
       <div className="flex flex-col jus-cen item-cen gap-10">
         {font === "intelone" ? (
-          <Typography as="p" size="3xl" code>
+          <Typography as="p" size={size} code color={color}>
             The quick brown fox jumps over the lazy dog
           </Typography>
         ) : (
-          <Typography as="p" size="3xl" {...{ [font]: weight }}>
+          <Typography as="p" size={size} {...{ [font]: weight }} color={color}>
             The quick brown fox jumps over the lazy dog
           </Typography>
         )}
