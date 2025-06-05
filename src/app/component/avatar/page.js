@@ -8,6 +8,14 @@ import React, { useState } from "react";
 import { UserFill } from "sud-icons";
 import { useLang } from "../../_lib/context/langContext";
 
+import {
+  borderTypeTags,
+  defaultSizeTypeTags,
+  shadowTypeTags,
+  shapeTypeTags,
+  tagColorTypeTags
+} from "../../_lib/components/common/defaultType";
+
 export default function SwitchPage() {
   const { isMobile } = useMobile();
   const { lang } = useLang();
@@ -591,23 +599,14 @@ export default GroupAvatar;`
       key: "size",
       name: "size",
       description: lang === "ko" ? "아바타의 크기" : "Size of the avatar",
-      type: (
-        <>
-          <Tag>xs</Tag> ｜ <Tag>sm</Tag> ｜ <Tag>md</Tag> ｜ <Tag>lg</Tag> ｜{" "}
-          <Tag>xl</Tag>
-        </>
-      ),
+      type: <>{defaultSizeTypeTags} or number</>,
       default: <Tag>md</Tag>
     },
     {
       key: "shape",
       name: "shape",
       description: lang === "ko" ? "아바타의 모양" : "Shape of the avatar",
-      type: (
-        <>
-          <Tag>circle</Tag> ｜ <Tag>square</Tag> ｜ <Tag>rounded</Tag>
-        </>
-      ),
+      type: <>{shapeTypeTags}</>,
       default: <Tag>circle</Tag>
     },
     {
@@ -615,20 +614,26 @@ export default GroupAvatar;`
       name: "colorType",
       description:
         lang === "ko" ? "아바타의 색상 타입" : "Color type of the avatar",
-      type: "string",
+      type: <>{tagColorTypeTags}</>,
       default: <Tag>default</Tag>
     },
     {
       key: "background",
       name: "background",
-      description: lang === "ko" ? "배경색" : "Background color",
+      description:
+        lang === "ko"
+          ? "배경색(palette값 또는 HEX code)"
+          : "Background color (palette value or HEX code)",
       type: "string",
       default: "-"
     },
     {
       key: "color",
       name: "color",
-      description: lang === "ko" ? "텍스트 색상" : "Text color",
+      description:
+        lang === "ko"
+          ? "텍스트 색상(palette값 또는 HEX code)"
+          : "Text color (palette value or HEX code)",
       type: "string",
       default: "-"
     },
@@ -643,7 +648,10 @@ export default GroupAvatar;`
     {
       key: "borderColor",
       name: "borderColor",
-      description: lang === "ko" ? "테두리 색상" : "Border color",
+      description:
+        lang === "ko"
+          ? "테두리 색상(palette값 또는 HEX code)"
+          : "Border color (palette value or HEX code)",
       type: "string",
       default: "-"
     },
@@ -651,11 +659,7 @@ export default GroupAvatar;`
       key: "borderType",
       name: "borderType",
       description: lang === "ko" ? "테두리 스타일" : "Border style",
-      type: (
-        <>
-          <Tag>solid</Tag> ｜ <Tag>dashed</Tag> ｜ <Tag>dotted</Tag>
-        </>
-      ),
+      type: <>{borderTypeTags}</>,
       default: <Tag>solid</Tag>
     },
     {
@@ -669,11 +673,7 @@ export default GroupAvatar;`
       key: "shadow",
       name: "shadow",
       description: lang === "ko" ? "그림자 크기" : "Shadow size",
-      type: (
-        <>
-          <Tag>none</Tag> ｜ <Tag>sm</Tag> ｜ <Tag>md</Tag> ｜ <Tag>lg</Tag>
-        </>
-      ),
+      type: <>{shadowTypeTags}</>,
       default: <Tag>none</Tag>
     },
     {
@@ -736,23 +736,14 @@ export default GroupAvatar;`
       key: "size",
       name: "size",
       description: lang === "ko" ? "아바타의 크기" : "Size of the avatars",
-      type: (
-        <>
-          <Tag>xs</Tag> ｜ <Tag>sm</Tag> ｜ <Tag>md</Tag> ｜ <Tag>lg</Tag> ｜{" "}
-          <Tag>xl</Tag>
-        </>
-      ),
+      type: <>{defaultSizeTypeTags} or number</>,
       default: <Tag>md</Tag>
     },
     {
       key: "shape",
       name: "shape",
       description: lang === "ko" ? "아바타의 모양" : "Shape of the avatars",
-      type: (
-        <>
-          <Tag>circle</Tag> ｜ <Tag>square</Tag> ｜ <Tag>rounded</Tag>
-        </>
-      ),
+      type: <>{shapeTypeTags}</>,
       default: <Tag>circle</Tag>
     },
     {
@@ -760,20 +751,26 @@ export default GroupAvatar;`
       name: "colorType",
       description:
         lang === "ko" ? "아바타의 색상 타입" : "Color type of the avatars",
-      type: "string",
+      type: <>{tagColorTypeTags}</>,
       default: <Tag>default</Tag>
     },
     {
       key: "background",
       name: "background",
-      description: lang === "ko" ? "배경색" : "Background color",
+      description:
+        lang === "ko"
+          ? "배경색(palette값 또는 HEX code)"
+          : "Background color (palette value or HEX code)",
       type: "string",
       default: "-"
     },
     {
       key: "color",
       name: "color",
-      description: lang === "ko" ? "텍스트 색상" : "Text color",
+      description:
+        lang === "ko"
+          ? "텍스트 색상(palette값 또는 HEX code)"
+          : "Text color (palette value or HEX code)",
       type: "string",
       default: "-"
     },
@@ -788,7 +785,10 @@ export default GroupAvatar;`
     {
       key: "borderColor",
       name: "borderColor",
-      description: lang === "ko" ? "테두리 색상" : "Border color",
+      description:
+        lang === "ko"
+          ? "테두리 색상(palette값 또는 HEX code)"
+          : "Border color (palette value or HEX code)",
       type: "string",
       default: "-"
     },
@@ -796,11 +796,7 @@ export default GroupAvatar;`
       key: "borderType",
       name: "borderType",
       description: lang === "ko" ? "테두리 스타일" : "Border style",
-      type: (
-        <>
-          <Tag>solid</Tag> ｜ <Tag>dashed</Tag> ｜ <Tag>dotted</Tag>
-        </>
-      ),
+      type: <>{borderTypeTags}</>,
       default: <Tag>solid</Tag>
     },
     {
@@ -814,11 +810,7 @@ export default GroupAvatar;`
       key: "shadow",
       name: "shadow",
       description: lang === "ko" ? "그림자 크기" : "Shadow size",
-      type: (
-        <>
-          <Tag>none</Tag> ｜ <Tag>sm</Tag> ｜ <Tag>md</Tag> ｜ <Tag>lg</Tag>
-        </>
-      ),
+      type: <>{shadowTypeTags}</>,
       default: <Tag>none</Tag>
     },
     {

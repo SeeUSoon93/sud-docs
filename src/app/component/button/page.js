@@ -7,6 +7,13 @@ import { Tag, Radio, Button, Card, Divider, Input } from "sud-ui";
 
 import React, { useState } from "react";
 import { Chat } from "sud-icons";
+import {
+  borderTypeTags,
+  defaultColorTypeTags,
+  shadowTypeTags,
+  shapeTypeTags
+} from "../../_lib/components/common/defaultType";
+import { tagRender } from "../../_lib/components/common/render";
 
 export default function ButtonPage() {
   const { isMobile } = useMobile();
@@ -836,18 +843,27 @@ export default function Example(): JSX.Element {
   ];
   const howToUseTableData = [
     {
+      key: "children",
+      name: "children",
+      description: "버튼의 내용",
+      type: "ReactNode",
+      default: "-"
+    },
+    {
       key: "colorType",
       name: "colorType",
       description:
         lang === "ko" ? "버튼의 색상 타입" : "The color type of the button.",
-      type: "string",
-      default: "default"
+      type: <>{defaultColorTypeTags}</>,
+      default: <Tag>default</Tag>
     },
     {
       key: "background",
       name: "background",
       description:
-        lang === "ko" ? "버튼의 배경색" : "The background color of the button.",
+        lang === "ko"
+          ? "배경색(palette값 또는 HEX code)"
+          : "Background color (palette value or HEX code)",
       type: "string",
       default: "-"
     },
@@ -855,37 +871,41 @@ export default function Example(): JSX.Element {
       key: "color",
       name: "color",
       description:
-        lang === "ko" ? "버튼의 텍스트 색상" : "The text color of the button.",
+        lang === "ko"
+          ? "텍스트 색상(palette값 또는 HEX code)"
+          : "Text color (palette value or HEX code)",
       type: "string",
       default: "-"
+    },
+    {
+      key: "border",
+      name: "border",
+      description:
+        lang === "ko" ? "테두리 표시 여부" : "Whether to show border",
+      type: "boolean",
+      default: "true"
     },
     {
       key: "borderColor",
       name: "borderColor",
       description:
         lang === "ko"
-          ? "버튼의 테두리 색상"
-          : "The border color of the button.",
+          ? "테두리 색상(palette값 또는 HEX code)"
+          : "Border color (palette value or HEX code)",
       type: "string",
       default: "-"
     },
     {
       key: "borderType",
       name: "borderType",
-      description:
-        lang === "ko"
-          ? "버튼의 테두리 스타일"
-          : "The border style of the button.",
-      type: "string",
-      default: "solid"
+      description: lang === "ko" ? "테두리 스타일" : "Border style",
+      type: <>{borderTypeTags}</>,
+      default: <Tag>solid</Tag>
     },
     {
       key: "borderWeight",
       name: "borderWeight",
-      description:
-        lang === "ko"
-          ? "버튼의 테두리 두께"
-          : "The border weight of the button.",
+      description: lang === "ko" ? "테두리 두께" : "Border weight",
       type: "number",
       default: "1"
     },
@@ -904,12 +924,8 @@ export default function Example(): JSX.Element {
       name: "iconPosition",
       description:
         lang === "ko" ? "아이콘의 위치" : "The position of the icon.",
-      type: (
-        <>
-          <Tag>left</Tag> ｜ <Tag>right</Tag>
-        </>
-      ),
-      default: "left"
+      type: <>{tagRender(["left", "right"])}</>,
+      default: <Tag>left</Tag>
     },
     {
       key: "disabled",
@@ -948,15 +964,15 @@ export default function Example(): JSX.Element {
         lang === "ko"
           ? "로딩 스피너의 타입"
           : "The type of the loading spinner.",
-      type: "string",
-      default: "-"
+      type: <>{tagRender(["default", "elastic", "brush"])}</>,
+      default: <Tag>default</Tag>
     },
     {
       key: "shape",
       name: "shape",
       description: lang === "ko" ? "버튼의 모양" : "The shape of the button.",
-      type: "string",
-      default: "rounded"
+      type: <>{shapeTypeTags}</>,
+      default: <Tag>rounded</Tag>
     },
     {
       key: "shadow",
@@ -965,27 +981,8 @@ export default function Example(): JSX.Element {
         lang === "ko"
           ? "버튼의 그림자 효과"
           : "The shadow effect of the button.",
-      type: "string",
-      default: "sm"
-    },
-    {
-      key: "border",
-      name: "border",
-      description:
-        lang === "ko" ? "테두리 표시 여부" : "The display of the border.",
-      type: "boolean",
-      default: "true"
-    },
-    {
-      key: "size",
-      name: "size",
-      description: lang === "ko" ? "버튼의 크기" : "The size of the button.",
-      type: (
-        <>
-          <Tag>sm</Tag> ｜ <Tag>md</Tag> ｜ <Tag>lg</Tag>
-        </>
-      ),
-      default: "-"
+      type: <>{shadowTypeTags}</>,
+      default: <Tag>sm</Tag>
     },
     {
       key: "onClick",
@@ -1000,7 +997,7 @@ export default function Example(): JSX.Element {
       name: "className",
       description: lang === "ko" ? "추가 클래스명" : "Additional class name.",
       type: "string",
-      default: '""'
+      default: "-"
     },
     {
       key: "style",

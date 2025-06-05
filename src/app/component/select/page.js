@@ -7,6 +7,13 @@ import { Tag, Radio, Card, Select } from "sud-ui";
 
 import React, { useState } from "react";
 import { Search, TriangleDown } from "sud-icons";
+import { tagRender } from "../../_lib/components/common/render";
+import {
+  borderTypeTags,
+  defaultColorTypeTags,
+  shadowTypeTags,
+  shapeTypeTags
+} from "../../_lib/components/common/defaultType";
 
 export default function SelectPage() {
   const { isMobile } = useMobile();
@@ -1076,7 +1083,7 @@ export default MultiModeSelect;`
           ? "선택된 값 (multiMode일 경우 배열)"
           : "Selected value (array if multiMode).",
       type: "string | string[]",
-      default: "null"
+      default: "-"
     },
     {
       key: "onChange",
@@ -1113,11 +1120,7 @@ export default MultiModeSelect;`
         lang === "ko"
           ? "Select 컴포넌트의 크기"
           : "Size of the Select component.",
-      type: (
-        <>
-          <Tag>sm</Tag> ｜ <Tag>md</Tag> ｜ <Tag>lg</Tag>
-        </>
-      ),
+      type: <>{tagRender(["sm", "md", "lg"])}</>,
       default: <Tag>md</Tag>
     },
     {
@@ -1127,11 +1130,7 @@ export default MultiModeSelect;`
         lang === "ko"
           ? "Select 컴포넌트의 모서리 모양"
           : "Shape of the Select component.",
-      type: (
-        <>
-          <Tag>rounded</Tag> ｜ <Tag>square</Tag> ｜ <Tag>capsule</Tag>
-        </>
-      ),
+      type: <>{shapeTypeTags}</>,
       default: <Tag>rounded</Tag>
     },
     {
@@ -1219,12 +1218,7 @@ export default MultiModeSelect;`
       name: "shadow",
       description:
         lang === "ko" ? "그림자 크기" : "Shadow size of the Select component.",
-      type: (
-        <>
-          <Tag>none</Tag> ｜ <Tag>sm</Tag> ｜ <Tag>md</Tag> ｜ <Tag>lg</Tag> ｜{" "}
-          <Tag>xl</Tag>
-        </>
-      ),
+      type: <>{shadowTypeTags}</>,
       default: <Tag>sm</Tag>
     },
     {
@@ -1262,8 +1256,8 @@ export default MultiModeSelect;`
         lang === "ko"
           ? "다중 선택 모드에서 태그의 색상 타입"
           : "Color type of the tag in multi-select mode.",
-      type: "string",
-      default: "'default'"
+      type: <>{defaultColorTypeTags}</>,
+      default: <Tag>default</Tag>
     },
     {
       key: "colorType",
@@ -1272,20 +1266,26 @@ export default MultiModeSelect;`
         lang === "ko"
           ? "Select 컴포넌트의 색상 타입"
           : "Color type of the Select component.",
-      type: "string",
-      default: "'default'"
+      type: <>{defaultColorTypeTags}</>,
+      default: <Tag>default</Tag>
     },
     {
       key: "background",
       name: "background",
-      description: lang === "ko" ? "배경색" : "Background color.",
+      description:
+        lang === "ko"
+          ? "배경색(palette값 또는 HEX code)"
+          : "Background color (palette value or HEX code).",
       type: "string",
       default: "-"
     },
     {
       key: "color",
       name: "color",
-      description: lang === "ko" ? "텍스트 색상" : "Text color.",
+      description:
+        lang === "ko"
+          ? "텍스트 색상(palette값 또는 HEX code)"
+          : "Text color (palette value or HEX code).",
       type: "string",
       default: "-"
     },
@@ -1299,7 +1299,10 @@ export default MultiModeSelect;`
     {
       key: "borderColor",
       name: "borderColor",
-      description: lang === "ko" ? "테두리 색상" : "Border color.",
+      description:
+        lang === "ko"
+          ? "테두리 색상(palette값 또는 HEX code)"
+          : "Border color (palette value or HEX code).",
       type: "string",
       default: "-"
     },
@@ -1307,11 +1310,7 @@ export default MultiModeSelect;`
       key: "borderType",
       name: "borderType",
       description: lang === "ko" ? "테두리 스타일" : "Border style.",
-      type: (
-        <>
-          <Tag>solid</Tag> ｜ <Tag>dashed</Tag> ｜ <Tag>dotted</Tag>
-        </>
-      ),
+      type: <>{borderTypeTags}</>,
       default: <Tag>solid</Tag>
     },
     {
@@ -1336,7 +1335,7 @@ export default MultiModeSelect;`
       name: "className",
       description: lang === "ko" ? "추가 클래스명" : "Additional class name.",
       type: "string",
-      default: '""'
+      default: "-"
     },
     {
       key: "style",

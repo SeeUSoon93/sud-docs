@@ -5,6 +5,7 @@ import { useMobile } from "../../_lib/context/mobileContext";
 import { useLang } from "../../_lib/context/langContext";
 import { Card, Input, List, Pagination, Radio, Tag, Typography } from "sud-ui";
 import React, { useState } from "react";
+import { tagRender } from "../../_lib/components/common/render";
 
 export default function PaginationPage() {
   const { isMobile } = useMobile();
@@ -494,7 +495,7 @@ export default MaxVisiblePagination;`
     },
     {
       key: "total",
-      name: "total *",
+      name: "total",
       description: lang === "ko" ? "전체 아이템 수" : "Total number of items",
       type: "number",
       default: "0"
@@ -504,11 +505,7 @@ export default MaxVisiblePagination;`
       name: "align",
       description:
         lang === "ko" ? "페이지네이션 정렬 위치" : "Pagination alignment",
-      type: (
-        <>
-          <Tag>left</Tag> ｜ <Tag>center</Tag> ｜ <Tag>right</Tag>
-        </>
-      ),
+      type: <>{tagRender(["left", "center", "right"])}</>,
       default: <Tag>left</Tag>
     },
     {
@@ -529,7 +526,7 @@ export default MaxVisiblePagination;`
           ? "페이지 변경 시 호출되는 콜백 함수"
           : "Callback function called when the page changes",
       type: "(page: number) => void",
-      default: "undefined"
+      default: "-"
     },
     {
       key: "showPrevNext",

@@ -6,6 +6,7 @@ import { useLang } from "../../_lib/context/langContext";
 import { Tag, ColorPicker, Button, Card, Typography } from "sud-ui";
 
 import React, { useState } from "react";
+import { tagRender } from "../../_lib/components/common/render";
 
 export default function ColorPickerPage() {
   const { isMobile } = useMobile();
@@ -281,7 +282,9 @@ export default function Example(): JSX.Element {
       key: "color",
       name: "color",
       description:
-        lang === "ko" ? "선택된 색상 값" : "The selected color value.",
+        lang === "ko"
+          ? "선택된 색상 값(palette값 또는 HEX code)"
+          : "The selected color value (palette value or HEX code).",
       type: "string",
       default: "#1677FF"
     },
@@ -290,8 +293,8 @@ export default function Example(): JSX.Element {
       name: "onChange",
       description:
         lang === "ko"
-          ? "색상이 변경될 때 호출되는 함수"
-          : "The function called when the color changes.",
+          ? "색상이 변경될 때 호출되는 함수(color 객체 반환)"
+          : "The function called when the color changes (returns a color object).",
       type: "(color: { hex: string, rgb: { r: number, g: number, b: number }, hsb: { h: number, s: number, b: number }, alpha: number }) => void",
       default: "-"
     },
@@ -332,28 +335,24 @@ export default function Example(): JSX.Element {
         lang === "ko"
           ? "컬러피커를 여는 트리거 방식"
           : "The trigger method to open the color picker.",
-      type: "string",
-      default: "click"
+      type: <>{tagRender(["click", "hover", "contextMenu"])}</>,
+      default: <Tag>click</Tag>
     },
     {
       key: "placement",
       name: "placement",
       description:
         lang === "ko" ? "컬러피커의 위치" : "The position of the color picker.",
-      type: "string",
-      default: "bottom"
+      type: <>{tagRender(["top", "bottom", "left", "right"])}</>,
+      default: <Tag>bottom</Tag>
     },
     {
       key: "size",
       name: "size",
       description:
         lang === "ko" ? "컬러피커의 크기" : "The size of the color picker.",
-      type: (
-        <>
-          <Tag>sm</Tag> ｜ <Tag>md</Tag> ｜ <Tag>lg</Tag>
-        </>
-      ),
-      default: "sm"
+      type: <>{tagRender(["sm", "md", "lg"])}</>,
+      default: <Tag>sm</Tag>
     },
     {
       key: "style",
@@ -367,7 +366,7 @@ export default function Example(): JSX.Element {
       name: "className",
       description: lang === "ko" ? "추가 클래스명" : "Additional class name.",
       type: "string",
-      default: '""'
+      default: "-"
     },
     {
       key: "popConfirmProps",

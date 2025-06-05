@@ -15,6 +15,14 @@ import {
   Minus,
   UserOutline
 } from "sud-icons";
+import { tagRender } from "../../_lib/components/common/render";
+import {
+  borderTypeTags,
+  defaultColorTypeTags,
+  defaultSizeTypeTags,
+  shadowTypeTags,
+  shapeTypeTags
+} from "../../_lib/components/common/defaultType";
 
 export default function FloatButtonPage() {
   const { isMobile } = useMobile();
@@ -532,10 +540,16 @@ export default function Example(): JSX.Element {
         lang === "ko" ? "버튼의 위치" : "The position of the button.",
       type: (
         <>
-          <Tag>bottom-right</Tag> ｜ <Tag>bottom-left</Tag> ｜{" "}
-          <Tag>bottom-center</Tag> ｜ <Tag>top-right</Tag> ｜{" "}
-          <Tag>top-left</Tag> ｜ <Tag>top-center</Tag> ｜ <Tag>left-center</Tag>{" "}
-          ｜ <Tag>right-center</Tag>
+          {tagRender([
+            "bottom-right",
+            "bottom-left",
+            "bottom-center",
+            "top-right",
+            "top-left",
+            "top-center",
+            "left-center",
+            "right-center"
+          ])}
         </>
       ),
       default: <Tag>bottom-right</Tag>
@@ -547,12 +561,7 @@ export default function Example(): JSX.Element {
         lang === "ko"
           ? "확장 버튼 방향"
           : "The direction of the extended button.",
-      type: (
-        <>
-          <Tag>up</Tag> ｜ <Tag>down</Tag> ｜ <Tag>left</Tag> ｜{" "}
-          <Tag>right</Tag>
-        </>
-      ),
+      type: <>{tagRender(["up", "down", "left", "right"])}</>,
       default: "-"
     },
 
@@ -560,11 +569,7 @@ export default function Example(): JSX.Element {
       key: "shape",
       name: "shape",
       description: lang === "ko" ? "버튼의 모양" : "The shape of the button.",
-      type: (
-        <>
-          <Tag>circle</Tag> ｜ <Tag>rounded</Tag> ｜ <Tag>square</Tag>
-        </>
-      ),
+      type: <>{shapeTypeTags}</>,
       default: <Tag>circle</Tag>
     },
     {
@@ -572,20 +577,16 @@ export default function Example(): JSX.Element {
       name: "colorType",
       description:
         lang === "ko" ? "버튼의 색상 타입" : "The color type of the button.",
-      type: (
-        <>
-          <Tag>default</Tag> ｜ <Tag>primary</Tag> ｜ <Tag>secondary</Tag> ｜{" "}
-          <Tag>success</Tag> ｜ <Tag>warning</Tag> ｜ <Tag>danger</Tag> ｜{" "}
-          <Tag>info</Tag> ｜ <Tag>ghost</Tag> ｜ <Tag>text</Tag>
-        </>
-      ),
+      type: <>{defaultColorTypeTags}</>,
       default: <Tag>primary</Tag>
     },
     {
       key: "background",
       name: "background",
       description:
-        lang === "ko" ? "버튼의 배경색" : "The background color of the button.",
+        lang === "ko"
+          ? "버튼의 배경색(palette값 또는 HEX code)"
+          : "The background color of the button (palette value or HEX code)",
       type: "string",
       default: "-"
     },
@@ -593,7 +594,9 @@ export default function Example(): JSX.Element {
       key: "color",
       name: "color",
       description:
-        lang === "ko" ? "버튼의 텍스트 색상" : "The text color of the button.",
+        lang === "ko"
+          ? "버튼의 텍스트 색상(palette값 또는 HEX code)"
+          : "The text color of the button (palette value or HEX code)",
       type: "string",
       default: "-"
     },
@@ -610,8 +613,8 @@ export default function Example(): JSX.Element {
       name: "borderColor",
       description:
         lang === "ko"
-          ? "버튼의 테두리 색상"
-          : "The border color of the button.",
+          ? "버튼의 테두리 색상(palette값 또는 HEX code)"
+          : "The border color of the button (palette value or HEX code)",
       type: "string",
       default: "-"
     },
@@ -622,8 +625,8 @@ export default function Example(): JSX.Element {
         lang === "ko"
           ? "버튼의 테두리 스타일"
           : "The border style of the button.",
-      type: "string",
-      default: "solid"
+      type: <>{borderTypeTags}</>,
+      default: <Tag>solid</Tag>
     },
     {
       key: "borderWeight",
@@ -652,11 +655,7 @@ export default function Example(): JSX.Element {
         lang === "ko"
           ? "버튼의 그림자 효과"
           : "The shadow effect of the button.",
-      type: (
-        <>
-          <Tag>none</Tag> ｜ <Tag>sm</Tag> ｜ <Tag>md</Tag> ｜ <Tag>lg</Tag>
-        </>
-      ),
+      type: <>{shadowTypeTags}</>,
       default: <Tag>md</Tag>
     },
     {
@@ -666,25 +665,14 @@ export default function Example(): JSX.Element {
         lang === "ko"
           ? "확장 버튼의 기본 색상 타입"
           : "The default color type of the extended button.",
-      type: (
-        <>
-          <Tag>default</Tag> ｜ <Tag>primary</Tag> ｜ <Tag>secondary</Tag> ｜{" "}
-          <Tag>success</Tag> ｜ <Tag>warning</Tag> ｜ <Tag>danger</Tag> ｜{" "}
-          <Tag>info</Tag> ｜ <Tag>ghost</Tag> ｜ <Tag>text</Tag>
-        </>
-      ),
+      type: <>{defaultColorTypeTags}</>,
       default: <Tag>default</Tag>
     },
     {
       key: "size",
       name: "size",
       description: lang === "ko" ? "버튼의 크기" : "The size of the button.",
-      type: (
-        <>
-          <Tag>xs</Tag> ｜ <Tag>sm</Tag> ｜ <Tag>md</Tag> ｜ <Tag>lg</Tag> ｜{" "}
-          <Tag>xl</Tag>
-        </>
-      ),
+      type: <>{defaultSizeTypeTags}</>,
       default: <Tag>md</Tag>
     },
     {

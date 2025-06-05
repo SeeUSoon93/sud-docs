@@ -6,6 +6,13 @@ import { useLang } from "../../_lib/context/langContext";
 import { Tag, Card, DatePicker, Radio } from "sud-ui";
 
 import React, { useState } from "react";
+import {
+  borderTypeTags,
+  defaultColorTypeTags,
+  shadowTypeTags,
+  shapeTypeTags
+} from "../../_lib/components/common/defaultType";
+import { tagRender } from "../../_lib/components/common/render";
 
 export default function DatePickerPage() {
   const { isMobile } = useMobile();
@@ -499,16 +506,87 @@ export default function Example(): JSX.Element {
         lang === "ko"
           ? "DatePicker의 색상 타입"
           : "The color type of the DatePicker.",
+      type: <>{defaultColorTypeTags}</>,
+      default: <Tag>default</Tag>
+    },
+    ,
+    {
+      key: "background",
+      name: "background",
+      description:
+        lang === "ko"
+          ? "DatePicker의 배경색(palette값 또는 HEX code)"
+          : "The background color of the DatePicker(palette value or HEX code)",
       type: "string",
-      default: "default"
+      default: "-"
+    },
+    {
+      key: "color",
+      name: "color",
+      description:
+        lang === "ko"
+          ? "DatePicker의 텍스트 색상(palette값 또는 HEX code)"
+          : "The text color of the DatePicker(palette value or HEX code)",
+      type: "string",
+      default: "-"
+    },
+    {
+      key: "border",
+      name: "border",
+      description:
+        lang === "ko"
+          ? "DatePicker의 테두리 표시 여부"
+          : "The display of the DatePicker border",
+      type: "boolean",
+      default: "true"
+    },
+    {
+      key: "borderColor",
+      name: "borderColor",
+      description:
+        lang === "ko"
+          ? "DatePicker의 테두리 색상(palette값 또는 HEX code)"
+          : "The color of the DatePicker border(palette value or HEX code)",
+      type: "string",
+      default: "-"
+    },
+    {
+      key: "borderType",
+      name: "borderType",
+      description:
+        lang === "ko"
+          ? "DatePicker의 테두리 스타일"
+          : "The style of the DatePicker border",
+      type: borderTypeTags,
+      default: <Tag>solid</Tag>
+    },
+    {
+      key: "borderWeight",
+      name: "borderWeight",
+      description:
+        lang === "ko"
+          ? "DatePicker의 테두리 두께"
+          : "The thickness of the DatePicker border",
+      type: "number",
+      default: "1"
+    },
+    {
+      key: "underline",
+      name: "underline",
+      description:
+        lang === "ko"
+          ? "DatePicker의 밑줄 표시 여부"
+          : "The display of the DatePicker underline",
+      type: "boolean",
+      default: "false"
     },
     {
       key: "shape",
       name: "shape",
       description:
         lang === "ko" ? "DatePicker의 모양" : "The shape of the DatePicker.",
-      type: "string",
-      default: "rounded"
+      type: <>{shapeTypeTags}</>,
+      default: <Tag>rounded</Tag>
     },
     {
       key: "shadow",
@@ -517,20 +595,16 @@ export default function Example(): JSX.Element {
         lang === "ko"
           ? "DatePicker의 그림자 크기"
           : "The shadow size of the DatePicker.",
-      type: "string",
-      default: "sm"
+      type: <>{shadowTypeTags}</>,
+      default: <Tag>sm</Tag>
     },
     {
       key: "size",
       name: "size",
       description:
         lang === "ko" ? "DatePicker의 크기" : "The size of the DatePicker.",
-      type: (
-        <>
-          <Tag>sm</Tag> ｜ <Tag>md</Tag> ｜ <Tag>lg</Tag>
-        </>
-      ),
-      default: "md"
+      type: <>{tagRender(["sm", "md", "lg"])}</>,
+      default: <Tag>md</Tag>
     },
     {
       key: "disabled",
@@ -610,16 +684,16 @@ export default function Example(): JSX.Element {
         lang === "ko"
           ? "캘린더 팝업의 위치"
           : "The placement of the calendar popup.",
-      type: "string",
-      default: "top"
+      type: <>{tagRender(["top", "bottom", "left", "right"])}</>,
+      default: <Tag>top</Tag>
     },
     {
       key: "locale",
       name: "locale",
       description:
         lang === "ko" ? "언어 설정" : "The language setting of the DatePicker.",
-      type: "string",
-      default: "en"
+      type: <>{tagRender(["en", "ko"])}</>,
+      default: <Tag>en</Tag>
     },
     {
       key: "popConfirmProps",
@@ -666,7 +740,7 @@ export default function Example(): JSX.Element {
           ? "접근성을 위한 레이블"
           : "The aria label for accessibility.",
       type: "string",
-      default: "placeholder와 동일"
+      default: "-"
     },
     {
       key: "ariaRequired",

@@ -5,6 +5,7 @@ import { useMobile } from "../../_lib/context/mobileContext";
 import { Breadcrumb, Dropdown, Tag, Typography } from "sud-ui";
 import { AngleDown, HomeOutline, TriangleRight } from "sud-icons";
 import { useLang } from "../../_lib/context/langContext";
+import { fontSizeTypeTags } from "../../_lib/components/common/defaultType";
 
 export default function BreadcrumbPage() {
   const { isMobile } = useMobile();
@@ -474,7 +475,7 @@ export default CustomStyleBreadcrumb;`
           ? "브레드크럼 항목 목록. 각 항목은 { label: ReactNode, href?: string } 형태로 구성됩니다."
           : "List of breadcrumb items. Each item is structured as { label: ReactNode, href?: string }.",
       type: "BreadcrumbItem[]",
-      default: ""
+      default: "-"
     },
     {
       key: "separator",
@@ -489,57 +490,48 @@ export default CustomStyleBreadcrumb;`
       name: "className",
       description: lang === "ko" ? "추가 클래스명" : "Additional class name",
       type: "string",
-      default: ""
+      default: "-"
     },
     {
       key: "style",
       name: "style",
       description: lang === "ko" ? "컨테이너 스타일" : "Container style",
       type: "React.CSSProperties",
-      default: ""
+      default: "-"
     },
     {
       key: "separatorStyle",
       name: "separatorStyle",
       description: lang === "ko" ? "구분자 스타일" : "Separator style",
       type: "React.CSSProperties",
-      default: ""
+      default: "-"
     },
     {
       key: "linkStyle",
       name: "linkStyle",
       description: lang === "ko" ? "링크 스타일" : "Link style",
       type: "React.CSSProperties",
-      default: ""
+      default: "-"
     },
     {
       key: "itemStyle",
       name: "itemStyle",
       description: lang === "ko" ? "항목 스타일" : "Item style",
       type: "React.CSSProperties",
-      default: ""
+      default: "-"
     },
     {
       key: "listStyle",
       name: "listStyle",
       description: lang === "ko" ? "목록 스타일" : "List style",
       type: "React.CSSProperties",
-      default: ""
+      default: "-"
     },
     {
       key: "size",
       name: "size",
-      description:
-        lang === "ko"
-          ? "텍스트 크기 (Typography size prop과 동일)"
-          : "Text size (same as Typography size prop)",
-      type: (
-        <>
-          <Tag>xs</Tag> ｜ <Tag>sm</Tag> ｜ <Tag>base</Tag> ｜ <Tag>lg</Tag> ｜{" "}
-          <Tag>xl</Tag> ｜ <Tag>2xl</Tag> ｜ <Tag>3xl</Tag> ｜ <Tag>4xl</Tag> ｜{" "}
-          <Tag>5xl</Tag>
-        </>
-      ),
+      description: lang === "ko" ? "텍스트 크기" : "Text size",
+      type: <>{fontSizeTypeTags}</>,
       default: <Tag>base</Tag>
     }
   ];

@@ -21,6 +21,12 @@ import {
   SettingOutline,
   ShareOutline
 } from "sud-icons";
+import {
+  borderTypeTags,
+  defaultColorTypeTags,
+  shadowTypeTags,
+  shapeTypeTags
+} from "../../_lib/components/common/defaultType";
 
 export default function CardPage() {
   const { isMobile } = useMobile();
@@ -614,20 +620,26 @@ export default function Example() {
       key: "colorType",
       name: "colorType",
       description: lang === "ko" ? "카드의 색상 타입" : "Card color type.",
-      type: "string",
-      default: "default"
+      type: <>{defaultColorTypeTags}</>,
+      default: <Tag>default</Tag>
     },
     {
       key: "background",
       name: "background",
-      description: lang === "ko" ? "카드의 배경색" : "Card background.",
+      description:
+        lang === "ko"
+          ? "카드의 배경색(palette값 또는 HEX code)"
+          : "Card background(palette value or HEX code)",
       type: "string",
       default: "-"
     },
     {
       key: "color",
       name: "color",
-      description: lang === "ko" ? "카드의 텍스트 색상" : "Card text color.",
+      description:
+        lang === "ko"
+          ? "카드의 텍스트 색상(palette값 또는 HEX code)"
+          : "Card text color(palette value or HEX code)",
       type: "string",
       default: "-"
     },
@@ -641,7 +653,10 @@ export default function Example() {
     {
       key: "borderColor",
       name: "borderColor",
-      description: lang === "ko" ? "카드의 테두리 색상" : "Card border color.",
+      description:
+        lang === "ko"
+          ? "카드의 테두리 색상(palette값 또는 HEX code)"
+          : "Card border color(palette value or HEX code)",
       type: "string",
       default: "-"
     },
@@ -650,8 +665,8 @@ export default function Example() {
       name: "borderType",
       description:
         lang === "ko" ? "카드의 테두리 스타일" : "Card border style.",
-      type: "string",
-      default: "solid"
+      type: <>{borderTypeTags}</>,
+      default: <Tag>solid</Tag>
     },
     {
       key: "borderWeight",
@@ -664,15 +679,15 @@ export default function Example() {
       key: "shape",
       name: "shape",
       description: lang === "ko" ? "카드의 모양" : "Card shape.",
-      type: "string",
-      default: "rounded"
+      type: <>{shapeTypeTags}</>,
+      default: <Tag>rounded</Tag>
     },
     {
       key: "shadow",
       name: "shadow",
       description: lang === "ko" ? "카드의 그림자 효과" : "Card shadow effect.",
-      type: "string",
-      default: "sm"
+      type: <>{shadowTypeTags}</>,
+      default: <Tag>sm</Tag>
     },
     {
       key: "width",
@@ -700,7 +715,7 @@ export default function Example() {
       name: "className",
       description: lang === "ko" ? "추가 클래스명" : "Additional class name.",
       type: "string",
-      default: '""'
+      default: "-"
     },
     {
       key: "style",

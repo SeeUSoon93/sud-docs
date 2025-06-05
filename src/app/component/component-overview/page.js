@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useMobile } from "../../_lib/context/mobileContext";
-import { Card, Typography, Input, Tag, Image } from "sud-ui";
+import { Card, Typography, Input, Tag, Image, Table } from "sud-ui";
 import { Search } from "sud-icons";
 import { overViewData } from "./overViewData";
 import { useDarkMode } from "../../_lib/context/darkModeContext";
@@ -34,6 +34,82 @@ export default function ComponentOverview() {
   const handleCardClick = (link) => {
     router.push(link);
   };
+  const mobileColumn = (prop) => {
+    return [
+      {
+        title: lang === "ko" ? prop.name : prop.name,
+        dataIndex: "name",
+        key: "name",
+        col: 2
+      },
+      {
+        title: lang === "ko" ? "내용" : "Content",
+        dataIndex: "value",
+        key: "value",
+        col: 3
+      }
+    ];
+  };
+
+  const mobileDataSource = (prop) => {
+    return [
+      {
+        key: "description",
+        name: lang === "ko" ? "설명" : "Description",
+        value: prop.description
+      },
+      {
+        key: "type",
+        name: lang === "ko" ? "타입" : "Type",
+        value: prop.type
+      },
+      {
+        key: "default",
+        name: lang === "ko" ? "기본값" : "Default",
+        value: prop.default
+      }
+    ];
+  };
+
+  const tableColumn = [
+    {
+      title: lang === "ko" ? "속성 이름" : "Property Name",
+      dataIndex: "name",
+      key: "name",
+      col: 3,
+      align: "center"
+    },
+    {
+      title: lang === "ko" ? "설명" : "Description",
+      dataIndex: "description",
+      key: "description",
+      col: 5,
+      align: "center"
+    },
+    {
+      title: lang === "ko" ? "타입" : "Type",
+      dataIndex: "type",
+      key: "type",
+      col: 5,
+      align: "center"
+    },
+    {
+      title: lang === "ko" ? "기본값" : "Default",
+      dataIndex: "default",
+      key: "default",
+      col: 2,
+      align: "center"
+    }
+  ];
+
+  const howToUseTableData = [
+    {
+      name: "Button",
+      description: "버튼 컴포넌트",
+      type: "Button",
+      default: "Button"
+    }
+  ];
 
   return (
     <div className="flex flex-col gap-40 pd-20 w-100">
@@ -80,6 +156,32 @@ export default function ComponentOverview() {
           />
         }
       />
+      {/* <SubTitleAndDescription
+        title={lang === "ko" ? "기본 Props" : "Basic Props"}
+        description={
+          <>
+            {lang === "ko"
+              ? "자주 사용되는 props를 정리한 표입니다. 컴포넌트별로 값이 조금씩 상이할 수 있습니다."
+              : "A table of frequently used props. The values may slightly differ for each component."}
+          </>
+        }
+        etc={
+          isMobile ? (
+            <div className="flex flex-col gap-20">
+              {howToUseTableData.map((prop) => (
+                <Table
+                  key={prop.key}
+                  columns={mobileColumn(prop)}
+                  dataSource={mobileDataSource(prop)}
+                />
+              ))}
+            </div>
+          ) : (
+            <Table columns={tableColumn} dataSource={howToUseTableData} />
+          )
+        }
+      /> */}
+
       <SubTitleAndDescription
         title={lang === "ko" ? "Component 종류" : "Component Types"}
         etc={

@@ -4,6 +4,13 @@ import { useMobile } from "../../_lib/context/mobileContext";
 import { useLang } from "../../_lib/context/langContext";
 import { Button, Dropdown, Tag } from "sud-ui";
 import { AngleDown, AngleLeft, AngleRight, AngleUp } from "sud-icons";
+import { tagRender } from "../../_lib/components/common/render";
+import {
+  borderTypeTags,
+  defaultColorTypeTags,
+  shadowTypeTags,
+  shapeTypeTags
+} from "../../_lib/components/common/defaultType";
 
 export default function DrawerPage() {
   const { isMobile } = useMobile();
@@ -571,7 +578,7 @@ export default function Example() {
           ? "드롭다운을 트리거하는 요소 (PopupBase)"
           : "Element that triggers the dropdown (PopupBase)",
       type: "ReactNode",
-      default: ""
+      default: "-"
     },
     {
       key: "title",
@@ -581,7 +588,7 @@ export default function Example() {
           ? "드롭다운 메뉴의 제목 (PopupBase)"
           : "Title of the dropdown menu (PopupBase)",
       type: "string",
-      default: ""
+      default: "-"
     },
     {
       key: "trigger",
@@ -590,11 +597,7 @@ export default function Example() {
         lang === "ko"
           ? "드롭다운을 여는 방식 (PopupBase)"
           : "How to open the dropdown (PopupBase)",
-      type: (
-        <>
-          <Tag>hover</Tag> ｜ <Tag>click</Tag> ｜ <Tag>contextMenu</Tag>
-        </>
-      ),
+      type: <>{tagRender(["hover", "click", "contextMenu"])}</>,
       default: <Tag>hover</Tag>
     },
     {
@@ -605,7 +608,7 @@ export default function Example() {
           ? "드롭다운의 열림 상태 (PopupBase, 제어용)"
           : "Open state of the dropdown (PopupBase, controlled)",
       type: "boolean",
-      default: ""
+      default: "-"
     },
     {
       key: "defaultOpen",
@@ -625,7 +628,7 @@ export default function Example() {
           ? "드롭다운 열림 상태 변경 시 호출되는 콜백 (PopupBase)"
           : "Callback called when dropdown open state changes (PopupBase)",
       type: "(open: boolean) => void",
-      default: ""
+      default: "-"
     },
     {
       key: "closeOnClick",
@@ -662,11 +665,7 @@ export default function Example() {
       name: "expandType",
       description:
         lang === "ko" ? "메뉴 확장 방식 (Menu)" : "Menu expansion type (Menu)",
-      type: (
-        <>
-          <Tag>popover</Tag> ｜ <Tag>dropdown</Tag>
-        </>
-      ),
+      type: <>{tagRender(["popover", "accordion"])}</>,
       default: <Tag>popover</Tag>
     },
     {
@@ -676,12 +675,7 @@ export default function Example() {
         lang === "ko"
           ? "드롭다운 팝업의 위치 (PopupBase)"
           : "Position of the dropdown popup (PopupBase)",
-      type: (
-        <>
-          <Tag>top</Tag> ｜ <Tag>bottom</Tag> ｜ <Tag>right</Tag> ｜{" "}
-          <Tag>left</Tag>
-        </>
-      ),
+      type: <>{tagRender(["top", "bottom", "right", "left"])}</>,
       default: <Tag>bottom</Tag>
     },
     {
@@ -693,9 +687,8 @@ export default function Example() {
           : "Array of menu positions (Menu)",
       type: (
         <>
-          [<Tag>top</Tag> ｜ <Tag>bottom</Tag> ｜ <Tag>right</Tag> ｜{" "}
-          <Tag>left</Tag>,<br /> <Tag>top</Tag> ｜ <Tag>bottom</Tag> ｜{" "}
-          <Tag>right</Tag> ｜ <Tag>left</Tag>]
+          [{tagRender(["top", "bottom", "right", "left"])},{" "}
+          {tagRender(["top", "bottom", "right", "left"])}]
         </>
       ),
       default: (
@@ -711,30 +704,28 @@ export default function Example() {
         lang === "ko"
           ? "색상 타입 (PopupBase, Menu)"
           : "Color type (PopupBase, Menu)",
-      type: (
-        <>
-          <Tag>default</Tag> ｜ <Tag>primary</Tag> ｜ <Tag>secondary</Tag> ｜{" "}
-          <Tag>success</Tag> ｜ <Tag>warning</Tag> ｜ <Tag>danger</Tag> ｜{" "}
-          <Tag>info</Tag> ｜ <Tag>text</Tag>
-        </>
-      ),
+      type: <>{defaultColorTypeTags}</>,
       default: <Tag>default</Tag>
     },
     {
       key: "background",
       name: "background",
       description:
-        lang === "ko" ? "배경색 (PopupBase)" : "Background color (PopupBase)",
+        lang === "ko"
+          ? "배경색 (PopupBase)(palette값 또는 HEX code)"
+          : "Background color (PopupBase)(palette value or HEX code)",
       type: "string",
-      default: ""
+      default: "-"
     },
     {
       key: "color",
       name: "color",
       description:
-        lang === "ko" ? "텍스트 색상 (PopupBase)" : "Text color (PopupBase)",
+        lang === "ko"
+          ? "텍스트 색상 (PopupBase)(palette값 또는 HEX code)"
+          : "Text color (PopupBase)(palette value or HEX code)",
       type: "string",
-      default: ""
+      default: "-"
     },
     {
       key: "border",
@@ -750,9 +741,11 @@ export default function Example() {
       key: "borderColor",
       name: "borderColor",
       description:
-        lang === "ko" ? "테두리 색상 (PopupBase)" : "Border color (PopupBase)",
+        lang === "ko"
+          ? "테두리 색상 (PopupBase)(palette값 또는 HEX code)"
+          : "Border color (PopupBase)(palette value or HEX code)",
       type: "string",
-      default: ""
+      default: "-"
     },
     {
       key: "borderType",
@@ -761,11 +754,7 @@ export default function Example() {
         lang === "ko"
           ? "테두리 스타일 (PopupBase)"
           : "Border style (PopupBase)",
-      type: (
-        <>
-          <Tag>solid</Tag> ｜ <Tag>dashed</Tag> ｜ <Tag>dotted</Tag>
-        </>
-      ),
+      type: <>{borderTypeTags}</>,
       default: <Tag>solid</Tag>
     },
     {
@@ -781,11 +770,7 @@ export default function Example() {
       name: "shape",
       description:
         lang === "ko" ? "모서리 형태 (PopupBase)" : "Corner shape (PopupBase)",
-      type: (
-        <>
-          <Tag>rounded</Tag> ｜ <Tag>square</Tag>
-        </>
-      ),
+      type: <>{shapeTypeTags}</>,
       default: <Tag>rounded</Tag>
     },
     {
@@ -793,12 +778,7 @@ export default function Example() {
       name: "shadow",
       description:
         lang === "ko" ? "그림자 크기 (PopupBase)" : "Shadow size (PopupBase)",
-      type: (
-        <>
-          <Tag>none</Tag> ｜ <Tag>sm</Tag> ｜ <Tag>md</Tag> ｜ <Tag>lg</Tag> ｜{" "}
-          <Tag>xl</Tag>
-        </>
-      ),
+      type: <>{shadowTypeTags}</>,
       default: <Tag>sm</Tag>
     },
     {
@@ -809,7 +789,7 @@ export default function Example() {
           ? "추가 클래스명 (PopupBase)"
           : "Additional class name (PopupBase)",
       type: "string",
-      default: ""
+      default: "-"
     },
     {
       key: "style",

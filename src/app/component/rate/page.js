@@ -3,9 +3,10 @@
 import Frame from "../Frame";
 import { useMobile } from "../../_lib/context/mobileContext";
 import { useLang } from "../../_lib/context/langContext";
-import { Rate } from "sud-ui";
+import { Rate, Tag } from "sud-ui";
 
 import { MoodSadOutline, MoodSmileOutline, UserFill } from "sud-icons";
+import { tagRender } from "../../_lib/components/common/render";
 
 export default function RatePage() {
   const { isMobile } = useMobile();
@@ -280,8 +281,8 @@ export default function Example(): JSX.Element {
       name: "activeColor",
       description:
         lang === "ko"
-          ? "활성화된 별점의 색상"
-          : "The color of the active star.",
+          ? "활성화된 별점의 색상(palette값 또는 HEX code)"
+          : "The color of the active star (palette value or HEX code).",
       type: "string",
       default: "-"
     },
@@ -290,8 +291,8 @@ export default function Example(): JSX.Element {
       name: "inactiveColor",
       description:
         lang === "ko"
-          ? "비활성화된 별점의 색상"
-          : "The color of the inactive star.",
+          ? "비활성화된 별점의 색상(palette값 또는 HEX code)"
+          : "The color of the inactive star (palette value or HEX code).",
       type: "string",
       default: "-"
     },
@@ -307,7 +308,7 @@ export default function Example(): JSX.Element {
       name: "className",
       description: lang === "ko" ? "추가 클래스명" : "Additional class name.",
       type: "string",
-      default: '""'
+      default: "-"
     },
     {
       key: "style",
@@ -331,8 +332,8 @@ export default function Example(): JSX.Element {
         lang === "ko"
           ? "별점 아이콘 (star, heart 또는 JSX 요소)"
           : "The star icon (star, heart or JSX element).",
-      type: "string | ReactElement",
-      default: "star"
+      type: <>{tagRender(["star", "heart"])} or ReactElement</>,
+      default: <Tag>star</Tag>
     }
   ];
 

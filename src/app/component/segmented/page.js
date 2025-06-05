@@ -5,6 +5,13 @@ import { useMobile } from "../../_lib/context/mobileContext";
 import { useLang } from "../../_lib/context/langContext";
 import { Tag, Typography, Segmented, Card, Radio } from "sud-ui";
 import React, { useState } from "react";
+import { tagRender } from "../../_lib/components/common/render";
+import {
+  borderTypeTags,
+  defaultColorTypeTags,
+  shadowTypeTags,
+  shapeTypeTags
+} from "../../_lib/components/common/defaultType";
 
 export default function SegmentedPage() {
   const { isMobile } = useMobile();
@@ -585,7 +592,7 @@ export default ColorSegmented;`
       description:
         lang === "ko" ? "현재 선택된 값" : "The currently selected value.",
       type: "string | number",
-      default: "undefined"
+      default: "-"
     },
     {
       key: "onChange",
@@ -595,7 +602,7 @@ export default ColorSegmented;`
           ? "값 변경 시 호출되는 콜백 함수"
           : "A callback function that is called when the value changes.",
       type: "(value: string | number) => void",
-      default: "undefined"
+      default: "-"
     },
     {
       key: "disabled",
@@ -609,11 +616,7 @@ export default ColorSegmented;`
       key: "size",
       name: "size",
       description: lang === "ko" ? "크기" : "The size of the segmented.",
-      type: (
-        <>
-          <Tag>sm</Tag> ｜ <Tag>md</Tag> ｜ <Tag>lg</Tag>
-        </>
-      ),
+      type: <>{tagRender(["sm", "md", "lg"])}</>,
       default: <Tag>md</Tag>
     },
     {
@@ -631,41 +634,35 @@ export default ColorSegmented;`
       name: "colorType",
       description:
         lang === "ko" ? "색상 타입" : "The color type of the segmented.",
-      type: (
-        <>
-          <Tag>default</Tag> ｜ <Tag>primary</Tag> ｜ <Tag>success</Tag> ｜{" "}
-          <Tag>warning</Tag> ｜ <Tag>danger</Tag>
-        </>
-      ),
+      type: <>{defaultColorTypeTags}</>,
       default: <Tag>default</Tag>
     },
     {
       key: "shape",
       name: "shape",
       description: lang === "ko" ? "모양" : "The shape of the segmented.",
-      type: (
-        <>
-          <Tag>rounded</Tag> ｜ <Tag>square</Tag> ｜ <Tag>circle</Tag> ｜{" "}
-          <Tag>capsule</Tag>
-        </>
-      ),
+      type: <>{shapeTypeTags}</>,
       default: <Tag>rounded</Tag>
     },
     {
       key: "background",
       name: "background",
       description:
-        lang === "ko" ? "배경색" : "The background color of the segmented.",
+        lang === "ko"
+          ? "배경색(palette값 또는 HEX code)"
+          : "The background color of the segmented (palette value or HEX code).",
       type: "string",
-      default: ""
+      default: "-"
     },
     {
       key: "color",
       name: "color",
       description:
-        lang === "ko" ? "텍스트 색상" : "The text color of the segmented.",
+        lang === "ko"
+          ? "텍스트 색상(palette값 또는 HEX code)"
+          : "The text color of the segmented (palette value or HEX code).",
       type: "string",
-      default: ""
+      default: "-"
     },
     {
       key: "border",
@@ -679,20 +676,18 @@ export default ColorSegmented;`
       key: "borderColor",
       name: "borderColor",
       description:
-        lang === "ko" ? "테두리 색상" : "The border color of the segmented.",
+        lang === "ko"
+          ? "테두리 색상(palette값 또는 HEX code)"
+          : "The border color of the segmented (palette value or HEX code).",
       type: "string",
-      default: ""
+      default: "-"
     },
     {
       key: "borderType",
       name: "borderType",
       description:
         lang === "ko" ? "테두리 스타일" : "The border style of the segmented.",
-      type: (
-        <>
-          <Tag>solid</Tag> ｜ <Tag>dashed</Tag> ｜ <Tag>dotted</Tag>
-        </>
-      ),
+      type: <>{borderTypeTags}</>,
       default: <Tag>solid</Tag>
     },
     {
@@ -708,12 +703,7 @@ export default ColorSegmented;`
       name: "shadow",
       description:
         lang === "ko" ? "그림자 효과" : "The shadow effect of the segmented.",
-      type: (
-        <>
-          <Tag>none</Tag> ｜ <Tag>sm</Tag> ｜ <Tag>md</Tag> ｜ <Tag>lg</Tag> ｜{" "}
-          <Tag>xl</Tag>
-        </>
-      ),
+      type: <>{shadowTypeTags}</>,
       default: <Tag>none</Tag>
     },
     {
@@ -721,7 +711,7 @@ export default ColorSegmented;`
       name: "style",
       description: lang === "ko" ? "추가 스타일" : "Additional styles.",
       type: "React.CSSProperties",
-      default: ""
+      default: "{}"
     },
     {
       key: "className",

@@ -4,6 +4,12 @@ import Frame from "../Frame";
 import { useMobile } from "../../_lib/context/mobileContext";
 import { useLang } from "../../_lib/context/langContext";
 import { Tag, Calendar } from "sud-ui";
+import { tagRender } from "../../_lib/components/common/render";
+import {
+  badgeColorTypeTags,
+  borderTypeTags,
+  defaultColorTypeTags
+} from "../../_lib/components/common/defaultType";
 
 export default function BadgePage() {
   const { isMobile } = useMobile();
@@ -279,11 +285,7 @@ export default MiniView;`
       key: "view",
       name: "view",
       description: lang === "ko" ? "달력 뷰 타입" : "Calendar view type",
-      type: (
-        <>
-          <Tag>daily</Tag> ｜ <Tag>month</Tag> ｜ <Tag>year</Tag>
-        </>
-      ),
+      type: <>{tagRender(["daily", "month", "year"])}</>,
       default: <Tag>month</Tag>
     },
     {
@@ -335,38 +337,43 @@ export default MiniView;`
       name: "locale",
       description:
         lang === "ko" ? "달력 언어 설정" : "Calendar language setting",
-      type: (
-        <>
-          <Tag>en</Tag> ｜ <Tag>ko</Tag>
-        </>
-      ),
+      type: <>{tagRender(["en", "ko"])}</>,
       default: <Tag>en</Tag>
     },
     {
       key: "colorType",
       name: "colorType",
       description: lang === "ko" ? "달력 색상 타입" : "Calendar color type",
-      type: "string",
+      type: <>{defaultColorTypeTags}</>,
       default: <Tag>sky</Tag>
     },
     {
       key: "background",
       name: "background",
-      description: lang === "ko" ? "배경색" : "Background color",
+      description:
+        lang === "ko"
+          ? "배경색(palette값 또는 HEX code)"
+          : "Background color(palette value or HEX code)",
       type: "string",
       default: "-"
     },
     {
       key: "hoverBackground",
       name: "hoverBackground",
-      description: lang === "ko" ? "호버 시 배경색" : "Hover background color",
+      description:
+        lang === "ko"
+          ? "호버 시 배경색(palette값 또는 HEX code)"
+          : "Hover background color(palette value or HEX code)",
       type: "string",
       default: "-"
     },
     {
       key: "color",
       name: "color",
-      description: lang === "ko" ? "텍스트 색상" : "Text color",
+      description:
+        lang === "ko"
+          ? "텍스트 색상(palette값 또는 HEX code)"
+          : "Text color(palette value or HEX code)",
       type: "string",
       default: "-"
     },
@@ -380,7 +387,10 @@ export default MiniView;`
     {
       key: "borderColor",
       name: "borderColor",
-      description: lang === "ko" ? "테두리 색상" : "Border color",
+      description:
+        lang === "ko"
+          ? "테두리 색상(palette값 또는 HEX code)"
+          : "Border color(palette value or HEX code)",
       type: "string",
       default: "-"
     },
@@ -388,11 +398,7 @@ export default MiniView;`
       key: "borderType",
       name: "borderType",
       description: lang === "ko" ? "테두리 스타일" : "Border style",
-      type: (
-        <>
-          <Tag>solid</Tag> ｜ <Tag>dashed</Tag> ｜ <Tag>dotted</Tag>
-        </>
-      ),
+      type: <>{borderTypeTags}</>,
       default: <Tag>solid</Tag>
     },
     {
@@ -421,7 +427,7 @@ export default MiniView;`
       name: "className",
       description: lang === "ko" ? "추가 클래스명" : "Additional class name",
       type: "string",
-      default: '""'
+      default: "-"
     },
     {
       key: "range",
@@ -453,11 +459,7 @@ export default MiniView;`
       key: "size",
       name: "size",
       description: lang === "ko" ? "달력 크기" : "Calendar size",
-      type: (
-        <>
-          <Tag>lg</Tag> ｜ <Tag>md</Tag> ｜ <Tag>sm</Tag> ｜ <Tag>miniView</Tag>
-        </>
-      ),
+      type: <>{tagRender(["lg", "md", "sm", "miniView"])}</>,
       default: <Tag>md</Tag>
     },
     {

@@ -6,6 +6,12 @@ import { useLang } from "../../_lib/context/langContext";
 import { Tabs, Tag, Radio, Card } from "sud-ui";
 
 import React, { useState } from "react";
+import { tagRender } from "../../_lib/components/common/render";
+import {
+  borderTypeTags,
+  defaultColorTypeTags,
+  defaultSizeTypeTags
+} from "../../_lib/components/common/defaultType";
 
 export default function TabsPage() {
   const { isMobile } = useMobile();
@@ -627,7 +633,7 @@ export default CustomColorTabs;`
           ? "현재 선택된 탭의 키 값 (제어 컴포넌트)"
           : "The key value of the currently selected tab (controlled component)",
       type: "string | number",
-      default: "undefined"
+      default: "-"
     },
     {
       key: "defaultValue",
@@ -637,7 +643,7 @@ export default CustomColorTabs;`
           ? "초기 선택된 탭의 키 값 (비제어 컴포넌트)"
           : "The key value of the initially selected tab (uncontrolled component)",
       type: "string | number",
-      default: "undefined"
+      default: "-"
     },
     {
       key: "onChange",
@@ -647,7 +653,7 @@ export default CustomColorTabs;`
           ? "탭 변경 시 호출되는 콜백 함수"
           : "The callback function called when the tab changes",
       type: "(key: string | number) => void",
-      default: "undefined"
+      default: "-"
     },
     {
       key: "options",
@@ -657,7 +663,7 @@ export default CustomColorTabs;`
           ? "탭 옵션 배열 (선언적 방식 사용 시)"
           : "The array of tab options (when using the declarative method)",
       type: "Array<{ key: string | number, label: string | ReactNode, children?: ReactNode }>",
-      default: "undefined"
+      default: "-"
     },
     {
       key: "children",
@@ -667,7 +673,7 @@ export default CustomColorTabs;`
           ? "TabPane 컴포넌트들 (선언적 방식 대신 사용)"
           : "TabPane components (used instead of the declarative method)",
       type: "ReactNode",
-      default: "undefined"
+      default: "-"
     },
     {
       key: "size",
@@ -675,8 +681,7 @@ export default CustomColorTabs;`
       description: lang === "ko" ? "탭의 크기" : "The size of the tab",
       type: (
         <>
-          <Tag>xs</Tag> ｜ <Tag>sm</Tag> ｜ <Tag>md</Tag> ｜ <Tag>lg</Tag> ｜{" "}
-          <Tag>xl</Tag> ｜ <Tag>2xl</Tag>
+          {defaultSizeTypeTags}｜ <Tag>2xl</Tag>
         </>
       ),
       default: <Tag>md</Tag>
@@ -688,38 +693,32 @@ export default CustomColorTabs;`
         lang === "ko" ? "탭의 색상 타입" : "The color type of the tab",
       type: (
         <>
-          <Tag>
-            {
-              "{ active?: 'default' | 'primary' | 'success' | 'warning' | 'danger', inactive?: 'default' | 'primary' | 'success' | 'warning' | 'danger' }"
-            }
-          </Tag>
+          {`{ active?: "color-type", inactive?: "color-type" }`}
+          <br />
+          {defaultColorTypeTags}
         </>
       ),
-      default: <Tag>{"{ active: 'default', inactive: 'default' }"}</Tag>
+      default: "{ active: 'default', inactive: 'default' }"
     },
     {
       key: "background",
       name: "background",
       description:
-        lang === "ko" ? "탭의 배경색" : "The background color of the tab",
-      type: (
-        <>
-          <Tag>{"{ active?: string, inactive?: string }"}</Tag>
-        </>
-      ),
-      default: <Tag>{"{ active: undefined, inactive: undefined }"}</Tag>
+        lang === "ko"
+          ? "탭의 배경색(palette값 또는 HEX code)"
+          : "The background color of the tab (palette value or HEX code)",
+      type: "{ active?: string, inactive?: string }",
+      default: "-"
     },
     {
       key: "color",
       name: "color",
       description:
-        lang === "ko" ? "탭의 텍스트 색상" : "The text color of the tab",
-      type: (
-        <>
-          <Tag>{"{ active?: string, inactive?: string }"}</Tag>
-        </>
-      ),
-      default: <Tag>{"{ active: undefined, inactive: undefined }"}</Tag>
+        lang === "ko"
+          ? "탭의 텍스트 색상(palette값 또는 HEX code)"
+          : "The text color of the tab (palette value or HEX code)",
+      type: "{ active?: string, inactive?: string }",
+      default: "-"
     },
     {
       key: "border",
@@ -733,20 +732,18 @@ export default CustomColorTabs;`
       key: "borderColor",
       name: "borderColor",
       description:
-        lang === "ko" ? "탭의 테두리 색상" : "The border color of the tab",
-      type: (
-        <>
-          <Tag>{"{ active?: string, inactive?: string }"}</Tag>
-        </>
-      ),
-      default: <Tag>{"{ active: undefined, inactive: undefined }"}</Tag>
+        lang === "ko"
+          ? "탭의 테두리 색상(palette값 또는 HEX code)"
+          : "The border color of the tab (palette value or HEX code)",
+      type: "{ active?: string, inactive?: string }",
+      default: "-"
     },
     {
       key: "borderType",
       name: "borderType",
       description: lang === "ko" ? "테두리 스타일" : "The border style",
-      type: "string",
-      default: "solid"
+      type: borderTypeTags,
+      default: <Tag>solid</Tag>
     },
     {
       key: "borderWeight",
@@ -767,7 +764,7 @@ export default CustomColorTabs;`
       name: "className",
       description: lang === "ko" ? "추가 클래스명" : "Additional class name",
       type: "string",
-      default: "''"
+      default: "-"
     },
     {
       key: "disabledKeys",
@@ -784,11 +781,7 @@ export default CustomColorTabs;`
       name: "align",
       description:
         lang === "ko" ? "탭의 정렬 위치" : "The alignment of the tab",
-      type: (
-        <>
-          <Tag>left</Tag> ｜ <Tag>center</Tag> ｜ <Tag>right</Tag>
-        </>
-      ),
+      type: tagRender(["left", "center", "right"]),
       default: <Tag>left</Tag>
     }
   ];
@@ -798,14 +791,14 @@ export default CustomColorTabs;`
       name: "label",
       description: lang === "ko" ? "탭의 레이블" : "The label of the tab",
       type: "string | ReactNode",
-      default: "undefined"
+      default: "-"
     },
     {
       key: "children",
       name: "children",
       description: lang === "ko" ? "탭의 내용" : "The content of the tab",
       type: "ReactNode",
-      default: "undefined"
+      default: "-"
     }
   ];
   return (

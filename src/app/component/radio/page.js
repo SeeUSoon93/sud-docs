@@ -6,6 +6,8 @@ import { useLang } from "../../_lib/context/langContext";
 import { Tag, Radio, Avatar } from "sud-ui";
 
 import React, { useState } from "react";
+import { tagRender } from "../../_lib/components/common/render";
+import { defaultColorTypeTags } from "../../_lib/components/common/defaultType";
 
 export default function RadioPage() {
   const { isMobile } = useMobile();
@@ -551,13 +553,8 @@ export default function Example(): JSX.Element {
       key: "labelPosition",
       name: "labelPosition",
       description: lang === "ko" ? "라벨의 위치" : "The position of the label.",
-      type: (
-        <>
-          <Tag>left</Tag> ｜ <Tag>right</Tag> ｜ <Tag>top</Tag> ｜{" "}
-          <Tag>bottom</Tag>
-        </>
-      ),
-      default: "right"
+      type: <>{tagRender(["left", "right", "top", "bottom"])}</>,
+      default: <Tag>right</Tag>
     },
     {
       key: "children",
@@ -571,7 +568,9 @@ export default function Example(): JSX.Element {
       key: "color",
       name: "color",
       description:
-        lang === "ko" ? "라디오 버튼의 색상" : "The color of the radio button.",
+        lang === "ko"
+          ? "라디오 버튼의 텍스트 색상(palette값 또는 HEX code)"
+          : "The text color of the radio button (palette value or HEX code).",
       type: "string",
       default: "-"
     },
@@ -592,15 +591,15 @@ export default function Example(): JSX.Element {
         lang === "ko"
           ? "라디오 버튼의 색상 타입"
           : "The color type of the radio button.",
-      type: "string",
-      default: "primary"
+      type: <>{defaultColorTypeTags}</>,
+      default: <Tag>primary</Tag>
     },
     {
       key: "className",
       name: "className",
       description: lang === "ko" ? "추가 클래스명" : "Additional class name.",
       type: "string",
-      default: '""'
+      default: "-"
     },
     {
       key: "style",
@@ -650,7 +649,7 @@ export default function Example(): JSX.Element {
       description:
         lang === "ko" ? "현재 선택된 값" : "Currently selected value.",
       type: "string",
-      default: "null"
+      default: "-"
     },
     {
       key: "onChange",
@@ -666,23 +665,15 @@ export default function Example(): JSX.Element {
       key: "layout",
       name: "layout",
       description: lang === "ko" ? "레이아웃 타입" : "Layout type.",
-      type: (
-        <>
-          <Tag>flex</Tag> ｜ <Tag>grid</Tag>
-        </>
-      ),
-      default: "flex"
+      type: <>{tagRender(["flex", "grid"])}</>,
+      default: <Tag>flex</Tag>
     },
     {
       key: "direction",
       name: "direction",
       description: lang === "ko" ? "배치 방향" : "Direction of arrangement.",
-      type: (
-        <>
-          <Tag>horizontal</Tag> ｜ <Tag>vertical</Tag>
-        </>
-      ),
-      default: "vertical"
+      type: <>{tagRender(["horizontal", "vertical"])}</>,
+      default: <Tag>vertical</Tag>
     },
     {
       key: "cols",
@@ -724,7 +715,9 @@ export default function Example(): JSX.Element {
       key: "color",
       name: "color",
       description:
-        lang === "ko" ? "라디오 버튼 색상" : "Color of radio buttons.",
+        lang === "ko"
+          ? "라디오 버튼 텍스트 색상(palette값 또는 HEX code)"
+          : "Text color of radio buttons (palette value or HEX code).",
       type: "string",
       default: "-"
     },
@@ -735,20 +728,15 @@ export default function Example(): JSX.Element {
         lang === "ko"
           ? "라디오 버튼 색상 타입"
           : "Color type of radio buttons.",
-      type: "string",
-      default: "primary"
+      type: <>{defaultColorTypeTags}</>,
+      default: <Tag>primary</Tag>
     },
     {
       key: "labelPosition",
       name: "labelPosition",
       description: lang === "ko" ? "라벨 위치" : "Position of labels.",
-      type: (
-        <>
-          <Tag>left</Tag> ｜ <Tag>right</Tag> ｜ <Tag>top</Tag> ｜{" "}
-          <Tag>bottom</Tag>
-        </>
-      ),
-      default: "right"
+      type: <>{tagRender(["left", "right", "top", "bottom"])}</>,
+      default: <Tag>right</Tag>
     },
     {
       key: "ariaLabel",
@@ -777,7 +765,7 @@ export default function Example(): JSX.Element {
       name: "className",
       description: lang === "ko" ? "추가 클래스명" : "Additional class name.",
       type: "string",
-      default: '""'
+      default: "-"
     },
     {
       key: "style",

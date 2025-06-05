@@ -6,6 +6,8 @@ import { useLang } from "../../_lib/context/langContext";
 import { Tag, Avatar, Checkbox } from "sud-ui";
 
 import React, { useState } from "react";
+import { tagRender } from "../../_lib/components/common/render";
+import { defaultColorTypeTags } from "../../_lib/components/common/defaultType";
 
 export default function CheckboxPage() {
   const { isMobile } = useMobile();
@@ -15,8 +17,8 @@ export default function CheckboxPage() {
   const description = (
     <>
       {lang === "ko"
-        ? "여러 옵션을 동시에 선택할 수 있는 체크박스 컴포넌트입니다."
-        : "A checkbox component that allows multiple options to be selected at the same time."}
+        ? "여러 옵션 중 하나 이상을 선택할 수 있는 체크박스 컴포넌트입니다."
+        : "A checkbox component that allows one or more options to be selected at the same time."}
     </>
   );
 
@@ -24,9 +26,12 @@ export default function CheckboxPage() {
 
   const whenToUse =
     lang === "ko"
-      ? ["여러 옵션 중 하나를 선택할 때", "사용자의 선택이나 결정을 확인할 때"]
+      ? [
+          "여러 옵션 중 하나 이상을 선택할 때",
+          "사용자의 선택이나 결정을 확인할 때"
+        ]
       : [
-          "When you need to select one option from multiple options.",
+          "When you need to select one or more options from multiple options.",
           "When you need to confirm the user's choice or decision."
         ];
 
@@ -534,19 +539,16 @@ export default function Example(): JSX.Element {
       key: "labelPosition",
       name: "labelPosition",
       description: lang === "ko" ? "라벨의 위치" : "The position of the label",
-      type: (
-        <>
-          <Tag>left</Tag> | <Tag>right</Tag> | <Tag>top</Tag> |{" "}
-          <Tag>bottom</Tag>
-        </>
-      ),
-      default: "right"
+      type: <>{tagRender(["left", "right", "top", "bottom"])}</>,
+      default: <Tag>right</Tag>
     },
     {
       key: "color",
       name: "color",
       description:
-        lang === "ko" ? "체크박스의 색상" : "The color of the checkbox",
+        lang === "ko"
+          ? "체크박스의 색상(palette값 또는 HEX code)"
+          : "The color of the checkbox (palette value or HEX code)",
       type: "string",
       default: "-"
     },
@@ -565,15 +567,15 @@ export default function Example(): JSX.Element {
         lang === "ko"
           ? "체크박스의 색상 타입"
           : "The color type of the checkbox",
-      type: "string",
-      default: "primary"
+      type: <>{defaultColorTypeTags}</>,
+      default: <Tag>primary</Tag>
     },
     {
       key: "className",
       name: "className",
       description: lang === "ko" ? "추가 클래스명" : "Additional class name",
       type: "string",
-      default: '""'
+      default: "-"
     },
     {
       key: "style",
@@ -648,23 +650,15 @@ export default function Example(): JSX.Element {
       key: "layout",
       name: "layout",
       description: lang === "ko" ? "레이아웃 타입" : "Layout type",
-      type: (
-        <>
-          <Tag>flex</Tag> | <Tag>grid</Tag>
-        </>
-      ),
-      default: "flex"
+      type: <>{tagRender(["flex", "grid"])}</>,
+      default: <Tag>flex</Tag>
     },
     {
       key: "direction",
       name: "direction",
       description: lang === "ko" ? "배치 방향" : "Direction of arrangement",
-      type: (
-        <>
-          <Tag>horizontal</Tag> | <Tag>vertical</Tag>
-        </>
-      ),
-      default: "vertical"
+      type: <>{tagRender(["horizontal", "vertical"])}</>,
+      default: <Tag>vertical</Tag>
     },
     {
       key: "cols",
@@ -708,7 +702,9 @@ export default function Example(): JSX.Element {
       key: "color",
       name: "color",
       description:
-        lang === "ko" ? "체크박스의 색상" : "The color of the checkboxes",
+        lang === "ko"
+          ? "체크박스의 색상(palette값 또는 HEX code)"
+          : "The color of the checkboxes (palette value or HEX code)",
       type: "string",
       default: "-"
     },
@@ -719,20 +715,15 @@ export default function Example(): JSX.Element {
         lang === "ko"
           ? "체크박스의 색상 타입"
           : "The color type of the checkboxes",
-      type: "string",
-      default: "primary"
+      type: <>{defaultColorTypeTags}</>,
+      default: <Tag>primary</Tag>
     },
     {
       key: "labelPosition",
       name: "labelPosition",
       description: lang === "ko" ? "라벨의 위치" : "The position of the labels",
-      type: (
-        <>
-          <Tag>left</Tag> | <Tag>right</Tag> | <Tag>top</Tag> |{" "}
-          <Tag>bottom</Tag>
-        </>
-      ),
-      default: "right"
+      type: <>{tagRender(["left", "right", "top", "bottom"])}</>,
+      default: <Tag>right</Tag>
     },
     {
       key: "ariaLabel",
@@ -771,7 +762,7 @@ export default function Example(): JSX.Element {
       name: "className",
       description: lang === "ko" ? "추가 클래스명" : "Additional class name",
       type: "string",
-      default: '""'
+      default: "-"
     },
     {
       key: "style",

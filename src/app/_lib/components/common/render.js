@@ -1,4 +1,12 @@
-import { Button, Card, Collapse, Divider, Segmented, Typography } from "sud-ui";
+import {
+  Button,
+  Card,
+  Collapse,
+  Divider,
+  Segmented,
+  Tag,
+  Typography
+} from "sud-ui";
 import { handleInstallCopy } from "../../utils/utils";
 import { CodeBoxOutline, DocumentOutline } from "sud-icons";
 import React, { useState } from "react";
@@ -268,3 +276,14 @@ export const ExampleBlock = ({
     </Card>
   );
 };
+
+export const tagRender = (tags) => (
+  <>
+    {tags.map((tag, index) => (
+      <React.Fragment key={tag}>
+        <Tag>{tag}</Tag>
+        {index < tags.length - 1 && " | "}
+      </React.Fragment>
+    ))}
+  </>
+);

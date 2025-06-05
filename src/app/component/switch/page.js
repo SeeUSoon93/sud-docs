@@ -7,6 +7,11 @@ import { Tag, Card, Radio, Switch } from "sud-ui";
 
 import React, { useState } from "react";
 import { Check, Close } from "sud-icons";
+import {
+  defaultColorTypeTags,
+  shadowTypeTags
+} from "../../_lib/components/common/defaultType";
+import { tagRender } from "../../_lib/components/common/render";
 
 export default function SwitchPage() {
   const { isMobile } = useMobile();
@@ -518,8 +523,8 @@ export default ThumbSwitch;`
       name: "onColor",
       description:
         lang === "ko"
-          ? "켜진 상태의 배경색"
-          : "The background color of the on state",
+          ? "켜진 상태의 배경색(palette값 또는 HEX code)"
+          : "The background color of the on state (palette value or HEX code).",
       type: "string",
       default: "-"
     },
@@ -528,8 +533,8 @@ export default ThumbSwitch;`
       name: "offColor",
       description:
         lang === "ko"
-          ? "꺼진 상태의 배경색"
-          : "The background color of the off state",
+          ? "꺼진 상태의 배경색(palette값 또는 HEX code)"
+          : "The background color of the off state (palette value or HEX code).",
       type: "string",
       default: "-"
     },
@@ -569,23 +574,14 @@ export default ThumbSwitch;`
       key: "shadow",
       name: "shadow",
       description: lang === "ko" ? "그림자 크기" : "The size of the shadow",
-      type: (
-        <>
-          <Tag>none</Tag> ｜ <Tag>sm</Tag> ｜ <Tag>md</Tag> ｜ <Tag>lg</Tag> ｜{" "}
-          <Tag>xl</Tag>
-        </>
-      ),
+      type: <>{shadowTypeTags}</>,
       default: <Tag>md</Tag>
     },
     {
       key: "size",
       name: "size",
       description: lang === "ko" ? "스위치의 크기" : "The size of the switch",
-      type: (
-        <>
-          <Tag>sm</Tag> ｜ <Tag>md</Tag> ｜ <Tag>lg</Tag>
-        </>
-      ),
+      type: <>{tagRender(["sm", "md", "lg"])}</>,
       default: <Tag>md</Tag>
     },
     {
@@ -593,12 +589,7 @@ export default ThumbSwitch;`
       name: "colorType",
       description:
         lang === "ko" ? "스위치의 색상 타입" : "The color type of the switch",
-      type: (
-        <>
-          <Tag>primary</Tag> ｜ <Tag>secondary</Tag> ｜ <Tag>success</Tag> ｜{" "}
-          <Tag>warning</Tag> ｜ <Tag>error</Tag>
-        </>
-      ),
+      type: <>{defaultColorTypeTags}</>,
       default: <Tag>primary</Tag>
     },
     {
@@ -606,7 +597,7 @@ export default ThumbSwitch;`
       name: "className",
       description: lang === "ko" ? "추가 클래스명" : "Additional class name",
       type: "string",
-      default: '""'
+      default: "-"
     },
     {
       key: "style",

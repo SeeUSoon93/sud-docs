@@ -6,6 +6,14 @@ import { Tag, Card, Avatar, Badge, Radio, Input, Typography } from "sud-ui";
 
 import React, { useState } from "react";
 import { useLang } from "../../_lib/context/langContext";
+import { tagRender } from "../../_lib/components/common/render";
+import {
+  borderTypeTags,
+  defaultSizeTypeTags,
+  shadowTypeTags,
+  shapeTypeTags,
+  badgeColorTypeTags
+} from "../../_lib/components/common/defaultType";
 
 export default function BadgePage() {
   const { isMobile } = useMobile();
@@ -578,8 +586,7 @@ export default MaxBadge;`
       description: lang === "ko" ? "배지의 위치" : "Position of the badge",
       type: (
         <>
-          <Tag>top-right</Tag> ｜ <Tag>top-left</Tag> ｜ <Tag>bottom-right</Tag>{" "}
-          ｜ <Tag>bottom-left</Tag>
+          {tagRender(["top-right", "top-left", "bottom-right", "bottom-left"])}
         </>
       ),
       default: <Tag>top-right</Tag>
@@ -588,12 +595,7 @@ export default MaxBadge;`
       key: "size",
       name: "size",
       description: lang === "ko" ? "배지의 크기" : "Size of the badge",
-      type: (
-        <>
-          <Tag>xs</Tag> ｜ <Tag>sm</Tag> ｜ <Tag>md</Tag> ｜ <Tag>lg</Tag> ｜{" "}
-          <Tag>xl</Tag> ｜ <Tag>number</Tag>
-        </>
-      ),
+      type: <>{defaultSizeTypeTags}</>,
       default: <Tag>sm</Tag>
     },
     {
@@ -617,11 +619,7 @@ export default MaxBadge;`
       key: "shape",
       name: "shape",
       description: lang === "ko" ? "배지의 모양" : "Shape of the badge",
-      type: (
-        <>
-          <Tag>circle</Tag> ｜ <Tag>square</Tag> ｜ <Tag>rounded</Tag>
-        </>
-      ),
+      type: <>{shapeTypeTags}</>,
       default: <Tag>circle</Tag>
     },
     {
@@ -629,14 +627,16 @@ export default MaxBadge;`
       name: "colorType",
       description:
         lang === "ko" ? "배지의 색상 타입" : "Color type of the badge",
-      type: "string",
-      default: <Tag>red</Tag>
+      type: <>{badgeColorTypeTags}</>,
+      default: <Tag>danger</Tag>
     },
     {
       key: "background",
       name: "background",
       description:
-        lang === "ko" ? "배지의 배경색" : "Background color of the badge",
+        lang === "ko"
+          ? "배경색(palette값 또는 HEX code)"
+          : "Background color (palette value or HEX code)",
       type: "string",
       default: "-"
     },
@@ -644,7 +644,9 @@ export default MaxBadge;`
       key: "color",
       name: "color",
       description:
-        lang === "ko" ? "배지의 텍스트 색상" : "Text color of the badge",
+        lang === "ko"
+          ? "텍스트 색상(palette값 또는 HEX code)"
+          : "Text color (palette value or HEX code)",
       type: "string",
       default: "-"
     },
@@ -659,7 +661,10 @@ export default MaxBadge;`
     {
       key: "borderColor",
       name: "borderColor",
-      description: lang === "ko" ? "테두리 색상" : "Border color",
+      description:
+        lang === "ko"
+          ? "테두리 색상(palette값 또는 HEX code)"
+          : "Border color (palette value or HEX code)",
       type: "string",
       default: "-"
     },
@@ -667,11 +672,7 @@ export default MaxBadge;`
       key: "borderType",
       name: "borderType",
       description: lang === "ko" ? "테두리 스타일" : "Border style",
-      type: (
-        <>
-          <Tag>solid</Tag> ｜ <Tag>dashed</Tag> ｜ <Tag>dotted</Tag>
-        </>
-      ),
+      type: <>{borderTypeTags}</>,
       default: <Tag>solid</Tag>
     },
     {
@@ -685,11 +686,7 @@ export default MaxBadge;`
       key: "shadow",
       name: "shadow",
       description: lang === "ko" ? "그림자 크기" : "Shadow size",
-      type: (
-        <>
-          <Tag>none</Tag> ｜ <Tag>sm</Tag> ｜ <Tag>md</Tag> ｜ <Tag>lg</Tag>
-        </>
-      ),
+      type: <>{shadowTypeTags}</>,
       default: <Tag>none</Tag>
     },
     {
@@ -697,7 +694,7 @@ export default MaxBadge;`
       name: "className",
       description: lang === "ko" ? "추가 클래스명" : "Additional class name",
       type: "string",
-      default: '""'
+      default: "-"
     },
     {
       key: "style",
@@ -715,145 +712,6 @@ export default MaxBadge;`
     }
   ];
 
-  const groupTableData = [
-    {
-      key: "avatars",
-      name: "avatars",
-      description: "아바타 배열",
-      type: "Array<AvatarProps>",
-      default: "[]"
-    },
-    {
-      key: "max",
-      name: "max",
-      description: "최대 표시 개수",
-      type: "number",
-      default: "3"
-    },
-    {
-      key: "size",
-      name: "size",
-      description: "아바타의 크기",
-      type: (
-        <>
-          <Tag>xs</Tag> ｜ <Tag>sm</Tag> ｜ <Tag>md</Tag> ｜ <Tag>lg</Tag> ｜{" "}
-          <Tag>xl</Tag>
-        </>
-      ),
-      default: <Tag>md</Tag>
-    },
-    {
-      key: "shape",
-      name: "shape",
-      description: "아바타의 모양",
-      type: (
-        <>
-          <Tag>circle</Tag> ｜ <Tag>square</Tag> ｜ <Tag>rounded</Tag>
-        </>
-      ),
-      default: <Tag>circle</Tag>
-    },
-    {
-      key: "colorType",
-      name: "colorType",
-      description: "아바타의 색상 타입",
-      type: "string",
-      default: <Tag>default</Tag>
-    },
-    {
-      key: "background",
-      name: "background",
-      description: "배경색",
-      type: "string",
-      default: "-"
-    },
-    {
-      key: "color",
-      name: "color",
-      description: "텍스트 색상",
-      type: "string",
-      default: "-"
-    },
-    {
-      key: "border",
-      name: "border",
-      description: "테두리 표시 여부",
-      type: "boolean",
-      default: "false"
-    },
-    {
-      key: "borderColor",
-      name: "borderColor",
-      description: "테두리 색상",
-      type: "string",
-      default: "-"
-    },
-    {
-      key: "borderType",
-      name: "borderType",
-      description: "테두리 스타일",
-      type: (
-        <>
-          <Tag>solid</Tag> ｜ <Tag>dashed</Tag> ｜ <Tag>dotted</Tag>
-        </>
-      ),
-      default: <Tag>solid</Tag>
-    },
-    {
-      key: "borderWeight",
-      name: "borderWeight",
-      description: "테두리 두께",
-      type: "number",
-      default: "1"
-    },
-    {
-      key: "shadow",
-      name: "shadow",
-      description: "그림자 크기",
-      type: (
-        <>
-          <Tag>none</Tag> ｜ <Tag>sm</Tag> ｜ <Tag>md</Tag> ｜ <Tag>lg</Tag>
-        </>
-      ),
-      default: <Tag>none</Tag>
-    },
-    {
-      key: "className",
-      name: "className",
-      description: "추가 클래스명",
-      type: "string",
-      default: '""'
-    },
-    {
-      key: "style",
-      name: "style",
-      description: "추가 스타일",
-      type: "React.CSSProperties",
-      default: "{}"
-    },
-    {
-      key: "zIndexStart",
-      name: "zIndexStart",
-      description: "z-index 시작 값",
-      type: "number",
-      default: "10"
-    },
-    {
-      key: "gap",
-      name: "gap",
-      description: "아바타 간의 간격 (0~1 사이의 값)",
-      type: "number",
-      default: "0.6"
-    },
-    {
-      key: "aria-label",
-      name: "aria-label",
-      description: "접근성 레이블",
-      type: "string",
-      default: "아바타 그룹"
-    }
-  ];
-
   return (
     <Frame
       component={{
@@ -862,8 +720,7 @@ export default MaxBadge;`
         IMPORT_COMMAND,
         whenToUse,
         examples,
-        howToUseTableData,
-        groupTableData
+        howToUseTableData
       }}
       grid={true}
       isMobile={isMobile}

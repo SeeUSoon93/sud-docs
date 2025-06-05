@@ -1,9 +1,16 @@
 "use client";
 import Frame from "../Frame";
 import { useMobile } from "../../_lib/context/mobileContext";
-import { Card, Collapse, Radio, Tag, Typography } from "sud-ui";
+import { Card, Collapse, Radio, Tag } from "sud-ui";
 import { useState } from "react";
 import { useLang } from "../../_lib/context/langContext";
+import {
+  borderTypeTags,
+  defaultColorTypeTags,
+  shadowTypeTags,
+  shapeTypeTags
+} from "../../_lib/components/common/defaultType";
+import { tagRender } from "../../_lib/components/common/render";
 
 export default function CollapsePage() {
   const { isMobile } = useMobile();
@@ -29,25 +36,6 @@ export default function CollapsePage() {
           "When content can be collapsed or expanded.",
           "When you need to provide users with a button to collapse or expand content."
         ];
-
-  const [shape, setShape] = useState("rounded");
-  const shapeOptions = [
-    { label: "rounded", value: "rounded" },
-    { label: "square", value: "square" }
-  ];
-
-  const [colorType, setColorType] = useState("default");
-  const colorTypeOptions = [
-    { label: "default", value: "default" },
-    { label: "sub", value: "sub" },
-    { label: "primary", value: "primary" },
-    { label: "secondary", value: "secondary" },
-    { label: "success", value: "success" },
-    { label: "warning", value: "warning" },
-    { label: "danger", value: "danger" },
-    { label: "info", value: "info" },
-    { label: "text", value: "text" }
-  ];
 
   const [color, setColor] = useState("coral");
   const colorOptions = [
@@ -443,7 +431,7 @@ export default function Example() {
           ? "열린 아이템의 key 배열 (제어 컴포넌트)"
           : "Array of keys for open items (controlled component)",
       type: "string[]",
-      default: ""
+      default: "-"
     },
     {
       key: "defaultOpenKeys",
@@ -453,7 +441,7 @@ export default function Example() {
           ? "기본으로 열린 아이템의 key 배열 (비제어 컴포넌트)"
           : "Array of keys for items open by default (uncontrolled component)",
       type: "string[]",
-      default: ""
+      default: "-"
     },
     {
       key: "onChange",
@@ -463,7 +451,7 @@ export default function Example() {
           ? "아이템 열림/닫힘 시 호출되는 콜백"
           : "Callback called when items are opened/closed",
       type: "(openKeys: string[]) => void",
-      default: ""
+      default: "-"
     },
     {
       key: "border",
@@ -476,15 +464,18 @@ export default function Example() {
     {
       key: "borderColor",
       name: "borderColor",
-      description: lang === "ko" ? "테두리 색상" : "Border color",
+      description:
+        lang === "ko"
+          ? "테두리 색상(palette값 또는 HEX code)"
+          : "Border color (palette value or HEX code)",
       type: "string",
-      default: ""
+      default: "-"
     },
     {
       key: "borderType",
       name: "borderType",
       description: lang === "ko" ? "테두리 스타일" : "Border style",
-      type: "string",
+      type: <>{borderTypeTags}</>,
       default: <Tag>solid</Tag>
     },
     {
@@ -498,66 +489,61 @@ export default function Example() {
       key: "headerColorType",
       name: "headerColorType",
       description: lang === "ko" ? "헤더 색상 타입" : "Header color type",
-      type: (
-        <>
-          <Tag>default</Tag> ｜ <Tag>primary</Tag> ｜ <Tag>secondary</Tag> ｜{" "}
-          <Tag>success</Tag> ｜ <Tag>warning</Tag> ｜ <Tag>danger</Tag> ｜{" "}
-          <Tag>info</Tag> ｜ <Tag>text</Tag> ｜ <Tag>sub</Tag>
-        </>
-      ),
+      type: <>{defaultColorTypeTags}</>,
       default: <Tag>sub</Tag>
     },
     {
       key: "headerBackground",
       name: "headerBackground",
-      description: lang === "ko" ? "헤더 배경색" : "Header background color",
+      description:
+        lang === "ko"
+          ? "헤더 배경색(palette값 또는 HEX code)"
+          : "Header background color (palette value or HEX code)",
       type: "string",
-      default: ""
+      default: "-"
     },
     {
       key: "headerColor",
       name: "headerColor",
-      description: lang === "ko" ? "헤더 텍스트 색상" : "Header text color",
+      description:
+        lang === "ko"
+          ? "헤더 텍스트 색상(palette값 또는 HEX code)"
+          : "Header text color (palette value or HEX code)",
       type: "string",
-      default: ""
+      default: "-"
     },
     {
       key: "contentColorType",
       name: "contentColorType",
       description: lang === "ko" ? "내용 색상 타입" : "Content color type",
-      type: (
-        <>
-          <Tag>default</Tag> ｜ <Tag>primary</Tag> ｜ <Tag>secondary</Tag> ｜{" "}
-          <Tag>success</Tag> ｜ <Tag>warning</Tag> ｜ <Tag>danger</Tag> ｜{" "}
-          <Tag>info</Tag> ｜ <Tag>text</Tag> ｜ <Tag>sub</Tag>
-        </>
-      ),
+      type: <>{defaultColorTypeTags}</>,
       default: <Tag>default</Tag>
     },
     {
       key: "contentBackground",
       name: "contentBackground",
-      description: lang === "ko" ? "내용 배경색" : "Content background color",
+      description:
+        lang === "ko"
+          ? "내용 배경색(palette값 또는 HEX code)"
+          : "Content background color (palette value or HEX code)",
       type: "string",
-      default: ""
+      default: "-"
     },
     {
       key: "contentColor",
       name: "contentColor",
-      description: lang === "ko" ? "내용 텍스트 색상" : "Content text color",
+      description:
+        lang === "ko"
+          ? "내용 텍스트 색상(palette값 또는 HEX code)"
+          : "Content text color (palette value or HEX code)",
       type: "string",
-      default: ""
+      default: "-"
     },
     {
       key: "shadow",
       name: "shadow",
       description: lang === "ko" ? "그림자 효과" : "Shadow effect",
-      type: (
-        <>
-          <Tag>none</Tag> ｜ <Tag>sm</Tag> ｜ <Tag>md</Tag> ｜ <Tag>lg</Tag> ｜{" "}
-          <Tag>xl</Tag>
-        </>
-      ),
+      type: <>{shadowTypeTags}</>,
       default: <Tag>sm</Tag>
     },
     {
@@ -568,35 +554,27 @@ export default function Example() {
           ? "비활성화된 아이템의 key 배열"
           : "Array of keys for disabled items",
       type: "string[]",
-      default: ""
+      default: "-"
     },
     {
       key: "className",
       name: "className",
       description: lang === "ko" ? "추가 클래스명" : "Additional class name",
       type: "string",
-      default: ""
+      default: "-"
     },
     {
       key: "size",
       name: "size",
       description: lang === "ko" ? "아코디언 크기" : "Accordion size",
-      type: (
-        <>
-          <Tag>sm</Tag> ｜ <Tag>md</Tag> ｜ <Tag>lg</Tag>
-        </>
-      ),
+      type: <>{tagRender(["sm", "md", "lg"])}</>,
       default: <Tag>md</Tag>
     },
     {
       key: "shape",
       name: "shape",
       description: lang === "ko" ? "아코디언 모양" : "Accordion shape",
-      type: (
-        <>
-          <Tag>rounded</Tag> ｜ <Tag>square</Tag>
-        </>
-      ),
+      type: <>{shapeTypeTags}</>,
       default: <Tag>rounded</Tag>
     },
     {
@@ -604,7 +582,7 @@ export default function Example() {
       name: "style",
       description: lang === "ko" ? "추가 스타일" : "Additional style",
       type: "React.CSSProperties",
-      default: ""
+      default: "{}"
     }
   ];
 

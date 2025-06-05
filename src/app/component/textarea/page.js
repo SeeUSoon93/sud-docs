@@ -7,6 +7,12 @@ import { Textarea, Tag, Radio, Card, Button } from "sud-ui";
 
 import React, { useState } from "react";
 import { PieChartOutline, Chat } from "sud-icons";
+import { tagRender } from "../../_lib/components/common/render";
+import {
+  borderTypeTags,
+  shadowTypeTags,
+  shapeTypeTags
+} from "../../_lib/components/common/defaultType";
 
 export default function TextareaPage() {
   const { isMobile } = useMobile();
@@ -881,7 +887,7 @@ export default BottomAddonTextarea;`
       description:
         lang === "ko" ? "입력 필드의 값" : "The value of the input field.",
       type: "string",
-      default: '""'
+      default: "-"
     },
     {
       key: "onChange",
@@ -908,11 +914,7 @@ export default BottomAddonTextarea;`
       name: "size",
       description:
         lang === "ko" ? "입력 필드의 크기" : "The size of the input field.",
-      type: (
-        <>
-          <Tag>sm</Tag> ｜ <Tag>md</Tag> ｜ <Tag>lg</Tag>
-        </>
-      ),
+      type: tagRender(["sm", "md", "lg"]),
       default: <Tag>md</Tag>
     },
     {
@@ -922,11 +924,7 @@ export default BottomAddonTextarea;`
         lang === "ko"
           ? "입력 필드의 모서리 모양"
           : "The shape of the input field.",
-      type: (
-        <>
-          <Tag>rounded</Tag> ｜ <Tag>square</Tag>
-        </>
-      ),
+      type: shapeTypeTags,
       default: <Tag>rounded</Tag>
     },
     {
@@ -1029,14 +1027,20 @@ export default BottomAddonTextarea;`
     {
       key: "background",
       name: "background",
-      description: lang === "ko" ? "배경색" : "The background color.",
+      description:
+        lang === "ko"
+          ? "배경색(palette값 또는 HEX code)"
+          : "The background color (palette value or HEX code).",
       type: "string",
       default: "-"
     },
     {
       key: "color",
       name: "color",
-      description: lang === "ko" ? "텍스트 색상" : "The text color.",
+      description:
+        lang === "ko"
+          ? "텍스트 색상(palette값 또는 HEX code)"
+          : "The text color (palette value or HEX code).",
       type: "string",
       default: "-"
     },
@@ -1051,7 +1055,10 @@ export default BottomAddonTextarea;`
     {
       key: "borderColor",
       name: "borderColor",
-      description: lang === "ko" ? "테두리 색상" : "The border color.",
+      description:
+        lang === "ko"
+          ? "테두리 색상(palette값 또는 HEX code)"
+          : "The border color (palette value or HEX code).",
       type: "string",
       default: "-"
     },
@@ -1059,11 +1066,7 @@ export default BottomAddonTextarea;`
       key: "borderType",
       name: "borderType",
       description: lang === "ko" ? "테두리 스타일" : "The border style.",
-      type: (
-        <>
-          <Tag>solid</Tag> ｜ <Tag>dashed</Tag> ｜ <Tag>dotted</Tag>
-        </>
-      ),
+      type: borderTypeTags,
       default: <Tag>solid</Tag>
     },
     {
@@ -1077,12 +1080,7 @@ export default BottomAddonTextarea;`
       key: "shadow",
       name: "shadow",
       description: lang === "ko" ? "그림자 크기" : "The shadow size.",
-      type: (
-        <>
-          <Tag>none</Tag> ｜ <Tag>sm</Tag> ｜ <Tag>md</Tag> ｜ <Tag>lg</Tag> ｜{" "}
-          <Tag>xl</Tag>
-        </>
-      ),
+      type: shadowTypeTags,
       default: <Tag>sm</Tag>
     },
     {
@@ -1091,7 +1089,7 @@ export default BottomAddonTextarea;`
       description:
         lang === "ko" ? "추가 클래스명" : "The additional class name.",
       type: "string",
-      default: '""'
+      default: "-"
     },
     {
       key: "style",

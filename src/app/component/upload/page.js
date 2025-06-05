@@ -16,6 +16,8 @@ import {
 
 import React, { useState } from "react";
 import { Plus, TrashOutline, Upload as UploadIcon } from "sud-icons";
+import { tagRender } from "../../_lib/components/common/render";
+import { tagColorTypeTags } from "../../_lib/components/common/defaultType";
 
 export default function UploadPage() {
   const { isMobile } = useMobile();
@@ -696,12 +698,7 @@ export default function UploadPage() {
       name: "listType",
       description:
         lang === "ko" ? "파일 목록 표시 타입" : "File List Display Type",
-      type: (
-        <>
-          <Tag>text</Tag> ｜ <Tag>thumbnail</Tag> ｜ <Tag>card</Tag> ｜{" "}
-          <Tag>none</Tag>
-        </>
-      ),
+      type: tagRender(["text", "thumbnail", "card", "none"]),
       default: <Tag>text</Tag>
     },
     {
@@ -791,8 +788,8 @@ export default function UploadPage() {
       name: "listColorType",
       description:
         lang === "ko" ? "파일 목록 색상 타입" : "File List Color Type",
-      type: "string",
-      default: "default"
+      type: tagColorTypeTags,
+      default: <Tag>default</Tag>
     },
     {
       key: "listErrorColorType",
@@ -801,8 +798,8 @@ export default function UploadPage() {
         lang === "ko"
           ? "파일 목록 에러 색상 타입"
           : "File List Error Color Type",
-      type: "string",
-      default: "red"
+      type: lang === "ko" ? "위와 동일" : "Same as above",
+      default: <Tag>red</Tag>
     },
     {
       key: "listHoverColorType",
@@ -811,8 +808,8 @@ export default function UploadPage() {
         lang === "ko"
           ? "파일 목록 호버 색상 타입"
           : "File List Hover Color Type",
-      type: "string",
-      default: "sky"
+      type: lang === "ko" ? "위와 동일" : "Same as above",
+      default: <Tag>sky</Tag>
     },
     {
       key: "listDeleteColorType",
@@ -821,18 +818,14 @@ export default function UploadPage() {
         lang === "ko"
           ? "파일 목록 삭제 색상 타입"
           : "File List Delete Color Type",
-      type: "string",
-      default: "coral"
+      type: lang === "ko" ? "위와 동일" : "Same as above",
+      default: <Tag>coral</Tag>
     },
     {
       key: "listDirection",
       name: "listDirection",
       description: lang === "ko" ? "파일 목록 방향" : "File List Direction",
-      type: (
-        <>
-          <Tag>row</Tag> ｜ <Tag>column</Tag>
-        </>
-      ),
+      type: tagRender(["row", "column"]),
       default: <Tag>column</Tag>
     },
     {

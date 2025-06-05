@@ -4,6 +4,13 @@ import Frame from "../Frame";
 import { useMobile } from "../../_lib/context/mobileContext";
 import { useLang } from "../../_lib/context/langContext";
 import { Menu, Tag } from "sud-ui";
+import { tagRender } from "../../_lib/components/common/render";
+import {
+  borderTypeTags,
+  defaultColorTypeTags,
+  shadowTypeTags,
+  shapeTypeTags
+} from "../../_lib/components/common/defaultType";
 
 export default function MenuPage() {
   const { isMobile } = useMobile();
@@ -671,7 +678,7 @@ export default DividerMenu;`
           ? "현재 선택된 메뉴 항목의 key"
           : "Key of the currently selected menu item",
       type: "string",
-      default: ""
+      default: "-"
     },
     {
       key: "defaultSelectedKey",
@@ -681,7 +688,7 @@ export default DividerMenu;`
           ? "초기 선택된 메뉴 항목의 key"
           : "Key of the initially selected menu item",
       type: "string",
-      default: ""
+      default: "-"
     },
     {
       key: "onSelect",
@@ -691,18 +698,14 @@ export default DividerMenu;`
           ? "메뉴 항목 선택 시 호출되는 함수"
           : "Function called when a menu item is selected",
       type: "(key: string) => void",
-      default: ""
+      default: "-"
     },
     {
       key: "expandType",
       name: "expandType",
       description:
         lang === "ko" ? "하위 메뉴 확장 방식" : "Submenu expansion type",
-      type: (
-        <>
-          <Tag>accordion</Tag> ｜ <Tag>popover</Tag>
-        </>
-      ),
+      type: <>{tagRender(["accordion", "popover"])}</>,
       default: <Tag>accordion</Tag>
     },
     {
@@ -720,40 +723,40 @@ export default DividerMenu;`
       name: "selectedColor",
       description:
         lang === "ko"
-          ? "선택된 메뉴 항목의 배경색"
-          : "Background color of the selected menu item",
+          ? "선택된 메뉴 항목의 배경색(palette값 또는 HEX code)"
+          : "Background color of the selected menu item (palette value or HEX code)",
       type: "string",
-      default: ""
+      default: "-"
     },
     {
       key: "selectedTextColor",
       name: "selectedTextColor",
       description:
         lang === "ko"
-          ? "선택된 메뉴 항목의 텍스트 색상"
-          : "Text color of the selected menu item",
+          ? "선택된 메뉴 항목의 텍스트 색상(palette값 또는 HEX code)"
+          : "Text color of the selected menu item (palette value or HEX code)",
       type: "string",
-      default: ""
+      default: "-"
     },
     {
       key: "hoverColor",
       name: "hoverColor",
       description:
         lang === "ko"
-          ? "호버 시 메뉴 항목의 배경색"
-          : "Background color of the menu item on hover",
+          ? "호버 시 메뉴 항목의 배경색(palette값 또는 HEX code)"
+          : "Background color of the menu item on hover (palette value or HEX code)",
       type: "string",
-      default: ""
+      default: "-"
     },
     {
       key: "hoverTextColor",
       name: "hoverTextColor",
       description:
         lang === "ko"
-          ? "호버 시 메뉴 항목의 텍스트 색상"
-          : "Text color of the menu item on hover",
+          ? "호버 시 메뉴 항목의 텍스트 색상(palette값 또는 HEX code)"
+          : "Text color of the menu item on hover (palette value or HEX code)",
       type: "string",
-      default: ""
+      default: "-"
     },
     {
       key: "divider",
@@ -768,39 +771,40 @@ export default DividerMenu;`
     {
       key: "dividerColor",
       name: "dividerColor",
-      description: lang === "ko" ? "구분선의 색상" : "Color of the divider",
+      description:
+        lang === "ko"
+          ? "구분선의 색상(palette값 또는 HEX code)"
+          : "Color of the divider (palette value or HEX code)",
       type: "string",
-      default: ""
+      default: "-"
     },
     {
       key: "colorType",
       name: "colorType",
       description:
         lang === "ko" ? "메뉴의 색상 테마" : "Color theme of the menu",
-      type: (
-        <>
-          <Tag>default</Tag> ｜ <Tag>sub</Tag> ｜ <Tag>primary</Tag> ｜{" "}
-          <Tag>secondary</Tag> ｜ <Tag>success</Tag> ｜ <Tag>warning</Tag> ｜{" "}
-          <Tag>danger</Tag> ｜ <Tag>info</Tag> ｜ <Tag>text</Tag>
-        </>
-      ),
+      type: <>{defaultColorTypeTags}</>,
       default: <Tag>default</Tag>
     },
     {
       key: "background",
       name: "background",
       description:
-        lang === "ko" ? "메뉴의 배경색" : "Background color of the menu",
+        lang === "ko"
+          ? "메뉴의 배경색(palette값 또는 HEX code)"
+          : "Background color of the menu (palette value or HEX code)",
       type: "string",
-      default: ""
+      default: "-"
     },
     {
       key: "color",
       name: "color",
       description:
-        lang === "ko" ? "메뉴의 텍스트 색상" : "Text color of the menu",
+        lang === "ko"
+          ? "메뉴의 텍스트 색상(palette값 또는 HEX code)"
+          : "Text color of the menu (palette value or HEX code)",
       type: "string",
-      default: ""
+      default: "-"
     },
     {
       key: "border",
@@ -816,20 +820,18 @@ export default DividerMenu;`
       key: "borderColor",
       name: "borderColor",
       description:
-        lang === "ko" ? "메뉴의 테두리 색상" : "Border color of the menu",
+        lang === "ko"
+          ? "메뉴의 테두리 색상(palette값 또는 HEX code)"
+          : "Border color of the menu (palette value or HEX code)",
       type: "string",
-      default: ""
+      default: "-"
     },
     {
       key: "borderType",
       name: "borderType",
       description:
         lang === "ko" ? "메뉴의 테두리 스타일" : "Border style of the menu",
-      type: (
-        <>
-          <Tag>solid</Tag> ｜ <Tag>dashed</Tag> ｜ <Tag>dotted</Tag>
-        </>
-      ),
+      type: <>{borderTypeTags}</>,
       default: <Tag>solid</Tag>
     },
     {
@@ -844,11 +846,7 @@ export default DividerMenu;`
       key: "shape",
       name: "shape",
       description: lang === "ko" ? "메뉴의 모양" : "Shape of the menu",
-      type: (
-        <>
-          <Tag>rounded</Tag> ｜ <Tag>square</Tag>
-        </>
-      ),
+      type: <>{shapeTypeTags}</>,
       default: <Tag>rounded</Tag>
     },
     {
@@ -856,12 +854,7 @@ export default DividerMenu;`
       name: "shadow",
       description:
         lang === "ko" ? "메뉴의 그림자 효과" : "Shadow effect of the menu",
-      type: (
-        <>
-          <Tag>none</Tag> ｜ <Tag>sm</Tag> ｜ <Tag>md</Tag> ｜ <Tag>lg</Tag> ｜{" "}
-          <Tag>xl</Tag>
-        </>
-      ),
+      type: <>{shadowTypeTags}</>,
       default: <Tag>sm</Tag>
     },
     {
@@ -871,15 +864,20 @@ export default DividerMenu;`
         lang === "ko"
           ? "팝오버 메뉴의 위치 (expandType이 'popover'일 때만 동작)"
           : "Position of the popover menu (only works when expandType is 'popover')",
-      type: "string[]",
-      default: "['bottom', 'right']"
+      type: (
+        <>
+          [{tagRender(["top", "bottom", "left", "right"])},{" "}
+          {tagRender(["top", "bottom", "left", "right"])}]
+        </>
+      ),
+      default: <Tag>['bottom', 'right']</Tag>
     },
     {
       key: "className",
       name: "className",
       description: lang === "ko" ? "추가 클래스명" : "Additional class name",
       type: "string",
-      default: ""
+      default: "-"
     },
     {
       key: "style",

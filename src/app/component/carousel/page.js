@@ -3,9 +3,10 @@
 import Frame from "../Frame";
 import { useMobile } from "../../_lib/context/mobileContext";
 import { useLang } from "../../_lib/context/langContext";
-import { Card, Avatar, Carousel, Radio } from "sud-ui";
+import { Card, Avatar, Carousel, Radio, Tag } from "sud-ui";
 import { useState } from "react";
 import { TriangleLeft, TriangleRight } from "sud-icons";
+import { tagRender } from "../../_lib/components/common/render";
 
 export default function CardPage() {
   const { isMobile } = useMobile();
@@ -42,16 +43,6 @@ export default function CardPage() {
         <Avatar sample={index + 1} size="xl" />
       </div>
     </Card>
-  ));
-
-  const renderItems2 = Array.from({ length: 5 }, (_, index) => (
-    <div className="flex jus-cen item-cen">
-      <Card key={index}>
-        <div className="flex jus-cen item-cen">
-          <Avatar sample={index + 1} size="xl" />
-        </div>
-      </Card>
-    </div>
   ));
 
   const examples = [
@@ -285,12 +276,12 @@ export default function Example(): React.ReactElement {
           : "The overlap effect is one of the effect types. This effect uses the itemCount, itemWidthRatio, scaleRatio, opacityRatio options to implement the overlap effect.",
       render: (
         <Carousel
-          items={renderItems2}
+          items={renderItems}
           effectType="overlap"
           itemCount={5}
-          itemWidthRatio={0.5}
-          scaleRatio={0.3}
-          opacityRatio={0.4}
+          itemWidthRatio={0.4}
+          scaleRatio={0.2}
+          opacityRatio={0.3}
         />
       ),
       jscode: `import React from "react";
@@ -299,7 +290,7 @@ import { Carousel, Card, Avatar } from "sud-ui";
 export default function Example() {
   const renderItems = Array.from({ length: 5 }, (_, index) => (
     <div className="flex jus-cen item-cen">
-      <Card key={index}>
+      <Card key={index} width="100%">
         <div className="flex jus-cen item-cen">
           <Avatar sample={index + 1} size="xl" />
         </div>
@@ -312,9 +303,9 @@ export default function Example() {
       items={renderItems}
       effectType="overlap"
       itemCount={5}
-      itemWidthRatio={0.5}  // 아이템 간격 조절
-      scaleRatio={0.3}      // 크기 변화 비율
-      opacityRatio={0.4}    // 투명도 변화 비율
+      itemWidthRatio={0.4}
+      scaleRatio={0.2}
+      opacityRatio={0.3}
     />
   );
 }`,
@@ -331,7 +322,7 @@ export default function Example(): React.ReactElement {
     key: index,
     content: (
       <div className="flex jus-cen item-cen">
-        <Card key={index}>
+        <Card key={index} width="100%">
           <div className="flex jus-cen item-cen">
             <Avatar sample={index + 1} size="xl" />
           </div>
@@ -345,9 +336,9 @@ export default function Example(): React.ReactElement {
       items={renderItems.map(item => item.content)}
       effectType="overlap"
       itemCount={5}
-      itemWidthRatio={0.5}  // 아이템 간격 조절
-      scaleRatio={0.3}      // 크기 변화 비율
-      opacityRatio={0.4}    // 투명도 변화 비율
+      itemWidthRatio={0.4}
+      scaleRatio={0.2}
+      opacityRatio={0.3} 
     />
   );
 }`
@@ -436,10 +427,7 @@ export default function Example() {
   ));
 
   return (
-    <Carousel 
-      items={renderItems}
-      drag={false}  // 드래그 기능 비활성화
-    />
+    <Carousel items={renderItems} drag={false} />
   );
 }`,
       tscode: `import React from "react";
@@ -465,7 +453,7 @@ export default function Example(): React.ReactElement {
   return (
     <Carousel 
       items={renderItems.map(item => item.content)}
-      drag={false}  // 드래그 기능 비활성화
+      drag={false}
     />
   );
 }`
@@ -559,7 +547,7 @@ export default function Example(): React.ReactElement {
       name: "className",
       description: lang === "ko" ? "추가 클래스명" : "Additional class name",
       type: "string",
-      default: '""'
+      default: "-"
     },
     {
       key: "drag",
@@ -605,12 +593,9 @@ export default function Example(): React.ReactElement {
     {
       key: "effectType",
       name: "effectType",
-      description:
-        lang === "ko"
-          ? "전환 효과 타입 (overlap, fade, slide, scale, stack)"
-          : "Transition effect type (overlap, fade, slide, scale, stack)",
-      type: "string",
-      default: "fade"
+      description: lang === "ko" ? "전환 효과 타입" : "Transition effect type.",
+      type: <>{tagRender(["overlap", "fade", "slide", "scale", "stack"])}</>,
+      default: <Tag>fade</Tag>
     }
   ];
 

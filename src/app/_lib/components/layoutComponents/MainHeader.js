@@ -119,7 +119,7 @@ export default function MainHeader({
         </div>
       ) : (
         <div className="flex flex-col w-100 h-100 item-cen jus-cen">
-          <div className="flex jus-bet w-100 item-cen mg-b-10">
+          <div className="flex jus-bet w-100 item-cen">
             <Button
               icon={<MenuHamburger size={20} />}
               onClick={onMenuClick}
@@ -127,19 +127,13 @@ export default function MainHeader({
               size="large"
             />
             {/* 로고 */}
-            <div
-              className="flex jus-cen item-cen gap-15 "
-              onClick={() => router.push("/")}
-              style={{ cursor: "pointer" }}
-            >
-              <Image
-                src="/sud-logo.svg"
-                alt="logo"
-                width={80}
-                preview={false}
-                mask={null}
-              />
-            </div>
+            <Image
+              src="/sud-logo.svg"
+              alt="logo"
+              width={80}
+              preview={false}
+              mask={null}
+            />
             <Button
               icon={<MenuHamburger size={20} />}
               disabled
@@ -149,7 +143,7 @@ export default function MainHeader({
               shadow="none"
             />
           </div>
-          <Divider />
+          <Divider style={{ margin: 0 }} />
           <div className="mg-t-5">
             <Menu
               items={mapMenuItems(items)}
