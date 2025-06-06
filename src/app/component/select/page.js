@@ -1358,6 +1358,7 @@ export default MultiModeSelect;`
       }}
       grid={true}
       isMobile={isMobile}
+      lang={lang}
     />
   );
 }

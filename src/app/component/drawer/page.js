@@ -298,6 +298,16 @@ export default function Example() {
       default: "true"
     },
     {
+      key: "dividerColor",
+      name: "dividerColor",
+      description:
+        lang === "ko"
+          ? "구분선 색상(palette값 또는 HEX code)"
+          : "The color of the divider (palette value or HEX code)",
+      type: "string",
+      default: "-"
+    },
+    {
       key: "colorType",
       name: "colorType",
       description: lang === "ko" ? "색상 타입" : "The color type",
@@ -398,6 +408,7 @@ export default function Example() {
       }}
       grid={true}
       isMobile={isMobile}
+      lang={lang}
     />
   );
 }

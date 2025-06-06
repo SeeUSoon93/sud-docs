@@ -483,6 +483,7 @@ export default MiniView;`
       }}
       grid={false}
       isMobile={isMobile}
+      lang={lang}
     />
   );
 }

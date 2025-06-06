@@ -145,6 +145,7 @@ export const InstallCommand = ({ command }) => {
 
 export const CodeBlock = ({ code }) => {
   const [isHovered, setIsHovered] = useState(false);
+  const { lang } = useLang();
 
   return (
     <Card

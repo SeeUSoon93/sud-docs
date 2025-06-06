@@ -1089,6 +1089,7 @@ export default AlphanumericOTP;`
       }}
       grid={true}
       isMobile={isMobile}
+      lang={lang}
     />
   );
 }

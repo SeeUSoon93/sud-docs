@@ -815,6 +815,7 @@ export default function Example() {
       }}
       grid={true}
       isMobile={isMobile}
+      lang={lang}
     />
   );
 }

@@ -815,6 +815,7 @@ export default CustomColorTabs;`
       }}
       grid={true}
       isMobile={isMobile}
+      lang={lang}
     />
   );
 }

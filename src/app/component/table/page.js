@@ -609,6 +609,7 @@ export default function App() {
       }}
       grid={false}
       isMobile={isMobile}
+      lang={lang}
     />
   );
 }

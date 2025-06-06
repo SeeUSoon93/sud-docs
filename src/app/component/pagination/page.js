@@ -599,6 +599,7 @@ export default MaxVisiblePagination;`
       }}
       grid={true}
       isMobile={isMobile}
+      lang={lang}
     />
   );
 }

@@ -283,6 +283,7 @@ export default function App(): ReactNode {
       }}
       grid={true}
       isMobile={isMobile}
+      lang={lang}
     />
   );
 }

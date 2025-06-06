@@ -1,8 +1,10 @@
 import { useState } from "react";
 import {
+  CodeBlock,
   ExampleBlock,
   InstallCommand,
   MainTitle,
+  SubTitle,
   SubTitleAndDescription
 } from "../_lib/components/common/render";
 import { CircleOutline, ErrorCircleOutline } from "sud-icons";
@@ -142,6 +144,23 @@ export default function Frame({ component, isMobile, grid, lang }) {
             </div>
           ))}
         />
+      )}
+      {component.preset && (
+        <div className="flex flex-col gap-10">
+          <SubTitle title={lang === "ko" ? "사전 설정" : "Preset"} />
+          <Typography
+            as="div"
+            pretendard="R"
+            size="base"
+            style={{
+              whiteSpace: "pre-wrap",
+              wordBreak: "keep-all"
+            }}
+          >
+            {component.preset.description}
+          </Typography>
+          <CodeBlock code={component.preset.command} />
+        </div>
       )}
 
       {/* 예제 */}

@@ -683,6 +683,7 @@ export default function App(): React.ReactElement {
       }}
       grid={true}
       isMobile={isMobile}
+      lang={lang}
     />
   );
 }

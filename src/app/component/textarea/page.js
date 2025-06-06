@@ -1112,6 +1112,7 @@ export default BottomAddonTextarea;`
       }}
       grid={true}
       isMobile={isMobile}
+      lang={lang}
     />
   );
 }

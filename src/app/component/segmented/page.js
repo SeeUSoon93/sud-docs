@@ -741,6 +741,7 @@ export default ColorSegmented;`
       }}
       grid={true}
       isMobile={isMobile}
+      lang={lang}
     />
   );
 }

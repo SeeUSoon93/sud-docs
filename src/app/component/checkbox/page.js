@@ -787,6 +787,7 @@ export default function Example(): JSX.Element {
       }}
       grid={true}
       isMobile={isMobile}
+      lang={lang}
     />
   );
 }

@@ -1632,6 +1632,7 @@ export default ThousandSeparatorInput;`
       }}
       grid={true}
       isMobile={isMobile}
+      lang={lang}
     />
   );
 }

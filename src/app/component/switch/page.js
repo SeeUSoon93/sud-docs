@@ -634,6 +634,7 @@ export default ThumbSwitch;`
       }}
       grid={true}
       isMobile={isMobile}
+      lang={lang}
     />
   );
 }

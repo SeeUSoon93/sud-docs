@@ -192,7 +192,7 @@ export default function Example(): JSX.Element {
           }}
           footer={
             <div className="flex jus-bet item-cen">
-              <Divider vertical />
+              <Divider vertical borderColor="transparent" />
               <Button colorType="text">
                 <EditOutline />
               </Button>
@@ -204,7 +204,7 @@ export default function Example(): JSX.Element {
               <Button colorType="text">
                 <ShareOutline />
               </Button>
-              <Divider vertical />
+              <Divider vertical borderColor="transparent" />
             </div>
           }
         >
@@ -342,7 +342,7 @@ export default function Example(): JSX.Element {
       }}
       footer={
         <div className="flex jus-bet item-cen">
-          <Divider vertical />
+          <Divider vertical borderColor="transparent" />
           <Button colorType="text">
             <EditOutline />
           </Button>
@@ -354,7 +354,7 @@ export default function Example(): JSX.Element {
           <Button colorType="text">
             <ShareOutline />
           </Button>
-          <Divider vertical />
+          <Divider vertical borderColor="transparent" />
         </div>
       }
     >
@@ -440,7 +440,7 @@ export default function Example(): JSX.Element {
       }}
       footer={
         <div className="flex jus-bet item-cen">
-          <Divider vertical />
+          <Divider vertical borderColor="transparent" />
           <Button colorType="text">
             <EditOutline />
           </Button>
@@ -452,7 +452,7 @@ export default function Example(): JSX.Element {
           <Button colorType="text">
             <ShareOutline />
           </Button>
-          <Divider vertical />
+          <Divider vertical borderColor="transparent" />
         </div>
       }
     >
@@ -730,6 +730,16 @@ export default function Example() {
       description: lang === "ko" ? "구분선 표시 여부" : "Show divider.",
       type: "boolean",
       default: "false"
+    },
+    {
+      key: "dividerColor",
+      name: "dividerColor",
+      description:
+        lang === "ko"
+          ? "구분선 색상(palette값 또는 HEX code)"
+          : "The color of the divider (palette value or HEX code)",
+      type: "string",
+      default: "-"
     }
   ];
 
@@ -745,6 +755,7 @@ export default function Example() {
       }}
       grid={true}
       isMobile={isMobile}
+      lang={lang}
     />
   );
 }

@@ -988,6 +988,7 @@ export default VerticalSlider;`
       }}
       grid={true}
       isMobile={isMobile}
+      lang={lang}
     />
   );
 }

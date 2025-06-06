@@ -611,6 +611,7 @@ export default function Example(): React.ReactElement {
       }}
       grid={true}
       isMobile={isMobile}
+      lang={lang}
     />
   );
 }

@@ -887,6 +887,7 @@ export default function UploadPage() {
       }}
       grid={true}
       isMobile={isMobile}
+      lang={lang}
     />
   );
 }

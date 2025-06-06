@@ -435,6 +435,7 @@ export default function App(): React.ReactElement {
       }}
       grid={false}
       isMobile={isMobile}
+      lang={lang}
     />
   );
 }

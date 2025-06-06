@@ -900,6 +900,7 @@ export default DividerMenu;`
       }}
       grid={true}
       isMobile={isMobile}
+      lang={lang}
     />
   );
 }
