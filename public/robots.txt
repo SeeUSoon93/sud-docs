@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://sud.co.kr
+
+# Sitemaps
+Sitemap: https://sud.co.kr/sitemap.xml

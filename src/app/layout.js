@@ -1,17 +1,19 @@
 import ClientLayout from "./_lib/components/ClientLayout";
 import "./globals.css";
 
+export const viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1
+};
+
 export const metadata = {
+  metadataBase: new URL("https://sud.co.kr"),
   title: "Soon UI Design",
   description:
     "Soon UI Design(SUD)은 쉽고 빠르게 사용할 수 있는 React UI 라이브러리입니다.",
   icons: {
     icon: "/sud.svg"
-  },
-  viewport: {
-    width: "device-width",
-    initialScale: 1,
-    maximumScale: 1
   },
   robots: {
     index: true,

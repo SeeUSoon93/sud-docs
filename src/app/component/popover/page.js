@@ -8,8 +8,7 @@ import { tagRender } from "../../_lib/components/common/render";
 import {
   borderTypeTags,
   defaultColorTypeTags,
-  shadowTypeTags,
-  shapeTypeTags
+  shadowTypeTags
 } from "../../_lib/components/common/defaultType";
 import { useState } from "react";
 
@@ -84,6 +83,14 @@ export default function App(): React.ReactElement {
             placement="bottom"
           >
             <Button>Click me</Button>
+          </Popover>
+          <Popover
+            title="Title"
+            content="This is a popover"
+            trigger="contextMenu"
+            placement="bottom"
+          >
+            <Button>Right click me</Button>
           </Popover>
         </div>
       ),

@@ -2,14 +2,7 @@
 
 import Frame from "../Frame";
 import { useMobile } from "../../_lib/context/mobileContext";
-import {
-  Tag,
-  Button,
-  Popover,
-  Segmented,
-  Typography,
-  PopConfirm
-} from "sud-ui";
+import { Tag, Button, PopConfirm, toast, Divider, Typography } from "sud-ui";
 import { useLang } from "../../_lib/context/langContext";
 import { tagRender } from "../../_lib/components/common/render";
 import {
@@ -17,26 +10,44 @@ import {
   defaultColorTypeTags,
   shadowTypeTags
 } from "../../_lib/components/common/defaultType";
-import { useState } from "react";
+import {
+  CheckCircleFill,
+  LogoReact,
+  LogoSud,
+  XMarkCircleFill
+} from "sud-icons";
 
-export default function PopconfirmPage() {
+export default function PopConfirmPage() {
   const { isMobile } = useMobile();
   const { lang } = useLang();
-  const name = "Popconfirm";
+  const name = "PopConfirm";
   const description =
     lang === "ko" ? (
       <>
         요소를 클릭하거나 호버하여 사용자에게 확인 또는 취소 옵션을 제공할 수
         있습니다.
+        <br />더 자세한 예제는{" "}
+        <Tag>
+          <a href="/component/popover">Popover</a>
+        </Tag>{" "}
+        컴포넌트를 참고하세요. PopConfirm은 Popover에서 title과 footer를
+        기본적으로 제공하며, 이를 커스텀할 수 있습니다.
       </>
     ) : (
       <>
         You can provide confirmation or cancel options to users by clicking or
         hovering over an element.
+        <br />
+        For more examples, please refer to the{" "}
+        <Tag>
+          <a href="/component/popover">Popover</a>
+        </Tag>{" "}
+        component. PopConfirm provides title and footer by default, which can be
+        customized.
       </>
     );
 
-  const IMPORT_COMMAND = "import { Popconfirm } from 'sud-ui';";
+  const IMPORT_COMMAND = "import { PopConfirm } from 'sud-ui';";
 
   const whenToUse =
     lang === "ko"
@@ -47,350 +58,294 @@ export default function PopconfirmPage() {
           "When you need to provide confirmation or cancel options to users by clicking or hovering over an element."
         ];
 
-  const [placement, setPlacement] = useState("bottom");
-
   const examples = [
     {
       title: "Basic Usage",
       description:
         lang === "ko" ? "기본 사용 예시입니다." : "Example of basic usage.",
       render: (
-        <PopConfirm title="Title" content="This is a popover">
-          <Button>Click me</Button>
+        <PopConfirm
+          title="Are you sure?"
+          content="If you delete this, it cannot be recovered."
+          type="danger"
+        >
+          <Button colorType="volcano">Delete This</Button>
         </PopConfirm>
       ),
-      jscode: `import { Button, Popover } from "sud-ui";
+      jscode: `import { Button, PopConfirm } from "sud-ui";
 
 export default function App() {
   return (
-    <Popover title="Title" content="This is a popover">
-      <Button>Hover me</Button>
-    </Popover>
+    <PopConfirm
+      title="Are you sure?"
+      content="If you delete this, it cannot be recovered."
+      type="danger"
+    >
+      <Button colorType="volcano">Delete This</Button>
+    </PopConfirm>
   );
 }`,
-      tscode: `import { Button, Popover } from "sud-ui";
+      tscode: `import { Button, PopConfirm } from "sud-ui";
 import React from "react";
 
 export default function App(): React.ReactElement {
   return (
-    <Popover title="Title" content="This is a popover">
-      <Button>Hover me</Button>
-    </Popover>
+    <PopConfirm
+      title="Are you sure?"
+      content="If you delete this, it cannot be recovered."
+      type="danger"
+    >
+      <Button colorType="volcano">Delete This</Button>
+    </PopConfirm>
   );
 }`
     },
     {
-      title: "Trigger",
+      title: "Title type",
       description:
-        lang === "ko" ? "트리거 방식 예시입니다." : "Example of trigger type.",
+        lang === "ko" ? "제목 타입 예시입니다." : "Example of title type.",
       render: (
-        <div className="flex gap-20">
-          <Popover title="Title" content="This is a popover">
-            <Button>Hover me</Button>
-          </Popover>
-          <Popover
-            title="Title"
-            content="This is a popover"
-            trigger="click"
-            placement="bottom"
+        <div className="flex gap-10">
+          <PopConfirm
+            title="Danger"
+            content="This is a danger type confirmation"
+            type="danger"
           >
-            <Button>Click me</Button>
-          </Popover>
+            <Button colorType="danger">Danger</Button>
+          </PopConfirm>
+          <PopConfirm
+            title="Warning"
+            content="This is a warning type confirmation"
+            type="warning"
+          >
+            <Button colorType="warning">Warning</Button>
+          </PopConfirm>
+          <PopConfirm
+            title="Success"
+            content="This is a success type confirmation"
+            type="success"
+          >
+            <Button colorType="success">Success</Button>
+          </PopConfirm>
         </div>
       ),
-      jscode: `import { Button, Popover } from "sud-ui";
+      jscode: `import { Button, PopConfirm } from "sud-ui";
 
 export default function App() {
   return (
-    <div className="flex gap-20">
-      <Popover title="Title" content="This is a popover">
-        <Button>Hover me</Button>
-      </Popover>
-      <Popover
-        title="Title"
-        content="This is a popover"
-        trigger="click"
-        placement="bottom"
+    <div className="flex gap-10">
+      <PopConfirm
+        title="Danger"
+        content="This is a danger type confirmation"
+        type="danger"
       >
-        <Button>Click me</Button>
-      </Popover>
+        <Button colorType="danger">Danger</Button>
+      </PopConfirm>
+      <PopConfirm
+        title="Warning"
+        content="This is a warning type confirmation"
+        type="warning"
+      >
+        <Button colorType="warning">Warning</Button>
+      </PopConfirm>
+      <PopConfirm
+        title="Success"
+        content="This is a success type confirmation"
+        type="success"
+      >
+        <Button colorType="success">Success</Button>
+      </PopConfirm>
     </div>
   );
 }`,
-      tscode: `import { Button, Popover } from "sud-ui";
+      tscode: `import { Button, PopConfirm } from "sud-ui";
 import React from "react";
 
 export default function App(): React.ReactElement {
   return (
-    <div className="flex gap-20">
-      <Popover title="Title" content="This is a popover">
-        <Button>Hover me</Button>
-      </Popover>
-      <Popover
-        title="Title"
-        content="This is a popover"
-        trigger="click"
-        placement="bottom"
+    <div className="flex gap-10">
+      <PopConfirm
+        title="Danger"
+        content="This is a danger type confirmation"
+        type="danger"
       >
-        <Button>Click me</Button>
-      </Popover>
+        <Button colorType="danger">Danger</Button>
+      </PopConfirm>
+      <PopConfirm
+        title="Warning"
+        content="This is a warning type confirmation"
+        type="warning"
+      >
+        <Button colorType="warning">Warning</Button>
+      </PopConfirm>
+      <PopConfirm
+        title="Success"
+        content="This is a success type confirmation"
+        type="success"
+      >
+        <Button colorType="success">Success</Button>
+      </PopConfirm>
     </div>
   );
 }`
     },
     {
-      title: "Placement",
-      description: lang === "ko" ? "위치 예시입니다." : "Example of placement.",
-      render: (
-        <div>
-          <div>
-            <Segmented
-              options={["left", "right", "top", "bottom"]}
-              value={placement}
-              onChange={(value) => setPlacement(value)}
-              style={{ marginBottom: "20px" }}
-            />
-          </div>
-          <Popover
-            title="Title"
-            content="This is a popover"
-            placement={placement}
-          >
-            <Button>Hover me</Button>
-          </Popover>
-        </div>
-      ),
-      jscode: `import { Button, Popover, Segmented } from "sud-ui";
-import { useState } from "react";
-
-export default function App() {
-  const [placement, setPlacement] = useState("bottom");
-
-  return (
-    <div>
-      <div>
-        <Segmented
-          options={["left", "right", "top", "bottom"]}
-          value={placement}
-          onChange={(value) => setPlacement(value)}
-          style={{ marginBottom: "20px" }}
-        />
-      </div>
-      <Popover
-        title="Title"
-        content="This is a popover"
-        placement={placement}
-      >
-        <Button>Hover me</Button>
-      </Popover>
-    </div>
-  );
-}`,
-      tscode: `import { Button, Popover, Segmented } from "sud-ui";
-import React, { useState } from "react";
-
-export default function App(): React.ReactElement {
-  const [placement, setPlacement] = useState<"left" | "right" | "top" | "bottom">("bottom");
-
-  return (
-    <div>
-      <div>
-        <Segmented
-          options={["left", "right", "top", "bottom"]}
-          value={placement}
-          onChange={(value) => setPlacement(value)}
-          style={{ marginBottom: "20px" }}
-        />
-      </div>
-      <Popover
-        title="Title"
-        content="This is a popover"
-        placement={placement}
-      >
-        <Button>Hover me</Button>
-      </Popover>
-    </div>
-  );
-}`
-    },
-    {
-      title: "Disabled",
-      description:
-        lang === "ko" ? "비활성화 예시입니다." : "Example of disabled.",
-      render: (
-        <div className="flex gap-20">
-          <Popover title="Title" content="This is a popover" disabled>
-            <Button disabled>Hover me(disabled)</Button>
-          </Popover>
-        </div>
-      ),
-      jscode: `import { Button, Popover } from "sud-ui";
-
-export default function App() {
-  return (
-    <div className="flex gap-20">
-      <Popover title="Title" content="This is a popover" disabled>
-        <Button disabled>Hover me(disabled)</Button>
-      </Popover>
-    </div>
-  );
-}`,
-      tscode: `import { Button, Popover } from "sud-ui";
-import React from "react";
-
-export default function App(): React.ReactElement {
-  return (
-    <div className="flex gap-20">
-      <Popover title="Title" content="This is a popover" disabled>
-        <Button disabled>Hover me(disabled)</Button>
-      </Popover>
-    </div>
-  );
-}`
-    },
-    {
-      title: "Close On Click",
+      title: "Use OnCancel and OnConfirm",
       description:
         lang === "ko"
-          ? "클릭 시 닫기 여부 예시입니다."
-          : "Example of close on click.",
+          ? "확인/취소 버튼 클릭 시 콜백 예시입니다."
+          : "Example of onCancel and onConfirm.",
       render: (
-        <div className="flex gap-20">
-          <Popover
-            title="Title"
-            content={
-              <div className="flex flex-col gap-20">
-                <Typography>The popup will not close when clicked</Typography>
-                <div>
-                  <Button size="sm" colorType="danger">
-                    Close
-                  </Button>
-                </div>
-              </div>
-            }
-            closeOnClick={false}
-            trigger="click"
-          >
-            <Button>Click me</Button>
-          </Popover>
-        </div>
+        <PopConfirm
+          title="Are you sure?"
+          content="If you delete this, it cannot be recovered."
+          type="danger"
+          onCancel={() => {
+            toast.danger("cancel");
+          }}
+          onConfirm={() => {
+            toast.success("confirm");
+          }}
+        >
+          <Button colorType="volcano">Delete This</Button>
+        </PopConfirm>
       ),
-      jscode: `import { Button, Popover, Typography } from "sud-ui";
+      jscode: `import { Button, PopConfirm, toast } from "sud-ui";
 
 export default function App() {
   return (
-    <div className="flex gap-20">
-      <Popover
-        title="Title"
-        content={
-          <div className="flex flex-col gap-20">
-            <Typography>The popup will not close when clicked</Typography>
-            <div>
-              <Button size="sm" colorType="danger">
-                Close
-              </Button>
-            </div>
-          </div>
-        }
-        closeOnClick={false}
-        trigger="click"
-      >
-        <Button>Click me</Button>
-      </Popover>
-    </div>
+    <PopConfirm
+      title="Are you sure?"
+      content="If you delete this, it cannot be recovered."
+      type="danger"
+      onCancel={() => {
+        toast.danger("cancel");
+      }}
+      onConfirm={() => {
+        toast.success("confirm");
+      }}
+    >
+      <Button colorType="volcano">Delete This</Button>
+    </PopConfirm>
   );
 }`,
-      tscode: `import { Button, Popover, Typography } from "sud-ui";
+      tscode: `import { Button, PopConfirm, toast } from "sud-ui";
 import React from "react";
 
 export default function App(): React.ReactElement {
   return (
-    <div className="flex gap-20">
-      <Popover
-        title="Title"
-        content={
-          <div className="flex flex-col gap-20">
-            <Typography>The popup will not close when clicked</Typography>
-            <div>
-              <Button size="sm" colorType="danger">
-                Close
-              </Button>
-            </div>
-          </div>
-        }
-        closeOnClick={false}
-        trigger="click"
-      >
-        <Button>Click me</Button>
-      </Popover>
-    </div>
+    <PopConfirm
+      title="Are you sure?"
+      content="If you delete this, it cannot be recovered."
+      type="danger"
+      onCancel={() => {
+        toast.danger("cancel");
+      }}
+      onConfirm={() => {
+        toast.success("confirm");
+      }}
+    >
+      <Button colorType="volcano">Delete This</Button>
+    </PopConfirm>
   );
 }`
     },
     {
-      title: "Style Customization",
+      title: "Title & Footer Custom",
       description:
         lang === "ko"
-          ? "스타일 커스터마이징 예시입니다."
-          : "Example of style customization.",
+          ? "제목과 푸터 영역 커스텀 예시입니다."
+          : "Example of title and footer custom.",
       render: (
-        <div className="flex gap-20">
-          <Popover
-            title="Title"
-            content="This is a popover"
-            open={true}
-            background="sky-2"
-            color="mint-8"
-            borderColor="black-7"
-            borderType="dashed"
-            borderWeight={2}
-            shadow="lg"
-          >
-            <Button>Hover me</Button>
-          </Popover>
-        </div>
+        <PopConfirm
+          title={
+            <div className="flex item-cen">
+              <LogoReact />
+              <Typography>Are you React Developer?</Typography>
+            </div>
+          }
+          content="If you React Developer, you can use Soon UI Design Library."
+          footer={
+            <div className="flex gap-10 jus-end mg-y-10">
+              <Button size="sm" icon={<XMarkCircleFill size={18} />}>
+                Cancel
+              </Button>
+              <Button
+                colorType="mint"
+                size="sm"
+                icon={<CheckCircleFill size={18} />}
+              >
+                Okay
+              </Button>
+            </div>
+          }
+        >
+          <Button icon={<LogoSud />}>Start Soon UI Design</Button>
+        </PopConfirm>
       ),
-      jscode: `import { Button, Popover } from "sud-ui";
+      jscode: `import { Button, PopConfirm, Typography } from "sud-ui";
+import { CheckCircleFill, LogoReact, LogoSud, XMarkCircleFill } from "sud-icons";
 
 export default function App() {
   return (
-    <div className="flex gap-20">
-      <Popover
-        title="Title"
-        content="This is a popover"
-        open={true}
-        background="sky-2"
-        color="mint-8"
-        borderColor="black-7"
-        borderType="dashed"
-        borderWeight={2}
-        shadow="lg"
-      >
-        <Button>Hover me</Button>
-      </Popover>
-    </div>
+    <PopConfirm
+      title={
+        <div className="flex item-cen">
+          <LogoReact />
+          <Typography>Are you React Developer?</Typography>
+        </div>
+      }
+      content="If you React Developer, you can use Soon UI Design Library."
+      footer={
+        <div className="flex gap-10 jus-end mg-y-10">
+          <Button size="sm" icon={<XMarkCircleFill size={18} />}>
+            Cancel
+          </Button>
+          <Button
+            colorType="mint"
+            size="sm"
+            icon={<CheckCircleFill size={18} />}
+          >
+            Okay
+          </Button>
+        </div>
+      }
+    >
+      <Button icon={<LogoSud />}>Start Soon UI Design</Button>
+    </PopConfirm>
   );
 }`,
-      tscode: `import { Button, Popover } from "sud-ui";
+      tscode: `import { Button, PopConfirm, Typography } from "sud-ui";
+import { CheckCircleFill, LogoReact, LogoSud, XMarkCircleFill } from "sud-icons";
 import React from "react";
 
 export default function App(): React.ReactElement {
   return (
-    <div className="flex gap-20">
-      <Popover
-        title="Title"
-        content="This is a popover"
-        open={true}
-        background="sky-2"
-        color="mint-8"
-        borderColor="black-7"
-        borderType="dashed"
-        borderWeight={2}
-        shadow="lg"
-      >
-        <Button>Hover me</Button>
-      </Popover>
-    </div>
+    <PopConfirm
+      title={
+        <div className="flex item-cen">
+          <LogoReact />
+          <Typography>Are you React Developer?</Typography>
+        </div>
+      }
+      content="If you React Developer, you can use Soon UI Design Library."
+      footer={
+        <div className="flex gap-10 jus-end mg-y-10">
+          <Button size="sm" icon={<XMarkCircleFill size={18} />}>
+            Cancel
+          </Button>
+          <Button
+            colorType="mint"
+            size="sm"
+            icon={<CheckCircleFill size={18} />}
+          >
+            Okay
+          </Button>
+        </div>
+      }
+    >
+      <Button icon={<LogoSud />}>Start Soon UI Design</Button>
+    </PopConfirm>
   );
 }`
     }
@@ -554,7 +509,7 @@ export default function App(): React.ReactElement {
       key: "type",
       name: "type",
       description: lang === "ko" ? "아이콘 타입" : "Icon type",
-      type: tagRender(["primary", "danger", "warning"]),
+      type: tagRender(["success", "danger", "warning"]),
       default: <Tag>primary</Tag>
     },
     {

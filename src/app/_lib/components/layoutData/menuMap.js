@@ -80,6 +80,7 @@ export const itemsList = (selectHeadMenu, lang) => {
             { key: "calendar", label: "Calendar" },
             { key: "card", label: "Card" },
             { key: "carousel", label: "Carousel" },
+            { key: "div", label: "div" },
             { key: "divider", label: "Divider" },
             { key: "empty", label: "Empty" },
             { key: "image", label: "Image" },
